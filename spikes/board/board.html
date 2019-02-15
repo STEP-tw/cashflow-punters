@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="horizontal_spaces">
+        <div class="corner_spaces horizontal_space " id="1">1</div>
+        <div class="horizontal_space" id="2">2</div>
+        <div class="horizontal_space" id="3">3</div>
+        <div class="horizontal_space" id="4">4</div>
+        <div class="horizontal_space" id="5">5</div>
+        <div class="horizontal_space" id="6">6</div>
+        <div class="horizontal_space" id="7">7</div>
+        <div class="horizontal_space corner_spaces" id="8">8</div>
+      </div>
+      <div class="middle_flex">
+        <div class="vertical_spaces">
+          <div class="vertical_space" id="24">24</div>
+          <div class="vertical_space" id="23">23</div>
+          <div class="vertical_space" id="22">22</div>
+          <div class="vertical_space" id="21">21</div>
+        </div>
+        <div class="game_center">
+          <div class="left_part">
+            <div class="financial_details">
+              <div class="player_details">
+                <h4>
+                  Name :
+                  <span id="name">PlayerName</span>
+                </h4>
+                <h4>
+                  Profession :
+                  <span id="Profession">prof</span>
+                </h4>
+                <h4>
+                  Ledger Balance :
+                  <span id="LedgerBal">$0</span>
+                </h4>
+              </div>
+              <div class="basic_fs">
+                <p>$ <span id="income">Income</span></p>
+                <p>$ <span id="passiveIn">passiveIn</span></p>
+                <p>$ <span id="totalIn">totalIn</span></p>
+                <p>$ <span id="expenses">expenses</span></p>
+                <p>$ <span id="cashflow">cashflow</span></p>
+              </div>
+              <div class="open_fs">
+                <button onclick="openFinancialStatement()">
+                  Financial statement
+                </button>
+                <button onclick="openCashLedger()">Cash ledger</button>
+              </div>
+            </div>
+
+            <div class="debt">
+              <button>Take Loan</button>
+              <button>Pay off debt</button>
+            </div>
+          </div>
+          <div class="middle_part">
+            <div class="title"></div>
+            <div class="card"></div>
+          </div>
+          <div class="right_part">
+            <div class="dice">dice</div>
+            <div class="activity_log">activity log</div>
+          </div>
+        </div>
+        <div class="vertical_spaces">
+          <div class="vertical_space" id="9">9</div>
+          <div class="vertical_space" id="10">10</div>
+          <div class="vertical_space" id="11">11</div>
+          <div class="vertical_space" id="12">12</div>
+        </div>
+      </div>
+      <div class="horizontal_spaces">
+        <div class="horizontal_space corner_spaces" id="20">20</div>
+        <div class="horizontal_space" id="19">19</div>
+        <div class="horizontal_space" id="18">18</div>
+        <div class="horizontal_space" id="17">17</div>
+        <div class="horizontal_space" id="16">16</div>
+        <div class="horizontal_space" id="15">15</div>
+        <div class="horizontal_space" id="14">14</div>
+        <div class="horizontal_space corner_spaces" id="13">13</div>
+      </div>
+
+      <div class="overlay" id="financial_statement">
+        <button class="close" onclick="closeOverlay()">
+          &times;
+        </button>
+        <header>
+          Financial Statement
+        </header>
+        <div class="vertical_flex half">
+          <div class="fs_box vertical_flex">
+            <h2>Income</h2>
+          </div>
+          <div class="fs_box vertical_flex">
+            <h2>Expenses</h2>
+          </div>
+          <div class="fs_box vertical_flex">
+            <h2>Assests</h2>
+          </div>
+        </div>
+
+        <div class="half vertical_flex">
+          <div class="fs_player_details">
+            <h3>Name :</h3>
+            <h3>Profession :</h3>
+            <h3>Dream :</h3>
+            <div class="basic_fs">
+              <p>$ <span id="income">Income</span></p>
+              <p>$ <span id="passiveIn">passiveIn</span></p>
+              <p>$ <span id="totalIn">totalIn</span></p>
+              <p>$ <span id="expenses">expenses</span></p>
+              <p>$ <span id="cashflow">cashflow</span></p>
+            </div>
+          </div>
+
+          <div class="fs_box">
+            <h2>Liabilities</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" id="cash_ledger">
+        <button class="close" onclick="closeOverlay()">
+          &times;
+        </button>
+        <header>
+          Cash ledger
+        </header>
+        <h2>Savings : <span id="LedgerBal"></span></h2>
+      </div>
+    </main>
+  </body>
+</html>
