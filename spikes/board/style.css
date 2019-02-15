@@ -8,6 +8,8 @@ body {
   font-family: sans-serif;
   height: 97%;
   width: 99%;
+
+  background-color: white;
 }
 
 div {
@@ -17,6 +19,14 @@ div {
 button {
   padding: 1%;
   margin: 1%;
+}
+
+.deals {
+  background-color: #82c255;
+  background-image: url("images/deals.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .horizontal_spaces {
@@ -79,6 +89,8 @@ button {
 
   padding: 0.5%;
 
+  background-color: white;
+
   width: 75%;
   height: 68.2%;
 }
@@ -96,8 +108,33 @@ button {
 }
 
 .round_border {
+  overflow: hidden;
   border: black 1px solid;
   border-radius: 3vh;
+}
+
+.market {
+  background-color: #306bd5;
+  background-image: url("images/market.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.doodad {
+  background-color: #d03620;
+  background-image: url("images/doodad.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.payday {
+  background-color: #e57738;
+  background-image: url("images/payday.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .left_part {
@@ -135,7 +172,7 @@ button {
 }
 
 .title {
-  background-image: url("logo.png");
+  background-image: url("images/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
