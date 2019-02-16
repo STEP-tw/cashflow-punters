@@ -113,28 +113,30 @@ button {
   border-radius: 3vh;
 }
 
-.market {
-  background-color: #306bd5;
-  background-image: url("images/market.png");
+.space_background {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.market {
+  background-color: #306bd5;
+  background-image: url("images/market.png");
+}
+
+.charity {
+  background-color: #631c7b;
+  background-image: url("images/charity.png");
 }
 
 .doodad {
   background-color: #d03620;
   background-image: url("images/doodad.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .payday {
   background-color: #e57738;
   background-image: url("images/payday.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .left_part {
