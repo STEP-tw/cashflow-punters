@@ -21,14 +21,6 @@ button {
   margin: 1%;
 }
 
-.deals {
-  background-color: #82c255;
-  background-image: url("images/deals.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
 .horizontal_spaces {
   display: flex;
 }
@@ -117,6 +109,16 @@ button {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.deals {
+  background-color: #82c255;
+  background-image: url("images/deals.png");
+}
+
+.baby {
+  background-color: #631c7b;
+  background-image: url("images/baby.png");
 }
 
 .market {
