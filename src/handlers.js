@@ -11,11 +11,12 @@ const logRequest = function(req, res, next) {
 };
 
 const rollDie = function(req, res) {
-  let { currPlayer } = req.game;
-  let diceNumber = randomNum(6);
-  let rolledDieMsg = "rolled " + diceNumber;
-  currPlayer.move(diceNumber);
-  req.game.updateActivity(currPlayer, rolledDieMsg);
+  let { currentPlayer } = req.game;
+  currentPlayer.hasRolledDice = true;
+  const diceNumber = randomNum(6);
+  const rolledDieMsg = "rolled " + diceNumber;
+  currentPlayer.move(diceNumber);
+  req.game.updateActivity(currentPlayer, rolledDieMsg);
   res.send("" + diceNumber, 200);
 };
 

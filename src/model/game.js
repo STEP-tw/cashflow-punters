@@ -13,6 +13,10 @@ class Game {
   getPlayerNames() {
     return this.players.map(player => player.name);
   }
+
+  nextPlayer() {
+    this.currentPlayer.hasRolledDice = false;
+  }
 }
 
 module.exports = Game;
