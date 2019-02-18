@@ -24,12 +24,12 @@ app.get("/", renderHomePage);
 app.get("/playernames", renderPlayerNames);
 app.post("/hostgame", hostGame);
 app.get("/rolldie", rollDie);
+app.get("/startgame", startGame);
 app.use(bodyParser.json());
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));
 app.use(express.static("public/scripts"));
 app.use(express.static("public/stylesheets"));
-app.get("/startgame", startGame);
 app.use(express.static("public/images"));
 
 module.exports = app;
