@@ -1,4 +1,4 @@
-const displayNames = function(gameDetails) {
+const displayLobby = function(gameDetails) {
   const gameIdSpace = document.getElementById('gameId');
   gameIdSpace.innerText = gameDetails.gameId;
   const playerList = document.getElementById('playersList');
@@ -14,17 +14,10 @@ const getPlayerNamesHtml = function(players) {
   });
 };
 
-const appendChildren = function(parentElement, childrenElements) {
-  parentElement.innerHTML = '';
-  childrenElements.forEach(function(child) {
-    parentElement.appendChild(child);
-  });
-};
-
 window.onload = () => {
   setInterval(() => {
-    fetch('/playernames')
+    fetch('/gamelobby')
       .then(res => res.json())
-      .then(displayNames);
+      .then(displayLobby);
   }, 1000);
 };
