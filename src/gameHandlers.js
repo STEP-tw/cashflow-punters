@@ -24,12 +24,6 @@ const hostGame = function(req, res) {
   res.redirect('/waiting.html');
 };
 
-const getCurrentGame = function(req, res, next) {
-  const {gameId} = req.cookies;
-  req.game = res.app.games[gameId];
-  next();
-};
-
 const renderPlayerNames = function(req, res) {
   const players = req.game.getPlayerNames();
   const {gameId} = req.cookies;
@@ -38,6 +32,5 @@ const renderPlayerNames = function(req, res) {
 
 module.exports = {
   hostGame,
-  renderPlayerNames,
-  getCurrentGame
+  renderPlayerNames
 };
