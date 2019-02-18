@@ -9,7 +9,7 @@ describe("rollDie", function() {
     req = {};
     req.game = {
       updateActivity: sinon.spy(),
-      currPlayer: {
+      currentPlayer: {
         move: sinon.spy()
       }
     };

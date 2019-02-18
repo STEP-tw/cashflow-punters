@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
 const {createGameId} = require('./utils/utils');
-const {hostGame, provideGameLobby, joinGame} = require('./gameHandlers');
+const {hostGame, provideGameLobby, joinGame,getPlayerProfessions} = require('./gameHandlers');
 const {
   renderHomePage,
   getCurrentGame,
@@ -25,6 +25,7 @@ app.get('/rolldie', rollDie);
 app.get('/startgame', startGame);
 app.post('/joingame', joinGame);
 app.use(bodyParser.json());
+app.get('/getPlayerProfessions',getPlayerProfessions);
 app.use(express.static('public/'));
 app.use(express.static('public/pages'));
 app.use(express.static('public/scripts'));
