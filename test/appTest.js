@@ -10,13 +10,3 @@ describe('/', () => {
       .end(done);
   });
 });
-
-describe('startGame', () => {
-  it('should start game if at least 2 players are present', done => {
-    request(app)
-      .get('/startgame')
-      .expect(302)
-      .expect('Location', '/board.html')
-      .end(done);
-  });
-});
