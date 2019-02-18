@@ -3,15 +3,15 @@
 <head>
 	<title>Waiting to start game</title>
 	<link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
+	<script src="/waitingPage.js"></script>
 </head>
 <body>
 		<header><strong>CASHFLOW</strong>
 			<p class="sub-header">Get out of the Rat Race !</p>
 	</header>
-	<h3>Game ID : ##gameId##</h3>
+	<h3>Game ID : <span id='gameId'>##gameId##</span></h3>
 	<h3>Players in lobby :</h3>
-	<ul>
-		##namesOFPlayers##
+	<ul id= 'playersList'>
 	</ul>
 	<button class="waiting">Start Game</button>
   <button class="waiting">Cancel Game</button>

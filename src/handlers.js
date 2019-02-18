@@ -8,4 +8,7 @@ const logRequest = function(req, res, next) {
   next();
 };
 
-module.exports = {renderHomePage, logRequest};
+module.exports = {
+  renderHomePage,
+  logRequest
+};
