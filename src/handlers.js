@@ -1,11 +1,22 @@
+const { randomNum } = require("./utils/utils");
+
 const renderHomePage = function(req, res) {
-  res.redirect('/homepage.html');
+  res.redirect("/homepage.html");
 };
 
 const logRequest = function(req, res, next) {
-  console.log('URL --> ', req.url);
-  console.log('Method  --> ', req.method);
+  console.log("URL --> ", req.url);
+  console.log("Method  --> ", req.method);
   next();
 };
 
-module.exports = {renderHomePage, logRequest};
+const rollDie = function(req, res) {
+  let { currPlayer } = req.game;
+  let diceNumber = randomNum(6);
+  let rolledDieMsg = "rolled " + diceNumber;
+  currPlayer.move(diceNumber);
+  req.game.updateActivity(currPlayer, rolledDieMsg);
+  res.send("" + diceNumber, 200);
+};
+
+module.exports = { renderHomePage, logRequest, rollDie };
