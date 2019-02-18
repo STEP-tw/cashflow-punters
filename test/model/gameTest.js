@@ -1,4 +1,4 @@
-const Game = require('../src/model/game');
+const Game = require('../../src/model/game');
 const {expect} = require('chai');
 
 describe('Game', function() {

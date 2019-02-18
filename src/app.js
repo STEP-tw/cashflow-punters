@@ -4,11 +4,11 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const {
   hostGame,
-  getCurrentGame,
   renderPlayerNames
 } = require("./gameHandlers");
 const {
   renderHomePage,
+  getCurrentGame,
   logRequest,
   startGame,
   rollDie
