@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="round_border">
+      <div class="horizontal_spaces">
+        <div
+          class="corner_spaces horizontal_space space_background deals "
+          id="1"
+        ></div>
+        <div
+          class="horizontal_first_space  horizontal_space space_background doodad"
+          id="2"
+        ></div>
+        <div class="horizontal_space space_background deals" id="3"></div>
+        <div class="horizontal_space space_background charity" id="4"></div>
+        <div class="horizontal_space space_background deals" id="5"></div>
+        <div class="horizontal_space space_background payday" id="6"></div>
+        <div class="horizontal_space space_background deals" id="7"></div>
+        <div
+          class="horizontal_space corner_spaces space_background market"
+          id="8"
+        ></div>
+      </div>
+      <div class="middle_flex">
+        <div class="vertical_spaces">
+          <div
+            class="vertical_first_space vertical_space space_background market"
+            id="24"
+          ></div>
+          <div class="vertical_space space_background deals" id="23"></div>
+          <div class="vertical_space space_background payday" id="22"></div>
+          <div class="vertical_space space_background deals" id="21"></div>
+        </div>
+        <div class="game_center round_border">
+          <div class="left_part">
+            <div class="financial_details">
+              <div class="player_details">
+                <h4>
+                  Name :
+                  <span id="name">PlayerName</span>
+                </h4>
+                <h4>
+                  Profession :
+                  <span id="Profession">prof</span>
+                </h4>
+                <h4>
+                  Ledger Balance :
+                  <span id="LedgerBal">$0</span>
+                </h4>
+              </div>
+              <div class="basic_fs">
+                <p>$ <span id="income">Income</span></p>
+                <p>$ <span id="passiveIn">passiveIn</span></p>
+                <p>$ <span id="totalIn">totalIn</span></p>
+                <p>$ <span id="expenses">expenses</span></p>
+                <p>$ <span id="cashflow">cashflow</span></p>
+              </div>
+              <div class="open_fs">
+                <button onclick="openFinancialStatement()">
+                  Financial statement
+                </button>
+                <button onclick="openCashLedger()">Cash ledger</button>
+              </div>
+            </div>
+
+            <div class="debt">
+              <button>Take Loan</button>
+              <button>Pay off debt</button>
+            </div>
+          </div>
+          <div class="middle_part">
+            <div class="title"></div>
+            <div class="card">card</div>
+          </div>
+          <div class="right_part">
+            <div class="dice">dice</div>
+            <div class="activity_log">activity log</div>
+          </div>
+        </div>
+        <div class="vertical_spaces">
+          <div
+            class="vertical_first_space vertical_space space_background deals"
+            id="9"
+          ></div>
+          <div class="vertical_space space_background doodad" id="10"></div>
+          <div class="vertical_space space_background deals" id="11"></div>
+          <div class="vertical_space space_background downsize" id="12"></div>
+        </div>
+      </div>
+      <div class=" horizontal_spaces bottom_flex">
+        <div
+          class="horizontal_space corner_spaces space_background baby"
+          id="20"
+        ></div>
+        <div
+          class="horizontal_first_space horizontal_space space_background deals"
+          id="19"
+        ></div>
+        <div class="horizontal_space space_background doodad" id="18"></div>
+        <div class="horizontal_space space_background deals" id="17"></div>
+        <div class="horizontal_space space_background market" id="16"></div>
+        <div class="horizontal_space space_background deals" id="15"></div>
+        <div class="horizontal_space space_background payday" id="14"></div>
+        <div
+          class="horizontal_space corner_spaces space_background deals"
+          id="13"
+        ></div>
+      </div>
+
+      <div class="overlay" id="financial_statement">
+        <button class="close" onclick="closeOverlay()">
+          &times;
+        </button>
+        <header>
+          Financial Statement
+        </header>
+        <div class="vertical_flex half">
+          <div class="fs_box vertical_flex">
+            <h2>Income</h2>
+          </div>
+          <div class="fs_box vertical_flex">
+            <h2>Expenses</h2>
+          </div>
+          <div class="fs_box vertical_flex">
+            <h2>Assests</h2>
+          </div>
+        </div>
+
+        <div class="half vertical_flex">
+          <div class="fs_player_details">
+            <h3>Name :</h3>
+            <h3>Profession :</h3>
+            <h3>Dream :</h3>
+            <div class="basic_fs">
+              <p>$ <span id="income">Income</span></p>
+              <p>$ <span id="passiveIn">passiveIn</span></p>
+              <p>$ <span id="totalIn">totalIn</span></p>
+              <p>$ <span id="expenses">expenses</span></p>
+              <p>$ <span id="cashflow">cashflow</span></p>
+            </div>
+          </div>
+
+          <div class="fs_box">
+            <h2>Liabilities</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" id="cash_ledger">
+        <button class="close" onclick="closeOverlay()">
+          &times;
+        </button>
+        <header>
+          Cash ledger
+        </header>
+        <h2>Savings : <span id="LedgerBal"></span></h2>
+      </div>
+    </main>
+  </body>
+</html>

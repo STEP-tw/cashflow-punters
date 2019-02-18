@@ -1,0 +1,326 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  font-family: sans-serif;
+  height: 97%;
+  width: 99%;
+
+  background-color: white;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 1%;
+  margin: 1%;
+}
+
+.horizontal_spaces {
+  display: flex;
+}
+.horizontal_space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 12.5%;
+  height: 16.6%;
+
+  border-right: 1px black solid;
+}
+
+.horizontal_first_space {
+  border-left: 1px black solid;
+}
+
+.vertical_first_space {
+  border-top: 1px black solid;
+}
+
+.corner_spaces {
+  border-right: 0px;
+
+  width: 14%;
+  height: 18.5%;
+}
+.middle_flex {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 64%;
+}
+
+.bottom_flex {
+  align-items: flex-end;
+}
+
+.top_flex {
+  height: 17%;
+}
+
+.vertical_spaces {
+  display: flex;
+  flex-direction: column;
+
+  width: 12.5%;
+  height: 100%;
+}
+.game_center {
+  position: absolute;
+  top: 16.6%;
+  left: 12.5%;
+
+  display: flex;
+
+  padding: 0.5%;
+
+  background-color: white;
+
+  width: 75%;
+  height: 68.2%;
+}
+.vertical_space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 25%;
+
+  border-bottom: 1px black solid;
+
+  text-align: center;
+}
+
+.round_border {
+  overflow: hidden;
+  border: black 1px solid;
+  border-radius: 3vh;
+}
+
+.space_background {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.deals {
+  background-color: #82c255;
+  background-image: url("images/deals.png");
+}
+
+.baby {
+  background-color: #631c7b;
+  background-image: url("images/baby.png");
+}
+
+.downsize {
+  background-color: #631c7b;
+  background-image: url("images/downsize.png");
+}
+
+.market {
+  background-color: #306bd5;
+  background-image: url("images/market.png");
+}
+
+.charity {
+  background-color: #631c7b;
+  background-image: url("images/charity.png");
+}
+
+.doodad {
+  background-color: #d03620;
+  background-image: url("images/doodad.png");
+}
+
+.payday {
+  background-color: #e57738;
+  background-image: url("images/payday.png");
+}
+
+.left_part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 1%;
+
+  height: 100%;
+  width: 30%;
+}
+.middle_part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 40%;
+  height: 100%;
+}
+.right_part {
+  border: black 1px solid;
+
+  width: 30%;
+}
+.dice {
+  border: black 1px solid;
+
+  height: 30%;
+}
+.activity_log {
+  border: black 1px solid;
+
+  height: 70%;
+}
+
+.title {
+  background-image: url("images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  height: 20%;
+}
+
+.card {
+  border: black 1px solid;
+  height: 80%;
+}
+.financial_details {
+  height: 78%;
+  width: 100%;
+
+  padding: 4%;
+
+  border: black 1px solid;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.basic_fs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 50%;
+  width: 100%;
+}
+.basic_fs > p {
+  width: 60%;
+  height: 13%;
+
+  padding: 1%;
+  margin: 0%;
+
+  border: black 1px solid;
+}
+
+.player_details {
+  width: 100%;
+  height: 22%;
+}
+.player_details > h4 {
+  padding: 1%;
+  margin: 1%;
+
+  width: 100%;
+}
+
+.open_fs > button {
+  height: 46%;
+  width: 100%;
+}
+
+.debt {
+  display: flex;
+  flex-direction: column;
+
+  height: 20%;
+
+  padding: 4%;
+
+  border: black 1px solid;
+}
+
+.debt > button {
+  height: 50%;
+  width: 100%;
+}
+
+.open_fs {
+  height: 20%;
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 35%;
+  height: 100%;
+
+  display: flex;
+  padding: 2%;
+  visibility: hidden;
+}
+
+.overlay > header {
+  position: absolute;
+  top: 2%;
+  left: 3%;
+
+  font-size: larger;
+  color: green;
+}
+
+#financial_statement {
+  background: lightblue;
+}
+
+#cash_ledger {
+  background: lightcoral;
+}
+
+.close {
+  position: absolute;
+  right: 2%;
+  top: 1%;
+
+  padding: 0.5% 1%;
+
+  border-radius: 50%;
+}
+
+.vertical_flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.half {
+  width: 50%;
+  height: 100%;
+}
+
+.fs_player_details {
+  width: 80%;
+  height: 65%;
+}
+
+.fs_box {
+  width: 80%;
+  height: 30%;
+
+  overflow: scroll;
+}
