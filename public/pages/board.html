@@ -76,7 +76,23 @@
             <div class="card">card</div>
           </div>
           <div class="right_part">
-            <div class="dice">dice</div>
+            <div class="dice_block">
+              <div id="num_of_dice" class="overlay_box">
+                <p>
+                  How many dice you want to use?
+                </p>
+                <button onclick="closeOverlay('num_of_dice')">One</button>
+                <button
+                  onclick="
+                  enableDice('dice2');
+                  closeOverlay('num_of_dice')"
+                >
+                  Two
+                </button>
+              </div>
+              <div id="dice1" class="dice" onclick="rollDie()"></div>
+              <div id="dice2" class="dice" onclick="rollDie()"></div>
+            </div>
             <div class="activity_log">activity log</div>
           </div>
         </div>
@@ -111,7 +127,7 @@
       </div>
 
       <div class="overlay" id="financial_statement">
-        <button class="close" onclick="closeOverlay()">
+        <button class="close" onclick="closeOverlay('financial_statement')">
           &times;
         </button>
         <header>
@@ -150,7 +166,7 @@
       </div>
 
       <div class="overlay" id="cash_ledger">
-        <button class="close" onclick="closeOverlay()">
+        <button class="close" onclick="closeOverlay('cash_ledger')">
           &times;
         </button>
         <header>

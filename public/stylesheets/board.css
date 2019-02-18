@@ -169,11 +169,35 @@ button {
 
   width: 30%;
 }
-.dice {
-  border: black 1px solid;
+.dice_block {
+  display: flex;
+  position: relative;
 
   height: 30%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
 }
+
+.overlay_box {
+  border: black 1px solid;
+
+  height: 99%;
+  width: 99%;
+
+  visibility: hidden;
+
+  position: absolute;
+  background-color: white;
+}
+
+.dice {
+  height: 90%;
+  width: 45%;
+
+  border: black 1px solid;
+}
+
 .activity_log {
   border: black 1px solid;
 

@@ -25,9 +25,10 @@ class Game {
       this.cardStore.professions.usedCard(profession);
     })
   }
-
-
-
+  
+  nextPlayer() {
+    this.currentPlayer.hasRolledDice = false;
+  }
 }
 
 module.exports = Game;
