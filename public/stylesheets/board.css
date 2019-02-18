@@ -113,37 +113,37 @@ button {
 
 .deals {
   background-color: #82c255;
-  background-image: url("images/deals.png");
+  background-image: url("/deals.png");
 }
 
 .baby {
   background-color: #631c7b;
-  background-image: url("images/baby.png");
+  background-image: url("/baby.png");
 }
 
 .downsize {
   background-color: #631c7b;
-  background-image: url("images/downsize.png");
+  background-image: url("/downsize.png");
 }
 
 .market {
   background-color: #306bd5;
-  background-image: url("images/market.png");
+  background-image: url("/market.png");
 }
 
 .charity {
   background-color: #631c7b;
-  background-image: url("images/charity.png");
+  background-image: url("/charity.png");
 }
 
 .doodad {
   background-color: #d03620;
-  background-image: url("images/doodad.png");
+  background-image: url("/doodad.png");
 }
 
 .payday {
   background-color: #e57738;
-  background-image: url("images/payday.png");
+  background-image: url("/payday.png");
 }
 
 .left_part {
@@ -181,7 +181,7 @@ button {
 }
 
 .title {
-  background-image: url("images/logo.png");
+  background-image: url("/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Waiting to start game</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
-</head>
-<body>
-		<header><strong>CASHFLOW</strong>
-			<p class="sub-header">Get out of the Rat Race !</p>
-	</header>
-	<h3>Game ID : ##gameId##</h3>
-	<h3>Players in lobby :</h3>
-	<ul>
-		##namesOFPlayers##
-	</ul>
-	<button class="waiting">Start Game</button>
-  <button class="waiting">Cancel Game</button>
-  <button class="waiting">Leave Game</button>
-</body>
+  <head>
+    <title>Waiting to start game</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
+  </head>
+  <body>
+    <header>
+      <strong>CASHFLOW</strong>
+      <p class="sub-header">Get out of the Rat Race !</p>
+    </header>
+    <h3>Game ID : ##gameId##</h3>
+    <h3>Players in lobby :</h3>
+    <ul>
+      ##namesOFPlayers##
+    </ul>
+    <section class="buttons">
+      <form action="/startgame">
+        <button class="button">Start Game</button>
+      </form>
+      <button class="button">Cancel Game</button>
+      <button class="button">Leave Game</button>
+    </section>
+  </body>
 </html>
