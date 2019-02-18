@@ -1,5 +1,8 @@
 class Player {
-  constructor() {
+  constructor(name) {
+    this.name = name;
+    this.profession;
+    this.financialStatement;
     this.currentSpace = 0;
   }
   move(spacesCount) {
@@ -7,4 +10,5 @@ class Player {
     return this.currentSpace;
   }
 }
+
 module.exports = Player;

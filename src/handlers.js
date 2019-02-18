@@ -19,4 +19,8 @@ const rollDie = function(req, res) {
   res.send("" + diceNumber, 200);
 };
 
-module.exports = { renderHomePage, logRequest, rollDie };
+const startGame = function(req, res) {
+  res.redirect("/board.html");
+};
+
+module.exports = { renderHomePage, logRequest, startGame, rollDie };

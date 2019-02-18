@@ -19,6 +19,12 @@ main {
  justify-content: space-around;
  align-items: center;
 }
+
+input{
+  height:40px;
+  width:200px;
+  border: 0px 0px 0px 1px solid black;
+}
 .game-options-field {
  width: 40%;
  height: 80%;
