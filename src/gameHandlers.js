@@ -36,8 +36,14 @@ const renderPlayerNames = function(req, res) {
   res.send(JSON.stringify({players, gameId}));
 };
 
+const getPlayerProfessions = function(req,res) {
+  res.write(JSON.stringify(req.game.players));
+  res.end();
+}
+
 module.exports = {
   hostGame,
   renderPlayerNames,
-  getCurrentGame
+  getCurrentGame,
+  getPlayerProfessions
 };
