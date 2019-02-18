@@ -30,3 +30,19 @@ describe('Game', function() {
     });
   });
 });
+
+describe('getInitialDetails', function() {
+  it('should assign the turn and profession to player ', function() {
+    const player1 = {name: 'player1'};
+    const player2 = {name: 'player2'};
+    const cards = {professions:{cards:["doctor"],usedCard:()=>{}}};
+    const game = new Game(cards);
+    game.addPlayer(player1);
+    game.addPlayer(player2);
+
+    game.getInitialDetails();
+    expect(game.players[0]).has.property('turn');
+    expect(game.players[0]).has.property('profession');
+  });
+});
+

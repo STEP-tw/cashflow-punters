@@ -40,13 +40,18 @@ const joinGame = function(req, res) {
   res.redirect('/waiting.html');
 };
 
-const getPlayerProfessions = function(req, res) {
+const getPlayers = function(req, res) {
   res.send(JSON.stringify(req.game.players));
 };
+
+const getGame = function(req,res) {
+  res.send(JSON.stringify(req.game));
+}
 
 module.exports = {
   hostGame,
   provideGameLobby,
-  getPlayerProfessions,
-  joinGame
+  getPlayers,
+  joinGame,
+  getGame
 };

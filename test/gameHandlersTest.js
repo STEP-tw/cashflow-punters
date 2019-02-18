@@ -1,7 +1,7 @@
 const request = require('supertest');
 const {expect} = require('chai');
 const app = require('../src/app');
-const {hostGame, provideGameLobby, joinGame} = require('../src/gameHandlers');
+const {hostGame, provideGameLobby, joinGame,getPlayers} = require('../src/gameHandlers');
 
 describe('hostGame', function() {
   it('should redirect to url /waiting.html with statusCode 302', function(done) {
@@ -109,5 +109,25 @@ describe('joinGame', function() {
       .to.have.property('1234')
       .to.have.property('players')
       .to.deep.equals([{name: 'player', currentSpace: 0}]);
+  });
+});
+
+
+describe('getgame', function() {
+  it('should return game', function(done) {
+    request(app)
+    .get('/getgame')
+    .expect(200)
+   .end(done)
+  });
+});
+
+describe('getgame', function() {
+  it('should return game', function() {
+    const req = {game:{player:[1,2]}};
+    const res = {send:()=>{
+      expect(req.game.player).to.eql([1,2])
+    }};
+    getPlayers(req,res);
   });
 });

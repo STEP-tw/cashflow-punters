@@ -1,3 +1,5 @@
+let game;
+
 const closeOverlay = function(id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
@@ -13,14 +15,14 @@ const openCashLedger = function () {
   fs.style.visibility = "visible";
 };
 
-const sayHello = function() {
+const displayFinancialStatement = function() {
   let container = document.getElementById('container');
   let parent = container.parentElement;
   parent.removeChild(container);
 }
 
 const getProfessionsDiv = function (player) {
-  let { name, profession, turn, gamePiece } = player;
+  let { name, profession, turn } = player;
   let mainDiv = document.createElement('div');
   let container = document.getElementById('container');
   container.className = "container";
@@ -33,15 +35,11 @@ const getProfessionsDiv = function (player) {
   let p_profession = document.createElement('div');
   p_profession.innerText = profession.profession;
 
-  let p_gamePiece = document.createElement('div');
-  p_gamePiece.innerText = gamePiece;
-
   let p_turn = document.createElement('div');
   p_turn.innerText = turn;
   
   mainDiv.appendChild(p_name);
   mainDiv.appendChild(p_profession);
-  mainDiv.appendChild(p_gamePiece);
   mainDiv.appendChild(p_turn);
   container.appendChild(mainDiv)
   return mainDiv;
@@ -55,7 +53,7 @@ const getProfessions = function () {
    content.map(getProfessionsDiv).join('');
    let button = document.createElement('button');
    button.innerText = "continue";
-   button.onclick = sayHello;
+   button.onclick = displayFinancialStatement;
    container.appendChild(button);
   })
 }
@@ -75,7 +73,6 @@ const activateDice = function(currentPlayer) {
   }
 };
 
-
 const rollDie = function() {
   const dice = document.getElementById(event.target.id);
   fetch("/rolldie")
@@ -93,7 +90,16 @@ const polling = function(game) {
   }
 };
 
+const getGame = function() {
+  fetch('/getgame').then((data)=>{
+      return data.json();
+  }).then((content)=>{
+    game = content;
+  })
+}
+
 const initialize = function() {
+  setInterval(getGame,1000);
   getProfessions();
   let dice2 = document.getElementById("dice2");
   dice2.hidden = true;

@@ -1,4 +1,5 @@
 const lodash = require("lodash")
+const { range, assignId } = require('../utils/array.js');
 
 class Game {
   constructor(cardStore) {
@@ -17,15 +18,15 @@ class Game {
   }
 
   getInitialDetails() {
-    this.players.map((player, index) => {
-      let profession = lodash.shuffle(this.cardStore.professions.cards).shift()
-      player.gamePiece = index + 1;
-      player.turn = index + 1;
+    const ids = range(1, this.players.length);
+    lodash.zip(this.players,ids).map(assignId);
+    this.players.map((player) => {
+      const profession = lodash.shuffle(this.cardStore.professions.cards).shift()
       player.profession = profession;
       this.cardStore.professions.usedCard(profession);
     })
   }
-  
+
   nextPlayer() {
     this.currentPlayer.hasRolledDice = false;
   }
