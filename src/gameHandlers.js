@@ -31,8 +31,7 @@ const renderPlayerNames = function(req, res) {
 };
 
 const getPlayerProfessions = function(req,res) {
-  res.write(JSON.stringify(req.game.players));
-  res.end();
+  res.send(JSON.stringify(req.game.players));
 }
 
 module.exports = {

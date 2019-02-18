@@ -1,6 +1,5 @@
-const closeOverlay = function () {
-  let closeBtn = event.target;
-  let overlay = closeBtn.parentNode;
+const closeOverlay = function(id) {
+  let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
 
@@ -76,10 +75,6 @@ const activateDice = function(currentPlayer) {
   }
 };
 
-const closeOverlay = function(id) {
-  let overlay = document.getElementById(id);
-  overlay.style.visibility = "hidden";
-};
 
 const rollDie = function() {
   const dice = document.getElementById(event.target.id);
