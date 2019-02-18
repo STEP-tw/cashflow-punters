@@ -8,7 +8,8 @@ const logRequest = function(req, res, next) {
   next();
 };
 
-module.exports = {
-  renderHomePage,
-  logRequest
+const startGame = function(req, res) {
+  res.redirect('/board.html');
 };
+
+module.exports = {renderHomePage, logRequest, startGame};

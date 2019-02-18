@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
-const {renderHomePage, logRequest} = require('./handlers.js');
 const {hostGame, getCurrentGame, renderPlayerNames} = require('./gameHandlers');
+const {renderHomePage, logRequest, startGame} = require('./handlers.js');
 
 app.games = {};
 app.use(cookieParser());
@@ -17,4 +17,7 @@ app.use(bodyParser.json());
 app.use(express.static('public/pages'));
 app.use(express.static('public/scripts'));
 app.use(express.static('public/stylesheets'));
+app.get('/startgame', startGame);
+app.use(express.static('public/images'));
+
 module.exports = app;
