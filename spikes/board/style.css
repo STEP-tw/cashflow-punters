@@ -121,6 +121,11 @@ button {
   background-image: url("images/baby.png");
 }
 
+.downsize {
+  background-color: #631c7b;
+  background-image: url("images/downsize.png");
+}
+
 .market {
   background-color: #306bd5;
   background-image: url("images/market.png");

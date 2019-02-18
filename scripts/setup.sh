@@ -1,9 +1,9 @@
 set -e
 
+echo "#Setup-- Creating git's precomit hook"
 cp .github/git_pre_commit_hook .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
-echo "#Setup-- creating git's precomit hook"
+echo "#Setup-- Installing node dependencies"
 npm install
-echo "#Setup-- installing node dependencies"
+echo "#Setup-- Setting commit template in git config"
 git config --local commit.template "./.github/git_commit_template"
-echo "#Setup-- setting commit template in git config"
