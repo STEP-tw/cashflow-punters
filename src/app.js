@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
-const {createGameId} = require('./utils/utils');
+const { createGameId } = require('./utils/utils');
 const {
   hostGame,
   provideGameLobby,
@@ -11,6 +11,7 @@ const {
   startGame,
   getGame,
   canJoin
+
 } = require('./gameHandlers');
 const {
   renderHomePage,
@@ -24,7 +25,7 @@ app.createGameId = createGameId;
 app.use(logRequest);
 app.use(cookieParser());
 app.use(getCurrentGame);
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.get('/', renderHomePage);
 app.get('/gamelobby', provideGameLobby);

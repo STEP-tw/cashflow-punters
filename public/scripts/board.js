@@ -1,55 +1,66 @@
-let game;
-
-const closeOverlay = function(id) {
+const closeOverlay = function (id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
 
-const openFinancialStatement = function() {
+const openFinancialStatement = function () {
   let fs = document.getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
 
-const openCashLedger = function() {
+const getName = function() {
+  return document.cookie.split(";")[0].split("=")[1];
+}
+
+const openCashLedger = function () {
   let fs = document.getElementById("cash_ledger");
   fs.style.visibility = "visible";
 };
 
-const getBoard = function() {
+const getBoard = function () {
   let container = document.getElementById("container");
   let parent = container.parentElement;
   parent.removeChild(container);
 };
 
-const createFinancialStatement = function() {
+const isMyName = function (player) {
+  return player.name == getName();
+}
+
+const getExpense = function (expenses) {
+  let values = Object.values(expenses);
+  return values;
+}
+
+const createFinancialStatement = function () {
   const rightSection = document.createElement("section");
-  let income = createDiv("Income");
-  let expenses = createDiv("Expense");
-  let assets = createDiv("Assets");
-  let name = createDiv("Name");
-  let profession = createDiv("Profession");
-  let dream = createDiv("Dream");
-  appendChildren(rightSection, [
-    income,
-    expenses,
-    assets,
-    name,
-    profession,
-    dream
-  ]);
+  rightSection.className = "popup";
+  let fs = document.getElementById("financial_statement");
+  rightSection.innerHTML = fs.innerHTML;
   return rightSection;
 };
 
-const getFinancialStatement = function() {
+const createCashLedger = function () {
+  const leftSection = document.createElement("section");
+  leftSection.className = "popup";
+  let cl = document.getElementById("cash_ledger");
+  leftSection.innerHTML = cl.innerHTML;
+  return leftSection;
+}
+
+const getFinancialStatement = function () {
   let container = document.getElementById("container");
   container.innerHTML = "";
   const rightSection = createFinancialStatement();
-  const leftSection = document.createElement("section");
+  const leftSection = createCashLedger();
   let button = createPopupButton("continue", getBoard);
-  appendChildren(container, [leftSection, rightSection, button]);
+  let top = document.createElement('div');
+  top.className = "statements";
+  appendChildren(top, [leftSection, rightSection])
+  appendChildren(container, [top, button]);
 };
 
-const displayFinancialStatement = function() {
+const displayFinancialStatement = function () {
   getFinancialStatement();
 };
 
@@ -60,36 +71,39 @@ const gamePiece = {
   4: "player4",
   5: "player5",
   6: "player6"
-};
+}
 
-const getProfessionsDiv = function(player) {
+const getProfessionsDiv = function (player) {
   let { name, profession, turn } = player;
   let mainDiv = createDivWithClass("details");
-  let container = document.getElementById("container");
-  let p_name = createDiv(`Name : ${name}`);
-  let p_profession = createDiv(`Profession : ${profession.profession}`);
-  let p_turn = createDiv(`Turn : ${turn}`);
-  let p_gamePiece = createDivWithClass(gamePiece[turn]);
-  appendChildren(mainDiv, [p_name, p_profession, p_turn, p_gamePiece]);
-  container.appendChild(mainDiv);
-  return mainDiv;
+  let container = document.getElementById('container');
+  let playerName = createDiv(`Name : ${name}`);
+  let playerProfession = createDiv(`Profession : ${profession.profession}`);
+  let playerTurn = createDiv(`Turn : ${turn}`);
+  let playerGamePiece = createDivWithClass(gamePiece[turn]);
+  appendChildren(mainDiv, [playerName, playerProfession, playerTurn, playerGamePiece]);
+  container.appendChild(mainDiv)
 };
 
-const getProfessions = function() {
-  let content = game.players;
-  let container = document.getElementById("container");
-  content.map(getProfessionsDiv).join("");
-  let button = createPopupButton("continue", displayFinancialStatement);
-  container.appendChild(button);
+const getProfessions = function () {
+  fetch('/getgame').then((data) => {
+    return data.json();
+  }).then((content) => {
+    let players = content.players;
+    let container = document.getElementById("container");
+    players.map(getProfessionsDiv).join("");
+    let button = createPopupButton("continue", displayFinancialStatement);
+    container.appendChild(button);
+  })
 };
 
-const enableDice = function(diceId) {
+const enableDice = function (diceId) {
   const dice = document.getElementById(diceId);
   dice.hidden = false;
   dice.onclick = rollDie;
 };
 
-const activateDice = function(currentPlayer) {
+const activateDice = function (currentPlayer) {
   enableDice("dice1");
   if (currentPlayer.hasCharityTurn) {
     let askNumOfDice = document.getElementById("num_of_dices");
@@ -97,7 +111,7 @@ const activateDice = function(currentPlayer) {
   }
 };
 
-const rollDie = function() {
+const rollDie = function () {
   const dice = document.getElementById(event.target.id);
   dice.onclick = null;
   fetch("/rolldie")
@@ -140,17 +154,14 @@ const updateActivtyLog = function(activityLog) {
 
 const getGame = function() {
   fetch("/getgame")
-    .then(data => {
-      return data.json();
-    })
-    .then(content => {
-      game = content;
+    .then(data => data.json())
+    .then(game => {
       updateActivtyLog(game.activityLog);
       polling(game);
     });
 };
 
-const initialize = function() {
+const initialize = function () {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");

@@ -355,9 +355,7 @@ button {
   left: 0px;
   height: 100%;
   width: 100%;
-
   background-color: #c3fcdb;
-  flex-wrap: wrap;
 }
 
 .player1 {
@@ -413,4 +411,16 @@ button {
 
 .visible {
   visibility: visible;
+}
+.popup {
+  background-color:lightblue;
+  height:100%;
+  width:50%;
+  display: flex;
+  flex-direction: row
+}
+
+.statements {
+  height:90%;
+  display: flex;
 }
