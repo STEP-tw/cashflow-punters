@@ -1,11 +1,11 @@
-const createForm = function(action, method) {
+const createForm = function (action, method) {
   const form = document.createElement('form');
   form.action = action;
   form.method = method;
   return form;
 };
 
-const createInput = function(name, placeholder, type) {
+const createInput = function (name, placeholder, type) {
   const input = document.createElement('input');
   input.placeholder = placeholder;
   input.name = name;
@@ -13,7 +13,7 @@ const createInput = function(name, placeholder, type) {
   return input;
 };
 
-const createButton = function(value, classname, type) {
+const createButton = function (value, classname, type) {
   const button = document.createElement('button');
   button.innerText = value;
   button.className = classname;
@@ -21,9 +21,30 @@ const createButton = function(value, classname, type) {
   return button;
 };
 
-const appendChildren = function(parentElement, childrenElements) {
+const appendChildren = function (parentElement, childrenElements) {
   parentElement.innerHTML = '';
-  childrenElements.forEach(function(child) {
+  childrenElements.forEach(function (child) {
     parentElement.appendChild(child);
   });
+  return parentElement;
 };
+
+
+const createDiv = function (text) {
+  let div = document.createElement('div');
+  div.innerText = text;
+  return div;
+}
+
+const createDivWithClass = function (classname) {
+  let div = document.createElement('div');
+  div.className = classname;
+  return div
+}
+
+const createPopupButton = function (text, func) {
+  let button = document.createElement('button');
+  button.innerText = text;
+  button.onclick = func;
+  return button;
+}

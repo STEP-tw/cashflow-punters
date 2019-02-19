@@ -1,11 +1,11 @@
 let game;
 
-const closeOverlay = function(id) {
+const closeOverlay = function (id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
 
-const openFinancialStatement = function() {
+const openFinancialStatement = function () {
   let fs = document.getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
@@ -15,57 +15,65 @@ const openCashLedger = function () {
   fs.style.visibility = "visible";
 };
 
-const displayFinancialStatement = function() {
+const getBoard = function () {
   let container = document.getElementById('container');
   let parent = container.parentElement;
   parent.removeChild(container);
 }
 
+const createFinancialStatement = function () {
+  const rightSection = document.createElement('section');
+  let income = createDiv('Income');
+  let expenses = createDiv('Expense');
+  let assets = createDiv('Assets');
+  let name = createDiv('Name');
+  let profession = createDiv('Profession');
+  let dream = createDiv('Dream');
+  appendChildren(rightSection, [income, expenses, assets, name, profession, dream]);
+  return rightSection;
+}
+
+const getFinancialStatement = function () {
+  let container = document.getElementById('container');
+  container.innerHTML = "";
+  const rightSection = createFinancialStatement();
+  const leftSection = document.createElement('section');
+  let button = createPopupButton('continue', getBoard);
+  appendChildren(container, [leftSection, rightSection, button])
+}
+
+const displayFinancialStatement = function () {
+  getFinancialStatement();
+}
+
 const getProfessionsDiv = function (player) {
   let { name, profession, turn } = player;
-  let mainDiv = document.createElement('div');
+  let mainDiv = createDivWithClass("details");
   let container = document.getElementById('container');
-  container.className = "container";
-
-  mainDiv.className = "details";
-
-  let p_name = document.createElement('div');
-  p_name.innerText =name;
-
-  let p_profession = document.createElement('div');
-  p_profession.innerText = profession.profession;
-
-  let p_turn = document.createElement('div');
-  p_turn.innerText = turn;
-  
-  mainDiv.appendChild(p_name);
-  mainDiv.appendChild(p_profession);
-  mainDiv.appendChild(p_turn);
+  let p_name = createDiv(name);
+  let p_profession = createDiv(profession.profession);
+  let p_turn = createDiv(turn);
+  appendChildren(mainDiv, [p_name, p_profession, p_turn]);
   container.appendChild(mainDiv)
   return mainDiv;
 }
 
 const getProfessions = function () {
-  fetch('/getPlayerProfessions').then((data) => {
-    return data.json();
-  }).then((content) => {
-    let container = document.getElementById('container');
-   content.map(getProfessionsDiv).join('');
-   let button = document.createElement('button');
-   button.innerText = "continue";
-   button.onclick = displayFinancialStatement;
-   container.appendChild(button);
-  })
+  let content = game.players;
+  let container = document.getElementById('container');
+  content.map(getProfessionsDiv).join('');
+  let button = createPopupButton("continue", displayFinancialStatement);
+  container.appendChild(button);
 }
 
 
-const enableDice = function(diceId) {
+const enableDice = function (diceId) {
   const dice = document.getElementById(diceId);
   dice.hidden = false;
   dice.onclick = rollDie;
 };
 
-const activateDice = function(currentPlayer) {
+const activateDice = function (currentPlayer) {
   enableDice("dice1");
   if (currentPlayer.hasCharityTurn) {
     let askNumOfDice = document.getElementById("num_of_dices");
@@ -73,7 +81,7 @@ const activateDice = function(currentPlayer) {
   }
 };
 
-const rollDie = function() {
+const rollDie = function () {
   const dice = document.getElementById(event.target.id);
   fetch("/rolldie")
     .then(res => res.text())
@@ -83,24 +91,24 @@ const rollDie = function() {
     });
 };
 
-const polling = function(game) {
+const polling = function (game) {
   let { currentPlayer } = game;
   if (isMyTurn && !currentPlayer.hasRolledDice) {
     activateDice(currentPlayer);
   }
 };
 
-const getGame = function() {
-  fetch('/getgame').then((data)=>{
-      return data.json();
-  }).then((content)=>{
+const getGame = function () {
+  fetch('/getgame').then((data) => {
+    return data.json();
+  }).then((content) => {
     game = content;
   })
 }
 
-const initialize = function() {
-  setInterval(getGame,1000);
-  getProfessions();
+const initialize = function () {
+  setInterval(getGame, 1000);
+  setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");
   dice2.hidden = true;
 };
