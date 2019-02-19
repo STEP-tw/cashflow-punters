@@ -22,7 +22,23 @@ const checkPlayersCount = function({players, isHost}) {
   }
 };
 
+const insertButtons = function({isHost}) {
+  const buttonsSpace = document.getElementById('buttons_space');
+  let button = createButton('Leave Game', 'button', 'button');
+  if (isHost) {
+    button = createButton('Cancel Game', 'button', 'button');
+  }
+  buttonsSpace.appendChild(button);
+};
+
 window.onload = () => {
+  fetch('/gamelobby')
+    .then(res => res.json())
+    .then(gameDetails => {
+      insertButtons(gameDetails);
+      return gameDetails;
+    });
+
   setInterval(() => {
     fetch('/gamelobby')
       .then(res => res.json())
