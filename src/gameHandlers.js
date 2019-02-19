@@ -57,8 +57,6 @@ const canJoin = function(req, res) {
 };
 
 const getPlayers = function(req, res) {
-  let { name } = req.game.currentPlayer;
-  req.game.isMyTurn = name == req.cookies["playerName"];
   res.send(JSON.stringify(req.game.players));
 };
 

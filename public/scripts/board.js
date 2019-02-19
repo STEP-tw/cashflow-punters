@@ -1,6 +1,6 @@
 let game;
 
-const closeOverlay = function (id) {
+const closeOverlay = function(id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
@@ -53,26 +53,25 @@ const displayFinancialStatement = function() {
   getFinancialStatement();
 };
 
-
 const gamePiece = {
-    1:"player1",
-    2:"player2",
-    3:"player3",
-    4:"player4",
-    5:"player5",
-    6:"player6"
-}
+  1: "player1",
+  2: "player2",
+  3: "player3",
+  4: "player4",
+  5: "player5",
+  6: "player6"
+};
 
-const getProfessionsDiv = function (player) {
+const getProfessionsDiv = function(player) {
   let { name, profession, turn } = player;
   let mainDiv = createDivWithClass("details");
-  let container = document.getElementById('container');
+  let container = document.getElementById("container");
   let p_name = createDiv(`Name : ${name}`);
   let p_profession = createDiv(`Profession : ${profession.profession}`);
   let p_turn = createDiv(`Turn : ${turn}`);
   let p_gamePiece = createDivWithClass(gamePiece[turn]);
-  appendChildren(mainDiv, [p_name, p_profession, p_turn,p_gamePiece]);
-  container.appendChild(mainDiv)
+  appendChildren(mainDiv, [p_name, p_profession, p_turn, p_gamePiece]);
+  container.appendChild(mainDiv);
   return mainDiv;
 };
 
@@ -109,29 +108,37 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  console.log(game);
-
-  let { currentPlayer, isMyTurn } = game;
+  let { currentPlayer, isMyTurn, players } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
   }
-  if (currentPlayer.didUpdateSpace) {
-    let gamePiece = document.getElementById("gamePiece" + currentPlayer.turn);
-    gamePiece.classList.add("visible");
-    let space = gamePiece.parentNode;
-    let newSpace = document.getElementById(currentPlayer.currentSpace);
-    space.removeChild(gamePiece);
-    newSpace.appendChild(gamePiece);
-  }
+  players.forEach(updateGamePiece);
 };
 
-const getGame = function () {
-  fetch('/getgame').then((data) => {
-    return data.json();
-  }).then((content) => {
-    game = content;
-  })
-}
+const updateGamePiece = function(player) {
+  if (!player.didUpdateSpace) {
+    return;
+  }
+  let gamePiece = document.getElementById("gamePiece" + player.turn);
+  gamePiece.classList.add("visible");
+  let space = gamePiece.parentNode;
+  let newSpace = document.getElementById(player.currentSpace);
+  console.log(newSpace);
+
+  space.removeChild(gamePiece);
+  newSpace.appendChild(gamePiece);
+};
+
+const getGame = function() {
+  fetch("/getgame")
+    .then(data => {
+      return data.json();
+    })
+    .then(content => {
+      game = content;
+      polling(game);
+    });
+};
 
 const initialize = function() {
   setInterval(getGame, 1000);

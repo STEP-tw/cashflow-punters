@@ -408,7 +408,7 @@ button {
 
   border: black 1px solid;
 
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 .visible {
