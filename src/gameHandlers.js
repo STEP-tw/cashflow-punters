@@ -28,7 +28,8 @@ const provideGameLobby = function(req, res) {
   const players = req.game.getPlayerNames();
   const {gameId, playerName} = req.cookies;
   const isHost = req.game.host == playerName;
-  res.send(JSON.stringify({players, gameId, isHost}));
+  const hasStarted = req.game.hasStarted;
+  res.send(JSON.stringify({players, gameId, isHost, hasStarted}));
 };
 
 const joinGame = function(req, res) {
@@ -39,6 +40,12 @@ const joinGame = function(req, res) {
   res.cookie('gameId', gameId);
   res.cookie('playerName', playerName);
   res.redirect('/waiting.html');
+};
+
+const startGame = function (req, res) {
+  req.game.getInitialDetails();
+  req.game.hasStarted = true;
+  res.redirect('/board.html');
 };
 
 const getPlayers = function(req, res) {
@@ -54,5 +61,6 @@ module.exports = {
   provideGameLobby,
   getPlayers,
   joinGame,
+  startGame,
   getGame
 };
