@@ -72,9 +72,10 @@ describe("provideGameLobby", function() {
     req.game = {
       getPlayerNames: () => {
         return ["player1", "player2"];
-      }
+      },
+      host: "player1"
     };
-    req.cookies = { gameId: "1234" };
+    req.cookies = { gameId: "1234", playerName: "player2" };
     res.send = function(response) {
       res.content = response;
     };
@@ -83,7 +84,9 @@ describe("provideGameLobby", function() {
 
     expect(res)
       .to.have.property("content")
-      .to.equal('{"players":["player1","player2"],"gameId":"1234"}');
+      .to.equal(
+        '{"players":["player1","player2"],"gameId":"1234","isHost":false}'
+      );
   });
 });
 
@@ -131,35 +134,13 @@ describe("getgame", function() {
 });
 
 describe("getgame", function() {
-  let req, res;
-  beforeEach(function() {
-    req = {
-      game: {
-        currentPlayer: {
-          name: "tilak"
-        },
-        player: [1, 2]
-      },
-      cookies: {
-        playerName: "tilak"
-      }
-    };
-    res = {
+  it("should return game", function() {
+    const req = { game: { player: [1, 2] } };
+    const res = {
       send: () => {
         expect(req.game.player).to.eql([1, 2]);
       }
     };
-  });
-  it("should return game", function() {
     getPlayers(req, res);
-  });
-  it("should return game with isMyTurn true when currentPlayer is request player", function() {
-    getPlayers(req, res);
-    expect(req.game.isMyTurn).to.be.true;
-  });
-  it("should return game with isMyTurn false when currentPlayer is request player", function() {
-    req.cookies["playerName"] = "swapnil";
-    getPlayers(req, res);
-    expect(req.game.isMyTurn).to.be.false;
   });
 });

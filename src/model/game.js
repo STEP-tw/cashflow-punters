@@ -3,7 +3,8 @@ const { range, assignId } = require("../utils/array.js");
 const { getNextNum } = require("../utils/utils.js");
 
 class Game {
-  constructor(cardStore) {
+  constructor(cardStore, host) {
+    this.host = host;
     this.cardStore = cardStore;
     this.currentPlayer;
     this.players = [];

@@ -3,11 +3,6 @@ const renderHomePage = function(req, res) {
   res.redirect("/homepage.html");
 };
 
-const startGame = function(req, res) {
-  req.game.getInitialDetails();
-  res.redirect("/board.html");
-};
-
 const getCurrentGame = function(req, res, next) {
   const { gameId } = req.cookies;
   req.game = res.app.games[gameId];
@@ -34,7 +29,6 @@ const rollDie = function(req, res) {
 module.exports = {
   renderHomePage,
   logRequest,
-  startGame,
   rollDie,
   getCurrentGame
 };

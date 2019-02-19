@@ -15,34 +15,62 @@ const openCashLedger = function() {
   fs.style.visibility = "visible";
 };
 
-const displayFinancialStatement = function() {
+const getBoard = function() {
   let container = document.getElementById("container");
   let parent = container.parentElement;
   parent.removeChild(container);
 };
 
+const createFinancialStatement = function() {
+  const rightSection = document.createElement("section");
+  let income = createDiv("Income");
+  let expenses = createDiv("Expense");
+  let assets = createDiv("Assets");
+  let name = createDiv("Name");
+  let profession = createDiv("Profession");
+  let dream = createDiv("Dream");
+  appendChildren(rightSection, [
+    income,
+    expenses,
+    assets,
+    name,
+    profession,
+    dream
+  ]);
+  return rightSection;
+};
+
+const getFinancialStatement = function() {
+  let container = document.getElementById("container");
+  container.innerHTML = "";
+  const rightSection = createFinancialStatement();
+  const leftSection = document.createElement("section");
+  let button = createPopupButton("continue", getBoard);
+  appendChildren(container, [leftSection, rightSection, button]);
+};
+
+const displayFinancialStatement = function() {
+  getFinancialStatement();
+};
+
 const getProfessionsDiv = function(player) {
   let { name, profession, turn } = player;
-  let mainDiv = document.createElement("div");
+  let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
-  container.className = "container";
-
-  mainDiv.className = "details";
-
-  let p_name = document.createElement("div");
-  p_name.innerText = name;
-
-  let p_profession = document.createElement("div");
-  p_profession.innerText = profession.profession;
-
-  let p_turn = document.createElement("div");
-  p_turn.innerText = turn;
-
-  mainDiv.appendChild(p_name);
-  mainDiv.appendChild(p_profession);
-  mainDiv.appendChild(p_turn);
+  let p_name = createDiv(name);
+  let p_profession = createDiv(profession.profession);
+  let p_turn = createDiv(turn);
+  appendChildren(mainDiv, [p_name, p_profession, p_turn]);
   container.appendChild(mainDiv);
   return mainDiv;
+};
+
+const getProfessions = function() {
+  let content = game.players;
+  let container = document.getElementById("container");
+  content.map(getProfessionsDiv).join("");
+  let button = createPopupButton("continue", displayFinancialStatement);
+  container.appendChild(button);
 };
 
 const getProfessions = function() {
@@ -112,7 +140,7 @@ const getGame = function() {
 
 const initialize = function() {
   setInterval(getGame, 1000);
-  getProfessions();
+  setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");
   dice2.hidden = true;
 };

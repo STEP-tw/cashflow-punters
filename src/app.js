@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
+<<<<<<< HEAD
 const { createGameId } = require("./utils/utils");
 const {
   hostGame,
@@ -10,11 +11,14 @@ const {
   getPlayers,
   getGame
 } = require("./gameHandlers");
+=======
+const { createGameId } = require('./utils/utils');
+const { hostGame, provideGameLobby, joinGame,startGame, getPlayers, getGame } = require('./gameHandlers');
+>>>>>>> 40a2ce385122eb95b8807d70ca70f676b5f81078
 const {
   renderHomePage,
   getCurrentGame,
   logRequest,
-  startGame,
   rollDie
 } = require("./handlers.js");
 
