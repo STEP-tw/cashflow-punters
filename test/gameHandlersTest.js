@@ -208,34 +208,30 @@ describe("canJoin", function() {
 });
 
 describe("getgame", function() {
+  const res = {};
+  const req = {};
   beforeEach(function() {
-    req = {
-      game: {
-        currentPlayer: {
-          name: "tilak"
-        }
-      },
-      cookies: {
-        playerName: "tilak"
+    req.game = {
+      currentPlayer: {
+        name: "tilak"
       }
     };
-    it("should return game", function(done) {
-      request(app)
-        .get("/getgame")
-        .expect(200)
-        .end(done);
-    });
-    it("should return game with isMyTurn true when currentPlayer is request player", function() {
-      getGame(req, res);
-      console.log("tilak");
+    req.cookies = {
+      playerName: "tilak"
+    };
+    res.send = function(response) {
+      res.content = response;
+    };
+  });
+  it("should return game with isMyTurn true when currentPlayer is request player", function() {
+    getGame(req, res);
 
-      expect(req.game.isMyTurn).to.be.true;
-    });
-    it("should return game with isMyTurn false when currentPlayer is request player", function() {
-      req.cookies["playerName"] = "swapnil";
-      getGame(req, res);
-      expect(req.game.isMyTurn).to.be.false;
-    });
+    expect(req.game.isMyTurn).to.be.true;
+  });
+  it("should return game with isMyTurn false when currentPlayer is request player", function() {
+    req.cookies["playerName"] = "swapnil";
+    getGame(req, res);
+    expect(req.game.isMyTurn).to.be.false;
   });
 });
 
