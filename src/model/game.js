@@ -35,6 +35,7 @@ class Game {
       this.cardStore.professions.usedCard(profession);
     });
     this.currentPlayer = this.players[0];
+    this.currentPlayer.haveToActivateDice = true;
   }
 
   getPlayer(turn) {

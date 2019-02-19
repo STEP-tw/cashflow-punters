@@ -108,7 +108,9 @@ const rollDie = function() {
     });
 };
 
-const polling = function() {
+const polling = function(game) {
+  console.log(game);
+
   let { currentPlayer, isMyTurn } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);

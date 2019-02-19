@@ -160,44 +160,47 @@ describe("canJoin", function() {
 });
 
 describe("getgame", function() {
-  it("should return game", function(done) {
-    request(app)
-      .get("/getgame")
-      .expect(200)
-      .end(done);
-  });
-});
-
-describe("getgame", function() {
-  let req, res;
   beforeEach(function() {
     req = {
       game: {
         currentPlayer: {
           name: "tilak"
-        },
-        player: [1, 2]
+        }
       },
       cookies: {
         playerName: "tilak"
       }
     };
-    res = {
+    it("should return game", function(done) {
+      request(app)
+        .get("/getgame")
+        .expect(200)
+        .end(done);
+    });
+    it("should return game with isMyTurn true when currentPlayer is request player", function() {
+      getPlayers(req, res);
+      expect(req.game.isMyTurn).to.be.true;
+    });
+    it("should return game with isMyTurn false when currentPlayer is request player", function() {
+      req.cookies["playerName"] = "swapnil";
+      getPlayers(req, res);
+      expect(req.game.isMyTurn).to.be.false;
+    });
+  });
+});
+
+describe("getPlayers", function() {
+  it("should return game", function() {
+    const req = {
+      game: {
+        player: [1, 2]
+      }
+    };
+    const res = {
       send: () => {
         expect(req.game.player).to.eql([1, 2]);
       }
     };
-  });
-  it("should return game", function() {
     getPlayers(req, res);
-  });
-  it("should return game with isMyTurn true when currentPlayer is request player", function() {
-    getPlayers(req, res);
-    expect(req.game.isMyTurn).to.be.true;
-  });
-  it("should return game with isMyTurn false when currentPlayer is request player", function() {
-    req.cookies["playerName"] = "swapnil";
-    getPlayers(req, res);
-    expect(req.game.isMyTurn).to.be.false;
   });
 });
