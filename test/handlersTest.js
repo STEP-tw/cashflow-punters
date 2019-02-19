@@ -1,4 +1,5 @@
-const { rollDie, startGame } = require("../src/handlers");
+const { rollDie } = require("../src/handlers");
+const {startGame} = require("../src/gameHandlers")
 const chai = require("chai");
 const sinon = require("sinon");
 
