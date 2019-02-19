@@ -1,6 +1,6 @@
 let game;
 
-const closeOverlay = function(id) {
+const closeOverlay = function (id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
@@ -53,15 +53,26 @@ const displayFinancialStatement = function() {
   getFinancialStatement();
 };
 
-const getProfessionsDiv = function(player) {
+
+const gamePiece = {
+    1:"player1",
+    2:"player2",
+    3:"player3",
+    4:"player4",
+    5:"player5",
+    6:"player6"
+}
+
+const getProfessionsDiv = function (player) {
   let { name, profession, turn } = player;
   let mainDiv = createDivWithClass("details");
-  let container = document.getElementById("container");
-  let p_name = createDiv(name);
-  let p_profession = createDiv(profession.profession);
-  let p_turn = createDiv(turn);
-  appendChildren(mainDiv, [p_name, p_profession, p_turn]);
-  container.appendChild(mainDiv);
+  let container = document.getElementById('container');
+  let p_name = createDiv(`Name : ${name}`);
+  let p_profession = createDiv(`Profession : ${profession.profession}`);
+  let p_turn = createDiv(`Turn : ${turn}`);
+  let p_gamePiece = createDivWithClass(gamePiece[turn]);
+  appendChildren(mainDiv, [p_name, p_profession, p_turn,p_gamePiece]);
+  container.appendChild(mainDiv)
   return mainDiv;
 };
 
@@ -112,16 +123,13 @@ const polling = function() {
   }
 };
 
-const getGame = function() {
-  fetch("/getgame")
-    .then(data => {
-      return data.json();
-    })
-    .then(content => {
-      game = content;
-      polling(game);
-    });
-};
+const getGame = function () {
+  fetch('/getgame').then((data) => {
+    return data.json();
+  }).then((content) => {
+    game = content;
+  })
+}
 
 const initialize = function() {
   setInterval(getGame, 1000);

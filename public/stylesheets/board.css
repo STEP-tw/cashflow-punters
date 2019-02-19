@@ -359,3 +359,46 @@ button {
   background-color: #c3fcdb;
   flex-wrap: wrap;
 }
+
+.player1 {
+  background-color: red;
+  border-radius: 5px;
+  height:20px;
+  width:20px
+}
+
+.player2 {
+  background-color: green;
+  border-radius: 5px;
+  height:20px;
+  width:20px
+}
+
+.player3 {
+  background-color: yellow;
+  height:20px;
+  width:20px;
+  border-radius: 5px;
+}
+
+.player4 {
+  background-color: violet;
+  height:20px;
+  border-radius: 5px;
+  width:20px;
+}
+
+.player5 {
+  background-color: purple;
+  height:20px;
+  border-radius: 5px;
+  width:20px;
+}
+
+.player6 {
+  background-color: saddlebrown;
+  height:20px;
+  border-radius: 5px;
+  width:20px;
+}
+
