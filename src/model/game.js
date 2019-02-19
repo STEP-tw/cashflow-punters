@@ -1,5 +1,6 @@
-const lodash = require("lodash")
-const { range, assignId } = require('../utils/array.js');
+const lodash = require("lodash");
+const { range, assignId } = require("../utils/array.js");
+const { getNextNum } = require("../utils/utils.js");
 
 class Game {
   constructor(cardStore) {
@@ -17,18 +18,36 @@ class Game {
     return this.players.map(player => player.name);
   }
 
+  setCurrentPlayer(player) {
+    this.currentPlayer = player;
+  }
+
   getInitialDetails() {
     const ids = range(1, this.players.length);
-    lodash.zip(this.players,ids).map(assignId);
-    this.players.map((player) => {
-      const profession = lodash.shuffle(this.cardStore.professions.cards).shift()
+    lodash.zip(this.players, ids).map(assignId);
+    this.players.map(player => {
+      const profession = lodash
+        .shuffle(this.cardStore.professions.cards)
+        .shift();
       player.profession = profession;
       this.cardStore.professions.usedCard(profession);
-    })
+    });
+  }
+
+  getPlayer(turn) {
+    return this.players[turn - 1];
+  }
+
+  getTotalPlayers() {
+    return this.players.length;
   }
 
   nextPlayer() {
-    this.currentPlayer.hasRolledDice = false;
+    const currTurn = this.currentPlayer.getTurn();
+    const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
+    const nextPlayer = this.getPlayer(nextPlayerTurn);
+    this.currentPlayer = nextPlayer;
+    this.currentPlayer.haveToActivateDice = true;
   }
 }
 

@@ -1,11 +1,11 @@
 const { randomNum } = require("./utils/utils");
-const renderHomePage = function (req, res) {
-  res.redirect('/homepage.html');
+const renderHomePage = function(req, res) {
+  res.redirect("/homepage.html");
 };
 
-const startGame = function (req, res) {
+const startGame = function(req, res) {
   req.game.getInitialDetails();
-  res.redirect('/board.html');
+  res.redirect("/board.html");
 };
 
 const getCurrentGame = function(req, res, next) {
@@ -22,15 +22,14 @@ const logRequest = function(req, res, next) {
 
 const rollDie = function(req, res) {
   let { currentPlayer } = req.game;
-  currentPlayer.hasRolledDice = true;
+  currentPlayer.haveToActivateDice = false;
+  currentPlayer.updateSpace = true;
   const diceNumber = randomNum(6);
   const rolledDieMsg = "rolled " + diceNumber;
   currentPlayer.move(diceNumber);
   req.game.updateActivity(currentPlayer, rolledDieMsg);
   res.send("" + diceNumber, 200);
 };
-
-
 
 module.exports = {
   renderHomePage,
