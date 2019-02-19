@@ -12,6 +12,7 @@ describe("rollDie", function() {
       addActivity: sinon.spy(),
       nextPlayer: sinon.spy(),
       currentPlayer: {
+        name: "tilak",
         deactivateDice: function() {
           this.haveToActivateDice = false;
         },
@@ -20,6 +21,7 @@ describe("rollDie", function() {
         move: sinon.spy()
       }
     };
+    req.cookies = { playerName: "tilak" };
     res = {};
     res.send = sinon.spy();
   });
@@ -55,6 +57,13 @@ describe("rollDie", function() {
     let { currentPlayer } = req.game;
     rollDie(req, res);
     chai.expect(currentPlayer.haveToActivateDice).to.be.false;
+  });
+
+  it("should not roll the die if requested player and currentPlayer are not same", function() {
+    let { currentPlayer } = req.game;
+    currentPlayer.name = "a";
+    rollDie(req, res);
+    chai.expect(req.game.addActivity.calledOnce).to.be.false;
   });
 });
 

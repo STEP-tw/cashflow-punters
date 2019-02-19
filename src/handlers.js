@@ -1,3 +1,5 @@
+const { isCurrentPlayer } = require("./gameHandlers");
+
 const { randomNum } = require("./utils/utils");
 const renderHomePage = function(req, res) {
   res.redirect("/homepage.html");
@@ -16,6 +18,9 @@ const logRequest = function(req, res, next) {
 };
 
 const rollDie = function(req, res) {
+  if (!isCurrentPlayer(req)) {
+    return;
+  }
   let { currentPlayer } = req.game;
   currentPlayer.deactivateDice();
   const diceNumber = randomNum(6);
