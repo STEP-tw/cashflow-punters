@@ -73,22 +73,6 @@ const getProfessions = function() {
   container.appendChild(button);
 };
 
-const getProfessions = function() {
-  fetch("/getPlayerProfessions")
-    .then(data => {
-      return data.json();
-    })
-    .then(content => {
-      polling(content);
-      let container = document.getElementById("container");
-      content.map(getProfessionsDiv).join("");
-      let button = document.createElement("button");
-      button.innerText = "continue";
-      button.onclick = displayFinancialStatement;
-      container.appendChild(button);
-    });
-};
-
 const enableDice = function(diceId) {
   const dice = document.getElementById(diceId);
   dice.hidden = false;
@@ -135,6 +119,7 @@ const getGame = function() {
     })
     .then(content => {
       game = content;
+      polling(game);
     });
 };
 
