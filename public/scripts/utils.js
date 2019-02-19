@@ -5,9 +5,10 @@ const createForm = function (action, method) {
   return form;
 };
 
-const createInput = function (name, placeholder, type) {
+const createInput = function(name, placeholder, type, id) {
   const input = document.createElement('input');
   input.placeholder = placeholder;
+  input.id = id;
   input.name = name;
   input.type = type;
   return input;

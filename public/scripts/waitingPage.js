@@ -43,6 +43,10 @@ window.onload = () => {
   fetch("/gamelobby")
     .then(res => res.json())
     .then(gameDetails => {
+      displayLobby(gameDetails);
+      return gameDetails;
+    })
+    .then(gameDetails => {
       insertButtons(gameDetails);
       return gameDetails;
     });

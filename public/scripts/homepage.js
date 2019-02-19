@@ -7,14 +7,52 @@ const displayHostTemplate = function() {
   appendChildren(hostingForm, [nameInput, hostButton]);
 };
 
+const joinGame = function() {
+  const gameId = document.getElementById('game_id').value;
+  const playerName = document.getElementById('name').value;
+  fetch('/joingame', {
+    method: 'POST',
+    body: JSON.stringify({gameId, playerName}),
+    headers: {'Content-Type': 'application/json'}
+  }).then(res => {
+    if (res.redirected) {
+      window.location.href = res.url;
+    }
+  });
+};
+
+const displayGameStarted = function() {
+  const messageDiv = document.createElement('div');
+  const optionsField = document.getElementById('gameOptionsField');
+  const message = 'Opps! Game has started or no place available';
+  messageDiv.innerText = message;
+  optionsField.appendChild(messageDiv);
+};
+
+const canJoin = function() {
+  const gameId = document.getElementById('game_id').value;
+  fetch('/canjoin', {
+    method: 'POST',
+    body: JSON.stringify({gameId}),
+    headers: {'Content-Type': 'application/json'}
+  })
+    .then(res => res.json())
+    .then(({hasStarted, isPlaceAvailable}) => {
+      if (isPlaceAvailable && !hasStarted) {
+        joinGame();
+        return;
+      }
+      displayGameStarted();
+    });
+};
+
 const displayJoinTemplate = function() {
   const optionsField = document.getElementById('gameOptionsField');
-  const joiningForm = createForm('/joingame', 'POST');
-  const gameIdInput = createInput('gameId', 'Enter GameID', 'text');
-  const nameInput = createInput('playerName', 'Enter Name', 'text');
+  const gameIdInput = createInput('gameId', 'Enter GameID', 'text', 'game_id');
+  const nameInput = createInput('playerName', 'Enter Name', 'text', 'name');
   const joinButton = createButton('JOIN', 'game-options', 'submit');
-  appendChildren(optionsField, [joiningForm]);
-  appendChildren(joiningForm, [nameInput, gameIdInput, joinButton]);
+  joinButton.onclick = canJoin;
+  appendChildren(optionsField, [nameInput, gameIdInput, joinButton]);
 };
 
 window.onload = () => {

@@ -9,6 +9,7 @@ class Game {
     this.currentPlayer;
     this.players = [];
     this.gameLog = [];
+    this.hasStarted = false;
   }
 
   addPlayer(player) {
@@ -42,6 +43,19 @@ class Game {
 
   getTotalPlayers() {
     return this.players.length;
+  }
+
+  startGame() {
+    this.hasStarted = true;
+  }
+
+  getPlayersCount() {
+    return this.players.length;
+  }
+
+  isPlaceAvailable() {
+    const playersCount = this.getPlayersCount();
+    return playersCount < 6;
   }
 
   nextPlayer() {
