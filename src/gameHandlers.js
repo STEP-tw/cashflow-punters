@@ -3,18 +3,18 @@ const Cards = require('./model/cards');
 const Player = require('./model/player');
 const cards = require('../data/cards');
 
-const initializeGame = function() {
+const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
   const smallDeals = new Cards(cards.smallDeals);
   const market = new Cards(cards.market);
   const doodads = new Cards(cards.doodads);
   const professions = new Cards(cards.professions);
-  return new Game({bigDeals, smallDeals, market, doodads, professions});
+  return new Game({bigDeals, smallDeals, market, doodads, professions}, host);
 };
 
 const hostGame = function(req, res) {
-  const game = initializeGame();
   const {playerName} = req.body;
+  const game = initializeGame(playerName);
   const player = new Player(playerName);
   const gameId = res.app.createGameId();
   game.addPlayer(player);
@@ -26,8 +26,9 @@ const hostGame = function(req, res) {
 
 const provideGameLobby = function(req, res) {
   const players = req.game.getPlayerNames();
-  const {gameId} = req.cookies;
-  res.send(JSON.stringify({players, gameId}));
+  const {gameId, playerName} = req.cookies;
+  const isHost = req.game.host == playerName;
+  res.send(JSON.stringify({players, gameId, isHost}));
 };
 
 const joinGame = function(req, res) {

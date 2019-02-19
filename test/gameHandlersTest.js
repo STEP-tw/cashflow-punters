@@ -1,7 +1,12 @@
 const request = require('supertest');
 const {expect} = require('chai');
 const app = require('../src/app');
-const {hostGame, provideGameLobby, joinGame,getPlayers} = require('../src/gameHandlers');
+const {
+  hostGame,
+  provideGameLobby,
+  joinGame,
+  getPlayers
+} = require('../src/gameHandlers');
 
 describe('hostGame', function() {
   it('should redirect to url /waiting.html with statusCode 302', function(done) {
@@ -65,9 +70,10 @@ describe('provideGameLobby', function() {
     req.game = {
       getPlayerNames: () => {
         return ['player1', 'player2'];
-      }
+      },
+      host: 'player1'
     };
-    req.cookies = {gameId: '1234'};
+    req.cookies = {gameId: '1234', playerName: 'player2'};
     res.send = function(response) {
       res.content = response;
     };
@@ -76,7 +82,9 @@ describe('provideGameLobby', function() {
 
     expect(res)
       .to.have.property('content')
-      .to.equal('{"players":["player1","player2"],"gameId":"1234"}');
+      .to.equal(
+        '{"players":["player1","player2"],"gameId":"1234","isHost":false}'
+      );
   });
 });
 
@@ -112,22 +120,23 @@ describe('joinGame', function() {
   });
 });
 
-
 describe('getgame', function() {
   it('should return game', function(done) {
     request(app)
-    .get('/getgame')
-    .expect(200)
-   .end(done)
+      .get('/getgame')
+      .expect(200)
+      .end(done);
   });
 });
 
 describe('getgame', function() {
   it('should return game', function() {
-    const req = {game:{player:[1,2]}};
-    const res = {send:()=>{
-      expect(req.game.player).to.eql([1,2])
-    }};
-    getPlayers(req,res);
+    const req = {game: {player: [1, 2]}};
+    const res = {
+      send: () => {
+        expect(req.game.player).to.eql([1, 2]);
+      }
+    };
+    getPlayers(req, res);
   });
 });

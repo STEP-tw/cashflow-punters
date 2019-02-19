@@ -14,10 +14,22 @@ const getPlayerNamesHtml = function(players) {
   });
 };
 
+const checkPlayersCount = function({players, isHost}) {
+  if (players.length >= 2 && isHost) {
+    const buttonSpace = document.getElementById('start_button_space');
+    const startButton = createButton('Start Game', 'button', 'button');
+    appendChildren(buttonSpace, [startButton]);
+  }
+};
+
 window.onload = () => {
   setInterval(() => {
     fetch('/gamelobby')
       .then(res => res.json())
-      .then(displayLobby);
+      .then(gameDetails => {
+        displayLobby(gameDetails);
+        return gameDetails;
+      })
+      .then(gameDetails => checkPlayersCount(gameDetails));
   }, 1000);
 };

@@ -2,7 +2,8 @@ const lodash = require("lodash")
 const { range, assignId } = require('../utils/array.js');
 
 class Game {
-  constructor(cardStore) {
+  constructor(cardStore, host) {
+    this.host = host;
     this.cardStore = cardStore;
     this.currentPlayer;
     this.players = [];
@@ -24,7 +25,7 @@ class Game {
       const profession = lodash.shuffle(this.cardStore.professions.cards).shift()
       player.profession = profession;
       this.cardStore.professions.usedCard(profession);
-    })
+    });
   }
 
   nextPlayer() {
