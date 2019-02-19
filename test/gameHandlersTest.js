@@ -1,11 +1,12 @@
 const request = require("supertest");
-const { expect } = require("chai");
+const {expect} = require("chai");
 const app = require("../src/app");
 const {
   hostGame,
   provideGameLobby,
   joinGame,
-  getPlayers
+  getPlayers,
+  canJoin
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -24,7 +25,7 @@ describe("hostGame", function() {
 
   beforeEach(() => {
     req = {};
-    req.body = { playerName: "player" };
+    req.body = {playerName: "player"};
     res = {};
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
@@ -48,7 +49,7 @@ describe("hostGame", function() {
       .to.have.property("players")
       .to.be.an("Array")
       .to.deep.equals([
-        { name: "player", didUpdateSpace: false, currentSpace: 0 }
+        {name: "player", didUpdateSpace: false, currentSpace: 0}
       ]);
   });
   it("should set cookie as gameId and player name", function() {
@@ -75,7 +76,7 @@ describe("provideGameLobby", function() {
       },
       host: "player1"
     };
-    req.cookies = { gameId: "1234", playerName: "player2" };
+    req.cookies = {gameId: "1234", playerName: "player2"};
     res.send = function(response) {
       res.content = response;
     };
@@ -94,7 +95,7 @@ describe("joinGame", function() {
   it("should add player in the game of given gameId", function() {
     const req = {};
     const res = {};
-    req.body = { gameId: "1234", playerName: "player" };
+    req.body = {gameId: "1234", playerName: "player"};
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
@@ -119,8 +120,42 @@ describe("joinGame", function() {
       .to.have.property("1234")
       .to.have.property("players")
       .to.deep.equals([
-        { name: "player", didUpdateSpace: false, currentSpace: 0 }
+        {name: "player", didUpdateSpace: false, currentSpace: 0}
       ]);
+  });
+});
+
+describe("canJoin", function() {
+  it("should send an object in response if the place is available and is game started", function() {
+    const req = {};
+    const res = {};
+    req.body = {gameId: "1234"};
+    res["Set-Cookie"] = "";
+    res.cookie = function(key, value) {
+      res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
+    };
+    res.redirect = function(location) {
+      res.Location = location;
+    };
+    res.app = {};
+    res.app.games = {
+      "1234": {
+        players: [{name: "player1"}, {name: "player2"}],
+        hasStarted: false,
+
+        isPlaceAvailable: function() {
+          return this.players.length < 6;
+        }
+      }
+    };
+    res.send = function(response) {
+      res.content = response;
+    };
+    canJoin(req, res);
+
+    expect(res)
+      .to.have.property("content")
+      .to.be.deep.equals('{"hasStarted":false,"isPlaceAvailable":true}');
   });
 });
 
