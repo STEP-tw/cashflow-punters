@@ -22,6 +22,7 @@ const logRequest = function(req, res, next) {
 
 const rollDie = function(req, res) {
   let { currentPlayer } = req.game;
+  console.log(req.game);
   currentPlayer.haveToActivateDice = false;
   currentPlayer.updateSpace = true;
   const diceNumber = randomNum(6);
@@ -29,6 +30,7 @@ const rollDie = function(req, res) {
   currentPlayer.move(diceNumber);
   req.game.updateActivity(currentPlayer, rolledDieMsg);
   res.send("" + diceNumber, 200);
+  req.game.nextPlayer();
 };
 
 module.exports = {

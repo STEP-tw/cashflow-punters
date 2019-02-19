@@ -9,6 +9,7 @@ describe("rollDie", function() {
     req = {};
     req.game = {
       updateActivity: sinon.spy(),
+      nextPlayer: sinon.spy(),
       currentPlayer: {
         haveToActivateDice: true,
         updateSpace: false,
