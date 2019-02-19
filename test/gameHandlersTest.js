@@ -7,7 +7,8 @@ const {
   joinGame,
   getPlayers,
   canJoin,
-  getGame
+  getGame,
+  startGame
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -248,5 +249,24 @@ describe("getPlayers", function() {
       }
     };
     getPlayers(req, res);
+  });
+});
+
+describe("startGame", function() {
+  it("should redirect to board.html", function() {
+    let req = {
+      game: {
+        hasStarted: false,
+        getInitialDetails: () => {}
+      }
+    };
+    let res = {
+      end: () => {}
+    };
+    startGame(req, res);
+
+    expect(req.game)
+      .to.have.property("hasStarted")
+      .to.be.equal(true);
   });
 });
