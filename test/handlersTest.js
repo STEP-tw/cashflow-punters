@@ -1,5 +1,5 @@
 const { rollDie } = require("../src/handlers");
-const {startGame} = require("../src/gameHandlers")
+const { startGame } = require("../src/gameHandlers");
 const chai = require("chai");
 const sinon = require("sinon");
 
@@ -9,7 +9,7 @@ describe("rollDie", function() {
   beforeEach(() => {
     req = {};
     req.game = {
-      updateActivity: sinon.spy(),
+      addActivity: sinon.spy(),
       nextPlayer: sinon.spy(),
       currentPlayer: {
         deactivateDice: function() {
@@ -37,17 +37,17 @@ describe("rollDie", function() {
     chai.expect(returnValue).to.be.at.most(6);
   });
 
-  it("should  call update activity", function() {
-    let { updateActivity } = req.game;
+  it("should  call add activity", function() {
+    let { addActivity } = req.game;
     rollDie(req, res);
-    const isUpdateActivityCalled = updateActivity.calledOnce;
-    chai.expect(isUpdateActivityCalled).to.be.true;
+    const isAddActivityCalled = addActivity.calledOnce;
+    chai.expect(isAddActivityCalled).to.be.true;
   });
 
   it("should  call update activity with msg rolled some number", function() {
-    let { updateActivity } = req.game;
+    let { addActivity } = req.game;
     rollDie(req, res);
-    const activityMsg = updateActivity.firstCall.lastArg;
+    const activityMsg = addActivity.firstCall.lastArg;
     chai.expect(activityMsg).to.match(/rolled [1-6]/);
   });
 

@@ -123,10 +123,19 @@ const updateGamePiece = function(player) {
   gamePiece.classList.add("visible");
   let space = gamePiece.parentNode;
   let newSpace = document.getElementById(player.currentSpace);
-  console.log(newSpace);
-
   space.removeChild(gamePiece);
   newSpace.appendChild(gamePiece);
+};
+
+const updateActivtyLog = function(activityLog) {
+  const activityLogDiv = document.getElementById("activityLog");
+  activityLogDiv.innerHTML = "";
+  activityLog.forEach(function({ playerName, msg }) {
+    const activity = document.createElement("p");
+    activity.classList.add("activity");
+    activity.innerText = playerName + " -->" + msg;
+    activityLogDiv.appendChild(activity);
+  });
 };
 
 const getGame = function() {
@@ -136,6 +145,7 @@ const getGame = function() {
     })
     .then(content => {
       game = content;
+      updateActivtyLog(game.activityLog);
       polling(game);
     });
 };

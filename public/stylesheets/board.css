@@ -200,7 +200,7 @@ button {
 
 .activity_log {
   border: black 1px solid;
-
+  overflow: scroll;
   height: 70%;
 }
 

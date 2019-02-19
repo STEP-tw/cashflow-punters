@@ -2,8 +2,19 @@ const lodash = require("lodash");
 const { range, assignId } = require("../utils/array.js");
 const { getNextNum } = require("../utils/utils.js");
 
-class Game {
+class ActivityLog {
+  constructor() {
+    this.activityLog = [];
+  }
+  addActivity(playerName, msg) {
+    const time = new Date();
+    this.activityLog.push({ playerName, msg, time });
+  }
+}
+
+class Game extends ActivityLog {
   constructor(cardStore, host) {
+    super();
     this.host = host;
     this.cardStore = cardStore;
     this.currentPlayer;
