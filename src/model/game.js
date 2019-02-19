@@ -6,7 +6,7 @@ class ActivityLog {
   constructor() {
     this.activityLog = [];
   }
-  addActivity(playerName, msg) {
+  addActivity(msg, playerName = "") {
     const time = new Date();
     this.activityLog.unshift({ playerName, msg, time });
   }
@@ -46,6 +46,8 @@ class Game extends ActivityLog {
       this.cardStore.professions.usedCard(profession);
     });
     this.currentPlayer = this.players[0];
+    this.addActivity("Game has Started");
+    this.addActivity("'s turn", this.currentPlayer.name);
     this.currentPlayer.haveToActivateDice = true;
   }
 
@@ -75,6 +77,7 @@ class Game extends ActivityLog {
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
     const nextPlayer = this.getPlayer(nextPlayerTurn);
     this.currentPlayer = nextPlayer;
+    this.addActivity("'s turn ", this.currentPlayer.name);
     this.currentPlayer.haveToActivateDice = true;
   }
 }

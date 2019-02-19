@@ -49,7 +49,7 @@ describe("rollDie", function() {
   it("should  call update activity with msg rolled some number", function() {
     let { addActivity } = req.game;
     rollDie(req, res);
-    const activityMsg = addActivity.firstCall.lastArg;
+    const activityMsg = addActivity.firstCall.args[0];
     chai.expect(activityMsg).to.match(/rolled [1-6]/);
   });
 

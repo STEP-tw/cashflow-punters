@@ -24,9 +24,9 @@ const rollDie = function(req, res) {
   let { currentPlayer } = req.game;
   currentPlayer.deactivateDice();
   const diceNumber = randomNum(6);
-  const rolledDieMsg = "rolled " + diceNumber;
+  const rolledDieMsg = " rolled " + diceNumber;
   currentPlayer.move(diceNumber);
-  req.game.addActivity(currentPlayer.name, rolledDieMsg);
+  req.game.addActivity(rolledDieMsg, currentPlayer.name);
   res.send("" + diceNumber, 200);
   req.game.nextPlayer();
 };

@@ -133,7 +133,7 @@ const updateActivtyLog = function(activityLog) {
   activityLog.forEach(function({ playerName, msg }) {
     const activity = document.createElement("p");
     activity.classList.add("activity");
-    activity.innerText = playerName + " -->" + msg;
+    activity.innerText = playerName + msg;
     activityLogDiv.appendChild(activity);
   });
 };
