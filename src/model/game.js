@@ -8,7 +8,7 @@ class ActivityLog {
   }
   addActivity(playerName, msg) {
     const time = new Date();
-    this.activityLog.push({ playerName, msg, time });
+    this.activityLog.unshift({ playerName, msg, time });
   }
 }
 
