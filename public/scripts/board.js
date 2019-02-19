@@ -99,11 +99,11 @@ const activateDice = function(currentPlayer) {
 
 const rollDie = function() {
   const dice = document.getElementById(event.target.id);
+  dice.onclick = null;
   fetch("/rolldie")
     .then(res => res.text())
     .then(number => {
       dice.innerText = number;
-      dice.onclick = null;
     });
 };
 
