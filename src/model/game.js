@@ -1,6 +1,6 @@
 const lodash = require("lodash");
-const {range, assignId} = require("../utils/array.js");
-const {getNextNum} = require("../utils/utils.js");
+const { range, assignId } = require("../utils/array.js");
+const { getNextNum } = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -37,17 +37,18 @@ class Game extends ActivityLog {
   getInitialDetails() {
     const ids = range(1, this.players.length);
     lodash.zip(this.players, ids).map(assignId);
-    this.players.map(player => {
-      const profession = lodash
-        .shuffle(this.cardStore.professions.cards)
-        .shift();
-      player.profession = profession;
-      this.cardStore.professions.usedCard(profession);
-    });
+    this.players.map(player => this.getProfession(player));
     this.currentPlayer = this.players[0];
     this.addActivity("Game has Started");
     this.addActivity("'s turn", this.currentPlayer.name);
     this.currentPlayer.haveToActivateDice = true;
+  }
+
+  getProfession(player) {
+    let { professions } = this.cardStore;
+    const profession = lodash.shuffle(professions.cards).shift();
+    player.profession = profession;
+    professions.usedCard(profession);
   }
 
   getPlayer(turn) {
