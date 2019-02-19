@@ -51,6 +51,7 @@ const getProfessions = function() {
       return data.json();
     })
     .then(content => {
+      polling(content);
       let container = document.getElementById("container");
       content.map(getProfessionsDiv).join("");
       let button = document.createElement("button");
@@ -84,13 +85,14 @@ const rollDie = function() {
     });
 };
 
-const polling = function(game) {
+const polling = function() {
   let { currentPlayer, isMyTurn } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
   }
-  if (currentPlayer.updateSpace) {
+  if (currentPlayer.didUpdateSpace) {
     let gamePiece = document.getElementById("gamePiece" + currentPlayer.turn);
+    gamePiece.classList.add("visible");
     let space = gamePiece.parentNode;
     let newSpace = document.getElementById(currentPlayer.currentSpace);
     space.removeChild(gamePiece);

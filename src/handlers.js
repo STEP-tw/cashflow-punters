@@ -22,9 +22,7 @@ const logRequest = function(req, res, next) {
 
 const rollDie = function(req, res) {
   let { currentPlayer } = req.game;
-  console.log(req.game);
-  currentPlayer.haveToActivateDice = false;
-  currentPlayer.updateSpace = true;
+  currentPlayer.deactivateDice();
   const diceNumber = randomNum(6);
   const rolledDieMsg = "rolled " + diceNumber;
   currentPlayer.move(diceNumber);

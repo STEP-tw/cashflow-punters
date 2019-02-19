@@ -11,8 +11,11 @@ describe("rollDie", function() {
       updateActivity: sinon.spy(),
       nextPlayer: sinon.spy(),
       currentPlayer: {
+        deactivateDice: function() {
+          this.haveToActivateDice = false;
+        },
         haveToActivateDice: true,
-        updateSpace: false,
+        didUpdateSpace: false,
         move: sinon.spy()
       }
     };
@@ -51,12 +54,6 @@ describe("rollDie", function() {
     let { currentPlayer } = req.game;
     rollDie(req, res);
     chai.expect(currentPlayer.haveToActivateDice).to.be.false;
-  });
-
-  it("should has to change updateSpace  of current playe to true", function() {
-    let { currentPlayer } = req.game;
-    rollDie(req, res);
-    chai.expect(currentPlayer.updateSpace).to.be.true;
   });
 });
 

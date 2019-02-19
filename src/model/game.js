@@ -32,6 +32,7 @@ class Game {
       player.profession = profession;
       this.cardStore.professions.usedCard(profession);
     });
+    this.currentPlayer = this.players[0];
   }
 
   getPlayer(turn) {
