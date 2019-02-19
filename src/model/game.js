@@ -1,6 +1,6 @@
 const lodash = require("lodash");
-const { range, assignId } = require("../utils/array.js");
-const { getNextNum } = require("../utils/utils.js");
+const {range, assignId} = require("../utils/array.js");
+const {getNextNum} = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -19,7 +19,6 @@ class Game extends ActivityLog {
     this.cardStore = cardStore;
     this.currentPlayer;
     this.players = [];
-    this.gameLog = [];
     this.hasStarted = false;
   }
 

@@ -1,37 +1,42 @@
 const displayLobby = function(gameDetails) {
-  const gameIdSpace = document.getElementById("gameId");
-  gameIdSpace.innerText = gameDetails.gameId;
-  const playerList = document.getElementById("playersList");
+  const gameIdSpace = getElementById("gameId");
+  const playerList = getElementById("playersList");
   const playernamesHtml = getPlayerNamesHtml(gameDetails.players);
+  gameIdSpace.innerText = gameDetails.gameId;
   appendChildren(playerList, playernamesHtml);
-  if (gameDetails.hasStarted) {
-    window.location = "/board.html";
-  }
+  return gameDetails;
+};
+
+const goToGame = function(gameDetails) {
+  if (gameDetails.hasStarted) window.location.href = "/board.html";
+  return gameDetails;
+};
+
+const convertToListElement = function(text) {
+  const listElement = createElement("li");
+  listElement.innerText = text;
+  return listElement;
 };
 
 const getPlayerNamesHtml = function(players) {
-  return players.map(playerName => {
-    const listElement = document.createElement("li");
-    listElement.innerText = playerName;
-    return listElement;
-  });
+  return players.map(convertToListElement);
 };
 
 const startNewGame = function() {
   fetch("/startGame");
 };
 
-const checkPlayersCount = function({ players, isHost }) {
+const checkPlayersCount = function({players, isHost}) {
   if (players.length >= 2 && isHost) {
-    const buttonSpace = document.getElementById("start_button_space");
+    const buttonSpace = getElementById("start_button_space");
     const startButton = createButton("Start Game", "button", "button");
     startButton.onclick = startNewGame;
     appendChildren(buttonSpace, [startButton]);
   }
 };
 
-const insertButtons = function({ isHost }) {
-  const buttonsSpace = document.getElementById("buttons_space");
+const insertButtons = function({isHost}) {
+  const buttonsSpace = getElementById("buttons_space");
   let button = createButton("Leave Game", "button", "button");
   if (isHost) {
     button = createButton("Cancel Game", "button", "button");
@@ -42,22 +47,15 @@ const insertButtons = function({ isHost }) {
 window.onload = () => {
   fetch("/gamelobby")
     .then(res => res.json())
-    .then(gameDetails => {
-      displayLobby(gameDetails);
-      return gameDetails;
-    })
-    .then(gameDetails => {
-      insertButtons(gameDetails);
-      return gameDetails;
-    });
+    .then(displayLobby)
+    .then(goToGame)
+    .then(insertButtons);
 
   setInterval(() => {
     fetch("/gamelobby")
       .then(res => res.json())
-      .then(gameDetails => {
-        displayLobby(gameDetails);
-        return gameDetails;
-      })
-      .then(gameDetails => checkPlayersCount(gameDetails));
+      .then(displayLobby)
+      .then(goToGame)
+      .then(checkPlayersCount);
   }, 1000);
 };

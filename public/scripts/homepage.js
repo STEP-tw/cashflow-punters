@@ -1,15 +1,16 @@
 const displayHostTemplate = function() {
-  const optionsField = document.getElementById("gameOptionsField");
+  const optionsField = getElementById("gameOptionsField");
   const hostingForm = createForm("/hostgame", "POST");
   const nameInput = createInput("playerName", "Enter Name", "text");
+  nameInput.required = true;
   const hostButton = createButton("HOST", "game-options", "submit");
   appendChildren(optionsField, [hostingForm]);
   appendChildren(hostingForm, [nameInput, hostButton]);
 };
 
 const joinGame = function() {
-  const gameId = document.getElementById("game_id").value;
-  const playerName = document.getElementById("name").value;
+  const gameId = getElementById("game_id").value;
+  const playerName = getElementById("name").value;
   fetch("/joingame", {
     method: "POST",
     body: JSON.stringify({gameId, playerName}),
@@ -22,14 +23,22 @@ const joinGame = function() {
 };
 
 const displayError = function(error) {
-  const messageDiv = document.createElement("div");
-  const optionsField = document.getElementById("gameOptionsField");
+  const messageDiv = getElementById("messageDiv");
   messageDiv.innerText = error;
-  optionsField.appendChild(messageDiv);
+};
+
+const isInvalidCredentials = function() {
+  const gameId = getElementById("game_id").value;
+  const playerName = getElementById("name").value;
+  return !gameId || !playerName;
 };
 
 const canJoin = function() {
-  const gameId = document.getElementById("game_id").value;
+  const gameId = getElementById("game_id").value;
+  if (isInvalidCredentials()) {
+    const error = "Invalid GameId or Player Name";
+    return displayError(error);
+  }
   fetch("/canjoin", {
     method: "POST",
     body: JSON.stringify({gameId}),
@@ -37,10 +46,7 @@ const canJoin = function() {
   })
     .then(res => res.json())
     .then(({isGameJoinable, error}) => {
-      if (isGameJoinable) {
-        joinGame();
-        return;
-      }
+      if (isGameJoinable) return joinGame();
       displayError(error);
     });
 };
@@ -50,13 +56,20 @@ const displayJoinTemplate = function() {
   const gameIdInput = createInput("gameId", "Enter GameID", "text", "game_id");
   const nameInput = createInput("playerName", "Enter Name", "text", "name");
   const joinButton = createButton("JOIN", "game-options", "submit");
+  const messageDiv = createElement("div");
+  messageDiv.id = "messageDiv";
   joinButton.onclick = canJoin;
-  appendChildren(optionsField, [nameInput, gameIdInput, joinButton]);
+  appendChildren(optionsField, [
+    nameInput,
+    gameIdInput,
+    joinButton,
+    messageDiv
+  ]);
 };
 
 window.onload = () => {
-  const hostGameButton = document.getElementById("hostGame");
+  const hostGameButton = getElementById("hostGame");
+  const joinGameButton = getElementById("joinGame");
   hostGameButton.onclick = displayHostTemplate;
-  const joinGameButton = document.getElementById("joinGame");
   joinGameButton.onclick = displayJoinTemplate;
 };

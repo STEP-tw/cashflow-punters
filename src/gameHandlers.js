@@ -9,11 +9,11 @@ const initializeGame = function(host) {
   const market = new Cards(cards.market);
   const doodads = new Cards(cards.doodads);
   const professions = new Cards(cards.professions);
-  return new Game({ bigDeals, smallDeals, market, doodads, professions }, host);
+  return new Game({bigDeals, smallDeals, market, doodads, professions}, host);
 };
 
 const hostGame = function(req, res) {
-  const { playerName } = req.body;
+  const {playerName} = req.body;
   const game = initializeGame(playerName);
   const player = new Player(playerName);
   const gameId = res.app.createGameId();
@@ -26,14 +26,14 @@ const hostGame = function(req, res) {
 
 const provideGameLobby = function(req, res) {
   const players = req.game.getPlayerNames();
-  const { gameId, playerName } = req.cookies;
+  const {gameId, playerName} = req.cookies;
   const isHost = req.game.host == playerName;
   const hasStarted = req.game.hasStarted;
-  res.send(JSON.stringify({ players, gameId, isHost, hasStarted }));
+  res.send(JSON.stringify({players, gameId, isHost, hasStarted}));
 };
 
 const joinGame = function(req, res) {
-  const { gameId, playerName } = req.body;
+  const {gameId, playerName} = req.body;
   const player = new Player(playerName);
   const game = res.app.games[gameId];
   game.addPlayer(player);
@@ -45,7 +45,7 @@ const joinGame = function(req, res) {
 const startGame = function(req, res) {
   req.game.getInitialDetails();
   req.game.hasStarted = true;
-  res.redirect("/board.html");
+  res.end();
 };
 
 const doesGameExist = function(allGames, gameId) {
@@ -55,23 +55,23 @@ const doesGameExist = function(allGames, gameId) {
 const sendGameNotFound = function(res) {
   const error = "Sorry! No Game with this Id..";
   const isGameJoinable = false;
-  res.send(JSON.stringify({ error, isGameJoinable }));
+  res.send(JSON.stringify({error, isGameJoinable}));
 };
 
 const sendGameStarted = function(res) {
   const error = "Sorry! The Game has already started..";
   const isGameJoinable = false;
-  res.send(JSON.stringify({ error, isGameJoinable }));
+  res.send(JSON.stringify({error, isGameJoinable}));
 };
 
 const sendPlaceNotAvailable = function(res) {
   const error = "Sorry! No place available in the Game..";
   const isGameJoinable = false;
-  res.send(JSON.stringify({ error, isGameJoinable }));
+  res.send(JSON.stringify({error, isGameJoinable}));
 };
 
 const canJoin = function(req, res) {
-  const { gameId } = req.body;
+  const {gameId} = req.body;
   const allGames = res.app.games;
   const game = allGames[gameId];
   if (!doesGameExist(allGames, gameId)) return sendGameNotFound(res);
@@ -81,7 +81,7 @@ const canJoin = function(req, res) {
   if (hasStarted) return sendGameStarted(res);
   if (!isPlaceAvailable) return sendPlaceNotAvailable(res);
 
-  res.send(JSON.stringify({ isGameJoinable: true }));
+  res.send(JSON.stringify({isGameJoinable: true}));
 };
 
 const getPlayers = function(req, res) {
@@ -89,7 +89,7 @@ const getPlayers = function(req, res) {
 };
 
 const isCurrentPlayer = function(req) {
-  let { name } = req.game.currentPlayer;
+  let {name} = req.game.currentPlayer;
   return name == req.cookies["playerName"];
 };
 
