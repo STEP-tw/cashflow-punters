@@ -6,7 +6,8 @@ const {
   provideGameLobby,
   joinGame,
   getPlayers,
-  canJoin
+  canJoin,
+  getGame
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -126,9 +127,10 @@ describe("joinGame", function() {
 });
 
 describe("canJoin", function() {
-  it("should send an object in response if the place is available and is game started", function() {
-    const req = {};
-    const res = {};
+  const req = {};
+  const res = {};
+
+  beforeEach(() => {
     req.body = {gameId: "1234"};
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
@@ -151,11 +153,57 @@ describe("canJoin", function() {
     res.send = function(response) {
       res.content = response;
     };
+  });
+
+  it("should send an object in response with key isGameJoinable as true", function() {
     canJoin(req, res);
 
     expect(res)
       .to.have.property("content")
-      .to.be.deep.equals('{"hasStarted":false,"isPlaceAvailable":true}');
+      .to.be.deep.equals('{"isGameJoinable":true}');
+  });
+
+  it("should send game not found error for non existing game id", function() {
+    req.body = {gameId: "456"};
+    canJoin(req, res);
+
+    expect(res)
+      .to.have.property("content")
+      .to.be.deep.equals(
+        '{"error":"Sorry! No Game with this Id..","isGameJoinable":false}'
+      );
+  });
+
+  it("should send No place error if total number of players is 6", function() {
+    const players = [
+      {name: "player1"},
+      {name: "player2"},
+      {name: "player3"},
+      {name: "player4"},
+      {name: "player5"},
+      {name: "player6"}
+    ];
+
+    res.app.games["1234"].players = players;
+    canJoin(req, res);
+
+    expect(res)
+      .to.have.property("content")
+      .to.be.deep.equals(
+        '{"error":"Sorry! No place available in the Game..","isGameJoinable":false}'
+      );
+  });
+
+  it("should send No place error if total number of players is 6", function() {
+    res.app.games["1234"].hasStarted = true;
+
+    canJoin(req, res);
+
+    expect(res)
+      .to.have.property("content")
+      .to.be.deep.equals(
+        '{"error":"Sorry! The Game has already started..","isGameJoinable":false}'
+      );
   });
 });
 
@@ -178,12 +226,14 @@ describe("getgame", function() {
         .end(done);
     });
     it("should return game with isMyTurn true when currentPlayer is request player", function() {
-      getPlayers(req, res);
+      getGame(req, res);
+      console.log("tilak");
+
       expect(req.game.isMyTurn).to.be.true;
     });
     it("should return game with isMyTurn false when currentPlayer is request player", function() {
       req.cookies["playerName"] = "swapnil";
-      getPlayers(req, res);
+      getGame(req, res);
       expect(req.game.isMyTurn).to.be.false;
     });
   });
