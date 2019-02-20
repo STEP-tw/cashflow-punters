@@ -3,7 +3,7 @@ const displayHostTemplate = function() {
   const hostingForm = createForm("/hostgame", "POST");
   const nameInput = createInput("playerName", "Enter Name", "text");
   nameInput.required = true;
-  const hostButton = createButton("HOST", "game-options", "submit");
+  const hostButton = createButton("HOST", "button", "submit");
   appendChildren(optionsField, [hostingForm]);
   appendChildren(hostingForm, [nameInput, hostButton]);
 };

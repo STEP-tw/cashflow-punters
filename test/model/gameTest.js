@@ -130,24 +130,25 @@ describe("handleCrossedPayday", function() {
   });
 });
 
-describe.skip("getInitialDetails", function() {
+describe("getInitialDetails", function() {
   it("should return initial details of player", function() {
     let cards = new Cards([{ 1: "p1" }, { 1: "p2" }]);
     let professions = new Cards(cards);
     let game = new Game({ professions });
-    const player1 = { name: "player1" };
-    const player2 = { name: "player2" };
+    const player1 = { name: "player1", setFinancialStatement: () => {} };
+    const player2 = { name: "player2", setFinancialStatement: () => {} };
 
     game.addPlayer(player1);
     game.addPlayer(player2);
     game.getInitialDetails();
 
+    expect(game)
+      .to.have.property("currentPlayer")
+      .to.be.an("Object");
     expect(game.players[0]).has.property("turn");
     expect(game.players[0]).has.property("profession");
-    expect(game.players[0]).has.property("financialStatement");
     expect(game.players[1]).has.property("turn");
     expect(game.players[1]).has.property("profession");
-    expect(game.players[1]).has.property("financialStatement");
   });
 });
 

@@ -38,9 +38,9 @@ class Game extends ActivityLog {
   }
 
   getInitialDetails() {
-    const ids = range(1, this.players.length);
+    const ids = lodash.range(1, this.players.length + 1);
     lodash.zip(this.players, ids).map(assignId);
-    this.players.map(player => this.getProfession(player));
+    this.players.map(this.getProfession, this);
     this.currentPlayer = this.players[0];
     this.addActivity("Game has Started");
     this.addActivity("'s turn", this.currentPlayer.name);
