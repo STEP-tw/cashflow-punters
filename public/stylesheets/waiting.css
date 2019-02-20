@@ -63,3 +63,7 @@ background-color: whitesmoke;
     justify-content: center;
     align-items: center;
 }
+
+.waiting-gif{
+  height:70px;
+}
