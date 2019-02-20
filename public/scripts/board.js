@@ -54,22 +54,17 @@ const createFinancialStatement = function () {
   const container = document.getElementById("container");
   container.innerHTML = "";
   const top = document.createElement("div");
+  const leftSection = document.createElement("section");
+  leftSection.className = "popup";
   top.className = "statements";
   fetch('/financialStatement').then(data => data.json()).then(fsContent => {
     setFinancialStatement(fsContent);
     const button = createPopupButton("continue", getBoard);
     const fs = document.getElementById("financial_statement");
     top.innerHTML = fs.innerHTML;
-    appendChildren(container, [top, button]);
+    leftSection.appendChild(top);
+    appendChildren(container, [leftSection, button]);
   });
-};
-
-const createCashLedger = function() {
-  const leftSection = document.createElement("section");
-  leftSection.className = "popup";
-  let cl = document.getElementById("cash_ledger");
-  leftSection.innerHTML = cl.innerHTML;
-  return leftSection;
 };
 
 const gamePiece = {

@@ -355,6 +355,9 @@ button {
   left: 0px;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #c3fcdb;
 }
 
@@ -415,14 +418,21 @@ button {
 
 .popup {
   background-color:lightblue;
-  height:50%;
+  height:90%;
   width:50%;
   display: flex;
-  flex-direction: row;
   justify-content:center;
 }
 
 .statements {
   height:90%;
   display: flex;
+}
+
+.details {
+  height:15%;
+  width:20%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
 }
