@@ -8,6 +8,7 @@ class FinancialStatement {
     this.totalIncome;
     this.cashflow;
     this.income;
+    this.cashLedger;
   }
   setFinancialStatement(profession) {
     this.profession = profession;
@@ -15,6 +16,7 @@ class FinancialStatement {
     this.totalExpense = Object.values(this.profession.expenses).reduce(add);
     this.income = this.profession.income.salary;
     this.cashflow = this.totalIncome - this.totalExpense;
+    this.cashLedger = this.totalIncome + this.profession.assets.savings;
   }
   getTotalIncome() {
     return this.totalIncome;

@@ -32,6 +32,7 @@ const updateStatementBoard = function (fsContent) {
   setInnerHTML('expenses', fsContent.totalExpense);
   setInnerHTML('cashflow', fsContent.cashflow);
   setInnerHTML('income', fsContent.profession.income.salary);
+  setInnerHTML('LedgerBal',fsContent.cashLedger);
 }
 
 const setFinancialStatement = function (fsContent) {
