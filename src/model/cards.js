@@ -1,11 +1,11 @@
-const lodash = require('lodash');
+const lodash = require("lodash");
 class Cards {
   constructor(cards) {
     this.cards = cards;
     this.usedCards = [];
   }
 
-  getCard() {
+  drawCard() {
     let cards = lodash.shuffle(this.cards);
     let card = cards.pop();
     this.usedCards.push(card);

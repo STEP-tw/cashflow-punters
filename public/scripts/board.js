@@ -125,6 +125,35 @@ const activateDice = function(currentPlayer) {
   }
 };
 
+const createTextDiv = function(text) {
+  const textDiv = document.createElement("div");
+  const textPara = document.createElement("p");
+  textPara.innerText = text;
+  textDiv.appendChild(textPara);
+  return textDiv;
+};
+
+const showPlainCard = function(cardData) {
+  const cardDisplay = document.getElementById("cardDisplay");
+  cardDisplay.innerHTML = null;
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("plain-card");
+  const titleDiv = createTextDiv(cardData.title);
+  titleDiv.classList.add("card-title");
+  const expenseDiv = createTextDiv("$ " + cardData.expenseAmount);
+  titleDiv.classList.add("card-expense");
+  cardDiv.appendChild(titleDiv);
+  cardDiv.appendChild(expenseDiv);
+  cardDisplay.appendChild(cardDiv);
+};
+
+const showCard = function(card) {
+  const cardHandlers = {
+    doodad: showPlainCard
+  };
+  cardHandlers[card.type](card.data);
+};
+
 const rollDie = function() {
   const dice = document.getElementById(event.target.id);
   dice.onclick = null;
@@ -139,6 +168,9 @@ const polling = function(game) {
   let { currentPlayer, isMyTurn, players } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
+  }
+  if (game.activeCard) {
+    showCard(game.activeCard);
   }
   players.forEach(updateGamePiece);
 };

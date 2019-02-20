@@ -1,12 +1,12 @@
 const Game = require("../../src/model/game");
 const sinon = require("sinon");
-const Cards = require('../../src/model/cards');
+const Cards = require("../../src/model/cards");
 const Player = require("../../src/model/player");
 const { expect } = require("chai");
 
-describe("Game", function () {
-  describe("addPlayer", function () {
-    it("should add the given player to game.players", function () {
+describe("Game", function() {
+  describe("addPlayer", function() {
+    it("should add the given player to game.players", function() {
       const player = { name: "player" };
       const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
@@ -18,8 +18,8 @@ describe("Game", function () {
         .to.deep.equals([{ name: "player" }]);
     });
   });
-  describe("getPlayerNames", function () {
-    it("should return the list of player names in the game ", function () {
+  describe("getPlayerNames", function() {
+    it("should return the list of player names in the game ", function() {
       const player1 = { name: "player1" };
       const player2 = { name: "player2" };
       const cards = { bigdeals: [], smallDeals: [] };
@@ -32,8 +32,8 @@ describe("Game", function () {
       expect(actualOutput).to.deep.equals(expectedOutput);
     });
   });
-  describe("nextPlayer", function () {
-    it("should change current player to next player", function () {
+  describe("nextPlayer", function() {
+    it("should change current player to next player", function() {
       const player1 = new Player("player1");
       player1.setTurn(1);
       const player2 = new Player("player2");
@@ -49,8 +49,8 @@ describe("Game", function () {
   });
 });
 
-describe("startGame", function () {
-  it("should set the isStarted property of game to true", function () {
+describe("startGame", function() {
+  it("should set the isStarted property of game to true", function() {
     const player1 = { name: "player1" };
     const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
@@ -62,8 +62,8 @@ describe("startGame", function () {
   });
 });
 
-describe("getPlayersCount", function () {
-  it("should return the number of players in the game", function () {
+describe("getPlayersCount", function() {
+  it("should return the number of players in the game", function() {
     const player1 = { name: "player1" };
     const player2 = { name: "player2" };
     const cards = { bigDeals: [], smallDeals: [] };
@@ -78,8 +78,8 @@ describe("getPlayersCount", function () {
   });
 });
 
-describe("isPlaceAvailable", function () {
-  it("should tell weather there is place for any more player in the game or not", function () {
+describe("isPlaceAvailable", function() {
+  it("should tell weather there is place for any more player in the game or not", function() {
     const player1 = { name: "player1" };
     const player2 = { name: "player2" };
     const player3 = { name: "player3" };
@@ -96,12 +96,11 @@ describe("isPlaceAvailable", function () {
   });
 });
 
-
 describe("handleSpace", function() {
   it("should call handleCrossedPayday if current players new space crossed payday space", function() {
     const game = new Game();
     game.currentPlayer = {};
-    game.currentPlayer.currentSpace = 10;
+    game.currentPlayer.currentSpace = 9;
     game.handleCrossedPayDay = sinon.spy();
     game.nextPlayer = sinon.spy();
     game.handleSpace(5);
@@ -112,7 +111,7 @@ describe("handleCrossedPayday", function() {
   let game;
   beforeEach(() => {
     game = new Game();
-    game.currentPlayer = {};
+    game.currentPlayer = { addPayday: () => {} };
   });
   it("should addActivity on crossing payday", function() {
     game.currentPlayer.currentSpace = 10;
@@ -131,23 +130,48 @@ describe("handleCrossedPayday", function() {
   });
 });
 
-describe.skip('getInitialDetails', function() {
-  it('should return initial details of player', function() {
-    let cards = new Cards([{1:"p1"},{1:"p2"}]);
+describe.skip("getInitialDetails", function() {
+  it("should return initial details of player", function() {
+    let cards = new Cards([{ 1: "p1" }, { 1: "p2" }]);
     let professions = new Cards(cards);
-    let game = new Game({professions})
+    let game = new Game({ professions });
     const player1 = { name: "player1" };
     const player2 = { name: "player2" };
 
     game.addPlayer(player1);
     game.addPlayer(player2);
     game.getInitialDetails();
-    
-    expect(game.players[0]).has.property('turn');
-    expect(game.players[0]).has.property('profession');
-    expect(game.players[0]).has.property('financialStatement');
-    expect(game.players[1]).has.property('turn');
-    expect(game.players[1]).has.property('profession');
-    expect(game.players[1]).has.property('financialStatement');    
+
+    expect(game.players[0]).has.property("turn");
+    expect(game.players[0]).has.property("profession");
+    expect(game.players[0]).has.property("financialStatement");
+    expect(game.players[1]).has.property("turn");
+    expect(game.players[1]).has.property("profession");
+    expect(game.players[1]).has.property("financialStatement");
+  });
+});
+
+describe("handleDoodaySpace", function() {
+  let game;
+  beforeEach(() => {
+    game = new Game();
+    const card = {
+      expenseAmount: 500
+    };
+    game.cardStore = { doodads: { drawCard: sinon.stub().returns(card) } };
+    game.currentPlayer = {
+      profession: { assets: { savings: 1000 } },
+      name: "swapnil"
+    };
+    game.addActivity = sinon.spy();
+  });
+
+  it("should draw a card", function() {
+    game.handleDoodadSpace();
+    expect(game.cardStore.doodads.drawCard.calledOnce).to.be.true;
+  });
+  it("should deduct card expense from savings ", function() {
+    game.handleDoodadSpace();
+    expect(game.currentPlayer.profession.assets.savings).equal(500);
   });
 });

@@ -19,6 +19,10 @@ class FinancialStatement {
   getTotalIncome() {
     return this.totalIncome;
   }
+
+  addPayday() {
+    this.profession.assets.savings += this.cashflow;
+  }
 }
 
 module.exports = FinancialStatement;

@@ -49,7 +49,7 @@ class Game extends ActivityLog {
 
   getProfession(player) {
     let { professions } = this.cardStore;
-    const profession = professions.getCard();
+    const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);
   }
@@ -89,12 +89,20 @@ class Game extends ActivityLog {
     this.addActivity(` got a baby`, this.currentPlayer.name);
   }
 
-  handleCharity() {}
+  handleDoodadSpace() {
+    let doodad = this.cardStore.doodads.drawCard();
+    this.activeCard = { type: "doodad", data: doodad };
+    const { expenseAmount } = doodad;
+    this.currentPlayer.profession.assets.savings -= expenseAmount;
+    let { name } = this.currentPlayer;
+    const doodadMsg = `${expenseAmount} is deducted from ${name} for doodad`;
+    this.addActivity(doodadMsg);
+  }
 
   handleSpace(oldSpaceNo) {
     const handlers = {
       baby: this.handleBabySpace.bind(this),
-      charity: this.handleCharity.bind(this)
+      doodad: this.handleDoodadSpace.bind(this)
     };
     const currentPlayer = this.currentPlayer;
     this.handleCrossedPayDay(oldSpaceNo);
@@ -114,6 +122,7 @@ class Game extends ActivityLog {
     if (crossedPaydays.length > 0) {
       crossedPaydays.forEach(() => {
         this.addActivity(" crossed payday", this.currentPlayer.name);
+        this.currentPlayer.addPayday();
       });
     }
   }
