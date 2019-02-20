@@ -1,9 +1,11 @@
 const { getNextNum } = require("../utils/utils.js");
-class Player {
+const FinancialStatement = require('./financialStatement');
+
+class Player extends FinancialStatement{
   constructor(name) {
+    super();
     this.name = name;
     this.profession;
-    this.financialStatement;
     this.currentSpace = 0;
     this.turn;
     this.haveToActivateDice;

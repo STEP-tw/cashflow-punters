@@ -10,8 +10,8 @@ const {
   getPlayers,
   startGame,
   getGame,
-  canJoin
-
+  canJoin,
+  getPlayersFinancialStatement
 } = require('./gameHandlers');
 const {
   renderHomePage,
@@ -34,6 +34,7 @@ app.get('/rolldie', rollDie);
 app.get('/startgame', startGame);
 app.get('/getPlayerProfessions', getPlayers);
 app.post('/canjoin', canJoin);
+app.get('/financialStatement',getPlayersFinancialStatement);
 app.post('/joingame', joinGame);
 app.post('/hostgame', hostGame);
 app.use(express.static('public/'));

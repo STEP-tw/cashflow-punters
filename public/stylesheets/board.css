@@ -412,6 +412,7 @@ button {
 .visible {
   visibility: visible;
 }
+
 .popup {
   background-color:lightblue;
   height:100%;

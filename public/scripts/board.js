@@ -8,7 +8,7 @@ const openFinancialStatement = function () {
   fs.style.visibility = "visible";
 };
 
-const getName = function() {
+const getName = function () {
   return document.cookie.split(";")[0].split("=")[1];
 }
 
@@ -32,12 +32,26 @@ const getExpense = function (expenses) {
   return values;
 }
 
+const setFinancialStatement = function (fsContent) {
+  document.getElementById('player_salary').innerText = fsContent.profession.income.salary;
+  document.getElementById('player_passiveIn').innerText = fsContent.passiveIncome;
+  document.getElementById('player_totalIn').innerText = fsContent.totalIncome;
+  document.getElementById('player_expenses').innerText = fsContent.totalExpense;
+  document.getElementById('player_cashflow').innerText = fsContent.cashflow;
+}
+
 const createFinancialStatement = function () {
-  const rightSection = document.createElement("section");
-  rightSection.className = "popup";
-  let fs = document.getElementById("financial_statement");
-  rightSection.innerHTML = fs.innerHTML;
-  return rightSection;
+  const container = document.getElementById("container");
+  container.innerHTML = "";
+  const top = document.createElement('div');
+  top.className = "statements";
+  fetch('/financialStatement').then(data => data.json()).then(fsContent => {
+    setFinancialStatement(fsContent);
+    const button = createPopupButton("continue", getBoard);
+    const fs = document.getElementById("financial_statement");
+    container.innerHTML = fs.innerHTML;
+    container.appendChild(button);
+  });
 };
 
 const createCashLedger = function () {
@@ -47,22 +61,6 @@ const createCashLedger = function () {
   leftSection.innerHTML = cl.innerHTML;
   return leftSection;
 }
-
-const getFinancialStatement = function () {
-  let container = document.getElementById("container");
-  container.innerHTML = "";
-  const rightSection = createFinancialStatement();
-  const leftSection = createCashLedger();
-  let button = createPopupButton("continue", getBoard);
-  let top = document.createElement('div');
-  top.className = "statements";
-  appendChildren(top, [leftSection, rightSection])
-  appendChildren(container, [top, button]);
-};
-
-const displayFinancialStatement = function () {
-  getFinancialStatement();
-};
 
 const gamePiece = {
   1: "player1",
@@ -92,7 +90,7 @@ const getProfessions = function () {
     let players = content.players;
     let container = document.getElementById("container");
     players.map(getProfessionsDiv).join("");
-    let button = createPopupButton("continue", displayFinancialStatement);
+    let button = createPopupButton("continue", createFinancialStatement);
     container.appendChild(button);
   })
 };
@@ -121,7 +119,7 @@ const rollDie = function () {
     });
 };
 
-const polling = function(game) {
+const polling = function (game) {
   let { currentPlayer, isMyTurn, players } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
@@ -129,7 +127,7 @@ const polling = function(game) {
   players.forEach(updateGamePiece);
 };
 
-const updateGamePiece = function(player) {
+const updateGamePiece = function (player) {
   if (!player.didUpdateSpace) {
     return;
   }
@@ -141,10 +139,10 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const updateActivtyLog = function(activityLog) {
+const updateActivtyLog = function (activityLog) {
   const activityLogDiv = document.getElementById("activityLog");
   activityLogDiv.innerHTML = "";
-  activityLog.forEach(function({ playerName, msg }) {
+  activityLog.forEach(function ({ playerName, msg }) {
     const activity = document.createElement("p");
     activity.classList.add("activity");
     activity.innerText = playerName + msg;
@@ -152,7 +150,7 @@ const updateActivtyLog = function(activityLog) {
   });
 };
 
-const getGame = function() {
+const getGame = function () {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {

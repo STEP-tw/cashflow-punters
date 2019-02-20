@@ -51,7 +51,7 @@ describe("hostGame", function() {
       .to.have.property("players")
       .to.be.an("Array")
       .to.deep.equals([
-        {name: "player", didUpdateSpace: false, currentSpace: 0}
+        {name: "player", didUpdateSpace: false, currentSpace: 0,passiveIncome:0}
       ]);
   });
   it("should set cookie as gameId and player name", function() {
@@ -122,7 +122,7 @@ describe("joinGame", function() {
       .to.have.property("1234")
       .to.have.property("players")
       .to.deep.equals([
-        {name: "player", didUpdateSpace: false, currentSpace: 0}
+        {name: "player", didUpdateSpace: false, currentSpace: 0,passiveIncome:0}
       ]);
   });
 });

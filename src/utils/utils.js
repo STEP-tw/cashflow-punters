@@ -12,4 +12,8 @@ const isBetween = function(lowerLimit, upperLimit, number) {
   return number < upperLimit && number > lowerLimit;
 };
 
-module.exports = { randomNum, createGameId, getNextNum, isBetween };
+const add = function(sum,value) {
+  return sum + value;
+}
+
+module.exports = { randomNum, createGameId, getNextNum, isBetween ,add};

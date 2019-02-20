@@ -98,6 +98,17 @@ const getGame = function(req, res) {
   res.send(JSON.stringify(req.game));
 };
 
+const getPlayer = function(currentPlayer,player) {
+  return player.name = currentPlayer;
+}
+
+const getPlayersFinancialStatement = function(req,res) {
+  let currentPlayer = req.cookies["playerName"];
+  let getRequiredPlayer = getPlayer.bind(null,currentPlayer);
+  let requiredPlayer = req.game.players.filter(getRequiredPlayer)[0];
+  res.send(JSON.stringify(requiredPlayer));
+}
+
 module.exports = {
   hostGame,
   provideGameLobby,
@@ -105,6 +116,7 @@ module.exports = {
   joinGame,
   getGame,
   startGame,
+  getPlayersFinancialStatement,
   canJoin,
   isCurrentPlayer
 };

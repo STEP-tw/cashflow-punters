@@ -22,6 +22,7 @@ class Game extends ActivityLog {
     this.currentPlayer;
     this.players = [];
     this.hasStarted = false;
+    this.financialStatement;
   }
 
   addPlayer(player) {
@@ -47,10 +48,10 @@ class Game extends ActivityLog {
   }
 
   getProfession(player) {
-    const professions = this.cardStore.professions;
-    const profession = lodash.shuffle(professions.cards).shift();
+    let { professions } = this.cardStore;
+    const profession = professions.getCard();
     player.profession = profession;
-    professions.usedCard(profession);
+    player.setFinancialStatement(profession);
   }
 
   getPlayer(turn) {
