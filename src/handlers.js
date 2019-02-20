@@ -19,16 +19,18 @@ const logRequest = function(req, res, next) {
 
 const rollDie = function(req, res) {
   if (!isCurrentPlayer(req)) {
+    res.send("this is not your turn ", 301);
     return;
   }
   let { currentPlayer } = req.game;
+  let currentSpace = currentPlayer.currentSpace;
   currentPlayer.deactivateDice();
   const diceNumber = randomNum(6);
   const rolledDieMsg = " rolled " + diceNumber;
   currentPlayer.move(diceNumber);
   req.game.addActivity(rolledDieMsg, currentPlayer.name);
   res.send("" + diceNumber, 200);
-  req.game.nextPlayer();
+  req.game.handleSpace(currentSpace);
 };
 
 module.exports = {

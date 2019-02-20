@@ -1,6 +1,7 @@
 const lodash = require("lodash");
+const Board = require("./board");
 const { range, assignId } = require("../utils/array.js");
-const { getNextNum } = require("../utils/utils.js");
+const { getNextNum, isBetween } = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -15,6 +16,7 @@ class ActivityLog {
 class Game extends ActivityLog {
   constructor(cardStore, host) {
     super();
+    this.board = new Board();
     this.host = host;
     this.cardStore = cardStore;
     this.currentPlayer;
@@ -45,7 +47,7 @@ class Game extends ActivityLog {
   }
 
   getProfession(player) {
-    let { professions } = this.cardStore;
+    const professions = this.cardStore.professions;
     const profession = lodash.shuffle(professions.cards).shift();
     player.profession = profession;
     professions.usedCard(profession);
@@ -79,6 +81,28 @@ class Game extends ActivityLog {
     this.currentPlayer = nextPlayer;
     this.addActivity("'s turn ", this.currentPlayer.name);
     this.currentPlayer.haveToActivateDice = true;
+  }
+
+  handleSpace(oldSpaceNo) {
+    const currentPlayer = this.currentPlayer;
+    this.handleCrossedPayDay(oldSpaceNo);
+    const currentSpaceType = this.board.getSpaceType(
+      currentPlayer.currentSpace
+    );
+    this.addActivity(` lands on ${currentSpaceType}`, currentPlayer.name);
+    this.nextPlayer();
+  }
+
+  handleCrossedPayDay(oldSpaceNo) {
+    const paydaySpaces = this.board.getPayDaySpaces();
+    const crossedPaydays = paydaySpaces.filter(paydaySpace =>
+      isBetween(oldSpaceNo, this.currentPlayer.currentSpace, paydaySpace)
+    );
+    if (crossedPaydays.length > 0) {
+      crossedPaydays.forEach(() => {
+        this.addActivity(" crossed payday", this.currentPlayer.name);
+      });
+    }
   }
 }
 

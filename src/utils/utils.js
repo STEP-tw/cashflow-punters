@@ -8,4 +8,8 @@ const createGameId = function() {
   return gameId.getTime() % 10000;
 };
 
-module.exports = { randomNum, createGameId, getNextNum };
+const isBetween = function(lowerLimit, upperLimit, number) {
+  return number < upperLimit && number > lowerLimit;
+};
+
+module.exports = { randomNum, createGameId, getNextNum, isBetween };

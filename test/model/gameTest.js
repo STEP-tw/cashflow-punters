@@ -1,26 +1,27 @@
 const Game = require("../../src/model/game");
+const sinon = require("sinon");
 const Player = require("../../src/model/player");
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 describe("Game", function() {
   describe("addPlayer", function() {
     it("should add the given player to game.players", function() {
-      const player = {name: "player"};
-      const cards = {bigdeals: [], smallDeals: []};
+      const player = { name: "player" };
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player);
 
       expect(game)
         .to.have.property("players")
         .to.be.an("Array")
-        .to.deep.equals([{name: "player"}]);
+        .to.deep.equals([{ name: "player" }]);
     });
   });
   describe("getPlayerNames", function() {
     it("should return the list of player names in the game ", function() {
-      const player1 = {name: "player1"};
-      const player2 = {name: "player2"};
-      const cards = {bigdeals: [], smallDeals: []};
+      const player1 = { name: "player1" };
+      const player2 = { name: "player2" };
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -36,7 +37,7 @@ describe("Game", function() {
       player1.setTurn(1);
       const player2 = new Player("player2");
       player2.setTurn(2);
-      const cards = {bigdeals: [], smallDeals: []};
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -49,9 +50,9 @@ describe("Game", function() {
 
 describe("getInitialDetails", function() {
   it("should assign the turn and profession to player ", function() {
-    const player1 = {name: "player1"};
-    const player2 = {name: "player2"};
-    const cards = {professions: {cards: ["doctor"], usedCard: () => {}}};
+    const player1 = { name: "player1" };
+    const player2 = { name: "player2" };
+    const cards = { professions: { cards: ["doctor"], usedCard: () => {} } };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -64,8 +65,8 @@ describe("getInitialDetails", function() {
 
 describe("startGame", function() {
   it("should set the isStarted property of game to true", function() {
-    const player1 = {name: "player1"};
-    const cards = {bigDeals: [], smallDeals: []};
+    const player1 = { name: "player1" };
+    const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
 
@@ -79,9 +80,9 @@ describe("startGame", function() {
 
 describe("getPlayersCount", function() {
   it("should return the number of players in the game", function() {
-    const player1 = {name: "player1"};
-    const player2 = {name: "player2"};
-    const cards = {bigDeals: [], smallDeals: []};
+    const player1 = { name: "player1" };
+    const player2 = { name: "player2" };
+    const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -95,10 +96,10 @@ describe("getPlayersCount", function() {
 
 describe("isPlaceAvailable", function() {
   it("should tell weather there is place for any more player in the game or not", function() {
-    const player1 = {name: "player1"};
-    const player2 = {name: "player2"};
-    const player3 = {name: "player3"};
-    const cards = {bigDeals: [], smallDeals: []};
+    const player1 = { name: "player1" };
+    const player2 = { name: "player2" };
+    const player3 = { name: "player3" };
+    const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -108,5 +109,33 @@ describe("isPlaceAvailable", function() {
     const expectedOutput = true;
 
     expect(actualOutput).to.equal(expectedOutput);
+  });
+});
+describe("handleSpace", function() {
+  it("should call handleCrossedPayday if current players new space crossed payday space", function() {
+    const game = new Game();
+    game.currentPlayer = {};
+    game.currentPlayer.currentSpace = 10;
+    game.handleCrossedPayDay = sinon.spy();
+    game.nextPlayer = sinon.spy();
+    game.handleSpace(5);
+    expect(game.handleCrossedPayDay.calledOnce).to.be.true;
+  });
+});
+describe("handleCrossedPayday", function() {
+  let game;
+  beforeEach(() => {
+    game = new Game();
+    game.currentPlayer = {};
+  });
+  it("should addActivity on crossing payday", function() {
+    game.currentPlayer.currentSpace = 10;
+    game.handleCrossedPayDay(4);
+    expect(game.activityLog[0].msg).to.equal(" crossed payday");
+  });
+  it("should addActivity's when crossed multiple payday's", function() {
+    game.currentPlayer.currentSpace = 17;
+    game.handleCrossedPayDay(5);
+    expect(game.activityLog[1].msg).to.equal(" crossed payday");
   });
 });
