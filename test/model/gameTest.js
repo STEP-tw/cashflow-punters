@@ -138,4 +138,9 @@ describe("handleCrossedPayday", function() {
     game.handleCrossedPayDay(5);
     expect(game.activityLog[1].msg).to.equal(" crossed payday");
   });
+  it("should not addActivity's when player didn't cross payday", function() {
+    game.currentPlayer.currentSpace = 3;
+    game.handleCrossedPayDay(2);
+    expect(game.activityLog).to.be.empty;
+  });
 });
