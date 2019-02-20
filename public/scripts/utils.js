@@ -1,19 +1,30 @@
-const getElementById = function(id) {
+const getElementById = function (id) {
   return document.getElementById(id);
 };
 
-const createElement = function(tag) {
+
+const setInnerHTML = function (id, html) {
+  return getElementById(id).innerHTML = html;
+}
+
+const createElement = function (tag) {
   return document.createElement(tag);
 };
 
-const createForm = function(action, method) {
+const createParagraph = function (values) {
+  const keys = Object.keys(values)
+  return keys.map(key => `<p>${key} : ${values[key]}`).join('');
+}
+
+
+const createForm = function (action, method) {
   const form = createElement("form");
   form.action = action;
   form.method = method;
   return form;
 };
 
-const createInput = function(name, placeholder, type, id) {
+const createInput = function (name, placeholder, type, id) {
   const input = createElement("input");
   input.placeholder = placeholder;
   input.id = id;
@@ -22,7 +33,7 @@ const createInput = function(name, placeholder, type, id) {
   return input;
 };
 
-const createButton = function(value, classname, type) {
+const createButton = function (value, classname, type) {
   const button = createElement("button");
   button.innerText = value;
   button.className = classname;
@@ -30,27 +41,27 @@ const createButton = function(value, classname, type) {
   return button;
 };
 
-const appendChildren = function(parentElement, childrenElements) {
+const appendChildren = function (parentElement, childrenElements) {
   parentElement.innerHTML = "";
-  childrenElements.forEach(function(child) {
+  childrenElements.forEach(function (child) {
     parentElement.appendChild(child);
   });
   return parentElement;
 };
 
-const createDiv = function(text) {
+const createDiv = function (text) {
   let div = createElement("div");
   div.innerText = text;
   return div;
 };
 
-const createDivWithClass = function(classname) {
+const createDivWithClass = function (classname) {
   let div = createElement("div");
   div.className = classname;
   return div;
 };
 
-const createPopupButton = function(text, func) {
+const createPopupButton = function (text, func) {
   let button = createElement("button");
   button.innerText = text;
   button.onclick = func;

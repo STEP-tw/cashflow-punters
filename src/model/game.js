@@ -76,7 +76,6 @@ class Game extends ActivityLog {
   }
 
   nextPlayer() {
-    console.log("hi");
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
     const nextPlayer = this.getPlayer(nextPlayerTurn);

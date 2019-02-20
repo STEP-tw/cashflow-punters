@@ -23,39 +23,44 @@ const getBoard = function() {
   parent.removeChild(container);
 };
 
-const isMyName = function(player) {
-  return player.name == getName();
-};
 
-const getExpense = function(expenses) {
-  let values = Object.values(expenses);
-  return values;
-};
+const updateStatementBoard = function (fsContent) {
+  setInnerHTML('name', fsContent.name);
+  setInnerHTML('Profession', fsContent.profession.profession);
+  setInnerHTML('passiveIn', fsContent.passiveIncome);
+  setInnerHTML('totalIn', fsContent.totalIncome);
+  setInnerHTML('expenses', fsContent.totalExpense);
+  setInnerHTML('cashflow', fsContent.cashflow);
+  setInnerHTML('income', fsContent.profession.income.salary);
+}
 
-const setFinancialStatement = function(fsContent) {
-  document.getElementById("player_salary").innerText =
-    fsContent.profession.income.salary;
-  document.getElementById("player_passiveIn").innerText =
-    fsContent.passiveIncome;
-  document.getElementById("player_totalIn").innerText = fsContent.totalIncome;
-  document.getElementById("player_expenses").innerText = fsContent.totalExpense;
-  document.getElementById("player_cashflow").innerText = fsContent.cashflow;
-};
+const setFinancialStatement = function (fsContent) {
+  setInnerHTML('player_salary', fsContent.profession.income.salary);
+  setInnerHTML('player_passiveIn', fsContent.passiveIncome);
+  setInnerHTML('player_totalIn', fsContent.totalIncome);
+  setInnerHTML('player_expenses', fsContent.totalExpense);
+  setInnerHTML('player_cashflow', fsContent.cashflow);
+  setInnerHTML('player_name', `Name : ${fsContent.name}`);
+  setInnerHTML('player_profession', `Profession : ${fsContent.profession.profession}`);
+  setInnerHTML('player_liabilities', `Liabilities :` + createParagraph(fsContent.profession.liabilities));
+  setInnerHTML('player_expense', `Expense :` + createParagraph(fsContent.profession.expenses));
+  setInnerHTML('player_income', `Income :` + createParagraph(fsContent.profession.income));
+  setInnerHTML('player_assets', `assets :` + createParagraph(fsContent.profession.assets));
+  updateStatementBoard(fsContent);
+}
 
-const createFinancialStatement = function() {
+const createFinancialStatement = function () {
   const container = document.getElementById("container");
   container.innerHTML = "";
   const top = document.createElement("div");
   top.className = "statements";
-  fetch("/financialStatement")
-    .then(data => data.json())
-    .then(fsContent => {
-      setFinancialStatement(fsContent);
-      const button = createPopupButton("continue", getBoard);
-      const fs = document.getElementById("financial_statement");
-      container.innerHTML = fs.innerHTML;
-      container.appendChild(button);
-    });
+  fetch('/financialStatement').then(data => data.json()).then(fsContent => {
+    setFinancialStatement(fsContent);
+    const button = createPopupButton("continue", getBoard);
+    const fs = document.getElementById("financial_statement");
+    top.innerHTML = fs.innerHTML;
+    appendChildren(container, [top, button]);
+  });
 };
 
 const createCashLedger = function() {
@@ -132,9 +137,6 @@ const rollDie = function() {
 
 const polling = function(game) {
   let { currentPlayer, isMyTurn, players } = game;
-  console.log(isMyTurn);
-  console.log(currentPlayer);
-  console.log(players);
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
   }
