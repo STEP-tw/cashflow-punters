@@ -208,9 +208,6 @@ const polling = function(game) {
 };
 
 const updateGamePiece = function(player) {
-  if (!player.didUpdateSpace) {
-    return;
-  }
   let gamePiece = document.getElementById("gamePiece" + player.turn);
   gamePiece.classList.add("visible");
   let space = gamePiece.parentNode;
