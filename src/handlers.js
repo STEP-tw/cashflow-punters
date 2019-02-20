@@ -19,7 +19,7 @@ const logRequest = function(req, res, next) {
 
 const rollDie = function(req, res) {
   if (!isCurrentPlayer(req)) {
-    res.send("this is not your turn ", 301);
+    res.send("this is not your turn ");
     return;
   }
   let { currentPlayer } = req.game;

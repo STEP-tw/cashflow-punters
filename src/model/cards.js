@@ -11,7 +11,7 @@ class Cards {
     this.usedCards.push(card);
     this.cards = cards;
     return card;
-  } 
+  }
 }
 
 module.exports = Cards;

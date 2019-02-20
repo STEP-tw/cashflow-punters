@@ -76,6 +76,7 @@ class Game extends ActivityLog {
   }
 
   nextPlayer() {
+    console.log("hi");
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
     const nextPlayer = this.getPlayer(nextPlayerTurn);
@@ -84,13 +85,25 @@ class Game extends ActivityLog {
     this.currentPlayer.haveToActivateDice = true;
   }
 
+  handleBabySpace() {
+    this.currentPlayer.addBaby();
+    this.addActivity(` got a baby`, this.currentPlayer.name);
+  }
+
+  handleCharity() {}
+
   handleSpace(oldSpaceNo) {
+    const handlers = {
+      baby: this.handleBabySpace.bind(this),
+      charity: this.handleCharity.bind(this)
+    };
     const currentPlayer = this.currentPlayer;
     this.handleCrossedPayDay(oldSpaceNo);
     const currentSpaceType = this.board.getSpaceType(
       currentPlayer.currentSpace
     );
     this.addActivity(` lands on ${currentSpaceType}`, currentPlayer.name);
+    handlers[currentSpaceType] && handlers[currentSpaceType]();
     this.nextPlayer();
   }
 

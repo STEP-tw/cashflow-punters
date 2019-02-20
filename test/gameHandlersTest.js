@@ -1,5 +1,5 @@
 const request = require("supertest");
-const {expect} = require("chai");
+const { expect } = require("chai");
 const app = require("../src/app");
 const {
   hostGame,
@@ -27,7 +27,7 @@ describe("hostGame", function() {
 
   beforeEach(() => {
     req = {};
-    req.body = {playerName: "player"};
+    req.body = { playerName: "player" };
     res = {};
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
@@ -51,7 +51,13 @@ describe("hostGame", function() {
       .to.have.property("players")
       .to.be.an("Array")
       .to.deep.equals([
-        {name: "player", didUpdateSpace: false, currentSpace: 0,passiveIncome:0}
+        {
+          childrenCount: 0,
+          name: "player",
+          didUpdateSpace: false,
+          currentSpace: 0,
+          passiveIncome: 0
+        }
       ]);
   });
   it("should set cookie as gameId and player name", function() {
@@ -78,7 +84,7 @@ describe("provideGameLobby", function() {
       },
       host: "player1"
     };
-    req.cookies = {gameId: "1234", playerName: "player2"};
+    req.cookies = { gameId: "1234", playerName: "player2" };
     res.send = function(response) {
       res.content = response;
     };
@@ -97,7 +103,7 @@ describe("joinGame", function() {
   it("should add player in the game of given gameId", function() {
     const req = {};
     const res = {};
-    req.body = {gameId: "1234", playerName: "player"};
+    req.body = { gameId: "1234", playerName: "player" };
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
@@ -122,7 +128,13 @@ describe("joinGame", function() {
       .to.have.property("1234")
       .to.have.property("players")
       .to.deep.equals([
-        {name: "player", didUpdateSpace: false, currentSpace: 0,passiveIncome:0}
+        {
+          name: "player",
+          childrenCount: 0,
+          didUpdateSpace: false,
+          currentSpace: 0,
+          passiveIncome: 0
+        }
       ]);
   });
 });
@@ -132,7 +144,7 @@ describe("canJoin", function() {
   const res = {};
 
   beforeEach(() => {
-    req.body = {gameId: "1234"};
+    req.body = { gameId: "1234" };
     res["Set-Cookie"] = "";
     res.cookie = function(key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
@@ -143,7 +155,7 @@ describe("canJoin", function() {
     res.app = {};
     res.app.games = {
       "1234": {
-        players: [{name: "player1"}, {name: "player2"}],
+        players: [{ name: "player1" }, { name: "player2" }],
         hasStarted: false,
 
         isPlaceAvailable: function() {
@@ -165,7 +177,7 @@ describe("canJoin", function() {
   });
 
   it("should send game not found error for non existing game id", function() {
-    req.body = {gameId: "456"};
+    req.body = { gameId: "456" };
     canJoin(req, res);
 
     expect(res)
@@ -177,12 +189,12 @@ describe("canJoin", function() {
 
   it("should send No place error if total number of players is 6", function() {
     const players = [
-      {name: "player1"},
-      {name: "player2"},
-      {name: "player3"},
-      {name: "player4"},
-      {name: "player5"},
-      {name: "player6"}
+      { name: "player1" },
+      { name: "player2" },
+      { name: "player3" },
+      { name: "player4" },
+      { name: "player5" },
+      { name: "player6" }
     ];
 
     res.app.games["1234"].players = players;
