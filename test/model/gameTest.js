@@ -176,3 +176,20 @@ describe("handleDoodaySpace", function() {
     expect(game.currentPlayer.profession.assets.savings).equal(500);
   });
 });
+
+describe("handleMarketCard", function() {
+  it("should draw a card ", function() {
+    game = new Game();
+    const card = {
+      expenseAmount: 500
+    };
+    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
+    game.currentPlayer = {
+      profession: { assets: { savings: 1000 } },
+      name: "swapnil"
+    };
+    game.addActivity = sinon.spy();
+    game.handleMarketSpace();
+    expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
+  });
+});

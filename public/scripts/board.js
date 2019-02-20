@@ -23,48 +23,62 @@ const getBoard = function() {
   parent.removeChild(container);
 };
 
+const updateStatementBoard = function(fsContent) {
+  setInnerHTML("name", fsContent.name);
+  setInnerHTML("Profession", fsContent.profession.profession);
+  setInnerHTML("passiveIn", fsContent.passiveIncome);
+  setInnerHTML("totalIn", fsContent.totalIncome);
+  setInnerHTML("expenses", fsContent.totalExpense);
+  setInnerHTML("cashflow", fsContent.cashflow);
+  setInnerHTML("income", fsContent.profession.income.salary);
+};
 
-const updateStatementBoard = function (fsContent) {
-  setInnerHTML('name', fsContent.name);
-  setInnerHTML('Profession', fsContent.profession.profession);
-  setInnerHTML('passiveIn', fsContent.passiveIncome);
-  setInnerHTML('totalIn', fsContent.totalIncome);
-  setInnerHTML('expenses', fsContent.totalExpense);
-  setInnerHTML('cashflow', fsContent.cashflow);
-  setInnerHTML('income', fsContent.profession.income.salary);
-  setInnerHTML('LedgerBal',fsContent.cashLedger);
-}
-
-const setFinancialStatement = function (fsContent) {
-  setInnerHTML('player_salary', fsContent.profession.income.salary);
-  setInnerHTML('player_passiveIn', fsContent.passiveIncome);
-  setInnerHTML('player_totalIn', fsContent.totalIncome);
-  setInnerHTML('player_expenses', fsContent.totalExpense);
-  setInnerHTML('player_cashflow', fsContent.cashflow);
-  setInnerHTML('player_name', `Name : ${fsContent.name}`);
-  setInnerHTML('player_profession', `Profession : ${fsContent.profession.profession}`);
-  setInnerHTML('player_liabilities', `Liabilities :` + createParagraph(fsContent.profession.liabilities));
-  setInnerHTML('player_expense', `Expense :` + createParagraph(fsContent.profession.expenses));
-  setInnerHTML('player_income', `Income :` + createParagraph(fsContent.profession.income));
-  setInnerHTML('player_assets', `assets :` + createParagraph(fsContent.profession.assets));
+const setFinancialStatement = function(fsContent) {
+  setInnerHTML("player_salary", fsContent.profession.income.salary);
+  setInnerHTML("player_passiveIn", fsContent.passiveIncome);
+  setInnerHTML("player_totalIn", fsContent.totalIncome);
+  setInnerHTML("player_expenses", fsContent.totalExpense);
+  setInnerHTML("player_cashflow", fsContent.cashflow);
+  setInnerHTML("player_name", `Name : ${fsContent.name}`);
+  setInnerHTML(
+    "player_profession",
+    `Profession : ${fsContent.profession.profession}`
+  );
+  setInnerHTML(
+    "player_liabilities",
+    `Liabilities :` + createParagraph(fsContent.profession.liabilities)
+  );
+  setInnerHTML(
+    "player_expense",
+    `Expense :` + createParagraph(fsContent.profession.expenses)
+  );
+  setInnerHTML(
+    "player_income",
+    `Income :` + createParagraph(fsContent.profession.income)
+  );
+  setInnerHTML(
+    "player_assets",
+    `assets :` + createParagraph(fsContent.profession.assets)
+  );
   updateStatementBoard(fsContent);
-}
+};
 
-const createFinancialStatement = function () {
+const createFinancialStatement = function() {
   const container = document.getElementById("container");
   container.innerHTML = "";
   const top = document.createElement("div");
   const leftSection = document.createElement("section");
   leftSection.className = "popup";
   top.className = "statements";
-  fetch('/financialStatement').then(data => data.json()).then(fsContent => {
-    setFinancialStatement(fsContent);
-    const button = createPopupButton("continue", getBoard);
-    const fs = document.getElementById("financial_statement");
-    top.innerHTML = fs.innerHTML;
-    leftSection.appendChild(top);
-    appendChildren(container, [leftSection, button]);
-  });
+  fetch("/financialStatement")
+    .then(data => data.json())
+    .then(fsContent => {
+      setFinancialStatement(fsContent);
+      const button = createPopupButton("continue", getBoard);
+      const fs = document.getElementById("financial_statement");
+      top.innerHTML = fs.innerHTML;
+      appendChildren(container, [top, button]);
+    });
 };
 
 const gamePiece = {
@@ -129,14 +143,14 @@ const createTextDiv = function(text) {
   return textDiv;
 };
 
-const showPlainCard = function(cardData) {
+const showPlainCard = function(title, expenseAmount) {
   const cardDisplay = document.getElementById("cardDisplay");
   cardDisplay.innerHTML = null;
   const cardDiv = document.createElement("div");
   cardDiv.classList.add("plain-card");
-  const titleDiv = createTextDiv(cardData.title);
+  const titleDiv = createTextDiv(title);
   titleDiv.classList.add("card-title");
-  const expenseDiv = createTextDiv("$ " + cardData.expenseAmount);
+  const expenseDiv = createTextDiv("$ " + expenseAmount);
   titleDiv.classList.add("card-expense");
   cardDiv.appendChild(titleDiv);
   cardDiv.appendChild(expenseDiv);
@@ -145,9 +159,10 @@ const showPlainCard = function(cardData) {
 
 const showCard = function(card) {
   const cardHandlers = {
-    doodad: showPlainCard
+    doodad: showPlainCard.bind(null, card.data.title, card.data.expenseAmount),
+    market: showPlainCard.bind(null, card.data.title, card.data.cash)
   };
-  cardHandlers[card.type](card.data);
+  cardHandlers[card.type]();
 };
 
 const rollDie = function() {

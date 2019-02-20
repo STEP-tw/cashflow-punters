@@ -90,19 +90,31 @@ class Game extends ActivityLog {
   }
 
   handleDoodadSpace() {
-    let doodad = this.cardStore.doodads.drawCard();
-    this.activeCard = { type: "doodad", data: doodad };
-    const { expenseAmount } = doodad;
+    let doodadCard = this.cardStore.doodads.drawCard();
+    this.activeCard = { type: "doodad", data: doodadCard };
+    this.handleExpenseCard("doodad", doodadCard.expenseAmount);
+  }
+
+  handleExpenseCard(type, expenseAmount) {
     this.currentPlayer.profession.assets.savings -= expenseAmount;
     let { name } = this.currentPlayer;
-    const doodadMsg = `${expenseAmount} is deducted from ${name} for doodad`;
-    this.addActivity(doodadMsg);
+    const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
+    this.addActivity(msg);
+  }
+
+  handleMarketSpace() {
+    let marketCard = this.cardStore.market.drawCard();
+    this.activeCard = { type: "market", data: marketCard };
+    if (marketCard.relatedTo == "expense") {
+      this.handleExpenseCard("market", marketCard.cash);
+    }
   }
 
   handleSpace(oldSpaceNo) {
     const handlers = {
       baby: this.handleBabySpace.bind(this),
-      doodad: this.handleDoodadSpace.bind(this)
+      doodad: this.handleDoodadSpace.bind(this),
+      market: this.handleMarketSpace.bind(this)
     };
     const currentPlayer = this.currentPlayer;
     this.handleCrossedPayDay(oldSpaceNo);
