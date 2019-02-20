@@ -7,6 +7,7 @@ class FinancialStatement {
     this.totalExpense;
     this.totalIncome;
     this.cashflow;
+    this.legerBalance;
     this.income;
     this.cashLedger;
   }
@@ -17,6 +18,7 @@ class FinancialStatement {
     this.income = this.profession.income.salary;
     this.cashflow = this.totalIncome - this.totalExpense;
     this.cashLedger = this.totalIncome + this.profession.assets.savings;
+    this.ledgerBalance = this.cashflow + this.profession.assets.savings;
   }
   getTotalIncome() {
     return this.totalIncome;

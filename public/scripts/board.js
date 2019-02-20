@@ -1,29 +1,51 @@
-const closeOverlay = function(id) {
+const closeOverlay = function (id) {
   let overlay = document.getElementById(id);
   overlay.style.visibility = "hidden";
 };
 
-const openFinancialStatement = function() {
+const openFinancialStatement = function () {
   let fs = document.getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
 
-const getName = function() {
+const getName = function () {
   return document.cookie.split(";")[0].split("=")[1];
 };
 
-const openCashLedger = function() {
+const openCashLedger = function () {
   let fs = document.getElementById("cash_ledger");
   fs.style.visibility = "visible";
 };
 
-const getBoard = function() {
+const getBoard = function () {
   let container = document.getElementById("container");
   let parent = container.parentElement;
   parent.removeChild(container);
 };
 
-const updateStatementBoard = function(fsContent) {
+const setCashLedger = function(player) {
+  setInnerHTML("LedgerBalance",player.ledgerBalance);
+  setInnerHTML("LedgerBal",player.ledgerBalance);
+  console.log(player.ledgerBalance)
+}
+
+const getCashLedger = function() {
+  const container = document.getElementById("container");
+  container.innerHTML = "";
+  const top = document.createElement("div");
+  const leftSection = document.createElement("section");
+  leftSection.className = "popup";
+  top.className = "statements";
+  fetch("/financialStatement").then(data => data.json()).then(content =>{
+    setCashLedger(content);
+    const button = createPopupButton("continue", getBoard);
+    const cashLedger = document.getElementById("cash_ledger");
+    top.innerHTML = cashLedger.innerHTML;
+    appendChildren(container, [top, button]);
+  });
+}
+
+const updateStatementBoard = function (fsContent) {
   setInnerHTML("name", fsContent.name);
   setInnerHTML("Profession", fsContent.profession.profession);
   setInnerHTML("passiveIn", fsContent.passiveIncome);
@@ -33,7 +55,7 @@ const updateStatementBoard = function(fsContent) {
   setInnerHTML("income", fsContent.profession.income.salary);
 };
 
-const setFinancialStatement = function(fsContent) {
+const setFinancialStatement = function (fsContent) {
   setInnerHTML("player_salary", fsContent.profession.income.salary);
   setInnerHTML("player_passiveIn", fsContent.passiveIncome);
   setInnerHTML("player_totalIn", fsContent.totalIncome);
@@ -63,7 +85,7 @@ const setFinancialStatement = function(fsContent) {
   updateStatementBoard(fsContent);
 };
 
-const createFinancialStatement = function() {
+const createFinancialStatement = function () {
   const container = document.getElementById("container");
   container.innerHTML = "";
   const top = document.createElement("div");
@@ -74,7 +96,7 @@ const createFinancialStatement = function() {
     .then(data => data.json())
     .then(fsContent => {
       setFinancialStatement(fsContent);
-      const button = createPopupButton("continue", getBoard);
+      const button = createPopupButton("continue", getCashLedger);
       const fs = document.getElementById("financial_statement");
       top.innerHTML = fs.innerHTML;
       appendChildren(container, [top, button]);
@@ -90,7 +112,7 @@ const gamePiece = {
   6: "player6"
 };
 
-const getProfessionsDiv = function(player) {
+const getProfessionsDiv = function (player) {
   let { name, profession, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
@@ -107,7 +129,7 @@ const getProfessionsDiv = function(player) {
   container.appendChild(mainDiv);
 };
 
-const getProfessions = function() {
+const getProfessions = function () {
   fetch("/getgame")
     .then(data => {
       return data.json();
@@ -121,13 +143,13 @@ const getProfessions = function() {
     });
 };
 
-const enableDice = function(diceId) {
+const enableDice = function (diceId) {
   const dice = document.getElementById(diceId);
   dice.hidden = false;
   dice.onclick = rollDie;
 };
 
-const activateDice = function(currentPlayer) {
+const activateDice = function (currentPlayer) {
   enableDice("dice1");
   if (currentPlayer.hasCharityTurn) {
     let askNumOfDice = document.getElementById("num_of_dices");
@@ -135,7 +157,7 @@ const activateDice = function(currentPlayer) {
   }
 };
 
-const createTextDiv = function(text) {
+const createTextDiv = function (text) {
   const textDiv = document.createElement("div");
   const textPara = document.createElement("p");
   textPara.innerText = text;
@@ -143,7 +165,7 @@ const createTextDiv = function(text) {
   return textDiv;
 };
 
-const showPlainCard = function(title, expenseAmount) {
+const showPlainCard = function (title, expenseAmount) {
   const cardDisplay = document.getElementById("cardDisplay");
   cardDisplay.innerHTML = null;
   const cardDiv = document.createElement("div");
@@ -157,7 +179,7 @@ const showPlainCard = function(title, expenseAmount) {
   cardDisplay.appendChild(cardDiv);
 };
 
-const showCard = function(card) {
+const showCard = function (card) {
   const cardHandlers = {
     doodad: showPlainCard.bind(null, card.data.title, card.data.expenseAmount),
     market: showPlainCard.bind(null, card.data.title, card.data.cash)
@@ -165,7 +187,7 @@ const showCard = function(card) {
   cardHandlers[card.type]();
 };
 
-const rollDie = function() {
+const rollDie = function () {
   const dice = document.getElementById(event.target.id);
   dice.onclick = null;
   fetch("/rolldie")
@@ -175,7 +197,7 @@ const rollDie = function() {
     });
 };
 
-const polling = function(game) {
+const polling = function (game) {
   let { currentPlayer, isMyTurn, players } = game;
   if (isMyTurn && currentPlayer.haveToActivateDice) {
     activateDice(currentPlayer);
@@ -186,7 +208,7 @@ const polling = function(game) {
   players.forEach(updateGamePiece);
 };
 
-const updateGamePiece = function(player) {
+const updateGamePiece = function (player) {
   if (!player.didUpdateSpace) {
     return;
   }
@@ -198,10 +220,10 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const updateActivtyLog = function(activityLog) {
+const updateActivtyLog = function (activityLog) {
   const activityLogDiv = document.getElementById("activityLog");
   activityLogDiv.innerHTML = "";
-  activityLog.forEach(function({ playerName, msg }) {
+  activityLog.forEach(function ({ playerName, msg }) {
     const activity = document.createElement("p");
     activity.classList.add("activity");
     activity.innerText = playerName + msg;
@@ -209,7 +231,7 @@ const updateActivtyLog = function(activityLog) {
   });
 };
 
-const getGame = function() {
+const getGame = function () {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
@@ -218,7 +240,7 @@ const getGame = function() {
     });
 };
 
-const initialize = function() {
+const initialize = function () {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");
