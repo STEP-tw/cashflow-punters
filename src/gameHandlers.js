@@ -99,13 +99,14 @@ const getGame = function(req, res) {
 };
 
 const getPlayer = function(currentPlayer,player) {
-  return player.name = currentPlayer;
+  return player.name == currentPlayer;
 }
 
 const getPlayersFinancialStatement = function(req,res) {
   let currentPlayer = req.cookies["playerName"];
   let getRequiredPlayer = getPlayer.bind(null,currentPlayer);
   let requiredPlayer = req.game.players.filter(getRequiredPlayer)[0];
+  console.log(requiredPlayer);
   res.send(JSON.stringify(requiredPlayer));
 }
 

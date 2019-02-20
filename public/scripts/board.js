@@ -25,6 +25,8 @@ const setFinancialStatement = function (fsContent) {
   document.getElementById('player_totalIn').innerText = fsContent.totalIncome;
   document.getElementById('player_expenses').innerText = fsContent.totalExpense;
   document.getElementById('player_cashflow').innerText = fsContent.cashflow;
+  document.getElementById('player_name').innerText = `Name : ${fsContent.name}`;
+  document.getElementById('player_profession').innerText = `Profession : ${fsContent.profession.profession}`;
 }
 
 const createFinancialStatement = function () {
@@ -36,8 +38,8 @@ const createFinancialStatement = function () {
     setFinancialStatement(fsContent);
     const button = createPopupButton("continue", getBoard);
     const fs = document.getElementById("financial_statement");
-    container.innerHTML = fs.innerHTML;
-    container.appendChild(button);
+    top.innerHTML = fs.innerHTML;
+    appendChildren(container,[top,button]);
   });
 };
 
