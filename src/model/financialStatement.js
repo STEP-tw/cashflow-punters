@@ -20,9 +20,6 @@ class FinancialStatement {
     this.cashLedger = this.totalIncome + this.profession.assets.savings;
     this.ledgerBalance = this.cashflow + this.profession.assets.savings;
   }
-  getTotalIncome() {
-    return this.totalIncome;
-  }
 
   addPayday() {
     this.profession.assets.savings += this.cashflow;

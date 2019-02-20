@@ -193,3 +193,37 @@ describe("handleMarketCard", function() {
     expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
   });
 });
+
+describe("handleMarketCard", function() {
+  it("should reduce expense amount if market card related to expense is drawn ", function() {
+    game = new Game();
+    const card = {
+      relatedTo:'expense',
+      expenseAmount: 500,
+      cash:500
+    };
+    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
+    game.currentPlayer = {
+      profession: { assets: { savings: 1000 } },
+      name: "swapnil"
+    };
+    game.addActivity = sinon.spy();
+    game.handleMarketSpace();
+    expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
+    expect(game.addActivity.calledOnce).to.be.true;
+  });
+});
+
+
+  describe("addBaby", function() {
+    it("should add the given player to game.players", function() {
+      const player = { name: "player" };
+      const player1 = new Player(player);
+      const cards = { bigdeals: [], smallDeals: [] };
+      const game = new Game(cards);
+      game.addPlayer(player1);
+      game.currentPlayer = player1;
+      game.handleBabySpace();
+      expect(game.currentPlayer.childrenCount).to.equal(1)
+    });
+  })

@@ -4,6 +4,7 @@ const app = require("../src/app");
 const {
   hostGame,
   provideGameLobby,
+  getPlayersFinancialStatement,
   joinGame,
   getPlayers,
   canJoin,
@@ -282,3 +283,18 @@ describe("startGame", function() {
       .to.be.equal(true);
   });
 });
+
+describe("getPlayersFinancialStatement", function() {
+  it("should give financial statement of current player", function() {
+    let req = {
+      cookies:{"playerName":"anu"},
+      game:{players:[{name:"anu"}]
+    }};
+
+    let res = {
+      send: (player) => {expect(player).that.eql('{"name":"anu"}')}
+    };
+    getPlayersFinancialStatement(req, res);
+  });
+});
+
