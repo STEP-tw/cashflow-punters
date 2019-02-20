@@ -213,9 +213,13 @@ button {
   height: 20%;
 }
 
-.card {
+.cardDisplay {
   border: black 1px solid;
+
   height: 80%;
+  width: 100%;
+
+  position: relative;
 }
 .financial_details {
   height: 78%;
@@ -363,53 +367,33 @@ button {
 
 .player1 {
   background-color: red;
-  border-radius: 5px;
-  height: 20px;
-  width: 20px;
 }
 
 .player2 {
   background-color: green;
-  border-radius: 5px;
-  height: 20px;
-  width: 20px;
 }
 
 .player3 {
   background-color: yellow;
-  height: 20px;
-  width: 20px;
-  border-radius: 5px;
 }
 
 .player4 {
   background-color: violet;
-  height: 20px;
-  border-radius: 5px;
-  width: 20px;
 }
 
 .player5 {
   background-color: purple;
-  height: 20px;
-  border-radius: 5px;
-  width: 20px;
 }
 
 .player6 {
   background-color: saddlebrown;
-  height: 20px;
-  border-radius: 5px;
-  width: 20px;
 }
 
 .gamePiece {
-  height: 10%;
-  width: 10%;
+  height: 20%;
+  width: 20%;
 
   border: black 1px solid;
-
-  visibility: hidden;
 }
 
 .visible {
@@ -417,22 +401,35 @@ button {
 }
 
 .popup {
-  background-color:lightblue;
-  height:90%;
-  width:50%;
+  background-color: lightblue;
+  height: 90%;
+  width: 50%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
 
 .statements {
-  height:90%;
+  height: 90%;
   display: flex;
 }
 
 .details {
-  height:15%;
-  width:20%;
+  height: 15%;
+  width: 20%;
+
   display: flex;
   flex-direction: column;
   z-index: 1;
+}
+
+.cardDisplayPopup {
+  position: absolute;
+  visibility: hidden;
+
+  height: 60%;
+  width: 95%;
+
+  margin: 2%;
+
+  border: black 1px solid;
 }

@@ -1,4 +1,4 @@
-const { rollDie } = require("../src/handlers");
+const { rollDie } = require("../src/gameHandlers");
 const chai = require("chai");
 const sinon = require("sinon");
 
@@ -10,6 +10,7 @@ describe("rollDie", function() {
     req.game = {
       addActivity: sinon.spy(),
       nextPlayer: sinon.spy(),
+      board: { getSpaceType: sinon.stub().returns("a") },
       currentPlayer: {
         name: "tilak",
         deactivateDice: function() {
@@ -23,20 +24,13 @@ describe("rollDie", function() {
     };
     req.cookies = { playerName: "tilak" };
     res = {};
-    res.send = sinon.spy();
+    res.json = sinon.spy();
   });
-
-  it("should return 200 status", function() {
-    rollDie(req, res);
-    const statusCode = +res.send.firstCall.lastArg;
-    chai.expect(statusCode).equals(200);
-  });
-
   it("should return a number between 1 and 6 ", function() {
     rollDie(req, res);
-    const returnValue = +res.send.firstCall.args[0];
-    chai.expect(returnValue).to.be.at.least(1);
-    chai.expect(returnValue).to.be.at.most(6);
+    const returnValue = res.json.firstCall.args[0];
+    chai.expect(returnValue.diceValue).to.be.at.least(1);
+    chai.expect(returnValue.diceValue).to.be.at.most(6);
   });
 
   it("should  call add activity", function() {

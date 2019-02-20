@@ -76,6 +76,7 @@ class Game extends ActivityLog {
   }
 
   nextPlayer() {
+    this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
     const nextPlayer = this.getPlayer(nextPlayerTurn);
@@ -87,12 +88,14 @@ class Game extends ActivityLog {
   handleBabySpace() {
     this.currentPlayer.addBaby();
     this.addActivity(` got a baby`, this.currentPlayer.name);
+    this.nextPlayer();
   }
 
   handleDoodadSpace() {
     let doodadCard = this.cardStore.doodads.drawCard();
     this.activeCard = { type: "doodad", data: doodadCard };
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
+    this.nextPlayer();
   }
 
   handleExpenseCard(type, expenseAmount) {
@@ -108,22 +111,41 @@ class Game extends ActivityLog {
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
     }
+    this.nextPlayer();
+  }
+
+  handleCharitySpace() {
+    this.currentPlayer.gotCharitySpace = true;
+  }
+
+  handleDealSpace() {
+    this.nextPlayer();
+  }
+  handleDownsizedSpace() {
+    this.nextPlayer();
+  }
+
+  handlePayday() {
+    this.nextPlayer();
   }
 
   handleSpace(oldSpaceNo) {
     const handlers = {
       baby: this.handleBabySpace.bind(this),
       doodad: this.handleDoodadSpace.bind(this),
-      market: this.handleMarketSpace.bind(this)
+      market: this.handleMarketSpace.bind(this),
+      charity: this.handleCharitySpace.bind(this),
+      deal: this.handleDealSpace.bind(this),
+      downsized: this.handleDownsizedSpace.bind(this),
+      payday: this.handlePayday.bind(this)
     };
     const currentPlayer = this.currentPlayer;
     this.handleCrossedPayDay(oldSpaceNo);
     const currentSpaceType = this.board.getSpaceType(
       currentPlayer.currentSpace
     );
-    this.addActivity(` lands on ${currentSpaceType}`, currentPlayer.name);
-    handlers[currentSpaceType] && handlers[currentSpaceType]();
-    this.nextPlayer();
+    this.addActivity(` landed on ${currentSpaceType}`, currentPlayer.name);
+    handlers[currentSpaceType]();
   }
 
   handleCrossedPayDay(oldSpaceNo) {

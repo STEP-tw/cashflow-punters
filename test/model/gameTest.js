@@ -165,6 +165,7 @@ describe("handleDoodaySpace", function() {
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
+    game.nextPlayer = sinon.spy();
   });
 
   it("should draw a card", function() {
@@ -174,6 +175,10 @@ describe("handleDoodaySpace", function() {
   it("should deduct card expense from savings ", function() {
     game.handleDoodadSpace();
     expect(game.currentPlayer.profession.assets.savings).equal(500);
+  });
+  it("should call next player", function() {
+    game.handleDoodadSpace();
+    expect(game.nextPlayer.calledOnce).to.be.true;
   });
 });
 
@@ -189,8 +194,15 @@ describe("handleMarketCard", function() {
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
+    game.nextPlayer = sinon.spy();
     game.handleMarketSpace();
     expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
+  });
+
+  it("should call next player", function() {
+    game.nextPlayer = sinon.spy();
+    game.handleMarketSpace();
+    expect(game.nextPlayer.calledOnce).to.be.true;
   });
 });
 

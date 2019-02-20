@@ -1,8 +1,9 @@
 const Game = require("./model/game");
-const lodash = require("lodash");
 const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
+
+const { randomNum } = require("./utils/utils");
 
 const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
@@ -110,6 +111,45 @@ const getPlayersFinancialStatement = function(req, res) {
   res.send(JSON.stringify(requiredPlayer));
 };
 
+const rollDie = function(req, res) {
+  if (!isCurrentPlayer(req)) {
+    res.json({ diceValue: "this is not your turn " });
+    return;
+  }
+
+  let { currentPlayer, board } = req.game;
+  let { currentSpace } = currentPlayer;
+
+  if (currentPlayer.rolledDice) {
+    res.json({ diceValue: "you already rolled the dice " });
+    return;
+  }
+  currentPlayer.deactivateDice();
+  const diceValue = randomNum(6);
+  const rolledDieMsg = " rolled " + diceValue;
+  currentPlayer.move(diceValue);
+  req.game.addActivity(rolledDieMsg, currentPlayer.name);
+  const spaceType = board.getSpaceType(currentPlayer.currentSpace);
+  const currentSpaceDetails = { diceValue, spaceType };
+  currentPlayer.rolledDice = true;
+  currentPlayer.didUpdateSpace = true;
+  res.json(currentSpaceDetails);
+  req.game.handleSpace(currentSpace);
+};
+
+const acceptCharity = function(req, res) {
+  let { currentPlayer } = req.game;
+  if (currentPlayer.gotCharitySpace) {
+    currentPlayer.charityTurns = 3;
+    currentPlayer.gotCharitySpace = false;
+    req.game.nextPlayer();
+  }
+};
+
+const declineCharity = function(req, res) {
+  req.game.nextPlayer();
+};
+
 module.exports = {
   hostGame,
   provideGameLobby,
@@ -119,5 +159,7 @@ module.exports = {
   startGame,
   getPlayersFinancialStatement,
   canJoin,
-  isCurrentPlayer
+  rollDie,
+  acceptCharity,
+  declineCharity
 };
