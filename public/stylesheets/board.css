@@ -17,6 +17,7 @@ div {
 }
 
 button {
+  cursor: pointer;
   padding: 1%;
   margin: 1%;
 }
@@ -195,13 +196,37 @@ button {
   height: 90%;
   width: 45%;
 
+  cursor: pointer;
+
+  font-size: xx-large;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
   border: black 1px solid;
 }
 
+#dice2 {
+  display: none;
+}
 .activity_log {
   border: black 1px solid;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 70%;
+}
+
+.activity {
+  position: relative;
+
+  background-color: #00bcd442;
+  border-radius: 2%;
+  width: 99%;
+  height: fit-content;
+}
+
+.activity > p {
+  margin: 4%;
+  word-break: break-all;
 }
 
 .title {
@@ -432,4 +457,15 @@ button {
   margin: 2%;
 
   border: black 1px solid;
+}
+
+.hover {
+  position: absolute;
+  z-index: 2;
+
+  background-color: grey;
+
+  visibility: hidden;
+  top: 20%;
+  right: 0%;
 }

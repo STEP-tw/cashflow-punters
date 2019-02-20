@@ -192,7 +192,7 @@ const rollDie = function() {
   fetch("/rolldie")
     .then(res => res.json())
     .then(({ diceValue, spaceType }) => {
-      dice.innerText = diceValue;
+      dice.innerText = diceValue || dice.innerText;
       if (spaceType == "charity") {
         askCharity.style.visibility = "visible";
       }
@@ -216,14 +216,43 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
+const showHover = function(parent) {
+  let a = parent.children[0];
+  a.style.visibility = "visible";
+};
+
+const hideHover = function(parent) {
+  let a = parent.children[0];
+  a.style.visibility = "hidden";
+};
+
+const createActivity = function({ playerName, msg, time }) {
+  const activity = document.createElement("div");
+  const activityPara = document.createElement("p");
+  const timeHoverPara = document.createElement("p");
+  timeHoverPara.classList.add("hover");
+  timeHoverPara.innerText = new Date(time).toLocaleTimeString();
+  activity.onmouseover = showHover.bind(null, activity);
+  activity.onmouseleave = hideHover.bind(null, activity);
+  activity.classList.add("activity");
+  activityPara.innerText = playerName + msg;
+  activity.appendChild(timeHoverPara);
+  activity.appendChild(activityPara);
+  return activity;
+};
+
 const updateActivtyLog = function(activityLog) {
+  console.log(activityLog);
+
   const activityLogDiv = document.getElementById("activityLog");
-  activityLogDiv.innerHTML = "";
-  activityLog.forEach(function({ playerName, msg }) {
-    const activity = document.createElement("p");
-    activity.classList.add("activity");
-    activity.innerText = playerName + msg;
-    activityLogDiv.appendChild(activity);
+  const localActivitiesCount = activityLogDiv.children.length;
+  if (activityLog.length == localActivitiesCount) {
+    return;
+  }
+  const newActivities = activityLog.slice(localActivitiesCount);
+  newActivities.forEach(activity => {
+    let activityDiv = createActivity(activity);
+    activityLogDiv.insertBefore(activityDiv, activityLogDiv.firstChild);
   });
 };
 

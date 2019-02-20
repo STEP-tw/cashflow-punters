@@ -112,16 +112,10 @@ const getPlayersFinancialStatement = function(req, res) {
 };
 
 const rollDie = function(req, res) {
-  if (!isCurrentPlayer(req)) {
-    res.json({ diceValue: "this is not your turn " });
-    return;
-  }
-
   let { currentPlayer, board } = req.game;
   let { currentSpace } = currentPlayer;
-
-  if (currentPlayer.rolledDice) {
-    res.json({ diceValue: "you already rolled the dice " });
+  if (!isCurrentPlayer(req) || currentPlayer.rolledDice) {
+    res.json({ diceValue: null });
     return;
   }
   currentPlayer.deactivateDice();
@@ -144,10 +138,12 @@ const acceptCharity = function(req, res) {
     currentPlayer.gotCharitySpace = false;
     req.game.nextPlayer();
   }
+  res.end();
 };
 
 const declineCharity = function(req, res) {
   req.game.nextPlayer();
+  res.end();
 };
 
 module.exports = {

@@ -1,4 +1,5 @@
 const request = require("supertest");
+const sinon = require("sinon");
 const { expect } = require("chai");
 const app = require("../src/app");
 const {
@@ -9,7 +10,9 @@ const {
   getPlayers,
   canJoin,
   getGame,
-  startGame
+  startGame,
+  acceptCharity,
+  declineCharity
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -287,14 +290,50 @@ describe("startGame", function() {
 describe("getPlayersFinancialStatement", function() {
   it("should give financial statement of current player", function() {
     let req = {
-      cookies:{"playerName":"anu"},
-      game:{players:[{name:"anu"}]
-    }};
+      cookies: { playerName: "anu" },
+      game: { players: [{ name: "anu" }] }
+    };
 
     let res = {
-      send: (player) => {expect(player).that.eql('{"name":"anu"}')}
+      send: player => {
+        expect(player).that.eql('{"name":"anu"}');
+      }
     };
     getPlayersFinancialStatement(req, res);
   });
 });
 
+describe("acceptCharity", function() {
+  let req, res;
+  beforeEach(() => {
+    req = {
+      game: {
+        currentPlayer: { gotCharitySpace: true, charityTurns: 0 },
+        nextPlayer: sinon.spy()
+      }
+    };
+    res = { end: sinon.spy() };
+  });
+  it("should add charity turns to currentPlayer", function() {
+    acceptCharity(req, res);
+    expect(req.game.currentPlayer.charityTurns).equal(3);
+  });
+
+  it("should not add charity turns to currentPlayer when currentPlayer doesnt get charity space", function() {
+    req.game.currentPlayer.gotCharitySpace = false;
+    acceptCharity(req, res);
+    expect(req.game.currentPlayer.charityTurns).equal(0);
+  });
+});
+
+describe("declineCharity", function() {
+  it("should add charity turns to currentPlayer", function() {});
+  const req = {
+    game: {
+      nextPlayer: sinon.spy()
+    }
+  };
+  const res = { end: sinon.spy() };
+  declineCharity(req, res);
+  expect(req.game.nextPlayer.calledOnce).to.be.true;
+});
