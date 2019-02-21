@@ -4,7 +4,7 @@
     <script src="/utils.js"></script>
     <link rel="stylesheet" href="/board.css" />
   </head>
-  <body id='body'>
+  <body id="body">
     <main class="round_border">
       <div hidden id="0">
         <div id="gamePiece1" class="gamePiece player1 "></div>
@@ -76,15 +76,16 @@
             </div>
 
             <div class="debt">
-              <button id = "loan-form-button">Take Loan</button>
+              <button id="loan-form-button">Take Loan</button>
               <button id="pay-debt-form-button">Pay off debt</button>
             </div>
           </div>
           <div class="middle_part">
             <div class="title"></div>
             <div id="cardDisplay" class="cardDisplay">
+              <div id="card-overlay" class="card-overlay"></div>
               <div id="askCharity" class="cardDisplayPopup">
-                <h2>Do you want do charity ?</h2>
+                <h2>Do Charity?</h2>
                 <p>if yes 10% of Total income will be deducted</p>
                 <div class="buttons_div">
                   <button id="acceptCharity">Yes</button>
@@ -92,7 +93,7 @@
                 </div>
               </div>
               <div id="select-deal" class="cardDisplayPopup">
-                <h2>which deal you want to take ?</h2>
+                <h2>Select Deal</h2>
                 <div class="buttons_div">
                   <button onclick="selectSmallDeal()">Small Deal</button>
                   <button onclick="selectBigDeal()">Big Deal</button>
@@ -117,7 +118,7 @@
                   Two
                 </button>
               </div>
-              <div id="dice1" class="dice"></div>
+              <div id="dice1" class="dice">6</div>
               <div id="dice2" class="dice"></div>
             </div>
             <div class="activity_log" id="activityLog"></div>
@@ -152,7 +153,6 @@
           id="13"
         ></div>
       </div>
-     
 
       <div class="overlay" id="financial_statement">
         <button class="close" onclick="closeOverlay('financial_statement')">
@@ -202,10 +202,9 @@
       </div>
     </main>
     <div id="container" class="container"></div>
-    <div id='manage-debt-form' class='manage-debt-form'>
-        <input id='debt-input' class='debt-input' type="number">
-        <button id='debt-button'class='debt-button'>Take Loan</button>
-      </div>
-    
+    <div id="manage-debt-form" class="manage-debt-form">
+      <input class="debt-input" type="number" />
+      <button id="debt-button" class="debt-button">Take Loan</button>
+    </div>
   </body>
 </html>

@@ -147,6 +147,7 @@ const createTextDiv = function(text) {
 
 const acceptCharity = function() {
   closeOverlay("askCharity");
+  hideCardOverLay();
   fetch("/acceptCharity")
     .then(res => res.json())
     .then(charityDetail => {
@@ -159,6 +160,7 @@ const acceptCharity = function() {
 
 const declineCharity = function() {
   closeOverlay("askCharity");
+  hideCardOverLay();
   fetch("/declineCharity");
 };
 
@@ -197,21 +199,35 @@ const showCard = function(card) {
 
 const handlerCharity = function() {
   const askCharity = document.getElementById("askCharity");
+  showCardOverLay();
   askCharity.style.visibility = "visible";
+};
+
+const showCardOverLay = function() {
+  const cardOverlay = document.getElementById("card-overlay");
+  cardOverlay.style.display = "block";
+};
+
+const hideCardOverLay = function() {
+  const cardOverlay = document.getElementById("card-overlay");
+  cardOverlay.style.display = "none";
 };
 
 const handlerDeal = function() {
   const selectDeal = document.getElementById("select-deal");
+  showCardOverLay();
   selectDeal.style.visibility = "visible";
 };
 
 const selectSmallDeal = function() {
   closeOverlay("select-deal");
+  hideCardOverLay();
   fetch("/selectSmallDeal");
 };
 
 const selectBigDeal = function() {
   closeOverlay("select-deal");
+  hideCardOverLay();
   fetch("/selectBigDeal");
 };
 
@@ -262,7 +278,11 @@ const createActivity = function({ playerName, msg, time }) {
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
   timeHoverPara.classList.add("hover");
-  timeHoverPara.innerText = new Date(time).toLocaleTimeString();
+  timeHoverPara.innerText = new Date(time).toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true
+  });
   activity.onmouseover = showHover.bind(null, activity);
   activity.onmouseleave = hideHover.bind(null, activity);
   activity.classList.add("activity");
