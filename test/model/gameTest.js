@@ -161,8 +161,11 @@ describe("handleDoodaySpace", function() {
     };
     game.cardStore = { doodads: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      assets: { savings: 1000 },
-      name: "swapnil"
+      ledgerBalance: 3000,
+      name: "swapnil",
+      deductLedgerBalance: function(amount) {
+        this.ledgerBalance -= amount;
+      }
     };
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
@@ -172,9 +175,9 @@ describe("handleDoodaySpace", function() {
     game.handleDoodadSpace();
     expect(game.cardStore.doodads.drawCard.calledOnce).to.be.true;
   });
-  it("should deduct card expense from savings ", function() {
+  it("should deduct card expense from ledgerBalance", function() {
     game.handleDoodadSpace();
-    expect(game.currentPlayer.assets.savings).equal(500);
+    expect(game.currentPlayer.ledgerBalance).equal(2500);
   });
   it("should call next player", function() {
     game.handleDoodadSpace();
@@ -207,7 +210,7 @@ describe("handleMarketCard", function() {
 });
 
 describe("handleMarketCard", function() {
-  it("should reduce expense amount if market card related to expense is drawn ", function() {
+  it("should deduct expense amount from ledger balance if market card related to expense is drawn ", function() {
     game = new Game();
     const card = {
       relatedTo: "expense",
@@ -216,14 +219,18 @@ describe("handleMarketCard", function() {
     };
     game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      assets: { savings: 1000 },
-      name: "swapnil"
+      ledgerBalance: 3000,
+      name: "swapnil",
+      deductLedgerBalance: function(amount) {
+        this.ledgerBalance -= amount;
+      }
     };
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
     game.handleMarketSpace();
     expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
     expect(game.addActivity.calledOnce).to.be.true;
+    expect(game.currentPlayer.ledgerBalance).to.be.equal(2500);
   });
 });
 
@@ -238,55 +245,66 @@ describe("addBaby", function() {
     game.handleBabySpace();
     expect(game.currentPlayer.childrenCount).to.equal(1);
   });
-  describe("handleCharitySpace", function() {
-    it("should set gotCharitySpace of currentplayer true ", function() {
-      const game = new Game();
-      game.currentPlayer = {};
-      game.handleCharitySpace();
-      expect(game.currentPlayer.gotCharitySpace).to.be.true;
-    });
+});
+
+describe("handleCharitySpace", function() {
+  it("should set gotCharitySpace of currentplayer true ", function() {
+    const game = new Game();
+    game.currentPlayer = {};
+    game.handleCharitySpace();
+    expect(game.currentPlayer.gotCharitySpace).to.be.true;
   });
-  describe("handleDownsizedSpace", function() {
-    it("should call game method nextPlayer", function() {
-      const game = new Game();
-      game.nextPlayer = sinon.spy();
-      game.handleDownsizedSpace();
-      expect(game.nextPlayer.calledOnce).to.be.true;
-    });
+});
+describe("handleDownsizedSpace", function() {
+  it("should call game method nextPlayer", function() {
+    const game = new Game();
+    game.nextPlayer = sinon.spy();
+    game.handleDownsizedSpace();
+    expect(game.nextPlayer.calledOnce).to.be.true;
   });
-  describe("handlePayday", function() {
-    it("should call game method nextPlayer", function() {
-      const game = new Game();
-      game.nextPlayer = sinon.spy();
-      game.handlePayday();
-      expect(game.nextPlayer.calledOnce).to.be.true;
-    });
+});
+describe("handlePayday", function() {
+  it("should call game method nextPlayer", function() {
+    const game = new Game();
+    const player = {
+      name: "player1",
+      ledgerBalance: 3000,
+      cashflow: 1000,
+      addPayday: function() {
+        this.ledgerBalance += this.cashflow;
+      },
+      getTurn: sinon.spy()
+    };
+    game.addPlayer(player);
+    game.setCurrentPlayer(player);
+    game.handlePayday();
+    expect(game.currentPlayer.ledgerBalance).to.be.equal(4000);
   });
-  describe("handleSmallDeal", function() {
-    it("should add activityLog selected small deal", function() {
-      const game = new Game();
-      game.addActivity = sinon.spy();
-      game.nextPlayer = sinon.spy();
-      game.currentPlayer = { name: "anabelle" };
-      game.cardStore = { smallDeals: { drawCard: sinon.stub().returns("") } };
-      game.handleSmallDeal();
-      expect(game.addActivity.firstCall.args).eql([
-        " selected Small Deal",
-        "anabelle"
-      ]);
-    });
+});
+describe("handleSmallDeal", function() {
+  it("should add activityLog selected small deal", function() {
+    const game = new Game();
+    game.addActivity = sinon.spy();
+    game.nextPlayer = sinon.spy();
+    game.currentPlayer = { name: "anabelle" };
+    game.cardStore = { smallDeals: { drawCard: sinon.stub().returns("") } };
+    game.handleSmallDeal();
+    expect(game.addActivity.firstCall.args).eql([
+      " selected Small Deal",
+      "anabelle"
+    ]);
   });
-  describe("handleBigDeal", function() {
-    it("should add activityLog selected Big deal", function() {
-      const game = new Game();
-      game.addActivity = sinon.spy();
-      game.nextPlayer = sinon.spy();
-      game.currentPlayer = { name: "anabelle" };
-      game.handleBigDeal();
-      expect(game.addActivity.firstCall.args).eql([
-        " selected Big Deal",
-        "anabelle"
-      ]);
-    });
+});
+describe("handleBigDeal", function() {
+  it("should add activityLog selected Big deal", function() {
+    const game = new Game();
+    game.addActivity = sinon.spy();
+    game.nextPlayer = sinon.spy();
+    game.currentPlayer = { name: "anabelle" };
+    game.handleBigDeal();
+    expect(game.addActivity.firstCall.args).eql([
+      " selected Big Deal",
+      "anabelle"
+    ]);
   });
 });

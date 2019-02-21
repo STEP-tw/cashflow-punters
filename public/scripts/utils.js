@@ -2,8 +2,8 @@ const getElementById = function(id) {
   return document.getElementById(id);
 };
 
-const setInnerHTML = function(id, html) {
-  return (getElementById(id).innerHTML = html);
+const setInnerText = function(id, text) {
+  return (getElementById(id).innerText = text);
 };
 
 const createElement = function(tag) {

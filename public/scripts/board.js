@@ -24,8 +24,8 @@ const getBoard = function() {
 };
 
 const setCashLedger = function(player) {
-  setInnerHTML("LedgerBalance", player.ledgerBalance);
-  setInnerHTML("ledger-balance", player.ledgerBalance);
+  setInnerText("LedgerBalance", player.ledgerBalance);
+  setInnerText("ledger-balance", player.ledgerBalance);
 };
 
 const getCashLedger = function() {
@@ -47,35 +47,35 @@ const getCashLedger = function() {
 };
 
 const updateStatementBoard = function(player) {
-  setInnerHTML("name", player.name);
-  setInnerHTML("Profession", player.profession);
-  setInnerHTML("passiveIn", player.passiveIncome);
-  setInnerHTML("totalIn", player.totalIncome);
-  setInnerHTML("expenses", player.totalExpense);
-  setInnerHTML("cashflow", player.cashflow);
-  setInnerHTML("income", player.income.salary);
-  setInnerHTML("ledger-balance", player.ledgerBalance);
+  setInnerText("name", player.name);
+  setInnerText("Profession", player.profession);
+  setInnerText("passiveIn", player.passiveIncome);
+  setInnerText("totalIn", player.totalIncome);
+  setInnerText("expenses", player.totalExpense);
+  setInnerText("cashflow", player.cashflow);
+  setInnerText("income", player.income.salary);
+  setInnerText("ledger-balance", player.ledgerBalance);
   return player;
 };
 
 const setFinancialStatement = function(player) {
-  setInnerHTML("player_salary", player.income.salary);
-  setInnerHTML("player_passiveIn", player.passiveIncome);
-  setInnerHTML("player_totalIn", player.totalIncome);
-  setInnerHTML("player_expenses", player.totalExpense);
-  setInnerHTML("player_cashflow", player.cashflow);
-  setInnerHTML("player_name", `Name : ${player.name}`);
-  setInnerHTML("player_profession", `Profession : ${player.profession}`);
-  setInnerHTML(
+  setInnerText("player_salary", player.income.salary);
+  setInnerText("player_passiveIn", player.passiveIncome);
+  setInnerText("player_totalIn", player.totalIncome);
+  setInnerText("player_expenses", player.totalExpense);
+  setInnerText("player_cashflow", player.cashflow);
+  setInnerText("player_name", `Name : ${player.name}`);
+  setInnerText("player_profession", `Profession : ${player.profession}`);
+  setInnerText(
     "player_liabilities",
     `Liabilities :` + createParagraph(player.liabilities)
   );
-  setInnerHTML(
+  setInnerText(
     "player_expense",
     `Expense :` + createParagraph(player.expenses)
   );
-  setInnerHTML("player_income", `Income :` + createParagraph(player.income));
-  setInnerHTML("player_assets", `assets :` + createParagraph(player.assets));
+  setInnerText("player_income", `Income :` + createParagraph(player.income));
+  setInnerText("player_assets", `assets :` + createParagraph(player.assets));
   updateStatementBoard(player);
 };
 
@@ -107,7 +107,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let {name, turn} = player;
+  let { name, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -355,7 +355,7 @@ const rollDie = function() {
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
-    .then(({diceValue, spaceType}) => {
+    .then(({ diceValue, spaceType }) => {
       dice.innerText = diceValue || dice.innerText;
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
@@ -363,7 +363,7 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let {players} = game;
+  let { players } = game;
   if (game.activeCard) {
     showCard(game.activeCard);
   }
@@ -389,7 +389,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = document.createElement("div");
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
@@ -421,12 +421,31 @@ const updateActivityLog = function(activityLog) {
   });
 };
 
+const parseCookie = function() {
+  const cookie = document.cookie;
+  const keyValuePairs = cookie.split("; ");
+  const parsedCookie = {};
+  keyValuePairs.forEach(keyValue => {
+    const [key, value] = keyValue.split("=");
+    parsedCookie[key] = value;
+  });
+  return parsedCookie;
+};
+
+const getPlayerData = function(playersData) {
+  const { playerName } = parseCookie();
+  const playerData = playersData.filter(({ name }) => name == playerName)[0];
+  return playerData;
+};
+
 const getGame = function() {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
       updateActivityLog(game.activityLog);
       polling(game);
+      const playerData = getPlayerData(game.players);
+      updateStatementBoard(playerData);
     });
 };
 

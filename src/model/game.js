@@ -112,7 +112,7 @@ class Game extends ActivityLog {
   }
 
   handleExpenseCard(type, expenseAmount) {
-    this.currentPlayer.assets.savings -= expenseAmount;
+    this.currentPlayer.deductLedgerBalance(expenseAmount);
     const { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
@@ -140,6 +140,7 @@ class Game extends ActivityLog {
   }
 
   handlePayday() {
+    this.currentPlayer.addPayday();
     this.nextPlayer();
   }
 

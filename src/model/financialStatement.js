@@ -34,6 +34,7 @@ class FinancialStatement {
   updateCashFlow() {
     this.cashflow = this.totalIncome - this.totalExpense;
   }
+  
   addToLedgerBalance(amount) {
     this.ledgerBalance += amount;
   }
