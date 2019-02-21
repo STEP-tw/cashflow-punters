@@ -19,7 +19,8 @@ const {
   selectSmallDeal,
   grantLoan,
   payDebt,
-  isAbleToDoCharity
+  isAbleToDoCharity,
+  provideLiabilities
 } = require("./gameHandlers");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 
@@ -38,6 +39,7 @@ app.get("/startgame", startGame);
 app.get("/getPlayerProfessions", getPlayers);
 app.get("/selectSmallDeal", selectSmallDeal);
 app.get("/selectBigDeal", selectBigDeal);
+app.get("/liabilities", provideLiabilities);
 app.post("/canjoin", canJoin);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.post("/joingame", joinGame);

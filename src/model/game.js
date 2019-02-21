@@ -106,7 +106,7 @@ class Game extends ActivityLog {
 
   handleDoodadSpace() {
     const doodadCard = this.cardStore.doodads.drawCard();
-    this.activeCard = { type: "doodad", data: doodadCard };
+    this.activeCard = {type: "doodad", data: doodadCard};
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
     this.nextPlayer();
   }
@@ -120,7 +120,7 @@ class Game extends ActivityLog {
 
   handleMarketSpace() {
     const marketCard = this.cardStore.market.drawCard();
-    this.activeCard = { type: "market", data: marketCard };
+    this.activeCard = {type: "market", data: marketCard};
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
     }
@@ -186,12 +186,12 @@ class Game extends ActivityLog {
     player.updateCashFlow();
   }
 
-  payDebt(playerName, debtAmount) {
+  payDebt(playerName, debtDetails) {
+    const {expense, liability, liabilityAmount, expenseAmount} = debtDetails;
     const player = this.getPlayerByName(playerName);
-    const interest = debtAmount / 10;
-    player.removeLiability("Bank Loan", debtAmount);
-    player.removeExpense("Bank Loan Payment", interest);
-    player.deductLedgerBalance(debtAmount);
+    player.removeLiability(liability, liabilityAmount);
+    player.removeExpense(expense, expenseAmount);
+    player.deductLedgerBalance(liabilityAmount);
     player.updateTotalExpense();
     player.updateCashFlow();
   }

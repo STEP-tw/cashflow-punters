@@ -27,7 +27,7 @@ const startNewGame = function() {
   fetch("/startGame");
 };
 
-const checkPlayersCount = function({ players, isHost }) {
+const checkPlayersCount = function({players, isHost}) {
   if (players.length >= 1 && isHost) {
     const buttonSpace = getElementById("start_button_space");
     const startButton = createButton("Start Game", "button", "button");

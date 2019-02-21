@@ -12,8 +12,8 @@ const getName = function() {
   return document.cookie.split(";")[0].split("=")[1];
 };
 
-const openCashLedger = function() {
-  let fs = document.getElementById("cash_ledger");
+const showOverlay = function(id) {
+  let fs = document.getElementById(id);
   fs.style.visibility = "visible";
 };
 
