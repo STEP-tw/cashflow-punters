@@ -106,7 +106,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let { name, profession, turn } = player;
+  let { name, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -156,7 +156,7 @@ const declineCharity = function() {
 };
 
 const showPlainCard = function(title, expenseAmount) {
-  const cardDisplay = document.getElementById("cardDisplay");
+  const cardDisplay = document.getElementById("card");
   cardDisplay.innerHTML = null;
   const cardDiv = document.createElement("div");
   cardDiv.classList.add("plain-card");
@@ -177,16 +177,21 @@ const showCard = function(card) {
   cardHandlers[card.type]();
 };
 
-const rollDie = function() {
-  const dice = document.getElementById(event.target.id);
+const handlerCharity = function() {
   const askCharity = document.getElementById("askCharity");
+  askCharity.style.visibility = "visible";
+};
+
+const rollDie = function() {
+  const spacesHandlers = {
+    charity: handlerCharity
+  };
+  const dice = document.getElementById(event.target.id);
   fetch("/rolldie")
     .then(res => res.json())
     .then(({ diceValue, spaceType }) => {
       dice.innerText = diceValue || dice.innerText;
-      if (spaceType == "charity") {
-        askCharity.style.visibility = "visible";
-      }
+      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
     });
 };
 
