@@ -4,7 +4,7 @@ const Player = require("./model/player");
 const cards = require("../data/cards");
 
 const { randomNum, isSame } = require("./utils/utils");
-const { charityMsg } = require("./constant");
+const { CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
 
 const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
@@ -133,7 +133,7 @@ const acceptCharity = function(req, res) {
   req.game.acceptCharity();
   const ledgerBalance = req.game.currentPlayer.getLedgerBalance();
   req.game.nextPlayer();
-  res.send(JSON.stringify({ msg: charityMsg, ledgerBalance }));
+  res.send(JSON.stringify({ ledgerBalance }));
 };
 
 const declineCharity = function(req, res) {
@@ -176,6 +176,13 @@ const payDebt = function(req, res) {
   game.payDebt(playerName, debtAmount);
   const player = game.getPlayerByName(playerName);
   res.send(JSON.stringify(player));
+}
+
+const isAbleToDoCharity = function(req, res) {
+  const isAble = req.game.currentPlayer.isAbleToDoCharity();
+  let msg = UNABLE_TO_DO_CHARITY_MSG;
+  if (isAble) msg = CHARITY_MSG;
+  res.send(JSON.stringify({ isAble, msg }));
 };
 
 module.exports = {
@@ -193,5 +200,6 @@ module.exports = {
   selectBigDeal,
   selectSmallDeal,
   grantLoan,
-  payDebt
+  payDebt,
+  isAbleToDoCharity
 };

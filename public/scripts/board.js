@@ -146,16 +146,24 @@ const createTextDiv = function(text) {
   return textDiv;
 };
 
-const acceptCharity = function() {
+const doCharity = function() {
   closeOverlay("askCharity");
   hideCardOverLay();
   fetch("/acceptCharity")
     .then(res => res.json())
     .then(charityDetail => {
-      const msgContainer = getElementById("notification");
-      msgContainer.innerText = charityDetail.msg;
       const ledgerBalance = getElementById("ledger-balance");
       ledgerBalance.innerText = charityDetail.ledgerBalance;
+    });
+};
+
+const acceptCharity = function() {
+  fetch("/isabletodocharity")
+    .then(res => res.json())
+    .then(({ isAble, msg }) => {
+      const msgContainer = getElementById("notification");
+      msgContainer.innerText = msg;
+      if (isAble) doCharity();
     });
 };
 
@@ -198,7 +206,7 @@ const showCard = function(card) {
   cardHandlers[card.type]();
 };
 
-const handlerCharity = function() {
+const handleCharity = function() {
   const askCharity = document.getElementById("askCharity");
   showCardOverLay();
   askCharity.style.visibility = "visible";
@@ -214,7 +222,7 @@ const hideCardOverLay = function() {
   cardOverlay.style.display = "none";
 };
 
-const handlerDeal = function() {
+const handleDeal = function() {
   const selectDeal = document.getElementById("select-deal");
   showCardOverLay();
   selectDeal.style.visibility = "visible";
@@ -234,8 +242,8 @@ const selectBigDeal = function() {
 
 const rollDie = function() {
   const spacesHandlers = {
-    charity: handlerCharity,
-    deal: handlerDeal
+    charity: handleCharity,
+    deal: handleDeal
   };
   const dice = document.getElementById("dice1");
   fetch("/rolldie")

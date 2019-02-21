@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
-const {createGameId} = require("./utils/utils");
+const { createGameId } = require("./utils/utils");
 const {
   hostGame,
   provideGameLobby,
@@ -18,16 +18,17 @@ const {
   selectBigDeal,
   selectSmallDeal,
   grantLoan,
-  payDebt
+  payDebt,
+  isAbleToDoCharity
 } = require("./gameHandlers");
-const {renderHomePage, getCurrentGame, logRequest} = require("./handlers.js");
+const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 
 app.games = {};
 app.createGameId = createGameId;
 app.use(logRequest);
 app.use(cookieParser());
 app.use(getCurrentGame);
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.get("/", renderHomePage);
 app.get("/gamelobby", provideGameLobby);
@@ -45,6 +46,7 @@ app.post("/paydebt", payDebt);
 app.post("/hostgame", hostGame);
 app.get("/acceptCharity", acceptCharity);
 app.get("/declineCharity", declineCharity);
+app.get("/isabletodocharity", isAbleToDoCharity);
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));
 app.use(express.static("public/scripts"));

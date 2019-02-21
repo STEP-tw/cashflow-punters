@@ -1,7 +1,7 @@
 const lodash = require("lodash");
 const Board = require("./board");
-const {assignId} = require("../utils/array.js");
-const {getNextNum, isBetween} = require("../utils/utils.js");
+const { assignId } = require("../utils/array.js");
+const { getNextNum, isBetween } = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -9,7 +9,7 @@ class ActivityLog {
   }
   addActivity(msg, playerName = "") {
     const time = new Date();
-    this.activityLog.push({playerName, msg, time});
+    this.activityLog.push({ playerName, msg, time });
   }
 }
 
@@ -48,7 +48,7 @@ class Game extends ActivityLog {
   }
 
   getProfession(player) {
-    let {professions} = this.cardStore;
+    let { professions } = this.cardStore;
     const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);

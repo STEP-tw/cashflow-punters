@@ -14,7 +14,8 @@ const {
   acceptCharity,
   declineCharity,
   selectSmallDeal,
-  selectBigDeal
+  selectBigDeal,
+  isAbleToDoCharity
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -379,5 +380,42 @@ describe("selectBigDeal", function() {
     req.game.currentPlayer.gotDeal = false;
     selectBigDeal(req, res);
     expect(req.game.handleBigDeal.calledOnce).to.be.false;
+  });
+});
+
+describe("isAbleToDoCharity", function() {
+  const req = {};
+  const res = {};
+  beforeEach(() => {
+    req.game = {
+      currentPlayer: {
+        totalIncome: 5000,
+        isAbleToDoCharity: function() {
+          return this.ledgerBalance >= this.totalIncome * 0.1;
+        }
+      }
+    };
+    res.content = "";
+    res.send = function(data) {
+      this.content = data;
+    };
+  });
+
+  it("should response with object with keys isAble as true and msg as charitymessage", function() {
+    req.game.currentPlayer.ledgerBalance = 5000;
+    isAbleToDoCharity(req, res);
+    expect(JSON.parse(res.content)).to.be.deep.equal({
+      isAble: true,
+      msg:
+        "You have done charity, So you can optionally use one or two dice for your next 3 turns"
+    });
+  });
+  it("should response with object with keys isAble as false and msg as unabletodocharity", function() {
+    req.game.currentPlayer.ledgerBalance = 300;
+    isAbleToDoCharity(req, res);
+    expect(JSON.parse(res.content)).to.be.deep.equal({
+      isAble: false,
+      msg: "Sorry! your ledger balance is not enough to charity."
+    });
   });
 });
