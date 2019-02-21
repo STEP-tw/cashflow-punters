@@ -182,9 +182,25 @@ const handlerCharity = function() {
   askCharity.style.visibility = "visible";
 };
 
+const handlerDeal = function() {
+  const selectDeal = document.getElementById("select-deal");
+  selectDeal.style.visibility = "visible";
+};
+
+const selectSmallDeal = function() {
+  closeOverlay("select-deal");
+  fetch("/selectSmallDeal");
+};
+
+const selectBigDeal = function() {
+  closeOverlay("select-deal");
+  fetch("/selectBigDeal");
+};
+
 const rollDie = function() {
   const spacesHandlers = {
-    charity: handlerCharity
+    charity: handlerCharity,
+    deal: handlerDeal
   };
   const dice = document.getElementById(event.target.id);
   fetch("/rolldie")
@@ -237,9 +253,7 @@ const createActivity = function({ playerName, msg, time }) {
   return activity;
 };
 
-const updateActivtyLog = function(activityLog) {
-  console.log(activityLog);
-
+const updateActivityLog = function(activityLog) {
   const activityLogDiv = document.getElementById("activityLog");
   const localActivitiesCount = activityLogDiv.children.length;
   if (activityLog.length == localActivitiesCount) {
@@ -256,7 +270,7 @@ const getGame = function() {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
-      updateActivtyLog(game.activityLog);
+      updateActivityLog(game.activityLog);
       polling(game);
     });
 };

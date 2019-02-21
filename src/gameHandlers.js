@@ -146,6 +146,24 @@ const declineCharity = function(req, res) {
   res.end();
 };
 
+const selectSmallDeal = function(req, res) {
+  let { currentPlayer } = req.game;
+  if (currentPlayer.gotDeal) {
+    req.game.handleSmallDeal();
+    currentPlayer.gotDeal = false;
+  }
+  res.end();
+};
+
+const selectBigDeal = function(req, res) {
+  let { currentPlayer } = req.game;
+  if (currentPlayer.gotDeal) {
+    req.game.handleBigDeal();
+    currentPlayer.gotDeal = false;
+  }
+  res.end();
+};
+
 module.exports = {
   hostGame,
   provideGameLobby,
@@ -157,5 +175,7 @@ module.exports = {
   canJoin,
   rollDie,
   acceptCharity,
-  declineCharity
+  declineCharity,
+  selectBigDeal,
+  selectSmallDeal
 };

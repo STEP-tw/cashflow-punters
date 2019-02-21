@@ -85,6 +85,18 @@ class Game extends ActivityLog {
     this.currentPlayer.haveToActivateDice = true;
   }
 
+  handleSmallDeal() {
+    const msg = " selected small Deal";
+    this.addActivity(msg, this.currentPlayer.name);
+    this.nextPlayer();
+  }
+
+  handleBigDeal() {
+    const msg = " selected Big Deal";
+    this.addActivity(msg, this.currentPlayer.name);
+    this.nextPlayer();
+  }
+
   handleBabySpace() {
     this.currentPlayer.addBaby();
     this.addActivity(` got a baby`, this.currentPlayer.name);
@@ -119,7 +131,7 @@ class Game extends ActivityLog {
   }
 
   handleDealSpace() {
-    this.nextPlayer();
+    this.currentPlayer.gotDeal = true;
   }
   handleDownsizedSpace() {
     this.nextPlayer();

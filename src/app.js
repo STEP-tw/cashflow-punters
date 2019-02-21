@@ -14,7 +14,9 @@ const {
   getPlayersFinancialStatement,
   acceptCharity,
   declineCharity,
-  rollDie
+  rollDie,
+  selectBigDeal,
+  selectSmallDeal
 } = require("./gameHandlers");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 
@@ -31,6 +33,8 @@ app.get("/getgame", getGame);
 app.get("/rolldie", rollDie);
 app.get("/startgame", startGame);
 app.get("/getPlayerProfessions", getPlayers);
+app.get("/selectSmallDeal", selectSmallDeal);
+app.get("/selectBigDeal", selectBigDeal);
 app.post("/canjoin", canJoin);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.post("/joingame", joinGame);
