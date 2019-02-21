@@ -175,9 +175,19 @@ class Game extends ActivityLog {
   grantLoan(playerName, loanAmount) {
     const player = this.getPlayerByName(playerName);
     const loanInterest = loanAmount / 10;
-    player.addLiability("bankLoan", loanAmount);
-    player.addExpense("bankLoanPayment", loanInterest);
+    player.addLiability("Bank Loan", loanAmount);
+    player.addExpense("Bank Loan Payment", loanInterest);
     player.addToLedgerBalance(loanAmount);
+    player.updateTotalExpense();
+    player.updateCashFlow();
+  }
+
+  payDebt(playerName, debtAmount) {
+    const player = this.getPlayerByName(playerName);
+    const interest = debtAmount / 10;
+    player.removeLiability("Bank Loan", debtAmount);
+    player.removeExpense("Bank Loan Payment", interest);
+    player.deductLedgerBalance(debtAmount);
     player.updateTotalExpense();
     player.updateCashFlow();
   }

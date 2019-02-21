@@ -10,7 +10,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 1000,
       "Bank Loan Payment": 0,
-      "perChildExpense": 200
+      "Per Child Expense": 200
     },
     "assets": { "savings": 400 },
     "liabilities": {
@@ -31,7 +31,7 @@
       "Credit Card Payment": 100,
       "Other Expenses": 600,
       "Bank Loan Payment": 0,
-      "perChildExpense": 100
+      "Per Child Expense": 100
     },
     "assets": { "savings": 700 },
     "liabilities": {
@@ -52,7 +52,7 @@
       "Credit Card Payment": 100,
       "Other Expenses": 600,
       "Bank Loan Payment": 0,
-      "perChildExpense": 200
+      "Per Child Expense": 200
     },
     "assets": { "savings": 800 },
     "liabilities": {
@@ -73,7 +73,7 @@
       "Credit Card Payment": 700,
       "Other Expenses": 2000,
       "Bank Loan Payment": 0,
-      "perChildExpense": 400
+      "Per Child Expense": 400
     },
     "assets": { "savings": 2500 },
     "liabilities": {
@@ -94,7 +94,7 @@
       "Credit Card Payment": 100,
       "Other Expenses": 300,
       "Bank Loan Payment": 0,
-      "perChildExpense": 100
+      "Per Child Expense": 100
     },
     "assets": { "savings": 600 },
     "liabilities": {
@@ -115,7 +115,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 2000,
       "Bank Loan Payment": 0,
-      "perChildExpense": 700
+      "Per Child Expense": 700
     },
     "assets": { "savings": 3500 },
     "liabilities": {
@@ -136,7 +136,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 700,
       "Bank Loan Payment": 0,
-      "perChildExpense": 200
+      "Per Child Expense": 200
     },
     "assets": { "savings": 400 },
     "liabilities": {
@@ -157,7 +157,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 1500,
       "Bank Loan Payment": 0,
-      "perChildExpense": 400
+      "Per Child Expense": 400
     },
     "assets": { "savings": 2000 },
     "liabilities": {
@@ -178,7 +178,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 1000,
       "Bank Loan Payment": 0,
-      "perChildExpense": 300
+      "Per Child Expense": 300
     },
     "assets": { "savings": 400 },
     "liabilities": {
@@ -199,7 +199,7 @@
       "Credit Card Payment": 200,
       "Other Expenses": 600,
       "Bank Loan Payment": 0,
-      "perChildExpense": 200
+      "Per Child Expense": 200
     },
     "assets": { "savings": 500 },
     "liabilities": {
@@ -220,7 +220,7 @@
       "Credit Card Payment": 100,
       "Other Expenses": 400,
       "Bank Loan Payment": 0,
-      "perChildExpense": 100
+      "Per Child Expense": 100
     },
     "assets": { "savings": 700 },
     "liabilities": {
@@ -241,7 +241,7 @@
       "Credit Card Payment": 100,
       "Other Expenses": 700,
       "Bank Loan Payment": 0,
-      "perChildExpense": 200
+      "Per Child Expense": 200
     },
     "assets": { "savings": 500 },
     "liabilities": {

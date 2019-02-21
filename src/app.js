@@ -17,7 +17,8 @@ const {
   rollDie,
   selectBigDeal,
   selectSmallDeal,
-  grantLoan
+  grantLoan,
+  payDebt
 } = require("./gameHandlers");
 const {renderHomePage, getCurrentGame, logRequest} = require("./handlers.js");
 
@@ -40,6 +41,7 @@ app.post("/canjoin", canJoin);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.post("/joingame", joinGame);
 app.post("/takeloan", grantLoan);
+app.post("/paydebt", payDebt);
 app.post("/hostgame", hostGame);
 app.get("/acceptCharity", acceptCharity);
 app.get("/declineCharity", declineCharity);

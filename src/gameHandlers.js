@@ -169,6 +169,15 @@ const grantLoan = function(req, res) {
   res.send(JSON.stringify(player));
 };
 
+const payDebt = function(req, res) {
+  const {playerName} = req.cookies;
+  const debtAmount = +req.body.amount;
+  const game = req.game;
+  game.payDebt(playerName, debtAmount);
+  const player = game.getPlayerByName(playerName);
+  res.send(JSON.stringify(player));
+};
+
 module.exports = {
   hostGame,
   provideGameLobby,
@@ -183,5 +192,6 @@ module.exports = {
   declineCharity,
   selectBigDeal,
   selectSmallDeal,
-  grantLoan
+  grantLoan,
+  payDebt
 };

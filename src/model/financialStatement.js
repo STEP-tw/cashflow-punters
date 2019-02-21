@@ -38,6 +38,10 @@ class FinancialStatement {
     this.ledgerBalance += amount;
   }
 
+  deductLedgerBalance(amount) {
+    this.ledgerBalance -= amount;
+  }
+
   addPayday() {
     this.ledgerBalance += this.cashflow;
   }
@@ -56,6 +60,14 @@ class FinancialStatement {
       return;
     }
     this.expenses[expense] = amount;
+  }
+
+  removeLiability(liability, amount) {
+    this.liabilities[liability] -= amount;
+  }
+
+  removeExpense(expense, amount) {
+    this.expenses[expense] -= amount;
   }
 }
 

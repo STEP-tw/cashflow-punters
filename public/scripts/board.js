@@ -54,7 +54,8 @@ const updateStatementBoard = function(player) {
   setInnerHTML("expenses", player.totalExpense);
   setInnerHTML("cashflow", player.cashflow);
   setInnerHTML("income", player.income.salary);
-  setInnerHTML("ledger-balance", player.ledgerBalance);
+  setInnerHTML("LedgerBal", player.ledgerBalance);
+  return player;
 };
 
 const setFinancialStatement = function(player) {
@@ -106,7 +107,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let { name, turn } = player;
+  let {name, turn} = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -239,7 +240,7 @@ const rollDie = function() {
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
-    .then(({ diceValue, spaceType }) => {
+    .then(({diceValue, spaceType}) => {
       dice.innerText = diceValue || dice.innerText;
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
@@ -247,7 +248,7 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let { players } = game;
+  let {players} = game;
   if (game.activeCard) {
     showCard(game.activeCard);
   }
@@ -273,7 +274,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({ playerName, msg, time }) {
+const createActivity = function({playerName, msg, time}) {
   const activity = document.createElement("div");
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
@@ -312,34 +313,6 @@ const getGame = function() {
       updateActivityLog(game.activityLog);
       polling(game);
     });
-};
-
-const displayLoanForm = function() {
-  const form = document.getElementById("manage-debt-form");
-  document.getElementById("debt-button").onclick = takeLoan;
-  document.getElementById("debt-button").innerHTML = "Take Loan";
-  form.style.visibility = "visible";
-};
-
-const payDebt = function() {};
-
-const displayPayDebtForm = function() {
-  const form = document.getElementById("manage-debt-form");
-  document.getElementById("debt-button").onclick = payDebt;
-  document.getElementById("debt-button").innerHTML = "Pay Debt";
-  form.style.visibility = "visible";
-};
-
-const takeLoan = function() {
-  const amount = document.getElementById("debt-input").value;
-  fetch("/takeloan", {
-    method: "POST",
-    body: JSON.stringify({ amount }),
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(res => res.json())
-    .then(updateStatementBoard);
-  closeOverlay("manage-debt-form");
 };
 
 const initialize = function() {
