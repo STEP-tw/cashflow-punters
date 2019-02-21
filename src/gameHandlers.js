@@ -117,7 +117,7 @@ const rollDie = function(req, res) {
     res.json({ diceValue: null });
     return;
   }
-  const diceValue = 4 || randomNum(6);
+  const diceValue = randomNum(6);
   const rolledDieMsg = " rolled " + diceValue;
   currentPlayer.move(diceValue);
   req.game.addActivity(rolledDieMsg, currentPlayer.name);
