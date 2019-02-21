@@ -92,9 +92,7 @@ button:hover {
   left: 12.5%;
   display: flex;
   padding: 0.5%;
-
   background-color: #ffe8ca;
-
   width: 75%;
   height: 68.2%;
 }
@@ -169,7 +167,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
   width: 40%;
   height: 100%;
 }
@@ -182,7 +179,6 @@ button:hover {
 .dice_block {
   display: flex;
   position: relative;
-
   height: 26%;
   width: 100%;
   align-items: center;
@@ -206,9 +202,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   display: flex;
-
   background-color: white;
-
   border: black 1px solid;
 }
 
@@ -219,19 +213,15 @@ button:hover {
 .activity_log {
   border: black 1px solid;
   background-color: white;
-
   border-bottom-right-radius: 5%;
-
   overflow-y: scroll;
   height: 72%;
 }
 
 .activity {
   position: relative;
-
   display: flex;
   padding-left: 2%;
-
   border-bottom: dotted grey 1px;
   margin: 5% 0 0 2%;
   width: 95%;
@@ -258,13 +248,10 @@ button:hover {
 
 .card-overlay {
   position: absolute;
-
   width: 100%;
   height: 100%;
-
   background: black;
   opacity: 0;
-
   display: none;
 }
 
@@ -278,13 +265,12 @@ button:hover {
   height: fit-content;
   width: fit-content;
 }
+
 .cardDisplay {
   border: black 1px solid;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 72%;
   width: 100%;
   position: relative;
@@ -305,15 +291,11 @@ button:hover {
 .plain-card {
   border-radius: 3%;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
-
   color: white;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: 10%;
-
   width: 80%;
   height: 45%;
 }
@@ -321,12 +303,9 @@ button:hover {
 .financial_details {
   height: 78%;
   width: 100%;
-
   border-top-left-radius: 5%;
-
   padding: 4%;
   border: black 1px solid;
-
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -369,12 +348,9 @@ button:hover {
 .debt {
   display: flex;
   flex-direction: column;
-
   border-bottom-left-radius: 1.4vh;
-
   height: 20%;
   padding: 4%;
-
   background-color: white;
   border: black 1px solid;
 }
@@ -516,30 +492,22 @@ button:hover {
 .cardDisplayPopup {
   position: absolute;
   visibility: hidden;
-
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
-
   border-radius: 1vh;
   padding: 10%;
-
   z-index: 2;
-
   height: 60%;
   width: 90%;
-
   background-color: white;
 }
 
 .hover {
   position: absolute;
   z-index: 2;
-
   background-color: lightgray;
-
   visibility: hidden;
   top: 20%;
   right: 0%;
@@ -549,12 +517,10 @@ button:hover {
   background-color: cyan;
   height: 250px;
   width: 300px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   position: fixed;
   top: 32%;
   left: 42%;
@@ -566,9 +532,13 @@ button:hover {
   width: 70%;
   height: 10%;
 }
+
 .notification {
-  height: 50%;
-  width: inherit;
+  height: 25%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid black;
 }
 
 .plain-card {
