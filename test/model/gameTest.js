@@ -2,27 +2,27 @@ const Game = require("../../src/model/game");
 const sinon = require("sinon");
 const Cards = require("../../src/model/cards");
 const Player = require("../../src/model/player");
-const { expect } = require("chai");
+const {expect} = require("chai");
 
 describe("Game", function() {
   describe("addPlayer", function() {
     it("should add the given player to game.players", function() {
-      const player = { name: "player" };
-      const cards = { bigdeals: [], smallDeals: [] };
+      const player = {name: "player"};
+      const cards = {bigdeals: [], smallDeals: []};
       const game = new Game(cards);
       game.addPlayer(player);
 
       expect(game)
         .to.have.property("players")
         .to.be.an("Array")
-        .to.deep.equals([{ name: "player" }]);
+        .to.deep.equals([{name: "player"}]);
     });
   });
   describe("getPlayerNames", function() {
     it("should return the list of player names in the game ", function() {
-      const player1 = { name: "player1" };
-      const player2 = { name: "player2" };
-      const cards = { bigdeals: [], smallDeals: [] };
+      const player1 = {name: "player1"};
+      const player2 = {name: "player2"};
+      const cards = {bigdeals: [], smallDeals: []};
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -38,7 +38,7 @@ describe("Game", function() {
       player1.setTurn(1);
       const player2 = new Player("player2");
       player2.setTurn(2);
-      const cards = { bigdeals: [], smallDeals: [] };
+      const cards = {bigdeals: [], smallDeals: []};
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -51,8 +51,8 @@ describe("Game", function() {
 
 describe("startGame", function() {
   it("should set the isStarted property of game to true", function() {
-    const player1 = { name: "player1" };
-    const cards = { bigDeals: [], smallDeals: [] };
+    const player1 = {name: "player1"};
+    const cards = {bigDeals: [], smallDeals: []};
     const game = new Game(cards);
     game.addPlayer(player1);
     game.startGame();
@@ -64,9 +64,9 @@ describe("startGame", function() {
 
 describe("getPlayersCount", function() {
   it("should return the number of players in the game", function() {
-    const player1 = { name: "player1" };
-    const player2 = { name: "player2" };
-    const cards = { bigDeals: [], smallDeals: [] };
+    const player1 = {name: "player1"};
+    const player2 = {name: "player2"};
+    const cards = {bigDeals: [], smallDeals: []};
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -80,10 +80,10 @@ describe("getPlayersCount", function() {
 
 describe("isPlaceAvailable", function() {
   it("should tell weather there is place for any more player in the game or not", function() {
-    const player1 = { name: "player1" };
-    const player2 = { name: "player2" };
-    const player3 = { name: "player3" };
-    const cards = { bigDeals: [], smallDeals: [] };
+    const player1 = {name: "player1"};
+    const player2 = {name: "player2"};
+    const player3 = {name: "player3"};
+    const cards = {bigDeals: [], smallDeals: []};
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -111,7 +111,7 @@ describe("handleCrossedPayday", function() {
   let game;
   beforeEach(() => {
     game = new Game();
-    game.currentPlayer = { addPayday: () => {} };
+    game.currentPlayer = {addPayday: () => {}};
   });
   it("should addActivity on crossing payday", function() {
     game.currentPlayer.currentSpace = 10;
@@ -132,11 +132,11 @@ describe("handleCrossedPayday", function() {
 
 describe("getInitialDetails", function() {
   it("should return initial details of player", function() {
-    let cards = new Cards([{ 1: "p1" }, { 1: "p2" }]);
+    let cards = new Cards([{1: "p1"}, {1: "p2"}]);
     let professions = new Cards(cards);
-    let game = new Game({ professions });
-    const player1 = { name: "player1", setFinancialStatement: () => {} };
-    const player2 = { name: "player2", setFinancialStatement: () => {} };
+    let game = new Game({professions});
+    const player1 = {name: "player1", setFinancialStatement: () => {}};
+    const player2 = {name: "player2", setFinancialStatement: () => {}};
 
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -159,7 +159,7 @@ describe("handleDoodaySpace", function() {
     const card = {
       expenseAmount: 500
     };
-    game.cardStore = { doodads: { drawCard: sinon.stub().returns(card) } };
+    game.cardStore = {doodads: {drawCard: sinon.stub().returns(card)}};
     game.currentPlayer = {
       ledgerBalance: 3000,
       name: "swapnil",
@@ -191,9 +191,9 @@ describe("handleMarketCard", function() {
     const card = {
       expenseAmount: 500
     };
-    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
+    game.cardStore = {market: {drawCard: sinon.stub().returns(card)}};
     game.currentPlayer = {
-      assets: { savings: 1000 },
+      assets: {savings: 1000},
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
@@ -217,7 +217,7 @@ describe("handleMarketCard", function() {
       expenseAmount: 500,
       cash: 500
     };
-    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
+    game.cardStore = {market: {drawCard: sinon.stub().returns(card)}};
     game.currentPlayer = {
       ledgerBalance: 3000,
       name: "swapnil",
@@ -236,9 +236,9 @@ describe("handleMarketCard", function() {
 
 describe("addBaby", function() {
   it("should add the given player to game.players", function() {
-    const player = { name: "player" };
+    const player = {name: "player"};
     const player1 = new Player(player);
-    const cards = { bigdeals: [], smallDeals: [] };
+    const cards = {bigdeals: [], smallDeals: []};
     const game = new Game(cards);
     game.addPlayer(player1);
     game.currentPlayer = player1;
@@ -286,8 +286,8 @@ describe("handleSmallDeal", function() {
     const game = new Game();
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
-    game.currentPlayer = { name: "anabelle" };
-    game.cardStore = { smallDeals: { drawCard: sinon.stub().returns("") } };
+    game.currentPlayer = {name: "anabelle"};
+    game.cardStore = {smallDeals: {drawCard: sinon.stub().returns("")}};
     game.handleSmallDeal();
     expect(game.addActivity.firstCall.args).eql([
       " selected Small Deal",
@@ -300,11 +300,75 @@ describe("handleBigDeal", function() {
     const game = new Game();
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
-    game.currentPlayer = { name: "anabelle" };
+    game.currentPlayer = {name: "anabelle"};
     game.handleBigDeal();
     expect(game.addActivity.firstCall.args).eql([
       " selected Big Deal",
       "anabelle"
     ]);
+  });
+});
+describe("grantLoan", function() {
+  it("should grant loan to the given input player of given amount", function() {
+    const game = new Game();
+    const player = {};
+
+    player.name = "player";
+    player.addLiability = sinon.spy();
+    player.addExpense = sinon.spy();
+    player.addToLedgerBalance = sinon.spy();
+    player.updateCashFlow = sinon.spy();
+    player.updateTotalExpense = sinon.spy();
+    game.getPlayerByName = sinon.stub();
+    game.getPlayerByName.onFirstCall().returns(player);
+
+    game.grantLoan("player", 5000);
+
+    sinon.assert.calledOnce(player.addLiability);
+    sinon.assert.calledOnce(player.addExpense);
+    sinon.assert.calledOnce(player.addToLedgerBalance);
+    sinon.assert.calledOnce(player.updateCashFlow);
+    sinon.assert.calledOnce(player.updateTotalExpense);
+  });
+});
+
+describe("payDebt", function() {
+  it("should grant loan to the given input player of given amount", function() {
+    const game = new Game();
+    const player = {};
+
+    player.name = "player";
+
+    player.removeLiability = sinon.spy();
+    player.removeExpense = sinon.spy();
+    player.deductLedgerBalance = sinon.spy();
+    player.updateCashFlow = sinon.spy();
+    player.updateTotalExpense = sinon.spy();
+    game.getPlayerByName = sinon.stub();
+    game.getPlayerByName.onFirstCall().returns(player);
+
+    game.payDebt("player", 5000);
+
+    sinon.assert.calledOnce(player.removeLiability);
+    sinon.assert.calledOnce(player.removeExpense);
+    sinon.assert.calledOnce(player.deductLedgerBalance);
+    sinon.assert.calledOnce(player.updateCashFlow);
+    sinon.assert.calledOnce(player.updateTotalExpense);
+  });
+});
+
+describe("getPlayerByName", function() {
+  it("should grant loan to the given input player of given amount", function() {
+    const game = new Game();
+    const players = [
+      {name: "player", profession: "janiator"},
+      {name: "player1", profession: "driver"}
+    ];
+    game.players = players;
+
+    const actualOutput = game.getPlayerByName("player");
+    const expectedOutput = {name: "player", profession: "janiator"};
+
+    expect(actualOutput).to.deep.equals(expectedOutput);
   });
 });
