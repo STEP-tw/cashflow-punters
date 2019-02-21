@@ -275,11 +275,33 @@ const getGame = function() {
     });
 };
 
+const displayLoanForm = function() {
+  const form = document.getElementById("manage-debt-form");
+  document.getElementById("debt-button").onclick = takeLoan;
+  document.getElementById("debt-button").innerHTML = "Take Loan";
+  form.style.visibility = "visible";
+};
+
+const payDebt = function() {
+};
+
+const displayPayDebtForm = function() {
+  const form = document.getElementById("manage-debt-form");
+  document.getElementById("debt-button").onclick = payDebt;
+  document.getElementById("debt-button").innerHTML = "Pay Debt";
+  form.style.visibility = "visible";
+};
+
+const takeLoan = function() {};
+
 const initialize = function() {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");
   dice2.hidden = true;
+
+  document.getElementById("loan-form-button").onclick = displayLoanForm;
+  document.getElementById("pay-debt-form-button").onclick = displayPayDebtForm;
 };
 
 window.onload = initialize;

@@ -445,7 +445,6 @@ button {
 .details {
   height: 15%;
   width: 20%;
-
   display: flex;
   flex-direction: column;
   z-index: 1;
@@ -475,4 +474,26 @@ button {
   visibility: hidden;
   top: 20%;
   right: 0%;
+}
+
+.manage-debt-form {
+  background-color: cyan;
+  height: 250px;
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 32%;
+  left: 42%;
+  visibility: hidden;
+}
+
+.debt-input {
+  margin:10px 0px;
+  width:70%;
+  height:10%;
 }

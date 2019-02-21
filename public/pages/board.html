@@ -4,7 +4,7 @@
     <script src="/utils.js"></script>
     <link rel="stylesheet" href="/board.css" />
   </head>
-  <body>
+  <body id='body'>
     <main class="round_border">
       <div hidden id="0">
         <div id="gamePiece1" class="gamePiece player1 "></div>
@@ -76,8 +76,8 @@
             </div>
 
             <div class="debt">
-              <button>Take Loan</button>
-              <button>Pay off debt</button>
+              <button id = "loan-form-button">Take Loan</button>
+              <button id="pay-debt-form-button">Pay off debt</button>
             </div>
           </div>
           <div class="middle_part">
@@ -151,6 +151,7 @@
           id="13"
         ></div>
       </div>
+     
 
       <div class="overlay" id="financial_statement">
         <button class="close" onclick="closeOverlay('financial_statement')">
@@ -200,5 +201,10 @@
       </div>
     </main>
     <div id="container" class="container"></div>
+    <div id='manage-debt-form' class='manage-debt-form'>
+        <input class='debt-input' type="number">
+        <button id='debt-button'class='debt-button'>Take Loan</button>
+      </div>
+    
   </body>
 </html>
