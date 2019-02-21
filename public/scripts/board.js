@@ -54,7 +54,7 @@ const updateStatementBoard = function(player) {
   setInnerHTML("expenses", player.totalExpense);
   setInnerHTML("cashflow", player.cashflow);
   setInnerHTML("income", player.income.salary);
-  setInnerHTML("LedgerBal", player.ledgerBalance);
+  setInnerHTML("ledger-balance", player.ledgerBalance);
   return player;
 };
 
