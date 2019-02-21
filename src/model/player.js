@@ -32,14 +32,6 @@ class Player extends FinancialStatement {
     this.childrenCount += 1;
   }
 
-  activateDice() {
-    this.haveToActivateDice = true;
-  }
-
-  deactivateDice() {
-    this.haveToActivateDice = false;
-  }
-
   addCharityTurn() {
     this.charityTurns = 3;
     this.ledgerBalance = this.ledgerBalance - this.totalIncome * 0.1;

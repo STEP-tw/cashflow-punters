@@ -268,6 +268,7 @@ describe("addBaby", function() {
       game.addActivity = sinon.spy();
       game.nextPlayer = sinon.spy();
       game.currentPlayer = { name: "anabelle" };
+      game.cardStore = { smallDeals: { drawCard: sinon.stub().returns("") } };
       game.handleSmallDeal();
       expect(game.addActivity.firstCall.args).eql([
         " selected Small Deal",

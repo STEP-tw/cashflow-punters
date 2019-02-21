@@ -86,7 +86,10 @@ class Game extends ActivityLog {
   handleSmallDeal() {
     const msg = " selected Small Deal";
     this.addActivity(msg, this.currentPlayer.name);
+    const smallDealCard = this.cardStore.smallDeals.drawCard();
+    this.activeCard = { type: "smallDeal", data: smallDealCard };
     this.nextPlayer();
+    return smallDealCard;
   }
 
   handleBigDeal() {

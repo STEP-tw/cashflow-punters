@@ -350,7 +350,7 @@ describe("selectSmallDeal", function() {
       currentPlayer: { gotDeal: true },
       handleSmallDeal: sinon.spy()
     };
-    res.end = sinon.spy();
+    res.send = sinon.spy();
   });
   it("should call handleSmallDeal when current player got deal", function() {
     selectSmallDeal(req, res);

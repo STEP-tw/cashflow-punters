@@ -144,11 +144,12 @@ const declineCharity = function(req, res) {
 
 const selectSmallDeal = function(req, res) {
   let { currentPlayer } = req.game;
+  let smallDeal;
   if (currentPlayer.gotDeal) {
-    req.game.handleSmallDeal();
+    smallDeal = req.game.handleSmallDeal();
     currentPlayer.gotDeal = false;
   }
-  res.end();
+  res.send(smallDeal);
 };
 
 const selectBigDeal = function(req, res) {

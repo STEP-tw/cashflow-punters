@@ -173,6 +173,81 @@ const declineCharity = function() {
   fetch("/declineCharity");
 };
 
+const createSharesSmallDeal = function(card) {
+  const { title, message, symbol, historicTradingRange, currentPrice } = card;
+  const cardDiv = document.getElementById("card");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
+  cardDiv.classList.add("plain-card");
+  cardDiv.classList.add("type");
+  const titleDiv = createTextDiv(title);
+  const messageDiv = createTextDiv(message);
+  const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
+  const rangeDiv = createTextDiv(historicTradingRange);
+  const currentPriceDiv = createTextDiv(currentPrice);
+  const bottomDiv = document.createElement("div");
+  bottomDiv.classList.add("card-bottom");
+  appendChildren(bottomDiv, [symbolDiv, rangeDiv, currentPriceDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+};
+
+const createRealEstateSmallDeal = function(card) {
+  const { title, message, cost, mortgage, downPayment, cashFlow } = card;
+  const cardDiv = document.getElementById("card");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
+  cardDiv.classList.add("plain-card");
+  cardDiv.classList.add("type");
+  const titleDiv = createTextDiv(title);
+  const messageDiv = createTextDiv(message);
+  const mortgageDiv = createTextDiv(mortgage);
+  const costDiv = createTextDiv(cost);
+  const downPaymentDiv = createTextDiv(downPayment);
+  const cashflowDiv = createTextDiv(cashFlow);
+  const bottomDiv1 = document.createElement("div");
+  const bottomDiv2 = document.createElement("div");
+  bottomDiv1.classList.add("card-bottom");
+  bottomDiv2.classList.add("card-bottom");
+  appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
+  appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
+};
+
+const createGoldSmallDeal = function(card) {
+  const { title, message, numberOfCoins, cost } = card;
+  const cardDiv = document.getElementById("card");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
+  cardDiv.classList.add("plain-card");
+  cardDiv.classList.add("type");
+  const titleDiv = createTextDiv(title);
+  const messageDiv = createTextDiv(message);
+  const numberDiv = createTextDiv(numberOfCoins);
+  const costDiv = createTextDiv(cost);
+  const bottomDiv = document.createElement("div");
+  bottomDiv.classList.add("card-bottom");
+  appendChildren(bottomDiv, [numberDiv, costDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+};
+
+const showSmallDealCard = function(title, expenseAmount, type) {
+  const cardDiv = document.getElementById("card");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
+  cardDiv.classList.add("plain-card");
+  cardDiv.classList.add(type);
+  const titleDiv = createTextDiv(title);
+  titleDiv.classList.add("card-title");
+  const expenseDiv = createTextDiv("Pay $ " + expenseAmount);
+  expenseDiv.classList.add("card-expense");
+  cardDiv.appendChild(titleDiv);
+  cardDiv.appendChild(expenseDiv);
+};
+
 const showPlainCard = function(title, expenseAmount, type) {
   const cardDiv = document.getElementById("card");
   cardDiv.style.visibility = "visible";
@@ -203,7 +278,7 @@ const showCard = function(card) {
       "market-card"
     )
   };
-  cardHandlers[card.type]();
+  cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
 const handleCharity = function() {
@@ -229,9 +304,19 @@ const handleDeal = function() {
 };
 
 const selectSmallDeal = function() {
+  const cardTypes = {
+    shares: createSharesSmallDeal,
+    goldCoins: createGoldSmallDeal,
+    realEstate: createRealEstateSmallDeal
+  };
+
   closeOverlay("select-deal");
   hideCardOverLay();
-  fetch("/selectSmallDeal");
+  fetch("/selectSmallDeal")
+    .then(data => data.json())
+    .then(card => {
+      cardTypes[card.relatedTo](card);
+    });
 };
 
 const selectBigDeal = function() {
@@ -245,6 +330,7 @@ const rollDie = function() {
     charity: handleCharity,
     deal: handleDeal
   };
+
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
