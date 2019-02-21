@@ -13,10 +13,7 @@ describe("rollDie", function() {
       board: { getSpaceType: sinon.stub().returns("a") },
       currentPlayer: {
         name: "tilak",
-        deactivateDice: function() {
-          this.haveToActivateDice = false;
-        },
-        haveToActivateDice: true,
+
         didUpdateSpace: false,
         move: sinon.spy()
       },
@@ -45,12 +42,6 @@ describe("rollDie", function() {
     rollDie(req, res);
     const activityMsg = addActivity.firstCall.args[0];
     chai.expect(activityMsg).to.match(/rolled [1-6]/);
-  });
-
-  it("should has to change haveToActivateDice  of current playe to false", function() {
-    let { currentPlayer } = req.game;
-    rollDie(req, res);
-    chai.expect(currentPlayer.haveToActivateDice).to.be.false;
   });
 
   it("should not roll the die if requested player and currentPlayer are not same", function() {

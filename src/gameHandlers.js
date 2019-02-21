@@ -118,7 +118,6 @@ const rollDie = function(req, res) {
     res.json({ diceValue: null });
     return;
   }
-  currentPlayer.deactivateDice();
   const diceValue = randomNum(6);
   const rolledDieMsg = " rolled " + diceValue;
   currentPlayer.move(diceValue);
