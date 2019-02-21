@@ -42,6 +42,6 @@ describe("financialStatement", function() {
     finantialStatement.setFinancialStatement(profession);
     finantialStatement.addPayday();
     expect(finantialStatement).has.property("totalIncome");
-    expect(finantialStatement.assets.savings).to.equal(13500);
+    expect(finantialStatement.ledgerBalance).to.equal(23500);
   });
 });

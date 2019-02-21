@@ -12,7 +12,9 @@ const {
   getGame,
   startGame,
   acceptCharity,
-  declineCharity
+  declineCharity,
+  selectSmallDeal,
+  selectBigDeal
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -56,6 +58,7 @@ describe("hostGame", function() {
       .to.be.an("Array")
       .to.deep.equals([
         {
+          charityTurns: 0,
           childrenCount: 0,
           name: "player",
           didUpdateSpace: false,
@@ -134,6 +137,7 @@ describe("joinGame", function() {
       .to.deep.equals([
         {
           name: "player",
+          charityTurns: 0,
           childrenCount: 0,
           didUpdateSpace: false,
           currentSpace: 0,
@@ -336,4 +340,45 @@ describe("declineCharity", function() {
   const res = { end: sinon.spy() };
   declineCharity(req, res);
   expect(req.game.nextPlayer.calledOnce).to.be.true;
+});
+
+describe("selectSmallDeal", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.game = {
+      currentPlayer: { gotDeal: true },
+      handleSmallDeal: sinon.spy()
+    };
+    res.end = sinon.spy();
+  });
+  it("should call handleSmallDeal when current player got deal", function() {
+    selectSmallDeal(req, res);
+    expect(req.game.handleSmallDeal.calledOnce).to.be.true;
+  });
+  it("should not call handleSmallDeal when current player didntgot deal", function() {
+    req.game.currentPlayer.gotDeal = false;
+    selectSmallDeal(req, res);
+    expect(req.game.handleSmallDeal.calledOnce).to.be.false;
+  });
+});
+describe("selectBigDeal", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.game = {
+      currentPlayer: { gotDeal: true },
+      handleBigDeal: sinon.spy()
+    };
+    res.end = sinon.spy();
+  });
+  it("should call handleBigDeal when current player got deal", function() {
+    selectBigDeal(req, res);
+    expect(req.game.handleBigDeal.calledOnce).to.be.true;
+  });
+  it("should not call handleBigDeal when current player didntgot deal", function() {
+    req.game.currentPlayer.gotDeal = false;
+    selectBigDeal(req, res);
+    expect(req.game.handleBigDeal.calledOnce).to.be.false;
+  });
 });

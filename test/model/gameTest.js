@@ -262,4 +262,30 @@ describe("addBaby", function() {
       expect(game.nextPlayer.calledOnce).to.be.true;
     });
   });
+  describe("handleSmallDeal", function() {
+    it("should add activityLog selected small deal", function() {
+      const game = new Game();
+      game.addActivity = sinon.spy();
+      game.nextPlayer = sinon.spy();
+      game.currentPlayer = { name: "anabelle" };
+      game.handleSmallDeal();
+      expect(game.addActivity.firstCall.args).eql([
+        " selected Small Deal",
+        "anabelle"
+      ]);
+    });
+  });
+  describe("handleBigDeal", function() {
+    it("should add activityLog selected Big deal", function() {
+      const game = new Game();
+      game.addActivity = sinon.spy();
+      game.nextPlayer = sinon.spy();
+      game.currentPlayer = { name: "anabelle" };
+      game.handleBigDeal();
+      expect(game.addActivity.firstCall.args).eql([
+        " selected Big Deal",
+        "anabelle"
+      ]);
+    });
+  });
 });

@@ -155,24 +155,35 @@ const declineCharity = function() {
   fetch("/declineCharity");
 };
 
-const showPlainCard = function(title, expenseAmount) {
-  const cardDisplay = document.getElementById("card");
-  cardDisplay.innerHTML = null;
-  const cardDiv = document.createElement("div");
+const showPlainCard = function(title, expenseAmount, type) {
+  const cardDiv = document.getElementById("card");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
+  cardDiv.classList.add(type);
   const titleDiv = createTextDiv(title);
   titleDiv.classList.add("card-title");
-  const expenseDiv = createTextDiv("$ " + expenseAmount);
-  titleDiv.classList.add("card-expense");
+  const expenseDiv = createTextDiv("Pay $ " + expenseAmount);
+  expenseDiv.classList.add("card-expense");
   cardDiv.appendChild(titleDiv);
   cardDiv.appendChild(expenseDiv);
-  cardDisplay.appendChild(cardDiv);
 };
 
 const showCard = function(card) {
   const cardHandlers = {
-    doodad: showPlainCard.bind(null, card.data.title, card.data.expenseAmount),
-    market: showPlainCard.bind(null, card.data.title, card.data.cash)
+    doodad: showPlainCard.bind(
+      null,
+      card.data.title,
+      card.data.expenseAmount,
+      "doodad-card"
+    ),
+    market: showPlainCard.bind(
+      null,
+      card.data.title,
+      card.data.cash,
+      "market-card"
+    )
   };
   cardHandlers[card.type]();
 };
@@ -202,7 +213,7 @@ const rollDie = function() {
     charity: handlerCharity,
     deal: handlerDeal
   };
-  const dice = document.getElementById(event.target.id);
+  const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
     .then(({ diceValue, spaceType }) => {

@@ -7,9 +7,9 @@ class Player extends FinancialStatement {
     this.name = name;
     this.profession;
     this.currentSpace = 0;
+    this.charityTurns = 0;
     this.turn;
     this.childrenCount = 0;
-    this.haveToActivateDice;
     this.didUpdateSpace = false;
   }
   setTurn(turn) {
@@ -26,13 +26,6 @@ class Player extends FinancialStatement {
 
   addBaby() {
     this.childrenCount += 1;
-  }
-
-  activateDice() {
-    this.haveToActivateDice = true;
-  }
-  deactivateDice() {
-    this.haveToActivateDice = false;
   }
 }
 

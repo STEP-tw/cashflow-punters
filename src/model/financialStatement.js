@@ -28,7 +28,7 @@ class FinancialStatement {
   }
 
   addPayday() {
-    this.assets.savings += this.cashflow;
+    this.ledgerBalance += this.cashflow;
   }
 }
 

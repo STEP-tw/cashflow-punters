@@ -242,14 +242,55 @@ button {
   height: 20%;
 }
 
+#card {
+  visibility: hidden;
+}
+
 .cardDisplay {
   border: black 1px solid;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   height: 80%;
   width: 100%;
 
   position: relative;
 }
+
+.doodad-card {
+  background-color: #f3b5aa;
+}
+
+.market-card {
+  background-color: #7493ef;
+}
+
+.card-title {
+  font-weight: bold;
+}
+/* 
+.card-expense {
+  align-self: center;
+} */
+
+.plain-card {
+  border-radius: 3%;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10%;
+
+  width: 80%;
+  height: 45%;
+}
+
 .financial_details {
   height: 78%;
   width: 100%;

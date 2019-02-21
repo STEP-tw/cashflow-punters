@@ -44,7 +44,6 @@ class Game extends ActivityLog {
     this.currentPlayer = this.players[0];
     this.addActivity("Game has Started");
     this.addActivity("'s turn", this.currentPlayer.name);
-    this.currentPlayer.haveToActivateDice = true;
   }
 
   getProfession(player) {
@@ -82,11 +81,10 @@ class Game extends ActivityLog {
     const nextPlayer = this.getPlayer(nextPlayerTurn);
     this.currentPlayer = nextPlayer;
     this.addActivity("'s turn ", this.currentPlayer.name);
-    this.currentPlayer.haveToActivateDice = true;
   }
 
   handleSmallDeal() {
-    const msg = " selected small Deal";
+    const msg = " selected Small Deal";
     this.addActivity(msg, this.currentPlayer.name);
     this.nextPlayer();
   }

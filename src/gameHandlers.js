@@ -134,6 +134,7 @@ const rollDie = function(req, res) {
 const acceptCharity = function(req, res) {
   let { currentPlayer } = req.game;
   if (currentPlayer.gotCharitySpace) {
+    currentPlayer.ledgerBalance -= currentPlayer.totalIncome / 10;
     currentPlayer.charityTurns = 3;
     currentPlayer.gotCharitySpace = false;
     req.game.nextPlayer();
