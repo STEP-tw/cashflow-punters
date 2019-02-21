@@ -136,6 +136,7 @@ describe("joinGame", function() {
       .to.have.property("players")
       .to.deep.equals([
         {
+          charityTurns: 0,
           name: "player",
           charityTurns: 0,
           childrenCount: 0,
@@ -312,21 +313,18 @@ describe("acceptCharity", function() {
   beforeEach(() => {
     req = {
       game: {
-        currentPlayer: { gotCharitySpace: true, charityTurns: 0 },
-        nextPlayer: sinon.spy()
+        currentPlayer: { charityTurns: 0 },
+        nextPlayer: sinon.spy(),
+        acceptCharity: function() {
+          this.currentPlayer.charityTurns = 3;
+        }
       }
     };
-    res = { end: sinon.spy() };
+    res = { send: sinon.spy() };
   });
   it("should add charity turns to currentPlayer", function() {
     acceptCharity(req, res);
     expect(req.game.currentPlayer.charityTurns).equal(3);
-  });
-
-  it("should not add charity turns to currentPlayer when currentPlayer doesnt get charity space", function() {
-    req.game.currentPlayer.gotCharitySpace = false;
-    acceptCharity(req, res);
-    expect(req.game.currentPlayer.charityTurns).equal(0);
   });
 });
 
@@ -334,12 +332,12 @@ describe("declineCharity", function() {
   it("should add charity turns to currentPlayer", function() {});
   const req = {
     game: {
-      nextPlayer: sinon.spy()
+      declineCharity: sinon.spy()
     }
   };
   const res = { end: sinon.spy() };
   declineCharity(req, res);
-  expect(req.game.nextPlayer.calledOnce).to.be.true;
+  expect(req.game.declineCharity.calledOnce).to.be.true;
 });
 
 describe("selectSmallDeal", function() {

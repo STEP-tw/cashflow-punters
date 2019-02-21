@@ -25,4 +25,7 @@ const board = [
   "market"
 ];
 
-module.exports = { board };
+const charityMsg =
+  "You have done charity, So you can optionally use one or two dice for your next 3 turns";
+
+module.exports = { board, charityMsg };

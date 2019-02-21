@@ -3,7 +3,8 @@ const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
 
-const {randomNum} = require("./utils/utils");
+const { randomNum, isSame } = require("./utils/utils");
+const { charityMsg } = require("./constant");
 
 const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
@@ -100,14 +101,12 @@ const getGame = function(req, res) {
   res.send(JSON.stringify(req.game));
 };
 
-const getPlayer = function(currentPlayer, player) {
-  return player.name == currentPlayer;
-};
-
 const getPlayersFinancialStatement = function(req, res) {
-  let currentPlayer = req.cookies["playerName"];
-  let getRequiredPlayer = getPlayer.bind(null, currentPlayer);
-  let requiredPlayer = req.game.players.filter(getRequiredPlayer)[0];
+  const requester = req.cookies["playerName"];
+  const isRequestedPlayer = isSame.bind(null, requester);
+  const requiredPlayer = req.game.players.filter(player => {
+    return isRequestedPlayer(player.name);
+  })[0];
   res.send(JSON.stringify(requiredPlayer));
 };
 
@@ -131,18 +130,12 @@ const rollDie = function(req, res) {
 };
 
 const acceptCharity = function(req, res) {
-  let {currentPlayer} = req.game;
-  if (currentPlayer.gotCharitySpace) {
-    currentPlayer.ledgerBalance -= currentPlayer.totalIncome / 10;
-    currentPlayer.charityTurns = 3;
-    currentPlayer.gotCharitySpace = false;
-    req.game.nextPlayer();
-  }
-  res.end();
+  req.game.acceptCharity();
+  res.send(JSON.stringify({ msg: charityMsg }));
 };
 
 const declineCharity = function(req, res) {
-  req.game.nextPlayer();
+  req.game.declineCharity();
   res.end();
 };
 

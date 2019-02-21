@@ -23,6 +23,7 @@ class Game extends ActivityLog {
     this.players = [];
     this.hasStarted = false;
     this.financialStatement;
+    this.activeCard;
   }
 
   addPlayer(player) {
@@ -78,8 +79,7 @@ class Game extends ActivityLog {
     this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
-    const nextPlayer = this.getPlayer(nextPlayerTurn);
-    this.currentPlayer = nextPlayer;
+    this.currentPlayer = this.getPlayer(nextPlayerTurn);
     this.addActivity("'s turn ", this.currentPlayer.name);
   }
 
@@ -102,22 +102,22 @@ class Game extends ActivityLog {
   }
 
   handleDoodadSpace() {
-    let doodadCard = this.cardStore.doodads.drawCard();
-    this.activeCard = {type: "doodad", data: doodadCard};
+    const doodadCard = this.cardStore.doodads.drawCard();
+    this.activeCard = { type: "doodad", data: doodadCard };
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
     this.nextPlayer();
   }
 
   handleExpenseCard(type, expenseAmount) {
     this.currentPlayer.assets.savings -= expenseAmount;
-    let {name} = this.currentPlayer;
+    const { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
   }
 
   handleMarketSpace() {
-    let marketCard = this.cardStore.market.drawCard();
-    this.activeCard = {type: "market", data: marketCard};
+    const marketCard = this.cardStore.market.drawCard();
+    this.activeCard = { type: "market", data: marketCard };
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
     }
@@ -131,6 +131,7 @@ class Game extends ActivityLog {
   handleDealSpace() {
     this.currentPlayer.gotDeal = true;
   }
+
   handleDownsizedSpace() {
     this.nextPlayer();
   }
@@ -179,12 +180,24 @@ class Game extends ActivityLog {
     player.addToLedgerBalance(loanAmount);
     player.updateTotalExpense();
     player.updateCashFlow();
-    console.log(player.cashflow);
   }
 
   getPlayerByName(playerName) {
     const player = this.players.filter(player => player.name == playerName)[0];
     return player;
+  }
+
+  acceptCharity() {
+    this.currentPlayer.addCharityTurn();
+    this.activeCard = "";
+    this.addActivity(" accepted charity", this.currentPlayer.name);
+    this.nextPlayer();
+  }
+  
+  declineCharity() {
+    this.addActivity(" declined charity", this.currentPlayer.name);
+    this.activeCard = "";
+    this.nextPlayer();
   }
 }
 

@@ -26,7 +26,6 @@ const getBoard = function() {
 const setCashLedger = function(player) {
   setInnerHTML("LedgerBalance", player.ledgerBalance);
   setInnerHTML("LedgerBal", player.ledgerBalance);
-  console.log(player.ledgerBalance);
 };
 
 const getCashLedger = function() {
@@ -107,7 +106,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let {name, turn} = player;
+  let { name, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -148,7 +147,12 @@ const createTextDiv = function(text) {
 
 const acceptCharity = function() {
   closeOverlay("askCharity");
-  fetch("/acceptCharity");
+  fetch("/acceptCharity")
+    .then(res => res.json())
+    .then(charityDetail => {
+      const msgContainer = getElementById("notification");
+      msgContainer.innerText = charityDetail.msg;
+    });
 };
 
 const declineCharity = function() {
@@ -217,14 +221,15 @@ const rollDie = function() {
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
-    .then(({diceValue, spaceType}) => {
+    .then(({ diceValue, spaceType }) => {
       dice.innerText = diceValue || dice.innerText;
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+      getElementById("notification").innerText = null;
     });
 };
 
 const polling = function(game) {
-  let {players} = game;
+  let { players } = game;
   if (game.activeCard) {
     showCard(game.activeCard);
   }
@@ -241,16 +246,16 @@ const updateGamePiece = function(player) {
 };
 
 const showHover = function(parent) {
-  let a = parent.children[0];
-  a.style.visibility = "visible";
+  const anchor = parent.children[0];
+  anchor.style.visibility = "visible";
 };
 
 const hideHover = function(parent) {
-  let a = parent.children[0];
-  a.style.visibility = "hidden";
+  const anchor = parent.children[0];
+  anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = document.createElement("div");
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
@@ -307,8 +312,8 @@ const takeLoan = function() {
   const amount = document.getElementById("debt-input").value;
   fetch("/takeloan", {
     method: "POST",
-    body: JSON.stringify({amount}),
-    headers: {"Content-Type": "application/json"}
+    body: JSON.stringify({ amount }),
+    headers: { "Content-Type": "application/json" }
   })
     .then(res => res.json())
     .then(updateStatementBoard);
@@ -325,4 +330,10 @@ const initialize = function() {
   document.getElementById("pay-debt-form-button").onclick = displayPayDebtForm;
 };
 
-window.onload = initialize;
+window.onload = () => {
+  initialize();
+  const acceptCharityButton = getElementById("acceptCharity");
+  acceptCharityButton.onclick = acceptCharity;
+  const declineCharityButton = getElementById("declineCharity");
+  declineCharityButton.onclick = declineCharity;
+};
