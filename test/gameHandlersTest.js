@@ -313,7 +313,7 @@ describe("acceptCharity", function() {
   beforeEach(() => {
     req = {
       game: {
-        currentPlayer: { charityTurns: 0 },
+        currentPlayer: { charityTurns: 0, getLedgerBalance: sinon.spy() },
         nextPlayer: sinon.spy(),
         acceptCharity: function() {
           this.currentPlayer.charityTurns = 3;
@@ -332,7 +332,8 @@ describe("declineCharity", function() {
   it("should add charity turns to currentPlayer", function() {});
   const req = {
     game: {
-      declineCharity: sinon.spy()
+      declineCharity: sinon.spy(),
+      nextPlayer: sinon.spy()
     }
   };
   const res = { end: sinon.spy() };

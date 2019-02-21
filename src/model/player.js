@@ -44,6 +44,10 @@ class Player extends FinancialStatement {
     this.charityTurns = 3;
     this.ledgerBalance = this.ledgerBalance - this.totalIncome * 0.1;
   }
+
+  getLedgerBalance() {
+    return this.ledgerBalance;
+  }
 }
 
 module.exports = Player;

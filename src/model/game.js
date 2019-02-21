@@ -191,13 +191,11 @@ class Game extends ActivityLog {
     this.currentPlayer.addCharityTurn();
     this.activeCard = "";
     this.addActivity(" accepted charity", this.currentPlayer.name);
-    this.nextPlayer();
   }
-  
+
   declineCharity() {
     this.addActivity(" declined charity", this.currentPlayer.name);
     this.activeCard = "";
-    this.nextPlayer();
   }
 }
 

@@ -25,7 +25,7 @@ const getBoard = function() {
 
 const setCashLedger = function(player) {
   setInnerHTML("LedgerBalance", player.ledgerBalance);
-  setInnerHTML("LedgerBal", player.ledgerBalance);
+  setInnerHTML("ledger-balance", player.ledgerBalance);
 };
 
 const getCashLedger = function() {
@@ -54,7 +54,7 @@ const updateStatementBoard = function(player) {
   setInnerHTML("expenses", player.totalExpense);
   setInnerHTML("cashflow", player.cashflow);
   setInnerHTML("income", player.income.salary);
-  setInnerHTML("LedgerBal", player.ledgerBalance);
+  setInnerHTML("ledger-balance", player.ledgerBalance);
 };
 
 const setFinancialStatement = function(player) {
@@ -152,6 +152,8 @@ const acceptCharity = function() {
     .then(charityDetail => {
       const msgContainer = getElementById("notification");
       msgContainer.innerText = charityDetail.msg;
+      const ledgerBalance = getElementById("ledger-balance");
+      ledgerBalance.innerText = charityDetail.ledgerBalance;
     });
 };
 
