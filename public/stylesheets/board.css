@@ -246,17 +246,23 @@ button:hover {
   visibility: hidden;
 }
 
+#notification {
+  display: none;
+}
+
 .card-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
   background: black;
-  opacity: 0;
+  opacity: 0.5;
+
   display: none;
 }
 
 .buttons_div {
   display: flex;
+  width: 40%;
   align-self: flex-end;
 }
 
@@ -299,8 +305,27 @@ button:hover {
 
   width: 90%;
   padding: 5%;
-  background: #aee9ae;
   height: 70%;
+}
+
+.smallDeal {
+  background: #aee9ae;
+}
+
+.smallDeal > button {
+  background: transparent;
+  color: #7493ef;
+  box-shadow: none;
+}
+
+.smallDeal > button:hover {
+  background: transparent;
+  color: #7493ef;
+  box-shadow: none;
+}
+
+.plain-card > div > p {
+  margin: 0;
 }
 
 .financial_details {

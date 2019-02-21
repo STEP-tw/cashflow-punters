@@ -180,7 +180,7 @@ const createSharesSmallDeal = function(card) {
   cardDiv.innerHTML = null;
   cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("type");
+  cardDiv.classList.add("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
@@ -188,8 +188,13 @@ const createSharesSmallDeal = function(card) {
   const currentPriceDiv = createTextDiv(currentPrice);
   const bottomDiv = document.createElement("div");
   bottomDiv.classList.add("card-bottom");
+  const buttons = document.createElement("div");
+  buttons.className = "buttons_div";
+  const button1 = createButton("Accept");
+  const button2 = createButton("decline");
+  appendChildren(buttons, [button1, button2]);
   appendChildren(bottomDiv, [symbolDiv, rangeDiv, currentPriceDiv]);
-  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv, buttons]);
 };
 
 const createRealEstateSmallDeal = function(card) {
@@ -199,7 +204,7 @@ const createRealEstateSmallDeal = function(card) {
   cardDiv.innerHTML = null;
   cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("type");
+  cardDiv.classList.add("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const mortgageDiv = createTextDiv(mortgage);
@@ -210,9 +215,20 @@ const createRealEstateSmallDeal = function(card) {
   const bottomDiv2 = document.createElement("div");
   bottomDiv1.classList.add("card-bottom");
   bottomDiv2.classList.add("card-bottom");
+  const buttons = document.createElement("div");
+  const button1 = createButton("Accept");
+  const button2 = createButton("decline");
+  buttons.className = "buttons_div";
+  appendChildren(buttons, [button1, button2]);
   appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
   appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
-  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
+  appendChildren(cardDiv, [
+    titleDiv,
+    messageDiv,
+    bottomDiv1,
+    bottomDiv2,
+    buttons
+  ]);
 };
 
 const createGoldSmallDeal = function(card) {
@@ -222,15 +238,20 @@ const createGoldSmallDeal = function(card) {
   cardDiv.innerHTML = null;
   cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("type");
+  cardDiv.classList.add("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const numberDiv = createTextDiv(numberOfCoins);
   const costDiv = createTextDiv(cost);
   const bottomDiv = document.createElement("div");
   bottomDiv.classList.add("card-bottom");
+  const buttons = document.createElement("div");
+  buttons.className = "buttons_div";
+  const button1 = createButton("Accept");
+  const button2 = createButton("decline");
+  appendChildren(buttons, [button1, button2]);
   appendChildren(bottomDiv, [numberDiv, costDiv]);
-  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv, buttons]);
 };
 
 const showSmallDealCard = function(title, expenseAmount, type) {
