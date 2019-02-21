@@ -218,14 +218,18 @@ button {
 .activity {
   position: relative;
 
+  display: flex;
+  align-content: center;
+
+  margin: 2%;
+
   background-color: #00bcd442;
   border-radius: 2%;
-  width: 99%;
+  width: 95%;
   height: fit-content;
 }
 
 .activity > p {
-  margin: 4%;
   word-break: break-all;
 }
 
