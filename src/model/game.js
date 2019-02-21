@@ -1,7 +1,7 @@
 const lodash = require("lodash");
 const Board = require("./board");
-const { range, assignId } = require("../utils/array.js");
-const { getNextNum, isBetween } = require("../utils/utils.js");
+const {assignId} = require("../utils/array.js");
+const {getNextNum, isBetween} = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -9,7 +9,7 @@ class ActivityLog {
   }
   addActivity(msg, playerName = "") {
     const time = new Date();
-    this.activityLog.push({ playerName, msg, time });
+    this.activityLog.push({playerName, msg, time});
   }
 }
 
@@ -47,7 +47,7 @@ class Game extends ActivityLog {
   }
 
   getProfession(player) {
-    let { professions } = this.cardStore;
+    let {professions} = this.cardStore;
     const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);
@@ -103,21 +103,21 @@ class Game extends ActivityLog {
 
   handleDoodadSpace() {
     let doodadCard = this.cardStore.doodads.drawCard();
-    this.activeCard = { type: "doodad", data: doodadCard };
+    this.activeCard = {type: "doodad", data: doodadCard};
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
     this.nextPlayer();
   }
 
   handleExpenseCard(type, expenseAmount) {
     this.currentPlayer.assets.savings -= expenseAmount;
-    let { name } = this.currentPlayer;
+    let {name} = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
   }
 
   handleMarketSpace() {
     let marketCard = this.cardStore.market.drawCard();
-    this.activeCard = { type: "market", data: marketCard };
+    this.activeCard = {type: "market", data: marketCard};
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
     }
@@ -169,6 +169,22 @@ class Game extends ActivityLog {
         this.currentPlayer.addPayday();
       });
     }
+  }
+
+  grantLoan(playerName, loanAmount) {
+    const player = this.getPlayerByName(playerName);
+    const loanInterest = loanAmount / 10;
+    player.addLiability("bankLoan", loanAmount);
+    player.addExpense("bankLoanPayment", loanInterest);
+    player.addToLedgerBalance(loanAmount);
+    player.updateTotalExpense();
+    player.updateCashFlow();
+    console.log(player.cashflow);
+  }
+
+  getPlayerByName(playerName) {
+    const player = this.players.filter(player => player.name == playerName)[0];
+    return player;
   }
 }
 

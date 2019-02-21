@@ -1,4 +1,4 @@
-const { add } = require("../utils/utils");
+const {add} = require("../utils/utils");
 
 class FinancialStatement {
   constructor() {
@@ -16,19 +16,46 @@ class FinancialStatement {
   }
   setFinancialStatement(profession) {
     this.profession = profession.profession;
-    this.totalIncome = Object.values(profession.income).reduce(add);
-    this.totalExpense = Object.values(profession.expenses).reduce(add);
     this.income = profession.income;
-    this.cashflow = this.totalIncome - this.totalExpense;
-    this.cashLedger = this.totalIncome + profession.assets.savings;
-    this.ledgerBalance = this.cashflow + profession.assets.savings;
     this.expenses = profession.expenses;
     this.assets = profession.assets;
     this.liabilities = profession.liabilities;
+    this.totalIncome = Object.values(this.income).reduce(add);
+    this.updateTotalExpense();
+    this.updateCashFlow();
+    this.cashLedger = this.totalIncome + profession.assets.savings;
+    this.ledgerBalance = this.cashflow + profession.assets.savings;
+  }
+
+  updateTotalExpense() {
+    this.totalExpense = Object.values(this.expenses).reduce(add);
+  }
+
+  updateCashFlow() {
+    this.cashflow = this.totalIncome - this.totalExpense;
+  }
+  addToLedgerBalance(amount) {
+    this.ledgerBalance += amount;
   }
 
   addPayday() {
     this.ledgerBalance += this.cashflow;
+  }
+
+  addLiability(liability, amount) {
+    if (this.liabilities[liability]) {
+      this.liabilities[liability] += amount;
+      return;
+    }
+    this.liabilities[liability] = amount;
+  }
+
+  addExpense(expense, amount) {
+    if (this.expenses[expense]) {
+      this.expenses[expense] += amount;
+      return;
+    }
+    this.expenses[expense] = amount;
   }
 }
 
