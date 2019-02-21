@@ -10,19 +10,25 @@ class FinancialStatement {
     this.legerBalance;
     this.income;
     this.cashLedger;
+    this.expenses;
+    this.liabilities;
+    this.assets;
   }
   setFinancialStatement(profession) {
-    this.profession = profession;
-    this.totalIncome = Object.values(this.profession.income).reduce(add);
-    this.totalExpense = Object.values(this.profession.expenses).reduce(add);
-    this.income = this.profession.income.salary;
+    this.profession = profession.profession;
+    this.totalIncome = Object.values(profession.income).reduce(add);
+    this.totalExpense = Object.values(profession.expenses).reduce(add);
+    this.income = profession.income;
     this.cashflow = this.totalIncome - this.totalExpense;
-    this.cashLedger = this.totalIncome + this.profession.assets.savings;
-    this.ledgerBalance = this.cashflow + this.profession.assets.savings;
+    this.cashLedger = this.totalIncome + profession.assets.savings;
+    this.ledgerBalance = this.cashflow + profession.assets.savings;
+    this.expenses = profession.expenses;
+    this.assets = profession.assets;
+    this.liabilities = profession.liabilities;
   }
 
   addPayday() {
-    this.profession.assets.savings += this.cashflow;
+    this.assets.savings += this.cashflow;
   }
 }
 

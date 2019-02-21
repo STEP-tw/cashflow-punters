@@ -47,44 +47,35 @@ const getCashLedger = function() {
     });
 };
 
-const updateStatementBoard = function(fsContent) {
-  setInnerHTML("name", fsContent.name);
-  setInnerHTML("Profession", fsContent.profession.profession);
-  setInnerHTML("passiveIn", fsContent.passiveIncome);
-  setInnerHTML("totalIn", fsContent.totalIncome);
-  setInnerHTML("expenses", fsContent.totalExpense);
-  setInnerHTML("cashflow", fsContent.cashflow);
-  setInnerHTML("income", fsContent.profession.income.salary);
+const updateStatementBoard = function(player) {
+  setInnerHTML("name", player.name);
+  setInnerHTML("Profession", player.profession);
+  setInnerHTML("passiveIn", player.passiveIncome);
+  setInnerHTML("totalIn", player.totalIncome);
+  setInnerHTML("expenses", player.totalExpense);
+  setInnerHTML("cashflow", player.cashflow);
+  setInnerHTML("income", player.income.salary);
 };
 
-const setFinancialStatement = function(fsContent) {
-  setInnerHTML("player_salary", fsContent.profession.income.salary);
-  setInnerHTML("player_passiveIn", fsContent.passiveIncome);
-  setInnerHTML("player_totalIn", fsContent.totalIncome);
-  setInnerHTML("player_expenses", fsContent.totalExpense);
-  setInnerHTML("player_cashflow", fsContent.cashflow);
-  setInnerHTML("player_name", `Name : ${fsContent.name}`);
-  setInnerHTML(
-    "player_profession",
-    `Profession : ${fsContent.profession.profession}`
-  );
+const setFinancialStatement = function(player) {
+  setInnerHTML("player_salary", player.income.salary);
+  setInnerHTML("player_passiveIn", player.passiveIncome);
+  setInnerHTML("player_totalIn", player.totalIncome);
+  setInnerHTML("player_expenses", player.totalExpense);
+  setInnerHTML("player_cashflow", player.cashflow);
+  setInnerHTML("player_name", `Name : ${player.name}`);
+  setInnerHTML("player_profession", `Profession : ${player.profession}`);
   setInnerHTML(
     "player_liabilities",
-    `Liabilities :` + createParagraph(fsContent.profession.liabilities)
+    `Liabilities :` + createParagraph(player.liabilities)
   );
   setInnerHTML(
     "player_expense",
-    `Expense :` + createParagraph(fsContent.profession.expenses)
+    `Expense :` + createParagraph(player.expenses)
   );
-  setInnerHTML(
-    "player_income",
-    `Income :` + createParagraph(fsContent.profession.income)
-  );
-  setInnerHTML(
-    "player_assets",
-    `assets :` + createParagraph(fsContent.profession.assets)
-  );
-  updateStatementBoard(fsContent);
+  setInnerHTML("player_income", `Income :` + createParagraph(player.income));
+  setInnerHTML("player_assets", `assets :` + createParagraph(player.assets));
+  updateStatementBoard(player);
 };
 
 const createFinancialStatement = function() {
@@ -96,8 +87,8 @@ const createFinancialStatement = function() {
   top.className = "statements";
   fetch("/financialStatement")
     .then(data => data.json())
-    .then(fsContent => {
-      setFinancialStatement(fsContent);
+    .then(player => {
+      setFinancialStatement(player);
       const button = createPopupButton("continue", getCashLedger);
       const fs = document.getElementById("financial_statement");
       top.innerHTML = fs.innerHTML;
@@ -119,7 +110,7 @@ const getProfessionsDiv = function(player) {
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
-  let playerProfession = createDiv(`Profession : ${profession.profession}`);
+  let playerProfession = createDiv(`Profession : ${player.profession}`);
   let playerTurn = createDiv(`Turn : ${turn}`);
   let playerGamePiece = createDivWithClass(gamePiece[turn]);
   playerGamePiece.classList.add("gamePiece");

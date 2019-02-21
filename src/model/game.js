@@ -99,7 +99,7 @@ class Game extends ActivityLog {
   }
 
   handleExpenseCard(type, expenseAmount) {
-    this.currentPlayer.profession.assets.savings -= expenseAmount;
+    this.currentPlayer.assets.savings -= expenseAmount;
     let { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);

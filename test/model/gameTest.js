@@ -161,7 +161,7 @@ describe("handleDoodaySpace", function() {
     };
     game.cardStore = { doodads: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      profession: { assets: { savings: 1000 } },
+      assets: { savings: 1000 },
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
@@ -174,7 +174,7 @@ describe("handleDoodaySpace", function() {
   });
   it("should deduct card expense from savings ", function() {
     game.handleDoodadSpace();
-    expect(game.currentPlayer.profession.assets.savings).equal(500);
+    expect(game.currentPlayer.assets.savings).equal(500);
   });
   it("should call next player", function() {
     game.handleDoodadSpace();
@@ -190,7 +190,7 @@ describe("handleMarketCard", function() {
     };
     game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      profession: { assets: { savings: 1000 } },
+      assets: { savings: 1000 },
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
@@ -216,7 +216,7 @@ describe("handleMarketCard", function() {
     };
     game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      profession: { assets: { savings: 1000 } },
+      assets: { savings: 1000 },
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
