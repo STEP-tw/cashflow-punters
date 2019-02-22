@@ -101,6 +101,7 @@ class Game extends ActivityLog {
   handleBabySpace() {
     this.currentPlayer.addBaby();
     this.addActivity(` got a baby`, this.currentPlayer.name);
+    this.currentPlayer.notification = `You got a baby`;
     this.nextPlayer();
   }
 
@@ -108,7 +109,6 @@ class Game extends ActivityLog {
     const doodadCard = this.cardStore.doodads.drawCard();
     this.activeCard = { type: "doodad", data: doodadCard };
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
-    this.nextPlayer();
   }
 
   handleExpenseCard(type, expenseAmount) {
@@ -116,6 +116,8 @@ class Game extends ActivityLog {
     const { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
+    this.currentPlayer.notification = msg;
+    this.nextPlayer();
   }
 
   handleMarketSpace() {
