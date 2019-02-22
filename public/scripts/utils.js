@@ -65,9 +65,11 @@ const appendChildren = function(parentElement, childrenElements) {
   return parentElement;
 };
 
-const createDiv = function(text) {
-  let div = createElement("div");
-  div.innerText = text;
+const createDiv = function(text, id, className) {
+  const div = createElement("div");
+  div.id = id;
+  div.className = className;
+  div.innerHTML = text;
   return div;
 };
 

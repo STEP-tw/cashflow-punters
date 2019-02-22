@@ -183,6 +183,8 @@ class Game extends ActivityLog {
     player.addToLedgerBalance(loanAmount);
     player.updateTotalExpense();
     player.updateCashFlow();
+    const activityMessage = ` took loan of $${loanAmount}`;
+    this.addActivity(activityMessage, playerName);
   }
 
   payDebt(playerName, debtDetails) {
@@ -193,6 +195,8 @@ class Game extends ActivityLog {
     player.deductLedgerBalance(liabilityPrice);
     player.updateTotalExpense();
     player.updateCashFlow();
+    const activityMessage = ` payed debt $${liabilityPrice} for liability - ${liability}`;
+    this.addActivity(activityMessage, playerName);
   }
 
   getPlayerByName(playerName) {

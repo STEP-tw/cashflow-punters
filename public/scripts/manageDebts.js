@@ -1,8 +1,9 @@
-const isInvalidLoanAmount = amount => amount % 1000 != 0;
+const isInvalidLoanAmount = amount => amount % 1000 != 0 || amount == 0;
 const isBankLiability = liability => liability == "Bank Loan";
 
-const isInvalidBankLoanAmount = function({liability, liabilityPrice}) {
-  return isInvalidLoanAmount(liabilityPrice) && isBankLiability(liability);
+const isInvalidBankLoanAmount = function({liability, liabilityPrice},player) {
+  return isInvalidLoanAmount(liabilityPrice) && isBankLiability(liability) || 
+  liabilityPrice > player.liabilities[liability];
 };
 
 const displayPayDebtForm = function() {
@@ -30,16 +31,18 @@ const displayLoanForm = function() {
   input.className = "debt-input";
   const loanButton = createButton("Take Loan", "form-button");
   const closeButton = createButton("&times;", "close");
+  const message = "Enter amount in Multiples of 1000";
+  const msgDiv = createDiv(message, "debt-form-msg-Box", "debt-form-msg");
   closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
   loanButton.id = "debt-button";
   loanButton.onclick = takeLoan;
-  appendChildren(form, [closeButton, input, loanButton]);
+  appendChildren(form, [closeButton, input, loanButton, msgDiv]);
 };
 
 const displayInvalidAmount = function() {
-  const msgBox = getElementById("manage-debt-form-msg-Box");
+  const msgBox = getElementById("debt-form-msg-Box");
   const message = "Invalid debt amount.. Please enter valid debt amount";
-  msgBox.innerText = message;
+  msgBox.innerHTML = message;
 };
 
 const takeLoan = function() {
@@ -54,6 +57,8 @@ const takeLoan = function() {
     .then(updateStatementBoard)
     .then(setFinancialStatement);
   closeOverlay("manage-debt-form");
+  const notification = `$${amount} added to your Ledger balance.`;
+  displayNotification(notification);
 };
 
 const getLiabilityDetails = function(player) {
@@ -69,10 +74,26 @@ const getLiabilityDetails = function(player) {
   return {liability, liabilityPrice, expense, expenseAmount};
 };
 
+const displayNotification = function(notification) {
+  const notificationDiv = getElementById("notification-div");
+  notificationDiv.innerText = notification;
+};
+
+const notEnoughCash = function({liabilityPrice}, {ledgerBalance}) {
+  return ledgerBalance < liabilityPrice;
+};
+
+const displayNotEnoughMoney = function() {
+  const msgBox = getElementById("debt-form-msg-Box");
+  const message = "You don't have enough money to pay..";
+  msgBox.innerHTML = message;
+};
+
 const payDebt = function(player, intervalId) {
   clearInterval(intervalId);
   const liabilityDetails = getLiabilityDetails(player);
-  if (isInvalidBankLoanAmount(liabilityDetails)) return displayInvalidAmount();
+  if (isInvalidBankLoanAmount(liabilityDetails,player)) return displayInvalidAmount();
+  if (notEnoughCash(liabilityDetails, player)) return displayNotEnoughMoney();
   fetch("/paydebt", {
     method: "POST",
     body: JSON.stringify(liabilityDetails),
@@ -83,6 +104,10 @@ const payDebt = function(player, intervalId) {
     .then(setFinancialStatement);
   closeOverlay("manage-debt-form");
   closeOverlay("debt-input");
+  const notification = `$${
+    liabilityDetails.liabilityPrice
+  } deducted from your ledgerBalance for ${liabilityDetails.liability}`;
+  displayNotification(notification);
 };
 
 const showBankForm = function() {
@@ -120,6 +145,8 @@ const displayLiabilityOptions = function(player) {
   amountInput.style.visibility = "hidden";
   const payButton = createButton("Pay", "form-button");
   payButton.id = "debt-button";
+  const message = "Enter amount in Multiples of 1000";
+  const msgDiv = createDiv(message, "debt-form-msg-Box", "debt-form-msg");
   payButton.onclick = payDebt.bind(null, player, intervalId);
-  appendChildren(form, [closeButton, options, amountInput, payButton]);
+  appendChildren(form, [closeButton, options, amountInput, payButton, msgDiv]);
 };
