@@ -446,9 +446,6 @@ const initialize = function() {
   setTimeout(getProfessions, 1500);
   let dice2 = document.getElementById("dice2");
   dice2.hidden = true;
-
-  document.getElementById("loan-form-button").onclick = displayLoanForm;
-  document.getElementById("pay-debt-form-button").onclick = displayPayDebtForm;
 };
 
 window.onload = () => {

@@ -92,7 +92,7 @@ button:hover {
   left: 12.5%;
   display: flex;
   padding: 0.5%;
-  background-image: url('/gamebackground.jpg');
+  background-image: url("/gamebackground.jpg");
   background-size: 500px 500px;
   width: 75%;
   height: 68.2%;
@@ -557,7 +557,7 @@ button:hover {
   z-index: 2;
   height: 60%;
   width: 90%;
-  background-color: white;
+  background-color: rgb(104, 84, 84);
 }
 
 .hover {
@@ -570,17 +570,22 @@ button:hover {
 }
 
 .manage-debt-form {
-  background-color: cyan;
   height: 250px;
   width: 300px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   position: fixed;
-  top: 32%;
+  top: 36%;
   left: 42%;
+
   visibility: hidden;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .debt-input {
@@ -601,4 +606,22 @@ button:hover {
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+
+.form-button {
+  height :40px;
+  width: 150px;
+
+  margin: 10px 0px;
+}
+
+.debt-input {
+  width:150px;
+  height:30px;
+}
+
+.select-tag {
+  width :150px;
+  height:20px;
 }

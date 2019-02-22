@@ -6,22 +6,9 @@ const isInvalidBankLoanAmount = function({liability, liabilityPrice}) {
 };
 
 const displayPayDebtForm = function() {
-  const form = getElementById("manage-debt-form");
-  const debtButton = getElementById("debt-button");
-  debtButton.onclick = payDebt;
-  debtButton.innerHTML = "Pay Debt";
-  form.style.visibility = "visible";
   fetch("/liabilities")
     .then(res => res.json())
     .then(displayLiabilityOptions);
-};
-
-const displayLoanForm = function() {
-  const form = getElementById("manage-debt-form");
-  const debtButton = getElementById("debt-button");
-  debtButton.onclick = takeLoan;
-  debtButton.innerHTML = "Take Loan";
-  form.style.visibility = "visible";
 };
 
 const createOptionTag = function(value) {
@@ -37,12 +24,16 @@ const appendOptions = function(parent, option) {
   return parent;
 };
 
-const restoreLoanForm = function() {
+const displayLoanForm = function() {
   const form = getElementById("manage-debt-form");
   const input = createInput("amount", "Enter amount", "number", "debt-input");
-  const payButton = createButton("Pay", "debt-button");
-  payButton.id = "debt-button";
-  appendChildren(form, [input, payButton]);
+  input.className = "debt-input";
+  const loanButton = createButton("Take Loan", "form-button");
+  const closeButton = createButton("&times;", "close");
+  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
+  loanButton.id = "debt-button";
+  loanButton.onclick = takeLoan;
+  appendChildren(form, [closeButton, input, loanButton]);
 };
 
 const displayInvalidAmount = function() {
@@ -91,12 +82,25 @@ const payDebt = function(player, intervalId) {
     .then(updateStatementBoard)
     .then(setFinancialStatement);
   closeOverlay("manage-debt-form");
-  restoreLoanForm();
+  closeOverlay("debt-input");
+};
+
+const showBankForm = function() {
+  const form = getElementById("manage-debt-form");
+  const closeButton = createButton("&times;", "close");
+  const loanButton = createButton("Take Loan", "form-button");
+  const payDebtButton = createButton("Pay Debt", "form-button");
+  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
+  loanButton.onclick = displayLoanForm;
+  payDebtButton.onclick = displayPayDebtForm;
+  appendChildren(form, [closeButton, loanButton, payDebtButton]);
+  showOverlay("manage-debt-form");
 };
 
 const displayLiabilityOptions = function(player) {
   const form = getElementById("manage-debt-form");
   const selectTag = createElement("select", "options");
+  selectTag.className = "select-tag";
   const liabilityTitles = Object.keys(player.liabilities);
   const options = liabilityTitles.reduce(appendOptions, selectTag);
   const amountInput = createInput(
@@ -105,14 +109,17 @@ const displayLiabilityOptions = function(player) {
     "number",
     "debt-input"
   );
+  amountInput.className = "debt-input";
   const intervalId = setInterval(() => {
     const options = getElementById("options");
     if (isBankLiability(options.value)) return showOverlay("debt-input");
     closeOverlay("debt-input");
   }, 100);
+  const closeButton = createButton("&times;", "close");
+  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
   amountInput.style.visibility = "hidden";
-  const payButton = createButton("Pay", "debt-button");
+  const payButton = createButton("Pay", "form-button");
   payButton.id = "debt-button";
   payButton.onclick = payDebt.bind(null, player, intervalId);
-  appendChildren(form, [options, amountInput, payButton]);
+  appendChildren(form, [closeButton, options, amountInput, payButton]);
 };

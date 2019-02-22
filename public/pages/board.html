@@ -80,11 +80,15 @@
                   <button
                     id="ledgerBtn"
                     class="iconBtn"
-                    onclick="openCashLedger()"
+                    onclick="showOverlay('cash_ledger')"
                   ></button>
                 </div>
                 <div class="iconButtonDiv">
-                  <button id="bankBtn" class="iconBtn"></button>
+                  <button
+                    id="bankBtn"
+                    class="iconBtn"
+                    onclick='showBankForm()'
+                  ></button>
                 </div>
               </div>
             </div>
@@ -215,11 +219,12 @@
     </main>
     <div id="container" class="container"></div>
     <div id="manage-debt-form" class="manage-debt-form">
-      <input id="debt-input" class="debt-input" type="number" />
-      <button id="debt-button" class="debt-button">Take Loan</button>
-      <div id="manage-debt-form-msg-Box">
-        Plz Enter the amount in multiples of 1000
-      </div>
+      <!-- <button class="close" onclick="closeOverlay('manage-debt-form')">
+        &times;
+      </button>
+      <button id="loan-form-button" class="debt-button">Take Loan</button>
+      <button id="pay-debt-form-button" class="debt-button">Pay Debt</button> -->
+      <div id="manage-debt-form-msg-Box"></div>
     </div>
   </body>
 </html>

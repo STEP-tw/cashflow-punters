@@ -34,7 +34,7 @@ const createInput = function(name, placeholder, type, id) {
 
 const createButton = function(value, classname, type) {
   const button = createElement("button");
-  button.innerText = value;
+  button.innerHTML = value;
   button.className = classname;
   button.type = type;
   return button;
