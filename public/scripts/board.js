@@ -537,8 +537,6 @@ const getGame = function() {
     .then(game => {
       updateActivityLog(game.activityLog);
       polling(game);
-      const playerData = getPlayerData(game.players);
-      updateStatementBoard(playerData);
     });
 };
 
