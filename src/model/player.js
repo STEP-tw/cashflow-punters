@@ -56,7 +56,7 @@ class Player extends FinancialStatement {
   rollDice(numberOfDice = 1) {
     const diceValues = new Array(numberOfDice)
       .fill(6)
-      .map(value => randomNum(value));
+      .map(value => 11 || randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.didUpdateSpace = true;
@@ -66,6 +66,15 @@ class Player extends FinancialStatement {
 
   hasCharityTurns() {
     return this.charityTurns > 0;
+  }
+
+  addRealEstate(card) {
+    const { downPayment, type, cost, cashflow, mortgage } = card;
+    if (this.ledgerBalance < downPayment) return false;
+    this.deductLedgerBalance(downPayment);
+    this.addAsset(type, downPayment, cost);
+    this.addLiability(type, mortgage);
+    this.addIncomeRealEstate(type, cashflow);
   }
 }
 

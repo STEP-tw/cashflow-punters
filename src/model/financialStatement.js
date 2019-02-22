@@ -1,5 +1,6 @@
 const { add } = require("../utils/utils");
 const CashLedger = require("./cashLedger");
+const getIncome = (value, content) => value + content.cashflow;
 
 class FinancialStatement extends CashLedger {
   constructor() {
@@ -21,10 +22,13 @@ class FinancialStatement extends CashLedger {
     this.profession = profession.profession;
     this.perChildExpense = profession.perChildExpense;
     this.income = profession.income;
+    this.income.realEstates = [];
     this.expenses = profession.expenses;
     this.assets = profession.assets;
+    this.assets.realEstate = [];
     this.liabilities = profession.liabilities;
-    this.totalIncome = Object.values(this.income).reduce(add);
+    this.liabilities.realEstate = [];
+    this.updateTotalIncome();
     this.updateTotalExpense();
     this.updateCashFlow();
     this.ledgerBalance = this.cashflow + profession.assets.savings;
@@ -35,6 +39,11 @@ class FinancialStatement extends CashLedger {
   updateFs() {
     this.updateTotalExpense();
     this.updateCashFlow();
+  }
+
+  updateTotalIncome() {
+    let assetIncome = this.assets.realEstate.reduce(getIncome, 0);
+    this.totalIncome = assetIncome + this.income.salary;
   }
 
   updateTotalExpense() {
@@ -58,6 +67,10 @@ class FinancialStatement extends CashLedger {
     return this.cashflow;
   }
 
+  addAsset(type, downPayment, cost) {
+    this.assets.realEstate.push({ type, downPayment, cost });
+  }
+
   addLiability(liability, amount) {
     if (this.liabilities[liability]) {
       this.liabilities[liability] += amount;
@@ -73,6 +86,10 @@ class FinancialStatement extends CashLedger {
     }
     this.expenses[expense] = amount;
     this.updateFs();
+  }
+
+  addIncomeRealEstate(type, cashflow) {
+    this.income.realEstates.push({ type, cashflow });
   }
 
   removeLiability(liability, amount) {

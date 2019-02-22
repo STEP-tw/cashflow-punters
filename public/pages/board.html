@@ -103,7 +103,7 @@
                 </p>
                 <button
                   id="one_dice_button"
-                  onclick="closeOverlay('num_of_dice')"
+                  onclick="hideOverlay('num_of_dice')"
                 >
                   One
                 </button>
@@ -111,7 +111,7 @@
                   id="two_dice_button"
                   onclick="
                       enableDice('dice2');
-                      closeOverlay('num_of_dice')"
+                      hideOverlay('num_of_dice')"
                 >
                   Two
                 </button>
@@ -176,7 +176,7 @@
       </div>
 
       <div class="overlay" id="financial_statement">
-        <button class="close" onclick="closeOverlay('financial_statement')">
+        <button class="close" onclick="hideOverlay('financial_statement')">
           &times;
         </button>
         <header>Financial Statement</header>
@@ -213,7 +213,7 @@
       </div>
 
       <div class="overlay" id="cash_ledger">
-        <button class="close" onclick="closeOverlay('cash_ledger')">
+        <button class="close" onclick="hideOverlay('cash_ledger')">
           &times;
         </button>
         <header>
@@ -226,6 +226,12 @@
     <div id="container" class="container"></div>
     <div id="manage-debt-form" class="manage-debt-form">
       <div id="manage-debt-form-msg-Box"></div>
+    </div>
+    <div id="low-balance" class="popup-background">
+      <div class="top-popup">
+        You are gareeb
+        <button onclick="closeOverlay('low-balance')">Ok</button>
+      </div>
     </div>
   </body>
 </html>

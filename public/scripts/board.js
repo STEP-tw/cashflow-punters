@@ -1,6 +1,16 @@
-const closeOverlay = function(id) {
+const hideOverlay = function(id) {
   const element = document.getElementById(id);
   element.style.visibility = "hidden";
+};
+
+const closeOverlay = function(id) {
+  const element = document.getElementById(id);
+  element.style.display = "none";
+};
+
+const openOverlay = function(id, displayType = "block") {
+  const element = document.getElementById(id);
+  element.style.display = displayType;
 };
 
 const showOverlay = function(id) {
@@ -105,6 +115,7 @@ const createFinancialStatement = function() {
   fetch("/financialStatement")
     .then(data => data.json())
     .then(player => {
+      console.log(player);
       setFinancialStatement(player);
       const button = createPopupButton("continue", getCashLedger);
       const fs = getElementById("financial_statement");
@@ -161,7 +172,7 @@ const createTextDiv = function(text) {
 };
 
 const doCharity = function() {
-  closeOverlay("askCharity");
+  hideOverlay("askCharity");
   hideCardOverLay();
   fetch("/acceptCharity")
     .then(res => res.json())
@@ -182,7 +193,7 @@ const acceptCharity = function() {
 };
 
 const declineCharity = function() {
-  closeOverlay("askCharity");
+  hideOverlay("askCharity");
   hideCardOverLay();
   fetch("/declineCharity");
 };
@@ -200,9 +211,16 @@ const declineSmallDeal = function() {
 };
 
 const acceptBigDeal = function(event) {
-  let parent = event.target.parentElement;
-  parent.style.display = "none";
-  fetch("/acceptBigDeal");
+  fetch("/acceptBigDeal")
+    .then(data => data.json())
+    .then(({ isSuccessful }) => {
+      if (isSuccessful) {
+        let parent = event.target.parentElement;
+        parent.style.display = "none";
+        return;
+      }
+      openOverlay("low-balance");
+    });
 };
 
 const declineBigDeal = function() {
@@ -393,13 +411,13 @@ const handleDeal = function() {
 };
 
 const selectSmallDeal = function() {
-  closeOverlay("select-deal");
+  hideOverlay("select-deal");
   hideCardOverLay();
   fetch("/selectSmallDeal");
 };
 
 const selectBigDeal = function() {
-  closeOverlay("select-deal");
+  hideOverlay("select-deal");
   hideCardOverLay();
   fetch("/selectBigDeal");
 };
@@ -426,7 +444,7 @@ const showDice = function(diceValues) {
 };
 
 const rollDice = function(numberOfDice) {
-  closeOverlay("num_of_dice");
+  hideOverlay("num_of_dice");
   const spacesHandlers = {
     charity: handleCharity,
     deal: handleDeal

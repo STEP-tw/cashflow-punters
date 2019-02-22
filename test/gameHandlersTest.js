@@ -610,17 +610,15 @@ describe("acceptBigDeal", function() {
     req.game.addActivity = sinon.spy();
     req.cookies = { playerName: "" };
     req.game.nextPlayer = sinon.spy();
+    req.game.currentPlayer = { addRealEstate: sinon.spy() };
     res.end = sinon.spy();
+    res.send = sinon.spy();
   });
   it("should return nothing if deal is already done ", function() {
     req.game.activeCard.dealDone = true;
     const output = acceptBigDeal(req, res);
     expect(output).to.be.undefined;
     expect(req.game.nextPlayer.calledOnce).to.be.false;
-  });
-  it("should call nextPlayer if deal is not done ", function() {
-    acceptBigDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
 });
 

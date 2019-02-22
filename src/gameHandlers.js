@@ -226,11 +226,13 @@ const rejectSmallDeal = function(req, res) {
 const acceptBigDeal = function(req, res) {
   const { activeCard } = req.game;
   if (activeCard.dealDone) return res.end();
+  const isSuccessful = req.game.currentPlayer.addRealEstate(activeCard);
+  if (!isSuccessful) return res.send({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
   activeCard.dealDone = true;
-  res.end();
+  res.send({ isSuccessful });
 };
 
 const rejectBigDeal = function(req, res) {
