@@ -8,10 +8,6 @@ const openFinancialStatement = function() {
   fs.style.visibility = "visible";
 };
 
-const getName = function() {
-  return document.cookie.split(";")[0].split("=")[1];
-};
-
 const showOverlay = function(id) {
   let fs = document.getElementById(id);
   fs.style.visibility = "visible";
@@ -66,16 +62,13 @@ const setFinancialStatement = function(player) {
   setInnerText("player_cashflow", player.cashflow);
   setInnerText("player_name", `Name : ${player.name}`);
   setInnerText("player_profession", `Profession : ${player.profession}`);
+  setInnerText("player_expense", `Expense : ${createPara(player.expenses)}`);
+  setInnerText("player_income", `Income : ${createPara(player.income)}`);
+  setInnerText("player_assets", `assets : ${createPara(player.assets)}`);
   setInnerText(
     "player_liabilities",
-    `Liabilities :` + createParagraph(player.liabilities)
+    `Liabilities : ${createPara(player.liabilities)}`
   );
-  setInnerText(
-    "player_expense",
-    `Expense :` + createParagraph(player.expenses)
-  );
-  setInnerText("player_income", `Income :` + createParagraph(player.income));
-  setInnerText("player_assets", `assets :` + createParagraph(player.assets));
   updateStatementBoard(player);
 };
 
@@ -107,7 +100,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let { name, turn } = player;
+  let {name, turn} = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -160,7 +153,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({ isAble, msg }) => {
+    .then(({isAble, msg}) => {
       const msgContainer = getElementById("notification");
       msgContainer.innerText = msg;
       if (isAble) doCharity();
@@ -174,7 +167,7 @@ const declineCharity = function() {
 };
 
 const createSharesSmallDeal = function(card) {
-  const { title, message, symbol, historicTradingRange, currentPrice } = card;
+  const {title, message, symbol, historicTradingRange, currentPrice} = card;
   const cardDiv = document.getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -198,7 +191,7 @@ const createSharesSmallDeal = function(card) {
 };
 
 const createRealEstateSmallDeal = function(card) {
-  const { title, message, cost, mortgage, downPayment, cashFlow } = card;
+  const {title, message, cost, mortgage, downPayment, cashFlow} = card;
   const cardDiv = document.getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -232,7 +225,7 @@ const createRealEstateSmallDeal = function(card) {
 };
 
 const createGoldSmallDeal = function(card) {
-  const { title, message, numberOfCoins, cost } = card;
+  const {title, message, numberOfCoins, cost} = card;
   const cardDiv = document.getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -319,9 +312,8 @@ const hideCardOverLay = function() {
 };
 
 const handleDeal = function() {
-  const selectDeal = document.getElementById("select-deal");
   showCardOverLay();
-  selectDeal.style.visibility = "visible";
+  showOverlay("select-deal");
 };
 
 const selectSmallDeal = function() {
@@ -355,7 +347,7 @@ const rollDie = function() {
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
-    .then(({ diceValue, spaceType }) => {
+    .then(({diceValue, spaceType}) => {
       dice.innerText = diceValue || dice.innerText;
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
@@ -363,7 +355,7 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let { players } = game;
+  let {players} = game;
   if (game.activeCard) {
     showCard(game.activeCard);
   }
@@ -389,7 +381,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({ playerName, msg, time }) {
+const createActivity = function({playerName, msg, time}) {
   const activity = document.createElement("div");
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
@@ -433,8 +425,8 @@ const parseCookie = function() {
 };
 
 const getPlayerData = function(playersData) {
-  const { playerName } = parseCookie();
-  const playerData = playersData.filter(({ name }) => name == playerName)[0];
+  const {playerName} = parseCookie();
+  const playerData = playersData.filter(({name}) => name == playerName)[0];
   return playerData;
 };
 

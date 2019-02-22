@@ -3,14 +3,16 @@ const getElementById = function(id) {
 };
 
 const setInnerText = function(id, text) {
-  return (getElementById(id).innerText = text);
+  return (getElementById(id).innerHTML = text);
 };
 
-const createElement = function(tag) {
-  return document.createElement(tag);
+const createElement = function(tag, id) {
+  const element = document.createElement(tag);
+  element.id = id;
+  return element;
 };
 
-const createParagraph = function(values) {
+const createPara = function(values) {
   const keys = Object.keys(values);
   return keys.map(key => `<p>${key} : ${values[key]}`).join("");
 };
@@ -23,9 +25,8 @@ const createForm = function(action, method) {
 };
 
 const createInput = function(name, placeholder, type, id) {
-  const input = createElement("input");
+  const input = createElement("input", id);
   input.placeholder = placeholder;
-  input.id = id;
   input.name = name;
   input.type = type;
   return input;

@@ -1,7 +1,7 @@
 const lodash = require("lodash");
 const Board = require("./board");
-const { assignId } = require("../utils/array.js");
-const { getNextNum, isBetween } = require("../utils/utils.js");
+const {assignId} = require("../utils/array.js");
+const {getNextNum, isBetween} = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -9,7 +9,7 @@ class ActivityLog {
   }
   addActivity(msg, playerName = "") {
     const time = new Date();
-    this.activityLog.push({ playerName, msg, time });
+    this.activityLog.push({playerName, msg, time});
   }
 }
 
@@ -48,7 +48,7 @@ class Game extends ActivityLog {
   }
 
   getProfession(player) {
-    let { professions } = this.cardStore;
+    let {professions} = this.cardStore;
     const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);
@@ -87,7 +87,7 @@ class Game extends ActivityLog {
     const msg = " selected Small Deal";
     this.addActivity(msg, this.currentPlayer.name);
     const smallDealCard = this.cardStore.smallDeals.drawCard();
-    this.activeCard = { type: "smallDeal", data: smallDealCard };
+    this.activeCard = {type: "smallDeal", data: smallDealCard};
     this.nextPlayer();
     return smallDealCard;
   }
@@ -113,7 +113,7 @@ class Game extends ActivityLog {
 
   handleExpenseCard(type, expenseAmount) {
     this.currentPlayer.deductLedgerBalance(expenseAmount);
-    const { name } = this.currentPlayer;
+    const {name} = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
   }
@@ -187,11 +187,11 @@ class Game extends ActivityLog {
   }
 
   payDebt(playerName, debtDetails) {
-    const {expense, liability, liabilityAmount, expenseAmount} = debtDetails;
+    const {expense, liability, liabilityPrice, expenseAmount} = debtDetails;
     const player = this.getPlayerByName(playerName);
-    player.removeLiability(liability, liabilityAmount);
+    player.removeLiability(liability, liabilityPrice);
     player.removeExpense(expense, expenseAmount);
-    player.deductLedgerBalance(liabilityAmount);
+    player.deductLedgerBalance(liabilityPrice);
     player.updateTotalExpense();
     player.updateCashFlow();
   }

@@ -92,7 +92,8 @@ button:hover {
   left: 12.5%;
   display: flex;
   padding: 0.5%;
-  background-color: #ffe8ca;
+  background-image: url('/gamebackground.jpg');
+  background-size: 500px 500px;
   width: 75%;
   height: 68.2%;
 }
