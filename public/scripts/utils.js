@@ -32,7 +32,22 @@ const createInput = function(name, placeholder, type, id) {
   return input;
 };
 
+<<<<<<< HEAD
 const createButton = function(value, classname, id, type, func) {
+=======
+const parseCookie = function() {
+  const cookie = document.cookie;
+  const keyValuePairs = cookie.split("; ");
+  const parsedCookie = {};
+  keyValuePairs.forEach(keyValue => {
+    const [key, value] = keyValue.split("=");
+    parsedCookie[key] = value;
+  });
+  return parsedCookie;
+};
+
+const createButton = function(value, classname, type) {
+>>>>>>> [#34] shubham/swapnil - Added features of optional use of 1 or 2 dice.
   const button = createElement("button");
   button.innerHTML = value;
   button.className = classname;

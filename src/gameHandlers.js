@@ -110,23 +110,15 @@ const getPlayersFinancialStatement = function(req, res) {
   res.send(JSON.stringify(requiredPlayer));
 };
 
-const rollDie = function(req, res) {
-  let { currentPlayer, board } = req.game;
-  let { currentSpace } = currentPlayer;
+const rollDice = function(req, res) {
+  const { numberOfDice } = req.body;
+  const currentPlayer = req.game.currentPlayer;
   if (!isCurrentPlayer(req) || currentPlayer.rolledDice) {
-    res.json({ diceValue: null });
+    res.json({ diceValues: [null] });
     return;
   }
-  const diceValue = randomNum(6);
-  const rolledDieMsg = " rolled " + diceValue;
-  currentPlayer.move(diceValue);
-  req.game.addActivity(rolledDieMsg, currentPlayer.name);
-  const spaceType = board.getSpaceType(currentPlayer.currentSpace);
-  const currentSpaceDetails = { diceValue, spaceType };
-  currentPlayer.rolledDice = true;
-  currentPlayer.didUpdateSpace = true;
+  const currentSpaceDetails = req.game.rollDice(numberOfDice);
   res.json(currentSpaceDetails);
-  req.game.handleSpace(currentSpace);
 };
 
 const acceptCharity = function(req, res) {
@@ -227,6 +219,11 @@ const rejectSmallDeal = function(req, res) {
   req.game.nextPlayer();
   activeCard.dealDone = true;
   res.end();
+}
+
+const hasCharity = function(req, res) {
+  const hasCharityTurns = req.game.hasCharityTurns();
+  res.send(JSON.stringify({ hasCharityTurns }));
 };
 
 module.exports = {
@@ -238,7 +235,6 @@ module.exports = {
   startGame,
   getPlayersFinancialStatement,
   canJoin,
-  rollDie,
   acceptCharity,
   declineCharity,
   selectBigDeal,
@@ -248,5 +244,7 @@ module.exports = {
   isAbleToDoCharity,
   provideLiabilities,
   acceptSmallDeal,
-  rejectSmallDeal
+  rejectSmallDeal,
+  hasCharity,
+  rollDice
 };

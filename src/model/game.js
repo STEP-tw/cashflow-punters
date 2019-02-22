@@ -1,7 +1,7 @@
 const lodash = require("lodash");
 const Board = require("./board");
 const { assignId } = require("../utils/array.js");
-const { getNextNum, isBetween } = require("../utils/utils.js");
+const { getNextNum, isBetween, add } = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -209,6 +209,20 @@ class Game extends ActivityLog {
   declineCharity() {
     this.addActivity(" declined charity", this.currentPlayer.name);
     this.activeCard = "";
+  }
+
+  rollDice(numberOfDice) {
+    const diceValues = this.currentPlayer.rollDice(numberOfDice);
+    const rolledDieMsg = " rolled " + diceValues.reduce(add);
+    this.addActivity(rolledDieMsg, this.currentPlayer.name);
+    const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
+    this.handleSpace(this.currentPlayer.currentSpace);
+    this.nextPlayer();
+    return { diceValues, spaceType };
+  }
+
+  hasCharityTurns() {
+    return this.currentPlayer.hasCharityTurns();
   }
 }
 

@@ -1,4 +1,4 @@
-const { getNextNum } = require("../utils/utils.js");
+const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
 
 class Player extends FinancialStatement {
@@ -11,7 +11,6 @@ class Player extends FinancialStatement {
     this.turn;
     this.childrenCount = 0;
     this.didUpdateSpace = false;
-    this.charityTurns = 0;
   }
 
   setTurn(turn) {
@@ -43,6 +42,25 @@ class Player extends FinancialStatement {
 
   isAbleToDoCharity() {
     return this.ledgerBalance >= this.totalIncome * 0.1;
+  }
+
+  reduceCharityTurns() {
+    this.charityTurns = this.charityTurns && this.charityTurns - 1;
+  }
+
+  rollDice(numberOfDice = 1) {
+    const diceValues = new Array(numberOfDice)
+      .fill(6)
+      .map(value => 2 || randomNum(value));
+    this.move(diceValues.reduce(add));
+    this.rolledDice = true;
+    this.didUpdateSpace = true;
+    this.reduceCharityTurns();
+    return diceValues;
+  }
+
+  hasCharityTurns() {
+    return this.charityTurns > 0;
   }
 }
 

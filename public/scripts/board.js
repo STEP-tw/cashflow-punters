@@ -119,9 +119,7 @@ const getProfessionsDiv = function(player) {
 
 const getProfessions = function() {
   fetch("/getgame")
-    .then(data => {
-      return data.json();
-    })
+    .then(data => data.json())
     .then(content => {
       let players = content.players;
       let container = document.getElementById("container");
@@ -151,6 +149,7 @@ const doCharity = function() {
 };
 
 const acceptCharity = function() {
+  console.log("isCharity");
   fetch("/isabletodocharity")
     .then(res => res.json())
     .then(({ isAble, msg }) => {
@@ -338,6 +337,10 @@ const handleCharity = function() {
   const askCharity = document.getElementById("askCharity");
   showCardOverLay();
   askCharity.style.visibility = "visible";
+  const acceptCharityButton = getElementById("acceptCharity");
+  acceptCharityButton.onclick = acceptCharity;
+  const declineCharityButton = getElementById("declineCharity");
+  declineCharityButton.onclick = declineCharity;
 };
 
 const showCardOverLay = function() {
@@ -367,19 +370,51 @@ const selectBigDeal = function() {
   fetch("/selectBigDeal");
 };
 
-const rollDie = function() {
+const showDice = function(diceValues) {
+  let count = 1;
+  diceValues.forEach(diceValue => {
+    const diceDiv = getElementById("dice" + count);
+    diceDiv.innerText = diceValue || diceDiv.innerText;
+    count++;
+  });
+};
+
+const rollDice = function(numberOfDice) {
+  closeOverlay("num_of_dice");
   const spacesHandlers = {
     charity: handleCharity,
     deal: handleDeal
   };
-
-  const dice = document.getElementById("dice1");
-  fetch("/rolldie")
+  fetch("/rolldice", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfDice })
+  })
     .then(res => res.json())
-    .then(({ diceValue, spaceType }) => {
-      dice.innerText = diceValue || dice.innerText;
+    .then(({ diceValues, spaceType }) => {
+      showDice(diceValues);
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
+      disableDice("dice2");
+    });
+};
+
+const rollDie = function() {
+  fetch("/hascharity")
+    .then(res => res.json())
+    .then(({ hasCharityTurns }) => {
+      if (hasCharityTurns) {
+        showOverlay("num_of_dice");
+        const oneDiceButton = getElementById("one_dice_button");
+        oneDiceButton.onclick = rollDice.bind(null, 1);
+        const twoDiceButton = getElementById("two_dice_button");
+        twoDiceButton.onclick = () => {
+          enableDice("dice2");
+          rollDice(2);
+        };
+        return;
+      }
+      rollDice(1);
     });
 };
 
@@ -442,17 +477,6 @@ const updateActivityLog = function(activityLog) {
   });
 };
 
-const parseCookie = function() {
-  const cookie = document.cookie;
-  const keyValuePairs = cookie.split("; ");
-  const parsedCookie = {};
-  keyValuePairs.forEach(keyValue => {
-    const [key, value] = keyValue.split("=");
-    parsedCookie[key] = value;
-  });
-  return parsedCookie;
-};
-
 const getPlayerData = function(playersData) {
   const { playerName } = parseCookie();
   const playerData = playersData.filter(({ name }) => name == playerName)[0];
@@ -470,6 +494,16 @@ const getGame = function() {
     });
 };
 
+const enableDice = function(id) {
+  const dice = getElementById(id);
+  dice.style.display = "block";
+};
+
+const disableDice = function(id) {
+  const dice = getElementById(id);
+  dice.style.display = "none";
+};
+
 const initialize = function() {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
@@ -479,8 +513,4 @@ const initialize = function() {
 
 window.onload = () => {
   initialize();
-  const acceptCharityButton = getElementById("acceptCharity");
-  acceptCharityButton.onclick = acceptCharity;
-  const declineCharityButton = getElementById("declineCharity");
-  declineCharityButton.onclick = declineCharity;
 };

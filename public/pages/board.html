@@ -124,8 +124,14 @@
                 <p>
                   How many dice you want to use?
                 </p>
-                <button onclick="closeOverlay('num_of_dice')">One</button>
                 <button
+                  id="one_dice_button"
+                  onclick="closeOverlay('num_of_dice')"
+                >
+                  One
+                </button>
+                <button
+                  id="two_dice_button"
                   onclick="
                   enableDice('dice2');
                   closeOverlay('num_of_dice')"
