@@ -54,8 +54,8 @@ class Game extends ActivityLog {
     player.setFinancialStatement(profession);
   }
 
-  getPlayer(turn) {
-    return this.players[turn - 1];
+  getPlayer(name) {
+    return this.players.filter(player => player.name == name)[0];
   }
 
   getTotalPlayers() {
@@ -79,7 +79,7 @@ class Game extends ActivityLog {
     this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
-    this.currentPlayer = this.getPlayer(nextPlayerTurn);
+    this.currentPlayer = this.players[nextPlayerTurn - 1];
     this.addActivity("'s turn ", this.currentPlayer.name);
   }
 

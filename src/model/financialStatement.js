@@ -30,6 +30,11 @@ class FinancialStatement {
     this.ledgerBalance = this.cashflow + profession.assets.savings;
   }
 
+  updateFs() {
+    this.updateTotalExpense();
+    this.updateCashFlow();
+  }
+
   updateTotalExpense() {
     this.totalExpense = Object.values(this.expenses).reduce(add);
   }
@@ -65,6 +70,7 @@ class FinancialStatement {
       return;
     }
     this.expenses[expense] = amount;
+    this.updateFs();
   }
 
   removeLiability(liability, amount) {

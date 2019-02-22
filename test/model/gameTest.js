@@ -235,13 +235,13 @@ describe("handleMarketCard", function() {
 });
 
 describe("addBaby", function() {
-  it("should add the given player to game.players", function() {
-    const player = { name: "player" };
-    const player1 = new Player(player);
+  it("should add baby to current player", function() {
+    const player1 = new Player("player");
     const cards = { bigdeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.currentPlayer = player1;
+    player1.addExpense = sinon.spy();
     game.handleBabySpace();
     expect(game.currentPlayer.childrenCount).to.equal(1);
   });

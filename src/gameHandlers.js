@@ -97,6 +97,8 @@ const isCurrentPlayer = function(req) {
 };
 
 const getGame = function(req, res) {
+  const name = req.cookies["playerName"];
+  req.game.requestedPlayer = req.game.getPlayer(name);
   req.game.isMyTurn = isCurrentPlayer(req);
   res.send(JSON.stringify(req.game));
 };

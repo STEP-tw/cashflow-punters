@@ -449,16 +449,17 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let { players } = game;
+  let { players, requestedPlayer } = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
-  showMyNotification(game);
+  updateStatementBoard(requestedPlayer);
+  setFinancialStatement(requestedPlayer);
+  showNotification(requestedPlayer.notification);
   players.forEach(updateGamePiece);
 };
 
-const showMyNotification = function(game) {
-  const notification = getPlayerData(game.players).notification;
+const showNotification = function(notification) {
   if (!notification) return;
   const notificationDiv = createTextDiv(notification);
   const time = new Date().toLocaleString("en-US", {

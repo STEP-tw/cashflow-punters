@@ -246,7 +246,8 @@ describe("getgame", function() {
     req.game = {
       currentPlayer: {
         name: "tilak"
-      }
+      },
+      getPlayer: sinon.spy()
     };
     req.cookies = {
       playerName: "tilak"

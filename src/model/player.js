@@ -29,7 +29,11 @@ class Player extends FinancialStatement {
   }
 
   addBaby() {
+    if (this.childrenCount == 3) {
+      return false;
+    }
     this.childrenCount += 1;
+    this.addExpense("Child Expenses", this.perChildExpense);
   }
 
   addCharityTurn() {
