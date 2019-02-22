@@ -19,9 +19,31 @@ const getBoard = function() {
   parent.removeChild(container);
 };
 
+const getEntriesHtml = function(entry) {
+  const symbols = {
+    debit: "-",
+    credit: "+"
+  };
+  const { time } = entry;
+  const currentTime = formatTime(new Date(time));
+  const entryDiv = createElement("div");
+  entryDiv.className = "entry";
+  const eventDiv = createElement("div");
+  const totalAmountDiv = createElement("div");
+  const symbol = symbols[entry.type];
+  eventDiv.innerHTML = `${symbol} ${entry.amount} --> ${
+    entry.event
+  } ${currentTime}`;
+  totalAmountDiv.innerHTML = `= ${entry.currentBalance}`;
+  appendChildren(entryDiv, [eventDiv, totalAmountDiv]);
+  return entryDiv;
+};
+
 const setCashLedger = function(player) {
-  setInnerText("LedgerBalance", player.ledgerBalance);
-  setInnerText("ledger-balance", player.ledgerBalance);
+  const { entries } = player;
+  const entriesDiv = getElementById("cash-ledger-entries");
+  const entriesHtml = entries.map(getEntriesHtml);
+  appendChildren(entriesDiv, entriesHtml);
 };
 
 const getCashLedger = function() {
@@ -70,6 +92,7 @@ const setFinancialStatement = function(player) {
     `Liabilities : ${createPara(player.liabilities)}`
   );
   updateStatementBoard(player);
+  return player;
 };
 
 const createFinancialStatement = function() {
@@ -495,11 +518,7 @@ const createActivity = function({ playerName, msg, time }) {
   const activityPara = createElement("p");
   const timeHoverPara = createElement("p");
   timeHoverPara.classList.add("hover");
-  timeHoverPara.innerText = new Date(time).toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true
-  });
+  timeHoverPara.innerText = formatTime(new Date(time));
   activity.onmouseover = showHover.bind(null, activity);
   activity.onmouseleave = hideHover.bind(null, activity);
   activity.classList.add("activity");

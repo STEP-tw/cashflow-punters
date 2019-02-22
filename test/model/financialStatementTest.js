@@ -1,5 +1,5 @@
 const FinancialStatement = require("../../src/model/financialStatement");
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 describe("", function() {
   let financialStatement;
@@ -7,11 +7,11 @@ describe("", function() {
     financialStatement = new FinancialStatement();
     const profession = {
       profession: "Doctor",
-      income: {salary: 13200},
+      income: { salary: 13200 },
       expenses: {
         taxes: 3200
       },
-      assets: {savings: 3500},
+      assets: { savings: 3500 },
       liabilities: {
         "Home Mortgage": 202000
       }
@@ -24,7 +24,7 @@ describe("", function() {
       expect(financialStatement).has.property("totalIncome");
       expect(financialStatement).has.property("income");
       expect(financialStatement).has.property("cashflow");
-      expect(financialStatement).has.property("cashLedger");
+      expect(financialStatement).has.property("entries");
       expect(financialStatement).has.property("ledgerBalance");
       expect(financialStatement).has.property("passiveIncome");
     });
