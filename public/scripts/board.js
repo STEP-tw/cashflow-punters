@@ -397,9 +397,7 @@ const displayDiceValue = function(diceValue, count) {
 const showDice = function(diceValues) {
   let count = 1;
   diceValues.forEach(diceValue => {
-    if (+diceValue) {
-      displayDiceValue(diceValue, count);
-    }
+    if (diceValue) displayDiceValue(diceValue, count);
     count++;
   });
 };
@@ -415,12 +413,12 @@ const rollDice = function(numberOfDice) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ numberOfDice })
   })
-    .then(res => res.json())
-    .then(({ diceValues, spaceType }) => {
-      showDice(diceValues);
-      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
-      getElementById("notification").innerText = null;
-    });
+  .then(res => res.json())
+  .then(({ diceValues, spaceType }) => {
+    showDice(diceValues);
+    spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+    getElementById("notification").innerText = null;
+  });
 };
 
 const rollOneDice = function() {
@@ -430,9 +428,9 @@ const rollOneDice = function() {
 
 const rollDie = function() {
   fetch("/hascharity")
-    .then(res => res.json())
-    .then(({ hasCharityTurns }) => {
-      if (hasCharityTurns) {
+  .then(res => res.json())
+  .then(({ hasCharityTurns }) => {
+    if (hasCharityTurns) {
         showOverlay("num_of_dice");
         const oneDiceButton = getElementById("one_dice_button");
         oneDiceButton.onclick = rollOneDice;
@@ -556,4 +554,6 @@ const initialize = function() {
 
 window.onload = () => {
   initialize();
+  const diceBlock = getElementById('dice_block');
+  diceBlock.onclick = rollDie;
 };

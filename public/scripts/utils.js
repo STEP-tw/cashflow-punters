@@ -38,7 +38,7 @@ const parseCookie = function() {
   const parsedCookie = {};
   keyValuePairs.forEach(keyValue => {
     const [key, value] = keyValue.split("=");
-    parsedCookie[key] = value;
+    parsedCookie[decodeURI(key)] = decodeURI(value);
   });
   return parsedCookie;
 };
