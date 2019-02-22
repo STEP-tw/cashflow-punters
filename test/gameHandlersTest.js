@@ -16,7 +16,9 @@ const {
   selectSmallDeal,
   selectBigDeal,
   isAbleToDoCharity,
-  grantLoan
+  grantLoan,
+  provideLiabilities,
+  payDebt
 } = require("../src/gameHandlers");
 
 describe("hostGame", function() {
@@ -423,11 +425,6 @@ describe("isAbleToDoCharity", function() {
 
 describe("grantLoan", function() {
   it("should update the cash ledger, financial statement and respond with player", function() {
-    const player = {
-      name: "player",
-      profession: "driver"
-    };
-
     const req = {};
     req.cookies = {playerName: "player"};
     req.body = {amount: 5000};
@@ -444,5 +441,73 @@ describe("grantLoan", function() {
     sinon.assert.calledOnce(req.game.grantLoan);
     sinon.assert.calledOnce(req.game.getPlayerByName);
     sinon.assert.calledOnce(res.send);
+  });
+});
+
+describe("provideLiabilities", function() {
+  const req = {};
+  const res = {};
+  req.cookies = {playerName: "player1"};
+  req.game = {
+    players: [
+      {name: "player1", turn: 1, profession: {}},
+      {name: "player2", turn: 2, profession: {}},
+      {name: "player3", turn: 3, profession: {}}
+    ],
+    getPlayerByName: function(playerName) {
+      return this.players.filter(player => player.name == playerName)[0];
+    }
+  };
+  res.content = "";
+  res.send = function(data) {
+    this.content = data;
+  };
+
+  it("should response with a current player object ", function() {
+    provideLiabilities(req, res);
+    expect(JSON.parse(res.content)).to.be.deep.equal({
+      name: "player1",
+      turn: 1,
+      profession: {}
+    });
+  });
+});
+
+describe("payDebt", function() {
+  it("should deduct the amount from ledgerBalance and return the player", function() {
+    const req = {};
+    const res = {};
+    req.cookies = {playerName: "player1"};
+    req.body = {
+      liability: "Bank Loan",
+      liabilityPrice: 5000,
+      expense: "Bank Loan Payment",
+      expenseAmount: 500
+    };
+
+    req.game = {
+      getPlayerByName: sinon.stub(),
+      payDebt: sinon.spy()
+    };
+    res.content = "";
+    res.send = function(data) {
+      this.content = data;
+    };
+    const player = {
+      name: "player",
+      profession: "driver"
+    };
+
+    const expectedPlayer = JSON.stringify({
+      name: "player",
+      profession: "driver"
+    });
+    req.game.getPlayerByName.onFirstCall().returns(player);
+
+    payDebt(req, res);
+
+    sinon.assert.calledOnce(req.game.getPlayerByName);
+    sinon.assert.calledOnce(req.game.payDebt);
+    expect(res.content).to.deep.equals(expectedPlayer);
   });
 });
