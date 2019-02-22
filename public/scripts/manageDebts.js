@@ -48,8 +48,6 @@ const displayInvalidAmount = function() {
   const msgBox = getElementById("debt-form-msg-Box");
   const message = "Invalid debt amount.. Please enter valid debt amount";
   msgBox.innerHTML = message;
-  closeOverlay("manage-debt-form");
-  closeOverlay("debt-input");
 };
 
 const takeLoan = function() {
@@ -62,7 +60,8 @@ const takeLoan = function() {
   })
     .then(res => res.json())
     .then(updateStatementBoard)
-    .then(setFinancialStatement);
+    .then(setFinancialStatement)
+    .then(setCashLedger);
   closeOverlay("manage-debt-form");
   const notification = `$${amount} added to your Ledger balance.`;
   displayNotification(notification);
@@ -95,7 +94,6 @@ const displayNotEnoughMoney = function() {
   const message = "You don't have enough money to pay..";
   msgBox.innerHTML = message;
   closeOverlay("debt-input");
-  closeOverlay("manage-debt-form");
 };
 
 const payDebt = function(player, intervalId) {
@@ -111,7 +109,8 @@ const payDebt = function(player, intervalId) {
   })
     .then(res => res.json())
     .then(updateStatementBoard)
-    .then(setFinancialStatement);
+    .then(setFinancialStatement)
+    .then(setCashLedger);
   closeOverlay("manage-debt-form");
   closeOverlay("debt-input");
   const notification = `$${

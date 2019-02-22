@@ -322,6 +322,7 @@ describe("grantLoan", function() {
     player.addToLedgerBalance = sinon.spy();
     player.updateCashFlow = sinon.spy();
     player.updateTotalExpense = sinon.spy();
+    player.addCreditEvent = sinon.spy();
     game.getPlayerByName = sinon.stub();
     game.getPlayerByName.onFirstCall().returns(player);
 
@@ -331,6 +332,7 @@ describe("grantLoan", function() {
     sinon.assert.calledOnce(player.addExpense);
     sinon.assert.calledOnce(player.addToLedgerBalance);
     sinon.assert.calledOnce(player.updateCashFlow);
+    sinon.assert.calledOnce(player.addCreditEvent);
     sinon.assert.calledOnce(player.updateTotalExpense);
   });
 });
@@ -345,6 +347,7 @@ describe("payDebt", function() {
     player.removeLiability = sinon.spy();
     player.removeExpense = sinon.spy();
     player.deductLedgerBalance = sinon.spy();
+    player.addDebitEvent = sinon.spy();
     player.updateCashFlow = sinon.spy();
     player.updateTotalExpense = sinon.spy();
     game.getPlayerByName = sinon.stub();
@@ -356,6 +359,7 @@ describe("payDebt", function() {
     sinon.assert.calledOnce(player.removeExpense);
     sinon.assert.calledOnce(player.deductLedgerBalance);
     sinon.assert.calledOnce(player.updateCashFlow);
+    sinon.assert.calledOnce(player.addDebitEvent);
     sinon.assert.calledOnce(player.updateTotalExpense);
   });
 });

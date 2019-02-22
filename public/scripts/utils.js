@@ -81,3 +81,11 @@ const createPopupButton = function(text, func) {
   button.onclick = func;
   return button;
 };
+
+const formatTime = function(date) {
+  return date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true
+  });
+};

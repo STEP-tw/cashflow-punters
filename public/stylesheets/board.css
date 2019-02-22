@@ -440,7 +440,7 @@ button:hover {
 }
 
 #cash_ledger {
-  background: lightcoral;
+  background: whitesmoke;
 }
 
 .close {
@@ -618,4 +618,21 @@ button:hover {
 .select-tag {
   width: 150px;
   height: 20px;
+}
+
+.cash-ledger-entries {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+
+  overflow: scroll;
+}
+
+.entry { 
+  margin: 10px 5px;
+
+  border-bottom:1px solid black;
+  border-radius: 5px;
 }

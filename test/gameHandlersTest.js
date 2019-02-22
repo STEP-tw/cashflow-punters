@@ -70,6 +70,7 @@ describe("hostGame", function() {
           notification: "",
           childrenCount: 0,
           name: "player",
+          entries: [],
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0
@@ -149,6 +150,7 @@ describe("joinGame", function() {
           notification: "",
           name: "player",
           charityTurns: 0,
+          entries: [],
           childrenCount: 0,
           didUpdateSpace: false,
           currentSpace: 0,

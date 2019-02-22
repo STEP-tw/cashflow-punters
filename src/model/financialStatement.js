@@ -1,7 +1,9 @@
 const { add } = require("../utils/utils");
+const CashLedger = require("./cashLedger");
 
-class FinancialStatement {
+class FinancialStatement extends CashLedger {
   constructor() {
+    super();
     this.profession;
     this.passiveIncome = 0;
     this.totalExpense;
@@ -9,7 +11,6 @@ class FinancialStatement {
     this.cashflow;
     this.legerBalance;
     this.income;
-    this.cashLedger;
     this.expenses;
     this.liabilities;
     this.assets;
@@ -26,8 +27,9 @@ class FinancialStatement {
     this.totalIncome = Object.values(this.income).reduce(add);
     this.updateTotalExpense();
     this.updateCashFlow();
-    this.cashLedger = this.totalIncome + profession.assets.savings;
     this.ledgerBalance = this.cashflow + profession.assets.savings;
+    const initialAmount = this.cashflow + profession.assets.savings;
+    this.addCreditEvent(initialAmount, "Initial Cash");
   }
 
   updateFs() {
