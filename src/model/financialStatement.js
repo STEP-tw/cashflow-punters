@@ -1,4 +1,4 @@
-const {add} = require("../utils/utils");
+const { add } = require("../utils/utils");
 
 class FinancialStatement {
   constructor() {
@@ -13,9 +13,12 @@ class FinancialStatement {
     this.expenses;
     this.liabilities;
     this.assets;
+    this.perChildExpense;
   }
+
   setFinancialStatement(profession) {
     this.profession = profession.profession;
+    this.perChildExpense = profession.perChildExpense;
     this.income = profession.income;
     this.expenses = profession.expenses;
     this.assets = profession.assets;
@@ -34,7 +37,7 @@ class FinancialStatement {
   updateCashFlow() {
     this.cashflow = this.totalIncome - this.totalExpense;
   }
-  
+
   addToLedgerBalance(amount) {
     this.ledgerBalance += amount;
   }

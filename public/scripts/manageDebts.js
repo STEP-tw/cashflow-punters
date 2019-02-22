@@ -1,9 +1,14 @@
 const isInvalidLoanAmount = amount => amount % 1000 != 0 || amount == 0;
 const isBankLiability = liability => liability == "Bank Loan";
 
-const isInvalidBankLoanAmount = function({liability, liabilityPrice},player) {
-  return isInvalidLoanAmount(liabilityPrice) && isBankLiability(liability) || 
-  liabilityPrice > player.liabilities[liability];
+const isInvalidBankLoanAmount = function(
+  { liability, liabilityPrice },
+  player
+) {
+  return (
+    (isInvalidLoanAmount(liabilityPrice) && isBankLiability(liability)) ||
+    liabilityPrice > player.liabilities[liability]
+  );
 };
 
 const displayPayDebtForm = function() {
@@ -43,6 +48,8 @@ const displayInvalidAmount = function() {
   const msgBox = getElementById("debt-form-msg-Box");
   const message = "Invalid debt amount.. Please enter valid debt amount";
   msgBox.innerHTML = message;
+  closeOverlay("manage-debt-form");
+  closeOverlay("debt-input");
 };
 
 const takeLoan = function() {
@@ -50,8 +57,8 @@ const takeLoan = function() {
   if (isInvalidLoanAmount(amount)) return displayInvalidAmount();
   fetch("/takeloan", {
     method: "POST",
-    body: JSON.stringify({amount}),
-    headers: {"Content-Type": "application/json"}
+    body: JSON.stringify({ amount }),
+    headers: { "Content-Type": "application/json" }
   })
     .then(res => res.json())
     .then(updateStatementBoard)
@@ -63,7 +70,7 @@ const takeLoan = function() {
 
 const getLiabilityDetails = function(player) {
   const liability = getElementById("options").value;
-  const {expenses, liabilities} = player;
+  const { expenses, liabilities } = player;
   const expense = `${liability} Payment`;
   let liabilityPrice = +liabilities[liability];
   let expenseAmount = expenses[expense];
@@ -71,7 +78,7 @@ const getLiabilityDetails = function(player) {
     liabilityPrice = getElementById("debt-input").value;
     expenseAmount = liabilityPrice / 10;
   }
-  return {liability, liabilityPrice, expense, expenseAmount};
+  return { liability, liabilityPrice, expense, expenseAmount };
 };
 
 const displayNotification = function(notification) {
@@ -79,7 +86,7 @@ const displayNotification = function(notification) {
   notificationDiv.innerText = notification;
 };
 
-const notEnoughCash = function({liabilityPrice}, {ledgerBalance}) {
+const notEnoughCash = function({ liabilityPrice }, { ledgerBalance }) {
   return ledgerBalance < liabilityPrice;
 };
 
@@ -87,17 +94,20 @@ const displayNotEnoughMoney = function() {
   const msgBox = getElementById("debt-form-msg-Box");
   const message = "You don't have enough money to pay..";
   msgBox.innerHTML = message;
+  closeOverlay("debt-input");
+  closeOverlay("manage-debt-form");
 };
 
 const payDebt = function(player, intervalId) {
   clearInterval(intervalId);
   const liabilityDetails = getLiabilityDetails(player);
-  if (isInvalidBankLoanAmount(liabilityDetails,player)) return displayInvalidAmount();
+  if (isInvalidBankLoanAmount(liabilityDetails, player))
+    return displayInvalidAmount();
   if (notEnoughCash(liabilityDetails, player)) return displayNotEnoughMoney();
   fetch("/paydebt", {
     method: "POST",
     body: JSON.stringify(liabilityDetails),
-    headers: {"Content-Type": "application/json"}
+    headers: { "Content-Type": "application/json" }
   })
     .then(res => res.json())
     .then(updateStatementBoard)
