@@ -368,12 +368,49 @@ button:hover {
   width: 100%;
 }
 
-.open_fs > button {
-  height: 46%;
+#fsBtn {
+  background-image: url("../images/fs.jpeg");
+}
+
+#ledgerBtn {
+  background-image: url("../images/ledger.png");
+}
+
+.iconBtn {
+  height: 90%;
+  width: 90%;
+}
+
+.iconBtn:hover {
+  height: 100%;
   width: 100%;
 }
 
-.debt {
+.iconButtonDiv {
+  height: 100%;
+  width: 30%;
+}
+
+.iconButtonDiv > button {
+  border: whitesmoke;
+  box-shadow: none;
+  background-color: white;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#bankBtn {
+  background-image: url("../images/bank.png");
+}
+
+.open-player-details {
+  display: flex;
+  justify-content: space-around;
+  height: 20%;
+  width: 100%;
+}
+
+.notifications {
   display: flex;
   flex-direction: column;
   border-bottom-left-radius: 1.4vh;
@@ -381,16 +418,6 @@ button:hover {
   padding: 4%;
   background-color: white;
   border: black 1px solid;
-}
-
-.debt > button {
-  height: 50%;
-  width: 100%;
-}
-
-.open_fs {
-  height: 20%;
-  width: 100%;
 }
 
 .overlay {

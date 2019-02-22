@@ -68,18 +68,28 @@
                 <p>$ <span id="expenses">expenses</span></p>
                 <p>$ <span id="cashflow">cashflow</span></p>
               </div>
-              <div class="open_fs">
-                <button onclick="openFinancialStatement()">
-                  Financial statement
-                </button>
-                <button onclick="showOverlay('cash_ledger')">Cash ledger</button>
+              <div class="open-player-details">
+                <div class="iconButtonDiv">
+                  <button
+                    id="fsBtn"
+                    class="iconBtn"
+                    onclick="openFinancialStatement()"
+                  ></button>
+                </div>
+                <div class="iconButtonDiv">
+                  <button
+                    id="ledgerBtn"
+                    class="iconBtn"
+                    onclick="openCashLedger()"
+                  ></button>
+                </div>
+                <div class="iconButtonDiv">
+                  <button id="bankBtn" class="iconBtn"></button>
+                </div>
               </div>
             </div>
 
-            <div class="debt">
-              <button id="loan-form-button">Take Loan</button>
-              <button id="pay-debt-form-button">Pay off debt</button>
-            </div>
+            <div class="notifications"></div>
           </div>
           <div class="middle_part">
             <div class="title"></div>
