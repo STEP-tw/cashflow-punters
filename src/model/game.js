@@ -216,11 +216,12 @@ class Game extends ActivityLog {
   }
 
   rollDice(numberOfDice) {
+    const oldSpaceNo = this.currentPlayer.currentSpace;
     const diceValues = this.currentPlayer.rollDice(numberOfDice);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
     this.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
-    this.handleSpace(this.currentPlayer.currentSpace);
+    this.handleSpace(oldSpaceNo);
     return { diceValues, spaceType };
   }
 
