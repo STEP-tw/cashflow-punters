@@ -20,7 +20,9 @@ const {
   grantLoan,
   payDebt,
   isAbleToDoCharity,
-  provideLiabilities
+  provideLiabilities,
+  acceptSmallDeal,
+  rejectSmallDeal
 } = require("./gameHandlers");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 
@@ -42,6 +44,8 @@ app.get("/selectBigDeal", selectBigDeal);
 app.get("/liabilities", provideLiabilities);
 app.post("/canjoin", canJoin);
 app.get("/financialStatement", getPlayersFinancialStatement);
+app.get("/acceptSmallDeal", acceptSmallDeal);
+app.get("/declineSmallDeal", rejectSmallDeal);
 app.post("/joingame", joinGame);
 app.post("/takeloan", grantLoan);
 app.post("/paydebt", payDebt);

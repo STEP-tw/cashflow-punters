@@ -100,7 +100,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let {name, turn} = player;
+  let { name, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -153,7 +153,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({isAble, msg}) => {
+    .then(({ isAble, msg }) => {
       const msgContainer = getElementById("notification");
       msgContainer.innerText = msg;
       if (isAble) doCharity();
@@ -166,14 +166,58 @@ const declineCharity = function() {
   fetch("/declineCharity");
 };
 
-const createSharesSmallDeal = function(card) {
-  const {title, message, symbol, historicTradingRange, currentPrice} = card;
+const acceptSmallDeal = function(event) {
+  let parent = event.target.parentElement;
+  parent.style.display = "none";
+  fetch("/acceptSmallDeal");
+};
+
+const declineSmallDeal = function() {
+  let parent = event.target.parentElement;
+  parent.style.display = "none";
+  fetch("/declineSmallDeal");
+};
+
+const createCardButtons = function() {
+  const buttons = document.createElement("div");
+  const button1 = createButton(
+    "Accept",
+    "button_div",
+    "accept",
+    "button",
+    acceptSmallDeal
+  );
+
+  const button2 = createButton(
+    "decline",
+    "button_div",
+    "reject",
+    "button",
+    declineSmallDeal
+  );
+  appendChildren(buttons, [button1, button2]);
+  return buttons;
+};
+
+const createCardDiv = function(type) {
   const cardDiv = document.getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
   cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("smallDeal");
+  cardDiv.classList.add(type);
+  return cardDiv;
+};
+
+const createSharesSmallDeal = function(card) {
+  const {
+    title,
+    message,
+    symbol,
+    historicTradingRange,
+    currentPrice
+  } = card.data;
+  const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
@@ -181,23 +225,14 @@ const createSharesSmallDeal = function(card) {
   const currentPriceDiv = createTextDiv(currentPrice);
   const bottomDiv = document.createElement("div");
   bottomDiv.classList.add("card-bottom");
-  const buttons = document.createElement("div");
-  buttons.className = "buttons_div";
-  const button1 = createButton("Accept");
-  const button2 = createButton("decline");
-  appendChildren(buttons, [button1, button2]);
+  const buttons = createCardButtons();
   appendChildren(bottomDiv, [symbolDiv, rangeDiv, currentPriceDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv, buttons]);
 };
 
-const createRealEstateSmallDeal = function(card) {
-  const {title, message, cost, mortgage, downPayment, cashFlow} = card;
-  const cardDiv = document.getElementById("card");
-  cardDiv.style.visibility = "visible";
-  cardDiv.innerHTML = null;
-  cardDiv.classList = [];
-  cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("smallDeal");
+const createRealEstateSmallDeal = function(card, isMyTurn) {
+  const { title, message, cost, mortgage, downPayment, cashFlow } = card.data;
+  const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const mortgageDiv = createTextDiv(mortgage);
@@ -208,52 +243,28 @@ const createRealEstateSmallDeal = function(card) {
   const bottomDiv2 = document.createElement("div");
   bottomDiv1.classList.add("card-bottom");
   bottomDiv2.classList.add("card-bottom");
-  const buttons = document.createElement("div");
-  const button1 = createButton("Accept");
-  const button2 = createButton("decline");
-  buttons.className = "buttons_div";
-  appendChildren(buttons, [button1, button2]);
   appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
   appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
-  appendChildren(cardDiv, [
-    titleDiv,
-    messageDiv,
-    bottomDiv1,
-    bottomDiv2,
-    buttons
-  ]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
+  if (isMyTurn) cardDiv.appendChild(createCardButtons());
 };
 
-const createGoldSmallDeal = function(card) {
-  const {title, message, numberOfCoins, cost} = card;
-  const cardDiv = document.getElementById("card");
-  cardDiv.style.visibility = "visible";
-  cardDiv.innerHTML = null;
-  cardDiv.classList = [];
-  cardDiv.classList.add("plain-card");
-  cardDiv.classList.add("smallDeal");
+const createGoldSmallDeal = function(card, isMyTurn) {
+  const { title, message, numberOfCoins, cost } = card.data;
+  const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const numberDiv = createTextDiv(numberOfCoins);
   const costDiv = createTextDiv(cost);
   const bottomDiv = document.createElement("div");
   bottomDiv.classList.add("card-bottom");
-  const buttons = document.createElement("div");
-  buttons.className = "buttons_div";
-  const button1 = createButton("Accept");
-  const button2 = createButton("decline");
-  appendChildren(buttons, [button1, button2]);
   appendChildren(bottomDiv, [numberDiv, costDiv]);
-  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv, buttons]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+  if (isMyTurn) cardDiv.appendChild(createCardButtons());
 };
 
 const showSmallDealCard = function(title, expenseAmount, type) {
-  const cardDiv = document.getElementById("card");
-  cardDiv.style.visibility = "visible";
-  cardDiv.innerHTML = null;
-  cardDiv.classList = [];
-  cardDiv.classList.add("plain-card");
-  cardDiv.classList.add(type);
+  const cardDiv = createCardDiv(type);
   const titleDiv = createTextDiv(title);
   titleDiv.classList.add("card-title");
   const expenseDiv = createTextDiv("Pay $ " + expenseAmount);
@@ -277,7 +288,32 @@ const showPlainCard = function(title, expenseAmount, type) {
   cardDiv.appendChild(expenseDiv);
 };
 
-const showCard = function(card) {
+const nothing = () => {};
+
+const getSmallDealHandler = function(card, isMyTurn) {
+  const dealCardTypes = {
+    shares: createSharesSmallDeal,
+    goldCoins: createGoldSmallDeal,
+    realEstate: createRealEstateSmallDeal
+  };
+  if (card.dealDone) return nothing;
+  return (
+    card.data.relatedTo &&
+    dealCardTypes[card.data.relatedTo].bind(null, card, isMyTurn)
+  );
+};
+
+const getCardTitle = function() {
+  let card = document.getElementById("card");
+  return card.children[0] && card.children[0].children[0].innerText;
+};
+
+const isSameCard = function(cardTitle) {
+  return cardTitle == getCardTitle();
+};
+
+const showCard = function(card, isMyTurn) {
+  if (isSameCard(card.data.title)) return;
   const cardHandlers = {
     doodad: showPlainCard.bind(
       null,
@@ -290,8 +326,11 @@ const showCard = function(card) {
       card.data.title,
       card.data.cash,
       "market-card"
-    )
+    ),
+    smallDeal: getSmallDealHandler(card, isMyTurn)
   };
+  console.log(card);
+
   cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
@@ -317,19 +356,9 @@ const handleDeal = function() {
 };
 
 const selectSmallDeal = function() {
-  const cardTypes = {
-    shares: createSharesSmallDeal,
-    goldCoins: createGoldSmallDeal,
-    realEstate: createRealEstateSmallDeal
-  };
-
   closeOverlay("select-deal");
   hideCardOverLay();
-  fetch("/selectSmallDeal")
-    .then(data => data.json())
-    .then(card => {
-      cardTypes[card.relatedTo](card);
-    });
+  fetch("/selectSmallDeal");
 };
 
 const selectBigDeal = function() {
@@ -347,7 +376,7 @@ const rollDie = function() {
   const dice = document.getElementById("dice1");
   fetch("/rolldie")
     .then(res => res.json())
-    .then(({diceValue, spaceType}) => {
+    .then(({ diceValue, spaceType }) => {
       dice.innerText = diceValue || dice.innerText;
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
@@ -355,9 +384,9 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let {players} = game;
+  let { players } = game;
   if (game.activeCard) {
-    showCard(game.activeCard);
+    showCard(game.activeCard, game.isMyTurn);
   }
   players.forEach(updateGamePiece);
 };
@@ -381,7 +410,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = document.createElement("div");
   const activityPara = document.createElement("p");
   const timeHoverPara = document.createElement("p");
@@ -425,8 +454,8 @@ const parseCookie = function() {
 };
 
 const getPlayerData = function(playersData) {
-  const {playerName} = parseCookie();
-  const playerData = playersData.filter(({name}) => name == playerName)[0];
+  const { playerName } = parseCookie();
+  const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 

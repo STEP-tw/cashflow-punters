@@ -3,7 +3,7 @@ const displayHostTemplate = function() {
   const hostingForm = createForm("/hostgame", "POST");
   const nameInput = createInput("playerName", "Enter Name", "text");
   nameInput.required = true;
-  const hostButton = createButton("HOST", "button", "submit");
+  const hostButton = createButton("HOST", "button");
   appendChildren(optionsField, [hostingForm]);
   appendChildren(hostingForm, [nameInput, hostButton]);
 };
@@ -13,8 +13,8 @@ const joinGame = function() {
   const playerName = getElementById("name").value;
   fetch("/joingame", {
     method: "POST",
-    body: JSON.stringify({gameId, playerName}),
-    headers: {"Content-Type": "application/json"}
+    body: JSON.stringify({ gameId, playerName }),
+    headers: { "Content-Type": "application/json" }
   }).then(res => {
     if (res.redirected) {
       window.location.href = res.url;
@@ -41,11 +41,11 @@ const canJoin = function() {
   }
   fetch("/canjoin", {
     method: "POST",
-    body: JSON.stringify({gameId}),
-    headers: {"Content-Type": "application/json"}
+    body: JSON.stringify({ gameId }),
+    headers: { "Content-Type": "application/json" }
   })
     .then(res => res.json())
-    .then(({isGameJoinable, error}) => {
+    .then(({ isGameJoinable, error }) => {
       if (isGameJoinable) return joinGame();
       displayError(error);
     });
@@ -55,7 +55,7 @@ const displayJoinTemplate = function() {
   const optionsField = document.getElementById("gameOptionsField");
   const gameIdInput = createInput("gameId", "Enter GameID", "text", "game_id");
   const nameInput = createInput("playerName", "Enter Name", "text", "name");
-  const joinButton = createButton("JOIN", "game-options", "submit");
+  const joinButton = createButton("JOIN", "game-options");
   const messageDiv = createElement("div");
   messageDiv.id = "messageDiv";
   joinButton.onclick = canJoin;

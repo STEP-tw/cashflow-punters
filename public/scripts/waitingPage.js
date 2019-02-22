@@ -30,7 +30,7 @@ const startNewGame = function() {
 const checkPlayersCount = function({players, isHost}) {
   if (players.length >= 1 && isHost) {
     const buttonSpace = getElementById("start_button_space");
-    const startButton = createButton("Start Game", "button", "button");
+    const startButton = createButton("Start Game", "button", "", "button");
     startButton.onclick = startNewGame;
     appendChildren(buttonSpace, [startButton]);
   }
@@ -38,9 +38,9 @@ const checkPlayersCount = function({players, isHost}) {
 
 const insertButtons = function({ isHost }) {
   const buttonsSpace = getElementById("buttons_space");
-  let button = createButton("Leave Game", "button", "button");
+  let button = createButton("Leave Game", "button", "", "button");
   if (isHost) {
-    button = createButton("Cancel Game", "button", "button");
+    button = createButton("Cancel Game", "button", "", "button");
   }
   buttonsSpace.appendChild(button);
 };

@@ -87,9 +87,14 @@ class Game extends ActivityLog {
     const msg = " selected Small Deal";
     this.addActivity(msg, this.currentPlayer.name);
     const smallDealCard = this.cardStore.smallDeals.drawCard();
+<<<<<<< HEAD
     this.activeCard = {type: "smallDeal", data: smallDealCard};
     this.nextPlayer();
     return smallDealCard;
+=======
+    this.activeCard = { type: "smallDeal", data: smallDealCard };
+    this.activeCard.dealDoneCount = 0;
+>>>>>>> [#29] annapurna/tilak - handling small deal
   }
 
   handleBigDeal() {

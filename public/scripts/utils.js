@@ -32,11 +32,13 @@ const createInput = function(name, placeholder, type, id) {
   return input;
 };
 
-const createButton = function(value, classname, type) {
+const createButton = function(value, classname, id, type, func) {
   const button = createElement("button");
   button.innerHTML = value;
   button.className = classname;
+  button.id = id;
   button.type = type;
+  button.onclick = func;
   return button;
 };
 
