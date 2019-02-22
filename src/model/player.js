@@ -11,6 +11,7 @@ class Player extends FinancialStatement {
     this.turn;
     this.childrenCount = 0;
     this.didUpdateSpace = false;
+    this.notification = "";
   }
 
   setTurn(turn) {

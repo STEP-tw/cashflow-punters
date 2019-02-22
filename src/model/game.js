@@ -140,7 +140,8 @@ class Game extends ActivityLog {
   }
 
   handlePayday() {
-    this.currentPlayer.addPayday();
+    const paydayAmount = this.currentPlayer.addPayday();
+    this.currentPlayer.notification = `You got Payday.${paydayAmount} added to your Savings`;
     this.nextPlayer();
   }
 
@@ -171,7 +172,8 @@ class Game extends ActivityLog {
     if (crossedPaydays.length > 0) {
       crossedPaydays.forEach(() => {
         this.addActivity(" crossed payday", this.currentPlayer.name);
-        this.currentPlayer.addPayday();
+        const paydayAmount = this.currentPlayer.addPayday();
+        this.currentPlayer.notification = `You got Payday.${paydayAmount} added to your Savings`;
       });
     }
   }

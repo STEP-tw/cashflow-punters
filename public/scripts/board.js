@@ -219,7 +219,7 @@ const createCardDiv = function(type) {
   return cardDiv;
 };
 
-const createSharesSmallDeal = function(card, actions) {
+const createSharesSmallDeal = function(actions, card) {
   const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
@@ -453,7 +453,24 @@ const polling = function(game) {
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
+  showMyNotification(game);
   players.forEach(updateGamePiece);
+};
+
+const showMyNotification = function(game) {
+  const notification = getPlayerData(game.players).notification;
+  if (!notification) return;
+  const notificationDiv = createTextDiv(notification);
+  const time = new Date().toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true
+  });
+  const timeDiv = createTextDiv(time);
+  const notificationsDiv = getElementById("notification-div");
+  notificationsDiv.innerHTML = "";
+  notificationsDiv.appendChild(notificationDiv);
+  notificationsDiv.appendChild(timeDiv);
 };
 
 const updateGamePiece = function(player) {

@@ -48,6 +48,7 @@ class FinancialStatement {
 
   addPayday() {
     this.ledgerBalance += this.cashflow;
+    return this.cashflow;
   }
 
   addLiability(liability, amount) {

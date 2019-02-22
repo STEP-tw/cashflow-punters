@@ -67,6 +67,7 @@ describe("hostGame", function() {
       .to.deep.equals([
         {
           charityTurns: 0,
+          notification: "",
           childrenCount: 0,
           name: "player",
           didUpdateSpace: false,
@@ -145,6 +146,7 @@ describe("joinGame", function() {
       .to.deep.equals([
         {
           charityTurns: 0,
+          notification: "",
           name: "player",
           charityTurns: 0,
           childrenCount: 0,
