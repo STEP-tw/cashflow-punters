@@ -556,7 +556,7 @@ button:hover {
   z-index: 2;
   height: 60%;
   width: 90%;
-  background-color: rgb(104, 84, 84);
+  background-color: white;
 }
 
 .hover {
@@ -607,20 +607,19 @@ button:hover {
   width: 100%;
 }
 
-
 .form-button {
-  height :40px;
+  height: 40px;
   width: 150px;
 
   margin: 10px 0px;
 }
 
 .debt-input {
-  width:150px;
-  height:30px;
+  width: 150px;
+  height: 30px;
 }
 
 .select-tag {
-  width :150px;
-  height:20px;
+  width: 150px;
+  height: 20px;
 }

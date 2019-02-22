@@ -297,7 +297,7 @@ const getSmallDealHandler = function(card, isMyTurn) {
   };
   if (card.dealDone) return nothing;
   return (
-    card.data.relatedTo &&
+    dealCardTypes[card.data.relatedTo] &&
     dealCardTypes[card.data.relatedTo].bind(null, card, isMyTurn)
   );
 };
@@ -328,8 +328,6 @@ const showCard = function(card, isMyTurn) {
     ),
     smallDeal: getSmallDealHandler(card, isMyTurn)
   };
-  console.log(card);
-
   cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
