@@ -197,14 +197,16 @@ button:hover {
 
 .dice {
   height: 100%;
-  width: 35%;
+  width: 25%;
   cursor: pointer;
-  font-size: xx-large;
-  justify-content: center;
-  align-items: center;
-  display: flex;
   background-color: white;
   border: black 1px solid;
+}
+
+.dice > p {
+  height: 100%;
+  width: 100%;
+  font-size: xx-large;
 }
 
 #dice2 {

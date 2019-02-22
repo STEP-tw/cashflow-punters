@@ -363,11 +363,26 @@ const selectBigDeal = function() {
   fetch("/selectBigDeal");
 };
 
+const displayDiceValue = function(diceValue, count) {
+  const diceFaces = {
+    1: "1",
+    2: "2",
+    3: "3",
+    4: "4",
+    5: "5",
+    6: "6"
+  };
+  const diceDiv = getElementById("dice" + count);
+  diceDiv.innerHTML = null;
+  const p = document.createElement("p");
+  p.innerText = diceFaces[diceValue];
+  diceDiv.appendChild(p);
+};
+
 const showDice = function(diceValues) {
   let count = 1;
   diceValues.forEach(diceValue => {
-    const diceDiv = getElementById("dice" + count);
-    diceDiv.innerText = diceValue || diceDiv.innerText;
+    if (diceValue) displayDiceValue(diceValue, count);
     count++;
   });
 };

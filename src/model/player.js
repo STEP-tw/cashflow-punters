@@ -51,7 +51,7 @@ class Player extends FinancialStatement {
   rollDice(numberOfDice = 1) {
     const diceValues = new Array(numberOfDice)
       .fill(6)
-      .map(value => 2 || randomNum(value));
+      .map(value => randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.didUpdateSpace = true;

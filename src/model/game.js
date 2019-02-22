@@ -221,7 +221,6 @@ class Game extends ActivityLog {
     this.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
     this.handleSpace(this.currentPlayer.currentSpace);
-    this.nextPlayer();
     return { diceValues, spaceType };
   }
 
