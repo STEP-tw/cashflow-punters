@@ -201,6 +201,7 @@ button:hover {
   cursor: pointer;
   background-color: white;
   border: black 1px solid;
+  font-size: 100px;
 }
 
 .dice > p {
