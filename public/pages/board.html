@@ -87,7 +87,7 @@
                   <button
                     id="bankBtn"
                     class="iconBtn"
-                    onclick='showBankForm()'
+                    onclick="showBankForm()"
                   ></button>
                 </div>
               </div>
@@ -96,7 +96,29 @@
             <div id="notification-div" class="notifications"></div>
           </div>
           <div class="middle_part">
-            <div class="title"></div>
+            <div onclick="rollDie()" class="dice_block">
+              <div id="num_of_dice" class="overlay_box">
+                <p>
+                  How many dice you want to use?
+                </p>
+                <button
+                  id="one_dice_button"
+                  onclick="closeOverlay('num_of_dice')"
+                >
+                  One
+                </button>
+                <button
+                  id="two_dice_button"
+                  onclick="
+                      enableDice('dice2');
+                      closeOverlay('num_of_dice')"
+                >
+                  Two
+                </button>
+              </div>
+              <div id="dice1" class="dice">6</div>
+              <div id="dice2" class="dice"></div>
+            </div>
             <div id="cardDisplay" class="cardDisplay">
               <div id="card-overlay" class="card-overlay"></div>
               <div id="askCharity" class="cardDisplayPopup">
@@ -119,29 +141,6 @@
             </div>
           </div>
           <div class="right_part">
-            <div onclick="rollDie()" class="dice_block">
-              <div id="num_of_dice" class="overlay_box">
-                <p>
-                  How many dice you want to use?
-                </p>
-                <button
-                  id="one_dice_button"
-                  onclick="closeOverlay('num_of_dice')"
-                >
-                  One
-                </button>
-                <button
-                  id="two_dice_button"
-                  onclick="
-                  enableDice('dice2');
-                  closeOverlay('num_of_dice')"
-                >
-                  Two
-                </button>
-              </div>
-              <div id="dice1" class="dice">6</div>
-              <div id="dice2" class="dice"></div>
-            </div>
             <div class="activity_log" id="activityLog"></div>
             <div></div>
           </div>
