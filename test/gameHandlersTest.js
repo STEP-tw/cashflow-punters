@@ -6,6 +6,8 @@ const {
   hostGame,
   acceptSmallDeal,
   rejectSmallDeal,
+  acceptBigDeal,
+  rejectBigDeal,
   provideGameLobby,
   getPlayersFinancialStatement,
   joinGame,
@@ -589,5 +591,55 @@ describe("rejectSmallDeal", function() {
     req.game.activeCard.dealDoneCount = 3;
     rejectSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.false;
+  });
+});
+
+describe("acceptBigDeal", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.game = {
+      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+    };
+    req.game.players = { length: 0 };
+    req.game.addActivity = sinon.spy();
+    req.cookies = { playerName: "" };
+    req.game.nextPlayer = sinon.spy();
+    res.end = sinon.spy();
+  });
+  it("should return nothing if deal is already done ", function() {
+    req.game.activeCard.dealDone = true;
+    const output = acceptBigDeal(req, res);
+    expect(output).to.be.undefined;
+    expect(req.game.nextPlayer.calledOnce).to.be.false;
+  });
+  it("should call nextPlayer if deal is not done ", function() {
+    acceptBigDeal(req, res);
+    expect(req.game.nextPlayer.calledOnce).to.be.true;
+  });
+});
+
+describe("rejectBigDeal", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.game = {
+      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+    };
+    req.game.addActivity = sinon.spy();
+    req.cookies = { playerName: "" };
+    req.game.players = { length: 0 };
+    req.game.nextPlayer = sinon.spy();
+    res.end = sinon.spy();
+  });
+  it("should return nothing if deal is already done ", function() {
+    req.game.activeCard.dealDone = true;
+    const output = rejectBigDeal(req, res);
+    expect(output).to.be.undefined;
+    expect(req.game.nextPlayer.calledOnce).to.be.false;
+  });
+  it("should call nextPlayer if deal is not done ", function() {
+    rejectBigDeal(req, res);
+    expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
 });

@@ -3,7 +3,7 @@ const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
 
-const { randomNum, isSame } = require("./utils/utils");
+const { isSame } = require("./utils/utils");
 const { CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
 
 const initializeGame = function(host) {
@@ -219,7 +219,27 @@ const rejectSmallDeal = function(req, res) {
   req.game.nextPlayer();
   activeCard.dealDone = true;
   res.end();
-}
+};
+
+const acceptBigDeal = function(req, res) {
+  const { activeCard } = req.game;
+  if (activeCard.dealDone) return res.end();
+  let requestedPlayer = req.cookies["playerName"];
+  req.game.addActivity(`${requestedPlayer} has accepted the deal`);
+  req.game.nextPlayer();
+  activeCard.dealDone = true;
+  res.end();
+};
+
+const rejectBigDeal = function(req, res) {
+  const { activeCard } = req.game;
+  if (activeCard.dealDone) return res.end();
+  let requestedPlayer = req.cookies["playerName"];
+  req.game.addActivity(`${requestedPlayer} has rejected the deal`);
+  req.game.nextPlayer();
+  activeCard.dealDone = true;
+  res.end();
+};
 
 const hasCharity = function(req, res) {
   const hasCharityTurns = req.game.hasCharityTurns();
@@ -245,6 +265,8 @@ module.exports = {
   provideLiabilities,
   acceptSmallDeal,
   rejectSmallDeal,
+  acceptBigDeal,
+  rejectBigDeal,
   hasCharity,
   rollDice
 };

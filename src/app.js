@@ -23,6 +23,8 @@ const {
   provideLiabilities,
   acceptSmallDeal,
   rejectSmallDeal,
+  acceptBigDeal,
+  rejectBigDeal,
   hasCharity
 } = require("./gameHandlers");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
@@ -46,6 +48,8 @@ app.get("/acceptCharity", acceptCharity);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.get("/acceptSmallDeal", acceptSmallDeal);
 app.get("/declineSmallDeal", rejectSmallDeal);
+app.get("/acceptBigDeal", acceptBigDeal);
+app.get("/declineBigDeal", rejectBigDeal);
 app.get("/declineCharity", declineCharity);
 app.get("/isabletodocharity", isAbleToDoCharity);
 app.get("/hascharity", hasCharity);

@@ -94,7 +94,8 @@ class Game extends ActivityLog {
   handleBigDeal() {
     const msg = " selected Big Deal";
     this.addActivity(msg, this.currentPlayer.name);
-    this.nextPlayer();
+    const bigDealCard = this.cardStore.bigDeals.drawCard();
+    this.activeCard = { type: "bigDeal", data: bigDealCard };
   }
 
   handleBabySpace() {

@@ -471,7 +471,7 @@
       "cost": "40000",
       "mortgage": "36000",
       "downPayment": "4000",
-      "cashFlow": "140"
+      "cashflow": "140"
     },
     {
       "title": "Condo for Sale - 2BR/1BA",
@@ -480,7 +480,7 @@
       "cost": "40000",
       "mortgage": "39000",
       "downPayment": "1000",
-      "cashFlow": "0"
+      "cashflow": "0"
     },
     {
       "title": "House for Sale - 2BR/1BA",
@@ -489,7 +489,7 @@
       "cost": "50000",
       "mortgage": "47000",
       "downPayment": "3000",
-      "cashFlow": "100"
+      "cashflow": "100"
     },
     {
       "title": "House for Sale - 2BR/1BA",
@@ -498,7 +498,7 @@
       "cost": "50000",
       "mortgage": "46000",
       "downPayment": "4000",
-      "cashFlow": "200"
+      "cashflow": "200"
     },
     {
       "title": "House for Sale - 2BR/1BA",
@@ -507,7 +507,7 @@
       "cost": "50000",
       "mortgage": "48000",
       "downPayment": "2000",
-      "cashFlow": "200"
+      "cashflow": "200"
     },
     {
       "title": "You Find A Great Deal!",
@@ -516,7 +516,7 @@
       "cost": "45000",
       "mortgage": "43000",
       "downPayment": "2000",
-      "cashFlow": "250"
+      "cashflow": "250"
     },
     {
       "title": "Condo for Sale - 2BR/1BA",
@@ -525,7 +525,7 @@
       "cost": "40000",
       "mortgage": "35000",
       "downPayment": "5000",
-      "cashFlow": "220"
+      "cashflow": "220"
     },
     {
       "title": "Condo for Sale - 2BR/1BA",
@@ -534,7 +534,7 @@
       "cost": "55000",
       "mortgage": "50000",
       "downPayment": "5000",
-      "cashFlow": "160"
+      "cashflow": "160"
     },
     {
       "title": "House for Sale - 2BR/1BA",
@@ -543,7 +543,7 @@
       "cost": "30000",
       "mortgage": "29000",
       "downPayment": "1000",
-      "cashFlow": "0"
+      "cashflow": "0"
     },
     {
       "title": "House for Sale - 2BR/1BA",
@@ -552,7 +552,7 @@
       "cost": "65000",
       "mortgage": "60000",
       "downPayment": "5000",
-      "cashFlow": "160"
+      "cashflow": "160"
     },
     {
       "title": "You Find A Great Deal!",
@@ -561,7 +561,7 @@
       "cost": "35000",
       "mortgage": "33000",
       "downPayment": "2000",
-      "cashFlow": "220"
+      "cashflow": "220"
     }
   ],
   "doodads": [
@@ -1085,7 +1085,7 @@
   "professions": [
     {
       "profession": "Engineer",
-      "income": {"salary": 4900},
+      "income": { "salary": 4900 },
       "expenses": {
         "taxes": 1000,
         "homeMortgagePayment": 700,
@@ -1097,7 +1097,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 200,
-      "assets": {"savings": 400},
+      "assets": { "savings": 400 },
       "liabilities": {
         "homeMortgage": 75000,
         "schoolLoan": 12000,
@@ -1107,7 +1107,7 @@
     },
     {
       "profession": "Secretary",
-      "income": {"salary": 2500},
+      "income": { "salary": 2500 },
       "expenses": {
         "taxes": 500,
         "homeMortgagePayment": 400,
@@ -1119,7 +1119,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 100,
-      "assets": {"savings": 700},
+      "assets": { "savings": 700 },
       "liabilities": {
         "homeMortgage": 38000,
         "schoolLoan": 0,
@@ -1129,7 +1129,7 @@
     },
     {
       "profession": "Truck Driver",
-      "income": {"salary": 2500},
+      "income": { "salary": 2500 },
       "expenses": {
         "taxes": 500,
         "homeMortgagePayment": 400,
@@ -1141,7 +1141,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 200,
-      "assets": {"savings": 800},
+      "assets": { "savings": 800 },
       "liabilities": {
         "homeMortgage": 38000,
         "schoolLoan": 0,
@@ -1151,7 +1151,7 @@
     },
     {
       "profession": "Airline Pilot",
-      "income": {"salary": 9500},
+      "income": { "salary": 9500 },
       "expenses": {
         "taxes": 2000,
         "homeMortgagePayment": 1000,
@@ -1163,7 +1163,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 400,
-      "assets": {"savings": 2500},
+      "assets": { "savings": 2500 },
       "liabilities": {
         "homeMortgage": 90000,
         "schoolLoan": 0,
@@ -1173,7 +1173,7 @@
     },
     {
       "profession": "Janitor",
-      "income": {"salary": 1600},
+      "income": { "salary": 1600 },
       "expenses": {
         "taxes": 300,
         "homeMortgagePayment": 200,
@@ -1185,7 +1185,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 100,
-      "assets": {"savings": 600},
+      "assets": { "savings": 600 },
       "liabilities": {
         "homeMortgage": 20000,
         "schoolLoan": 0,
@@ -1195,7 +1195,7 @@
     },
     {
       "profession": "Doctor",
-      "income": {"salary": 13200},
+      "income": { "salary": 13200 },
       "expenses": {
         "taxes": 3200,
         "homeMortgagePayment": 1900,
@@ -1207,7 +1207,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 700,
-      "assets": {"savings": 3500},
+      "assets": { "savings": 3500 },
       "liabilities": {
         "homeMortgage": 202000,
         "schoolLoan": 150000,
@@ -1217,7 +1217,7 @@
     },
     {
       "profession": "Teacher",
-      "income": {"salary": 3300},
+      "income": { "salary": 3300 },
       "expenses": {
         "taxes": 500,
         "homeMortgagePayment": 500,
@@ -1229,7 +1229,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 200,
-      "assets": {"savings": 400},
+      "assets": { "savings": 400 },
       "liabilities": {
         "homeMortgage": 50000,
         "schoolLoan": 12000,
@@ -1239,7 +1239,7 @@
     },
     {
       "profession": "Lawyer",
-      "income": {"salary": 7500},
+      "income": { "salary": 7500 },
       "expenses": {
         "taxes": 1800,
         "homeMortgagePayment": 1100,
@@ -1251,7 +1251,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 400,
-      "assets": {"savings": 2000},
+      "assets": { "savings": 2000 },
       "liabilities": {
         "homeMortgage": 115000,
         "schoolLoan": 78000,
@@ -1261,7 +1261,7 @@
     },
     {
       "profession": "Business Manager",
-      "income": {"salary": 4600},
+      "income": { "salary": 4600 },
       "expenses": {
         "taxes": 900,
         "homeMortgagePayment": 700,
@@ -1273,7 +1273,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 300,
-      "assets": {"savings": 400},
+      "assets": { "savings": 400 },
       "liabilities": {
         "homeMortgage": 75000,
         "schoolLoan": 12000,
@@ -1283,7 +1283,7 @@
     },
     {
       "profession": "Nurse",
-      "income": {"salary": 3100},
+      "income": { "salary": 3100 },
       "expenses": {
         "taxes": 600,
         "homeMortgagePayment": 400,
@@ -1295,7 +1295,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 200,
-      "assets": {"savings": 500},
+      "assets": { "savings": 500 },
       "liabilities": {
         "homeMortgage": 47000,
         "schoolLoan": 6000,
@@ -1305,7 +1305,7 @@
     },
     {
       "profession": "Mechanic",
-      "income": {"salary": 2000},
+      "income": { "salary": 2000 },
       "expenses": {
         "taxes": 400,
         "homeMortgagePayment": 300,
@@ -1317,7 +1317,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 100,
-      "assets": {"savings": 700},
+      "assets": { "savings": 700 },
       "liabilities": {
         "homeMortgage": 31000,
         "schoolLoan": 0,
@@ -1327,7 +1327,7 @@
     },
     {
       "profession": "Police Officer",
-      "income": {"salary": 3000},
+      "income": { "salary": 3000 },
       "expenses": {
         "taxes": 600,
         "homeMortgagePayment": 400,
@@ -1339,7 +1339,7 @@
         "childExpenses": 0
       },
       "perChildExpense": 200,
-      "assets": {"savings": 500},
+      "assets": { "savings": 500 },
       "liabilities": {
         "homeMortgage": 46000,
         "schoolLoan": 0,

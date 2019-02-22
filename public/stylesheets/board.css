@@ -292,7 +292,7 @@ button:hover {
 .plain-card {
   border-radius: 3%;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
-  color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
