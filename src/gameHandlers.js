@@ -32,12 +32,11 @@ const rollDice = function(req, res) {
   const { numberOfDice } = req.body;
   const { playerName } = req.cookies;
   const {currentPlayer  } = req.game;
-  const currentPlayer = game.currentPlayer;
   if (!isCurrentPlayer(currentPlayer, playerName) || currentPlayer.rolledDice) {
     res.json({ diceValues: [null] });
     return;
   }
-  const currentSpaceDetails = game.rollDice(numberOfDice);
+  const currentSpaceDetails = req.game.rollDice(numberOfDice);
   res.json(currentSpaceDetails);
 };
 
