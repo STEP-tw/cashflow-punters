@@ -12,10 +12,15 @@ class Player extends FinancialStatement {
     this.childrenCount = 0;
     this.didUpdateSpace = false;
     this.notification = "";
+    this.downSizedForTurns = 0;
   }
 
   setTurn(turn) {
     this.turn = turn;
+  }
+
+  isDownSized() {
+    return this.downSizedForTurns != 0;
   }
 
   move(spacesCount) {
@@ -59,7 +64,6 @@ class Player extends FinancialStatement {
       .map(value => randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
-    this.didUpdateSpace = true;
     this.reduceCharityTurns();
     return diceValues;
   }

@@ -27,6 +27,8 @@ const board = [
 
 const CHARITY_MSG =
   "You have done charity, So you can optionally use one or two dice for your next 3 turns";
+
 const UNABLE_TO_DO_CHARITY_MSG =
-  "Sorry! your ledger balance is not enough to charity.";
+  "Sorry! your ledger balance is not enough to do charity.";
+
 module.exports = { board, CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG };
