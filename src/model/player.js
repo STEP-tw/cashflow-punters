@@ -64,7 +64,9 @@ class Player extends FinancialStatement {
 
   addCharityTurn() {
     this.charityTurns = 3;
-    this.ledgerBalance = this.ledgerBalance - this.totalIncome * 0.1;
+    const charityAmount = this.totalIncome * 0.1;
+    this.ledgerBalance -= charityAmount;
+    this.addDebitEvent(charityAmount, "Charity");
     this.setNotification(CHARITY_MSG);
   }
 
