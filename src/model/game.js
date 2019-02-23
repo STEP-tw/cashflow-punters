@@ -112,14 +112,19 @@ class Game extends ActivityLog {
       const deductAmount = this.currentPlayer.doChildExpenses(
         +doodadCard.expenseAmount
       );
-      const msg = `${deductAmount} is deducted from ${
-        this.currentPlayer.name
-      } for doodad`;
-      this.addActivity(msg);
+      this.addDebitActivity(+deductAmount, "is deducted ", "doodad");
       this.nextPlayer();
       return;
     }
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
+  }
+
+  addDebitActivity(amount, msg, type) {
+    const { name } = this.currentPlayer;
+    const activityMsg = `${amount}  ${msg} from ${name} for ${type}`;
+    this.addActivity(activityMsg);
+    this.currentPlayer.setNotification(msg);
+    this.currentPlayer.addDebitEvent(amount, msg);
   }
 
   handleExpenseCard(type, expenseAmount) {
@@ -128,11 +133,7 @@ class Game extends ActivityLog {
       this.grantLoan(this.currentPlayer.name, loanAmount);
     }
     this.currentPlayer.deductLedgerBalance(expenseAmount);
-    this.currentPlayer.addDebitEvent(+expenseAmount, "doodad");
-    const { name } = this.currentPlayer;
-    const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
-    this.addActivity(msg);
-    this.currentPlayer.setNotification(msg);
+    this.addDebitActivity(+expenseAmount, "is deducted ", type);
     this.nextPlayer();
   }
 
