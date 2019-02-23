@@ -23,7 +23,7 @@ const getGame = function(req, res) {
 };
 
 const getPlayersFinancialStatement = function(req, res) {
-  const { playerName } = req.cookies["playerName"];
+  const { playerName } = req.cookies;
   const requiredPlayer = req.game.getPlayerByName(playerName);
   res.send(JSON.stringify(requiredPlayer));
 };
@@ -31,7 +31,7 @@ const getPlayersFinancialStatement = function(req, res) {
 const rollDice = function(req, res) {
   const { numberOfDice } = req.body;
   const { playerName } = req.cookies;
-  const {currentPlayer  } = req.game;
+  const { currentPlayer } = req.game;
   if (!isCurrentPlayer(currentPlayer, playerName) || currentPlayer.rolledDice) {
     res.json({ diceValues: [null] });
     return;
