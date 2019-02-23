@@ -340,12 +340,11 @@ const showPlainCard = function(title, expenseAmount, type) {
 const nothing = () => {};
 
 const acceptShareDeal = function(event) {
-  console.log("here");
   acceptSmallDeal(event);
 };
 
-const declineShareDeal = function() {
-  console.log("there");
+const declineShareDeal = function(event) {
+  acceptSmallDeal(event);
 };
 
 const getSmallDealHandler = function(card, isMyTurn) {

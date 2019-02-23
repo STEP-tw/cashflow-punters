@@ -654,7 +654,8 @@ button:hover {
   z-index: 10;
 
   position: absolute;
-  top: 10%;
+  top: 30%;
+  left: 25;
 
   width: 25%;
   height: 25%;
