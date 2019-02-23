@@ -109,7 +109,6 @@ const payDebt = function(player, intervalId) {
 };
 
 const showBankForm = function() {
-  console.log("showing bank form");
   const form = getElementById("manage-debt-form");
   const closeButton = createButton("&times;", "close");
   const loanButton = createButton("Take Loan", "form-button");

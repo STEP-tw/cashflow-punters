@@ -480,6 +480,7 @@ const rollDie = function() {
     .then(({ hasCharityTurns }) => {
       if (!hasCharityTurns) return rollOneDice();
       showOverlay("num_of_dice");
+      openOverlay("num_of_dice");
       const oneDiceButton = getElementById("one_dice_button");
       oneDiceButton.onclick = rollOneDice;
       const twoDiceButton = getElementById("two_dice_button");
@@ -579,7 +580,6 @@ const getGame = function() {
     .then(game => {
       updateActivityLog(game.activityLog);
       polling(game);
-      console.log(game.currentPlayer);
     });
 };
 
