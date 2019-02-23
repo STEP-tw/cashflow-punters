@@ -201,7 +201,7 @@ button:hover {
   width: 25%;
   cursor: pointer;
   background-color: white;
-  border: black 1px solid;
+  text-align: center;
   font-size: 100px;
 }
 
@@ -270,7 +270,6 @@ button:hover {
 }
 
 .cardDisplay {
-  border: black 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -647,14 +646,15 @@ button:hover {
 
   position: absolute;
   top: 0px;
-  justify-content: center;
-  align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
 
 .top-popup {
   z-index: 10;
+
+  position: absolute;
+  top: 10%;
 
   width: 25%;
   height: 25%;

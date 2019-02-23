@@ -136,6 +136,16 @@
                   <button onclick="selectBigDeal()">Big Deal</button>
                 </div>
               </div>
+              <div id="utilityPopup" class="cardDisplayPopup">
+                <button
+                  class="close"
+                  onclick=" hideOverlay('utilityPopup');
+                  hideCardOverLay();"
+                >
+                  &times;
+                </button>
+                <div class="buttons_div"></div>
+              </div>
               <div id="card" class="plain-card"></div>
               <div id="notification" class="notification"></div>
             </div>
@@ -229,7 +239,7 @@
     </div>
     <div id="low-balance" class="popup-background">
       <div class="top-popup">
-        You are gareeb
+        You don't have enought balance
         <button onclick="closeOverlay('low-balance')">Ok</button>
       </div>
     </div>

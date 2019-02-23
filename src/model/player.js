@@ -63,7 +63,7 @@ class Player extends FinancialStatement {
   rollDice(numberOfDice = 1) {
     const diceValues = new Array(numberOfDice)
       .fill(6)
-      .map(value => 2 || randomNum(value));
+      .map(value => randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.reduceCharityTurns();
@@ -99,7 +99,7 @@ class Player extends FinancialStatement {
   }
 
   doChildExpenses(amount) {
-    if (!this.childrenCount) return;
+    if (!this.childrenCount) return 0;
     this.ledgerBalance -= this.childrenCount * amount;
     this.setNotification(
       this.childrenCount * amount + "  deducted from your account"

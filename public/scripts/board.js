@@ -339,7 +339,22 @@ const showPlainCard = function(title, expenseAmount, type) {
 
 const nothing = () => {};
 
-const getSmallDealHandler = function(card, isMyTurn, actions) {
+const acceptShareDeal = function(event) {
+  console.log("here");
+  acceptSmallDeal(event);
+};
+
+const declineShareDeal = function() {
+  console.log("there");
+};
+
+const getSmallDealHandler = function(card, isMyTurn) {
+  const shareDealactions = [acceptShareDeal, declineShareDeal];
+  const smallDealactions = [acceptSmallDeal, declineSmallDeal];
+  let actions = smallDealactions;
+  if (card.data.relatedTo == "shares") {
+    actions = shareDealactions;
+  }
   const dealCardTypes = {
     shares: createSharesSmallDeal.bind(null, actions),
     goldCoins: createGoldSmallDeal.bind(null, actions),
@@ -364,7 +379,7 @@ const isSameCard = function(cardTitle) {
 const showCard = function(card, isMyTurn) {
   if (isSameCard(card.data.title)) return;
   const bigDealactions = [acceptBigDeal, declineBigDeal];
-  const smallDealactions = [acceptSmallDeal, declineSmallDeal];
+
   const cardHandlers = {
     doodad: showPlainCard.bind(
       null,
@@ -378,7 +393,7 @@ const showCard = function(card, isMyTurn) {
       card.data.cash,
       "market-card"
     ),
-    smallDeal: getSmallDealHandler(card, isMyTurn, smallDealactions),
+    smallDeal: getSmallDealHandler(card, isMyTurn),
     bigDeal: createRealEstateDealCard.bind(
       null,
       bigDealactions,

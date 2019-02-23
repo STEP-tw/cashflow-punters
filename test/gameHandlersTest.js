@@ -183,7 +183,7 @@ describe("isAbleToDoCharity", function() {
     req.game = {
       currentPlayer: {
         totalIncome: 5000,
-        setNotification:function(msg){
+        setNotification: function(msg) {
           this.notification = msg;
         },
         isAbleToDoCharity: function() {
@@ -201,14 +201,14 @@ describe("isAbleToDoCharity", function() {
     req.game.currentPlayer.ledgerBalance = 5000;
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
-      isAble: true,
+      isAble: true
     });
   });
   it("should response with object with keys isAble as false and msg as unabletodocharity", function() {
     req.game.currentPlayer.ledgerBalance = 300;
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
-      isAble: false,
+      isAble: false
     });
   });
 });
@@ -354,6 +354,7 @@ describe("rejectSmallDeal", function() {
     req.game.players = { length: 0 };
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
+    res.send = sinon.spy();
   });
   it("should return nothing if deal is already done ", function() {
     req.game.activeCard.dealDone = true;

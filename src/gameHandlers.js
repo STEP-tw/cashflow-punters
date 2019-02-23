@@ -110,7 +110,7 @@ const handleShareSmallDeal = function(req, res) {
     activeCard.dealDone = true;
     req.game.nextPlayer();
   }
-  res.end();
+  res.send({ isSuccessful: true });
 };
 
 const acceptSmallDeal = function(req, res) {
