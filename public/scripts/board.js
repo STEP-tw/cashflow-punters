@@ -563,14 +563,9 @@ const hideHover = function(parent) {
 const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
-  const timeHoverPara = createElement("p");
-  timeHoverPara.classList.add("hover");
-  timeHoverPara.innerText = formatTime(new Date(time));
-  activity.onmouseover = showHover.bind(null, activity);
-  activity.onmouseleave = hideHover.bind(null, activity);
   activity.classList.add("activity");
-  activityPara.innerText = playerName + msg;
-  activity.appendChild(timeHoverPara);
+  activityPara.innerText =
+    formatTime(new Date(time)) + "   " + playerName + msg;
   activity.appendChild(activityPara);
   return activity;
 };

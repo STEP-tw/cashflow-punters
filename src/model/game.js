@@ -128,8 +128,8 @@ class Game extends ActivityLog {
     const { name } = this.currentPlayer;
     const activityMsg = `${amount}  ${msg} from ${name} for ${type}`;
     this.addActivity(activityMsg);
-    this.currentPlayer.setNotification(msg);
-    this.currentPlayer.addDebitEvent(amount, msg);
+    this.currentPlayer.setNotification(`${amount}  ${msg} for ${type}`);
+    this.currentPlayer.addDebitEvent(amount, type);
   }
 
   handleExpenseCard(type, expenseAmount) {

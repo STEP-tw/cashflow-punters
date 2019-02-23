@@ -55,6 +55,7 @@ class Player extends FinancialStatement {
 
   addBaby() {
     if (this.childrenCount == 3) {
+      this.setNotification("you already have 3 babies so baby is not added");
       return false;
     }
     this.childrenCount += 1;
