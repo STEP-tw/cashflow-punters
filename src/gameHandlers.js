@@ -179,6 +179,12 @@ const rejectBigDeal = function(req, res) {
 };
 
 const hasCharity = function(req, res) {
+  const { playerName } = req.cookies;
+  const currentPlayer = req.game.currentPlayer;
+  if(!isCurrentPlayer(currentPlayer, playerName)){
+    res.send(JSON.stringify({ hasCharityTurns: false }));
+    return
+  }
   const hasCharityTurns = req.game.hasCharityTurns();
   res.send(JSON.stringify({ hasCharityTurns }));
 };
