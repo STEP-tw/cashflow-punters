@@ -27,7 +27,8 @@ class Player extends FinancialStatement {
   isDownSized() {
     return this.downSizedForTurns != 0;
   }
-  isledgerBalanceNegative() {
+
+  isLedgerBalanceNegative() {
     return this.ledgerBalance < 0;
   }
 
@@ -120,13 +121,12 @@ class Player extends FinancialStatement {
     this.notification = notification;
   }
 
-  doChildExpenses(amount) {
-    if (!this.childrenCount) return 0;
-    this.ledgerBalance -= this.childrenCount * amount;
-    this.setNotification(
-      this.childrenCount * amount + "  deducted from your account"
-    );
-    return this.childrenCount * amount;
+  getChildCount() {
+    return this.childrenCount;
+  }
+
+  hasChild() {
+    return this.childrenCount > 0;
   }
 }
 

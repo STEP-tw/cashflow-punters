@@ -111,17 +111,13 @@ class Game extends ActivityLog {
   }
 
   handleDoodadSpace() {
-    let doodadCard = this.cardStore.doodads.drawCard();
+    const doodadCard = this.cardStore.doodads.drawCard();
     this.activeCard = { type: "doodad", data: doodadCard };
-    if (doodadCard.isChildExpense) {
-      const deductAmount = this.currentPlayer.doChildExpenses(
-        +doodadCard.expenseAmount
-      );
-      this.addDebitActivity(+deductAmount, "is deducted ", "doodad");
-      this.nextPlayer();
-      return;
+    let { isChildExpense, expenseAmount } = doodadCard;
+    if (isChildExpense && !this.currentPlayer.hasChild()) {
+      expenseAmount = 0;
     }
-    this.handleExpenseCard("doodad", doodadCard.expenseAmount);
+    this.handleExpenseCard("doodad", expenseAmount);
   }
 
   addDebitActivity(amount, msg, type) {
@@ -133,11 +129,11 @@ class Game extends ActivityLog {
   }
 
   handleExpenseCard(type, expenseAmount) {
-    if (this.currentPlayer.ledgerBalance < expenseAmount) {
-      const loanAmount = Math.ceil(expenseAmount / 1000) * 1000;
+    this.currentPlayer.deductLedgerBalance(expenseAmount);
+    if (this.currentPlayer.isLedgerBalanceNegative()) {
+      const loanAmount = calculateLoanToTake(this.currentPlayer.ledgerBalance);
       this.grantLoan(this.currentPlayer.name, loanAmount);
     }
-    this.currentPlayer.deductLedgerBalance(expenseAmount);
     this.addDebitActivity(+expenseAmount, "is deducted ", type);
     this.nextPlayer();
   }
