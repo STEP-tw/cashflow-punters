@@ -142,6 +142,7 @@ class Game extends ActivityLog {
     this.activeCard = { type: "market", data: marketCard };
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
+      return;
     }
     this.nextPlayer();
   }

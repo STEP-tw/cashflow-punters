@@ -470,6 +470,7 @@ const rollDice = function(numberOfDice) {
 
 const rollOneDice = function() {
   closeOverlay("num_of_dice");
+  hideOverlay("num_of_dice");
   disableDice("dice2");
   rollDice(1);
 };
