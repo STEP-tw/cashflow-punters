@@ -3,6 +3,7 @@
     {
       "title": "Duplex for Sale",
       "message": "Owner is moving out of this duplex due to growing family. Tenant in other unit remains and new tenant waiting to move into this well-maintained property.",
+      "type": "duplex",
       "cost": "250000",
       "mortgage": "234000",
       "downPayment": "16000",
@@ -12,6 +13,7 @@
       "title": "4-Plex for Sale",
       "message": "4-Plex for sale in rehabilitating neighbourhood. Owner being forced out by income tax liens.",
       "cost": "370000",
+      "type": "4-plex",
       "mortgage": "360000",
       "downPayment": "10000",
       "cashflow": "900"
@@ -20,6 +22,7 @@
       "title": "Duplex for Sale",
       "message": "Duplex owner must sell to pay hospital bills. Two tenants are in place at this well-maintained property and it is a good investment opportunity.",
       "cost": "260000",
+      "type": "duplex",
       "mortgage": "248000",
       "downPayment": "12000",
       "cashflow": "600"
@@ -28,6 +31,7 @@
       "title": "4-Plex for Sale",
       "message": "4-Plex next to new highway for sale. Owner/occupant moving to quieter area. Prices for quick sale.",
       "cost": "290000",
+      "type": "4-plex",
       "mortgage": "275000",
       "downPayment": "15000",
       "cashflow": "800"
@@ -36,6 +40,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "Divorse leads to sale of this 3/2 house in an area full of owner-occupied homes. It has been on the market for five months.",
       "cost": "350000",
+      "type": "3BR/2BA house",
       "mortgage": "330000",
       "downPayment": "20000",
       "cashflow": "1000"
@@ -44,6 +49,7 @@
       "title": "4-Plex for Sale",
       "message": "4-Plex in recovering neighbourhood. Fully rented, repairs kept up. Needs your down payment and patience.",
       "cost": "300000",
+      "type": "4-plex",
       "mortgage": "280000",
       "downPayment": "20000",
       "cashflow": "1100"
@@ -52,6 +58,7 @@
       "title": "Automated Business",
       "message": "Sucessfully 4-bay, coin-operated auto wash near busy intersection. Seller is moving to retirement communityout of state.",
       "cost": "125000",
+      "type": "automated business",
       "mortgage": "100000",
       "downPayment": "25000",
       "cashflow": "1800"
@@ -60,6 +67,7 @@
       "title": "Limited Partner Wanted",
       "message": "Sandwich shops is doubling the number of locations. Owner needs an investor to get started.",
       "cost": "30000",
+      "type": "limited partner",
       "mortgage": "0",
       "downPayment": "30000",
       "cashflow": "1700"
@@ -68,6 +76,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "Businessman needs cash to save his business and is liquidating this 3/2 house. It is currently occupied by a happy tenant.",
       "cost": "225000",
+      "type": "3BR/2BA house",
       "mortgage": "211000",
       "downPayment": "14000",
       "cashflow": "750"
@@ -76,6 +85,7 @@
       "title": "Duplex for Sale",
       "message": "Tenants in place at this investment duplex! Owner has income tax problems and needs to sell quickly.",
       "cost": "245000",
+      "type": "duplex",
       "mortgage": "233000",
       "downPayment": "12000",
       "cashflow": "800"
@@ -84,6 +94,7 @@
       "title": "Limited Partner Wanted",
       "message": "Auto Dealer wants to expand into leasing 2 and 3 year old cars. Needs capital as car maker's finance company is not intrested.",
       "cost": "30000",
+      "type": "limited partner",
       "mortgage": "0",
       "downPayment": "30000",
       "cashflow": "1500"
@@ -92,6 +103,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "3/2 house in rough neighbourhood.Positive cash flow even though rents are weak.",
       "cost": "300000",
+      "type": "3BR/2BA house",
       "mortgage": "288000",
       "downPayment": "12000",
       "cashflow": "800"
@@ -100,14 +112,16 @@
       "title": "8-Plex for Sale",
       "message": "Owner's legal troubles lead to forced sale of this 8-Plex. Jump on this deal before someone else does.",
       "cost": "250000",
+      "type": "8-plex",
       "mortgage": "210000",
       "downPayment": "40000",
       "cashflow": "2000"
     },
     {
-      "title": "Automated BUsiness for Sale",
+      "title": "Automated Business for Sale",
       "message": "Vintage arcade with 30 pinball machines and loyal clientele. Owner has become overextended and is desperate to liquidate.",
       "cost": "180000",
+      "type": "automated business",
       "mortgage": "160000",
       "downPayment": "20000",
       "cashflow": "1600"
@@ -116,6 +130,7 @@
       "title": "4-Plex for Sale",
       "message": "Nice, well-maintained 4-Plex in good neighbourhood. Stable tenants, positive cash flow, minor repairs.",
       "cost": "225000",
+      "type": "4-plex",
       "mortgage": "210000",
       "downPayment": "15000",
       "cashflow": "700"
@@ -124,6 +139,7 @@
       "title": "Apartment House for Sale",
       "message": "12-unit apartment house offered by out-of-state heirs of handyman/owner. Highly desirable location with a long waiting list for apartment units at this property.",
       "cost": "350000",
+      "type": "apartment",
       "mortgage": "300000",
       "downPayment": "50000",
       "cashflow": "3000"
@@ -133,6 +149,7 @@
       "message": "Split level 3/2 house on out-of-way golf couse offered by heirs of owner. Golf membership is included.",
       "cost": "275000",
       "mortgage": "260000",
+      "type": "3BR/2BA house",
       "downPayment": "15000",
       "cashflow": "800"
     },
@@ -141,6 +158,7 @@
       "message": "Downsized manager cannot afford payments on new salary and must sell this 3/2 house. The surrounding area is in transition.",
       "cost": "270000",
       "mortgage": "255000",
+      "type": "3BR/2BA house",
       "downPayment": "15000",
       "cashflow": "800"
     },
@@ -149,6 +167,7 @@
       "message": "Owner is retiring and this older 24-unit property is fully rented with great cash flow. Great location near a community college.",
       "cost": "550000",
       "mortgage": "500000",
+      "type": "apartment",
       "downPayment": "50000",
       "cashflow": "2400"
     },
@@ -156,6 +175,7 @@
       "title": "Duplex for Sale",
       "message": "Well-maintained duplex in desirable area available due to transfer of owner. Excellent investment opportunity for the right buyer.",
       "cost": "260000",
+      "type": "duplex",
       "mortgage": "250000",
       "downPayment": "10000",
       "cashflow": "1100"
@@ -164,6 +184,7 @@
       "title": "4-Plex for Sale",
       "message": "Older 4-Plex available -  forced sale. Out-of-state, financially-distressed owner years behind on taxes. Some records available.",
       "cost": "280000",
+      "type": "4-plex",
       "mortgage": "264000",
       "downPayment": "16000",
       "cashflow": "1000"
@@ -172,6 +193,7 @@
       "title": "Duplex for Sale",
       "message": "This duplex is the best in the neighbourhood! Proud owner retiring to another state to be near her grandchildren.",
       "cost": "170000",
+      "type": "duplex",
       "mortgage": "152000",
       "downPayment": "18000",
       "cashflow": "900"
@@ -180,6 +202,7 @@
       "title": "Pizza Franchise for Sale",
       "message": "Healthy pizza company franchise. Trend in high-end fast food is booming. High traffic location next to college campus.",
       "cost": "500000",
+      "type": "pizza franchise",
       "mortgage": "400000",
       "downPayment": "100000",
       "cashflow": "5000"
@@ -188,6 +211,7 @@
       "title": "Car Wash for Sale",
       "message": "Family car wash in a prime location is for sale. Family feud forces sale as they want out ASAP.",
       "cost": "350000",
+      "type": "car wash",
       "mortgage": "300000",
       "downPayment": "50000",
       "cashflow": "2500"
@@ -196,6 +220,7 @@
       "title": "Apartment House for Sale",
       "message": "Two buildings totailing24 units for sale. Owner managed with on-site assistant. Retirement prompts sale. Big Opportunity.",
       "cost": "575000",
+      "type": "apartment",
       "mortgage": "500000",
       "downPayment": "75000",
       "cashflow": "3600"
@@ -204,6 +229,7 @@
       "title": "Apartment House for Sale",
       "message": "60-unit complex available from pension fund that foreclosed on builder/owner. On-site management in place.",
       "cost": "1200000",
+      "type": "apartment",
       "mortgage": "1000000",
       "downPayment": "200000",
       "cashflow": "11000"
@@ -212,6 +238,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "3/2 house near the airport. Low cost and lots of cash flow potential, if you can stand the noise.",
       "cost": "275000",
+      "type": "3BR/2BA house",
       "mortgage": "259000",
       "downPayment": "16000",
       "cashflow": "750"
@@ -220,6 +247,7 @@
       "title": "4-Plex for Sale",
       "message": "4-Plex for sale by owner, moving to another state. Full records, fully rented, low occupant turnover in good neighbourhood.",
       "cost": "340000",
+      "type": "4-plex",
       "mortgage": "308000",
       "downPayment": "32000",
       "cashflow": "1400"
@@ -228,6 +256,7 @@
       "title": "8-Plex for Sale",
       "message": "Professional person urgently needs cash to save partnership. 8-Plex is being sold to raise capital. Great opportunity for the right person.",
       "cost": "360000",
+      "type": "8-plex",
       "mortgage": "328000",
       "downPayment": "32000",
       "cashflow": "1800"
@@ -236,6 +265,7 @@
       "title": "Limited Partner Wanted",
       "message": "Successful doctor expanding office and clinic. Needs partner to fund equity portion of construction costs.",
       "cost": "25000",
+      "type": "limited partner",
       "mortgage": "0",
       "downPayment": "25000",
       "cashflow": "1300"
@@ -244,6 +274,7 @@
       "title": "8-Plex for Sale",
       "message": "Owner offers his 8-Plex at the current, appraised value. It has all the amenities renters look for. Fully rented at market rent with excellent records.",
       "cost": "240000",
+      "type": "8-plex",
       "mortgage": "200000",
       "downPayment": "40000",
       "cashflow": "1800"
@@ -252,6 +283,7 @@
       "title": "8-Plex for Sale",
       "message": "Reinvesting owner offers 8-Plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
       "cost": "320000",
+      "type": "8-plex",
       "mortgage": "280000",
       "downPayment": "40000",
       "cashflow": "1700"
@@ -260,6 +292,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "Nice 3/2 house with inground pool and all appliances available in upper-middle-class area. Good schools.",
       "cost": "300000",
+      "type": "3BR/2BA house",
       "mortgage": "280000",
       "downPayment": "20000",
       "cashflow": "1000"
@@ -268,6 +301,7 @@
       "title": "House for Sale - 3Br/2Ba",
       "message": "Skilled tradesman kept this 3/2 house in excellent condition, so it commands top-dollar rent in older neighbourhood.",
       "cost": "325000",
+      "type": "3BR/2BA house",
       "mortgage": "307000",
       "downPayment": "18000",
       "cashflow": "900"
@@ -276,6 +310,7 @@
       "title": "Limited Partner Wanted",
       "message": "Successful pizza chain expanding into production of frozen pizzas for grocery stores. Owner needs capital for equipment.",
       "cost": "20000",
+      "type": "limited partner",
       "mortgage": "0",
       "downPayment": "20000",
       "cashflow": "1200"
@@ -284,6 +319,7 @@
       "title": "Automated Business for Sale",
       "message": "Personal bankruptcy forces sale of busy, successful laundromat on busy highway. Growth in local area is expected to skyrocket.",
       "cost": "150000",
+      "type": "automated business",
       "mortgage": "120000",
       "downPayment": "30,000",
       "cashflow": "2500"
@@ -1085,7 +1121,7 @@
   "professions": [
     {
       "profession": "Engineer",
-      "income": { "salary": 4900 },
+      "income": {"salary": 4900},
       "expenses": {
         "taxes": 1000,
         "Home Mortgage Payment": 700,
@@ -1097,7 +1133,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 75000,
         "School Loan": 12000,
@@ -1107,7 +1143,7 @@
     },
     {
       "profession": "Secretary",
-      "income": { "salary": 2500 },
+      "income": {"salary": 2500},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 400,
@@ -1119,7 +1155,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 700 },
+      "assets": {"savings": 700},
       "liabilities": {
         "Home Mortgage": 38000,
         "School Loan": 0,
@@ -1129,7 +1165,7 @@
     },
     {
       "profession": "Truck Driver",
-      "income": { "salary": 2500 },
+      "income": {"salary": 2500},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 400,
@@ -1141,7 +1177,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 800 },
+      "assets": {"savings": 800},
       "liabilities": {
         "Home Mortgage": 38000,
         "School Loan": 0,
@@ -1151,7 +1187,7 @@
     },
     {
       "profession": "Airline Pilot",
-      "income": { "salary": 9500 },
+      "income": {"salary": 9500},
       "expenses": {
         "taxes": 2000,
         "Home Mortgage Payment": 1000,
@@ -1163,7 +1199,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 400,
-      "assets": { "savings": 2500 },
+      "assets": {"savings": 2500},
       "liabilities": {
         "Home Mortgage": 90000,
         "School Loan": 0,
@@ -1173,7 +1209,7 @@
     },
     {
       "profession": "Janitor",
-      "income": { "salary": 1600 },
+      "income": {"salary": 1600},
       "expenses": {
         "taxes": 300,
         "Home Mortgage Payment": 200,
@@ -1185,7 +1221,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 600 },
+      "assets": {"savings": 600},
       "liabilities": {
         "Home Mortgage": 20000,
         "School Loan": 0,
@@ -1195,7 +1231,7 @@
     },
     {
       "profession": "Doctor",
-      "income": { "salary": 13200 },
+      "income": {"salary": 13200},
       "expenses": {
         "taxes": 3200,
         "Home Mortgage Payment": 1900,
@@ -1207,7 +1243,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 700,
-      "assets": { "savings": 3500 },
+      "assets": {"savings": 3500},
       "liabilities": {
         "Home Mortgage": 202000,
         "School Loan": 150000,
@@ -1217,7 +1253,7 @@
     },
     {
       "profession": "Teacher",
-      "income": { "salary": 3300 },
+      "income": {"salary": 3300},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 500,
@@ -1229,7 +1265,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 50000,
         "School Loan": 12000,
@@ -1239,7 +1275,7 @@
     },
     {
       "profession": "Lawyer",
-      "income": { "salary": 7500 },
+      "income": {"salary": 7500},
       "expenses": {
         "taxes": 1800,
         "Home Mortgage Payment": 1100,
@@ -1251,7 +1287,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 400,
-      "assets": { "savings": 2000 },
+      "assets": {"savings": 2000},
       "liabilities": {
         "Home Mortgage": 115000,
         "School Loan": 78000,
@@ -1261,7 +1297,7 @@
     },
     {
       "profession": "Business Manager",
-      "income": { "salary": 4600 },
+      "income": {"salary": 4600},
       "expenses": {
         "taxes": 900,
         "Home Mortgage Payment": 700,
@@ -1273,7 +1309,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 300,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 75000,
         "School Loan": 12000,
@@ -1283,7 +1319,7 @@
     },
     {
       "profession": "Nurse",
-      "income": { "salary": 3100 },
+      "income": {"salary": 3100},
       "expenses": {
         "taxes": 600,
         "Home Mortgage Payment": 400,
@@ -1295,7 +1331,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 500 },
+      "assets": {"savings": 500},
       "liabilities": {
         "Home Mortgage": 47000,
         "School Loan": 6000,
@@ -1305,7 +1341,7 @@
     },
     {
       "profession": "Mechanic",
-      "income": { "salary": 2000 },
+      "income": {"salary": 2000},
       "expenses": {
         "taxes": 400,
         "Home Mortgage Payment": 300,
@@ -1317,7 +1353,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 700 },
+      "assets": {"savings": 700},
       "liabilities": {
         "Home Mortgage": 31000,
         "School Loan": 0,
@@ -1327,7 +1363,7 @@
     },
     {
       "profession": "Police Officer",
-      "income": { "salary": 3000 },
+      "income": {"salary": 3000},
       "expenses": {
         "taxes": 600,
         "Home Mortgage Payment": 400,
@@ -1339,7 +1375,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 500 },
+      "assets": {"savings": 500},
       "liabilities": {
         "Home Mortgage": 46000,
         "School Loan": 0,
