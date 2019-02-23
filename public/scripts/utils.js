@@ -12,9 +12,25 @@ const createElement = function(tag, id) {
   return element;
 };
 
+const showRealEstate = function(realEstate) {
+  realEstate => {
+    return Object.keys(realEstate)
+      .map(key => `<p>${key} : ${realEstate[key]}`)
+      .join("");
+  };
+};
+
 const createPara = function(values) {
   const keys = Object.keys(values);
-  return keys.map(key => `<p>${key} : ${values[key]}`).join("");
+  const a = keys
+    .map(key => {
+      if (key == "realEstates") {
+        return values[key].map(showRealEstate).join("");
+      }
+      return `<p>${key} : ${values[key]}`;
+    })
+    .join("");
+  return a;
 };
 
 const createForm = function(action, method) {

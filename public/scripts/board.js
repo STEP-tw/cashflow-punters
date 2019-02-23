@@ -34,7 +34,7 @@ const getEntriesHtml = function(entry) {
     debit: "-",
     credit: "+"
   };
-  const {time} = entry;
+  const { time } = entry;
   const currentTime = formatTime(new Date(time));
   const entryDiv = createElement("div");
   entryDiv.className = "entry";
@@ -50,7 +50,7 @@ const getEntriesHtml = function(entry) {
 };
 
 const setCashLedger = function(player) {
-  const {entries} = player;
+  const { entries } = player;
   const entriesDiv = getElementById("cash-ledger-entries");
   const entriesHtml = entries.map(getEntriesHtml);
   appendChildren(entriesDiv, entriesHtml);
@@ -115,7 +115,6 @@ const createFinancialStatement = function() {
   fetch("/financialStatement")
     .then(data => data.json())
     .then(player => {
-      console.log(player);
       setFinancialStatement(player);
       const button = createPopupButton("continue", getCashLedger);
       const fs = getElementById("financial_statement");
@@ -134,7 +133,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let {name, turn} = player;
+  let { name, turn } = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -185,7 +184,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({ isAble}) => {
+    .then(({ isAble }) => {
       if (isAble) doCharity();
     });
 };
@@ -198,8 +197,15 @@ const declineCharity = function() {
 
 const acceptSmallDeal = function(event) {
   let parent = event.target.parentElement;
-  parent.style.display = "none";
-  fetch("/acceptSmallDeal");
+  fetch("/acceptSmallDeal")
+    .then(data => data.json())
+    .then(({ isSuccessful }) => {
+      if (isSuccessful) {
+        parent.style.display = "none";
+        return;
+      }
+      openOverlay("low-balance");
+    });
 };
 
 const declineSmallDeal = function() {
@@ -211,7 +217,7 @@ const declineSmallDeal = function() {
 const acceptBigDeal = function(event) {
   fetch("/acceptBigDeal")
     .then(data => data.json())
-    .then(({isSuccessful}) => {
+    .then(({ isSuccessful }) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
         parent.style.display = "none";
@@ -259,7 +265,7 @@ const createCardDiv = function(type) {
 };
 
 const createSharesSmallDeal = function(actions, card) {
-  const {title, message, symbol, historicTradingRange, currentPrice} = card;
+  const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -274,7 +280,7 @@ const createSharesSmallDeal = function(actions, card) {
 };
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
-  const {title, message, cost, mortgage, downPayment, cashflow} = card;
+  const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -293,7 +299,7 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
-  const {title, message, numberOfCoins, cost} = card;
+  const { title, message, numberOfCoins, cost } = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -444,7 +450,7 @@ const showDice = function(diceValues) {
 const rollDice = function(numberOfDice) {
   hideOverlay("num_of_dice");
   closeOverlay("num_of_dice");
-  const diceBlock = getElementById('dice_block');
+  const diceBlock = getElementById("dice_block");
   diceBlock.onclick = null;
   const spacesHandlers = {
     charity: handleCharity,
@@ -452,14 +458,14 @@ const rollDice = function(numberOfDice) {
   };
   fetch("/rolldice", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({numberOfDice})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfDice })
   })
-  .then(res => res.json())
-  .then(({ diceValues, spaceType }) => {
-    showDice(diceValues);
-    spacesHandlers[spaceType] && spacesHandlers[spaceType]();
-  });
+    .then(res => res.json())
+    .then(({ diceValues, spaceType }) => {
+      showDice(diceValues);
+      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+    });
 };
 
 const rollOneDice = function() {
@@ -470,22 +476,22 @@ const rollOneDice = function() {
 
 const rollDie = function() {
   fetch("/hascharity")
-  .then(res => res.json())
-  .then(({ hasCharityTurns }) => {
-    if (!hasCharityTurns) return rollOneDice();
-        showOverlay("num_of_dice");
-        const oneDiceButton = getElementById("one_dice_button");
-        oneDiceButton.onclick = rollOneDice;
-        const twoDiceButton = getElementById("two_dice_button");
-        twoDiceButton.onclick = () => {
-          enableDice("dice2");
-          rollDice(2);
-        };
+    .then(res => res.json())
+    .then(({ hasCharityTurns }) => {
+      if (!hasCharityTurns) return rollOneDice();
+      showOverlay("num_of_dice");
+      const oneDiceButton = getElementById("one_dice_button");
+      oneDiceButton.onclick = rollOneDice;
+      const twoDiceButton = getElementById("two_dice_button");
+      twoDiceButton.onclick = () => {
+        enableDice("dice2");
+        rollDice(2);
+      };
     });
 };
 
 const polling = function(game) {
-  let {players, requestedPlayer} = game;
+  let { players, requestedPlayer } = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
@@ -493,9 +499,9 @@ const polling = function(game) {
   setFinancialStatement(requestedPlayer);
   showNotification(requestedPlayer.notification);
   players.forEach(updateGamePiece);
-  if(game.isMyTurn){
-    const diceBlock = getElementById('dice_block');
-    diceBlock.onclick = rollDie;  
+  if (game.isMyTurn) {
+    const diceBlock = getElementById("dice_block");
+    diceBlock.onclick = rollDie;
   }
 };
 
@@ -533,7 +539,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   const timeHoverPara = createElement("p");
@@ -562,8 +568,8 @@ const updateActivityLog = function(activityLog) {
 };
 
 const getPlayerData = function(playersData) {
-  const {playerName} = parseCookie();
-  const playerData = playersData.filter(({name}) => name == playerName)[0];
+  const { playerName } = parseCookie();
+  const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 
@@ -573,6 +579,7 @@ const getGame = function() {
     .then(game => {
       updateActivityLog(game.activityLog);
       polling(game);
+      console.log(game.currentPlayer);
     });
 };
 

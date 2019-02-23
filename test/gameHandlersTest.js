@@ -314,6 +314,7 @@ describe("acceptSmallDeal", function() {
     req.cookies = { playerName: "" };
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
+    res.send = sinon.spy();
   });
   it("should return nothing if deal is already done ", function() {
     req.game.activeCard.dealDone = true;

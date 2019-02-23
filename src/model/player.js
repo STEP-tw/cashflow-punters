@@ -78,10 +78,21 @@ class Player extends FinancialStatement {
   addRealEstate(card) {
     const { downPayment, type, cost, cashflow, mortgage } = card;
     if (this.ledgerBalance < downPayment) return false;
-    this.deductLedgerBalance(downPayment);
+    this.deductLedgerBalance(+downPayment);
+    this.addCreditEvent(+downPayment, "brought realEstate");
     this.addAsset(type, downPayment, cost);
     this.addLiability(type, mortgage);
     this.addIncomeRealEstate(type, cashflow);
+    return true;
+  }
+
+  buyGoldCoins(card) {
+    const { cost, numberOfCoins } = card;
+    if (this.ledgerBalance < cost * numberOfCoins) return false;
+    this.deductLedgerBalance(cost * numberOfCoins);
+    this.addGoldCoins(+numberOfCoins);
+    this.addCreditEvent(cost * numberOfCoins, "brought gold coins");
+    return true;
   }
   
   setNotification(notification) {

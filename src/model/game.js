@@ -115,7 +115,12 @@ class Game extends ActivityLog {
   }
 
   handleExpenseCard(type, expenseAmount) {
+    if (this.currentPlayer.ledgerBalance < expenseAmount) {
+      const loanAmount = Math.ceil(expenseAmount / 1000) * 1000;
+      this.grantLoan(this.currentPlayer.name, loanAmount);
+    }
     this.currentPlayer.deductLedgerBalance(expenseAmount);
+    this.currentPlayer.addDebitEvent(+expenseAmount, "doodad");
     const { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
@@ -191,8 +196,8 @@ class Game extends ActivityLog {
     player.addToLedgerBalance(loanAmount);
     player.updateTotalExpense();
     player.updateCashFlow();
-    player.addCreditEvent(loanAmount, "Taken Loan");
     const activityMessage = ` took loan of $${loanAmount}`;
+    player.addCreditEvent(loanAmount, "took loan");
     this.addActivity(activityMessage, playerName);
     player.setNotification("you" + activityMessage);
   }

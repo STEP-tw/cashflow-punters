@@ -175,6 +175,7 @@ describe("handleDoodaySpace", function () {
         this.notification = msg;
       }
     };
+    game.currentPlayer.addDebitEvent = sinon.spy();
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
   });
@@ -238,6 +239,7 @@ describe("handleMarketCard", function () {
     };
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
+    game.currentPlayer.addDebitEvent = sinon.spy();
     game.handleMarketSpace();
     expect(game.cardStore.market.drawCard.calledOnce).to.be.true;
     expect(game.addActivity.calledOnce).to.be.true;

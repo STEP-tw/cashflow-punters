@@ -25,7 +25,8 @@ class FinancialStatement extends CashLedger {
     this.income.realEstates = [];
     this.expenses = profession.expenses;
     this.assets = profession.assets;
-    this.assets.realEstate = [];
+    this.assets.realEstates = [];
+    this.assets.goldCoins = 0;
     this.liabilities = profession.liabilities;
     this.liabilities.realEstate = [];
     this.updateTotalIncome();
@@ -42,7 +43,7 @@ class FinancialStatement extends CashLedger {
   }
 
   updateTotalIncome() {
-    let assetIncome = this.assets.realEstate.reduce(getIncome, 0);
+    let assetIncome = this.assets.realEstates.reduce(getIncome, 0);
     this.totalIncome = assetIncome + this.income.salary;
   }
 
@@ -64,11 +65,12 @@ class FinancialStatement extends CashLedger {
 
   addPayday() {
     this.ledgerBalance += this.cashflow;
+    this.addCreditEvent(this.cashflow, "gotPayday");
     return this.cashflow;
   }
 
   addAsset(type, downPayment, cost) {
-    this.assets.realEstate.push({ type, downPayment, cost });
+    this.assets.realEstates.push({ type, downPayment, cost });
   }
 
   addLiability(liability, amount) {
@@ -86,6 +88,10 @@ class FinancialStatement extends CashLedger {
     }
     this.expenses[expense] = amount;
     this.updateFs();
+  }
+
+  addGoldCoins(count) {
+    this.assets.goldCoins += count;
   }
 
   addIncomeRealEstate(type, cashflow) {
