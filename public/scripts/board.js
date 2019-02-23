@@ -452,10 +452,13 @@ const displayDiceValue = function(diceValue, count) {
   };
   const diceDiv = getElementById("dice" + count);
   diceDiv.innerHTML = diceFaces[diceValue];
+  diceDiv.style.visibility = "visible";
+  diceDiv.style.display = "block";
 };
 
 const showDice = function(diceValues) {
   let count = 1;
+  console.log(diceValues, diceValues[0], typeof diceValues[0]);
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
     count++;
