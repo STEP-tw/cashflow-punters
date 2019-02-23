@@ -63,8 +63,6 @@ const takeLoan = function() {
     .then(setFinancialStatement)
     .then(setCashLedger);
   hideOverlay("manage-debt-form");
-  const notification = `$${amount} added to your Ledger balance.`;
-  displayNotification(notification);
 };
 
 const getLiabilityDetails = function(player) {
@@ -78,11 +76,6 @@ const getLiabilityDetails = function(player) {
     expenseAmount = liabilityPrice / 10;
   }
   return { liability, liabilityPrice, expense, expenseAmount };
-};
-
-const displayNotification = function(notification) {
-  const notificationDiv = getElementById("notification-div");
-  notificationDiv.innerText = notification;
 };
 
 const notEnoughCash = function({ liabilityPrice }, { ledgerBalance }) {
@@ -113,10 +106,6 @@ const payDebt = function(player, intervalId) {
     .then(setCashLedger);
   hideOverlay("manage-debt-form");
   hideOverlay("debt-input");
-  const notification = `$${
-    liabilityDetails.liabilityPrice
-  } deducted from your ledgerBalance for ${liabilityDetails.liability}`;
-  displayNotification(notification);
 };
 
 const showBankForm = function() {

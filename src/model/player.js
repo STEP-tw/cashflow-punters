@@ -1,5 +1,7 @@
 const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
+const { CHARITY_MSG } = require("../constant");
+
 
 class Player extends FinancialStatement {
   constructor(name) {
@@ -44,6 +46,7 @@ class Player extends FinancialStatement {
   addCharityTurn() {
     this.charityTurns = 3;
     this.ledgerBalance = this.ledgerBalance - this.totalIncome * 0.1;
+    this.setNotification(CHARITY_MSG);
   }
 
   getLedgerBalance() {
@@ -61,7 +64,7 @@ class Player extends FinancialStatement {
   rollDice(numberOfDice = 1) {
     const diceValues = new Array(numberOfDice)
       .fill(6)
-      .map(value => randomNum(value));
+      .map(value => 2 || randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.reduceCharityTurns();
@@ -79,6 +82,16 @@ class Player extends FinancialStatement {
     this.addAsset(type, downPayment, cost);
     this.addLiability(type, mortgage);
     this.addIncomeRealEstate(type, cashflow);
+  }
+  
+  setNotification(notification) {
+    this.notification = notification;
+  }
+
+  doChildExpenses(amount) {
+    if (!this.childrenCount) return;
+    this.ledgerBalance -= this.childrenCount * amount;
+    this.setNotification()
   }
 }
 

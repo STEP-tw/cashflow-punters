@@ -185,9 +185,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({isAble, msg}) => {
-      const msgContainer = getElementById("notification");
-      msgContainer.innerText = msg;
+    .then(({ isAble}) => {
       if (isAble) doCharity();
     });
 };
@@ -445,6 +443,9 @@ const showDice = function(diceValues) {
 
 const rollDice = function(numberOfDice) {
   hideOverlay("num_of_dice");
+  closeOverlay("num_of_dice");
+  const diceBlock = getElementById('dice_block');
+  diceBlock.onclick = null;
   const spacesHandlers = {
     charity: handleCharity,
     deal: handleDeal
@@ -454,24 +455,24 @@ const rollDice = function(numberOfDice) {
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({numberOfDice})
   })
-    .then(res => res.json())
-    .then(({diceValues, spaceType}) => {
-      showDice(diceValues);
-      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
-      getElementById("notification").innerText = null;
-    });
+  .then(res => res.json())
+  .then(({ diceValues, spaceType }) => {
+    showDice(diceValues);
+    spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+  });
 };
 
 const rollOneDice = function() {
+  closeOverlay("num_of_dice");
   disableDice("dice2");
   rollDice(1);
 };
 
 const rollDie = function() {
   fetch("/hascharity")
-    .then(res => res.json())
-    .then(({hasCharityTurns}) => {
-      if (hasCharityTurns) {
+  .then(res => res.json())
+  .then(({ hasCharityTurns }) => {
+    if (!hasCharityTurns) return rollOneDice();
         showOverlay("num_of_dice");
         const oneDiceButton = getElementById("one_dice_button");
         oneDiceButton.onclick = rollOneDice;
@@ -480,9 +481,6 @@ const rollDie = function() {
           enableDice("dice2");
           rollDice(2);
         };
-        return;
-      }
-      rollOneDice();
     });
 };
 
@@ -495,6 +493,10 @@ const polling = function(game) {
   setFinancialStatement(requestedPlayer);
   showNotification(requestedPlayer.notification);
   players.forEach(updateGamePiece);
+  if(game.isMyTurn){
+    const diceBlock = getElementById('dice_block');
+    diceBlock.onclick = rollDie;  
+  }
 };
 
 const showNotification = function(notification) {
@@ -591,6 +593,4 @@ const initialize = function() {
 
 window.onload = () => {
   initialize();
-  const diceBlock = getElementById("dice_block");
-  diceBlock.onclick = rollDie;
 };

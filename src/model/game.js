@@ -101,12 +101,15 @@ class Game extends ActivityLog {
   handleBabySpace() {
     this.currentPlayer.addBaby();
     this.addActivity(` got a baby`, this.currentPlayer.name);
-    this.currentPlayer.notification = `You got a baby`;
+    this.currentPlayer.setNotification('You got a baby');
     this.nextPlayer();
   }
 
   handleDoodadSpace() {
     const doodadCard = this.cardStore.doodads.drawCard();
+    if(doodadCard.isChildExpense) {
+       return this.currentPlayer.doChildExpenses(doodadCard.expenseAmount);
+    }
     this.activeCard = { type: "doodad", data: doodadCard };
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
   }
@@ -116,7 +119,7 @@ class Game extends ActivityLog {
     const { name } = this.currentPlayer;
     const msg = `${expenseAmount} is deducted from ${name} for ${type}`;
     this.addActivity(msg);
-    this.currentPlayer.notification = msg;
+    this.currentPlayer.setNotification(msg);
     this.nextPlayer();
   }
 
@@ -143,7 +146,7 @@ class Game extends ActivityLog {
 
   handlePayday() {
     const paydayAmount = this.currentPlayer.addPayday();
-    this.currentPlayer.notification = `You got Payday.${paydayAmount} added to your Savings`;
+    this.currentPlayer.setNotification(`You got Payday.${paydayAmount} added to your Savings`);
     this.nextPlayer();
   }
 
@@ -175,7 +178,7 @@ class Game extends ActivityLog {
       crossedPaydays.forEach(() => {
         this.addActivity(" crossed payday", this.currentPlayer.name);
         const paydayAmount = this.currentPlayer.addPayday();
-        this.currentPlayer.notification = `You got Payday.${paydayAmount} added to your Savings`;
+        this.currentPlayer.setNotification(`You got Payday.${paydayAmount} added to your Savings`);
       });
     }
   }
@@ -191,6 +194,7 @@ class Game extends ActivityLog {
     player.addCreditEvent(loanAmount, "Taken Loan");
     const activityMessage = ` took loan of $${loanAmount}`;
     this.addActivity(activityMessage, playerName);
+    player.setNotification("you" + activityMessage);
   }
 
   payDebt(playerName, debtDetails) {
@@ -204,6 +208,7 @@ class Game extends ActivityLog {
     player.addDebitEvent(liabilityPrice, `paid loan for ${liability}`);
     const activityMessage = ` payed debt $${liabilityPrice} for liability - ${liability}`;
     this.addActivity(activityMessage, playerName);
+    player.setNotification("you" + activityMessage);
   }
 
   getPlayerByName(playerName) {

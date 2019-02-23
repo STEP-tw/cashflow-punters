@@ -183,6 +183,9 @@ describe("isAbleToDoCharity", function() {
     req.game = {
       currentPlayer: {
         totalIncome: 5000,
+        setNotification:function(msg){
+          this.notification = msg;
+        },
         isAbleToDoCharity: function() {
           return this.ledgerBalance >= this.totalIncome * 0.1;
         }
@@ -199,8 +202,6 @@ describe("isAbleToDoCharity", function() {
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
       isAble: true,
-      msg:
-        "You have done charity, So you can optionally use one or two dice for your next 3 turns"
     });
   });
   it("should response with object with keys isAble as false and msg as unabletodocharity", function() {
@@ -208,7 +209,6 @@ describe("isAbleToDoCharity", function() {
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
       isAble: false,
-      msg: "Sorry! your ledger balance is not enough to do charity."
     });
   });
 });

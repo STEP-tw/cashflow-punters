@@ -28,7 +28,7 @@ const getPlayersFinancialStatement = function(req, res) {
   res.send(JSON.stringify(requiredPlayer));
 };
 
-const rollDice = function(req, res) {
+const rollDice = function (req, res) {
   const { numberOfDice } = req.body;
   const { playerName } = req.cookies;
   const { currentPlayer } = req.game;
@@ -40,20 +40,20 @@ const rollDice = function(req, res) {
   res.json(currentSpaceDetails);
 };
 
-const acceptCharity = function(req, res) {
+const acceptCharity = function (req, res) {
   req.game.acceptCharity();
   const ledgerBalance = req.game.currentPlayer.getLedgerBalance();
   req.game.nextPlayer();
   res.send(JSON.stringify({ ledgerBalance }));
 };
 
-const declineCharity = function(req, res) {
+const declineCharity = function (req, res) {
   req.game.declineCharity();
   req.game.nextPlayer();
   res.end();
 };
 
-const selectSmallDeal = function(req, res) {
+const selectSmallDeal = function (req, res) {
   let { currentPlayer } = req.game;
   if (currentPlayer.gotDeal) {
     req.game.handleSmallDeal();
@@ -62,7 +62,7 @@ const selectSmallDeal = function(req, res) {
   res.end();
 };
 
-const selectBigDeal = function(req, res) {
+const selectBigDeal = function (req, res) {
   let { currentPlayer } = req.game;
   if (currentPlayer.gotDeal) {
     req.game.handleBigDeal();
@@ -71,7 +71,7 @@ const selectBigDeal = function(req, res) {
   res.end();
 };
 
-const grantLoan = function(req, res) {
+const grantLoan = function (req, res) {
   const { playerName } = req.cookies;
   const loanAmount = +req.body.amount;
   const game = req.game;
@@ -80,7 +80,7 @@ const grantLoan = function(req, res) {
   res.send(JSON.stringify(player));
 };
 
-const payDebt = function(req, res) {
+const payDebt = function (req, res) {
   const { playerName } = req.cookies;
   const debtDetails = req.body;
   const game = req.game;
@@ -89,21 +89,20 @@ const payDebt = function(req, res) {
   res.send(JSON.stringify(player));
 };
 
-const provideLiabilities = function(req, res) {
+const provideLiabilities = function (req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
   const player = game.getPlayerByName(playerName);
   res.send(JSON.stringify(player));
 };
 
-const isAbleToDoCharity = function(req, res) {
+const isAbleToDoCharity = function (req, res) {
   const isAble = req.game.currentPlayer.isAbleToDoCharity();
-  let msg = UNABLE_TO_DO_CHARITY_MSG;
-  if (isAble) msg = CHARITY_MSG;
-  res.send(JSON.stringify({ isAble, msg }));
+  if (!isAble) req.game.currentPlayer.setNotification(UNABLE_TO_DO_CHARITY_MSG);
+  res.send(JSON.stringify({ isAble}));
 };
 
-const handleShareSmallDeal = function(req, res) {
+const handleShareSmallDeal = function (req, res) {
   const { activeCard } = req.game;
   activeCard.dealDoneCount++;
   if (activeCard.dealDoneCount >= req.game.players.length) {
@@ -114,7 +113,7 @@ const handleShareSmallDeal = function(req, res) {
   res.end();
 };
 
-const acceptSmallDeal = function(req, res) {
+const acceptSmallDeal = function (req, res) {
   const { activeCard } = req.game;
   if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
@@ -127,7 +126,7 @@ const acceptSmallDeal = function(req, res) {
   res.end();
 };
 
-const rejectSmallDeal = function(req, res) {
+const rejectSmallDeal = function (req, res) {
   const { activeCard } = req.game;
   if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
@@ -140,7 +139,7 @@ const rejectSmallDeal = function(req, res) {
   res.end();
 };
 
-const acceptBigDeal = function(req, res) {
+const acceptBigDeal = function (req, res) {
   const { activeCard } = req.game;
   if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
@@ -150,7 +149,7 @@ const acceptBigDeal = function(req, res) {
   res.end();
 };
 
-const rejectBigDeal = function(req, res) {
+const rejectBigDeal = function (req, res) {
   const { activeCard } = req.game;
   if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
@@ -160,7 +159,7 @@ const rejectBigDeal = function(req, res) {
   res.end();
 };
 
-const hasCharity = function(req, res) {
+const hasCharity = function (req, res) {
   const hasCharityTurns = req.game.hasCharityTurns();
   res.send(JSON.stringify({ hasCharityTurns }));
 };
