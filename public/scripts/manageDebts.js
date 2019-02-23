@@ -38,7 +38,7 @@ const displayLoanForm = function() {
   const closeButton = createButton("&times;", "close");
   const message = "Enter amount in Multiples of 1000";
   const msgDiv = createDiv(message, "debt-form-msg-Box", "debt-form-msg");
-  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
+  closeButton.onclick = hideOverlay.bind(null, "manage-debt-form");
   loanButton.id = "debt-button";
   loanButton.onclick = takeLoan;
   appendChildren(form, [closeButton, input, loanButton, msgDiv]);
@@ -62,7 +62,7 @@ const takeLoan = function() {
     .then(updateStatementBoard)
     .then(setFinancialStatement)
     .then(setCashLedger);
-  closeOverlay("manage-debt-form");
+  hideOverlay("manage-debt-form");
   const notification = `$${amount} added to your Ledger balance.`;
   displayNotification(notification);
 };
@@ -93,7 +93,7 @@ const displayNotEnoughMoney = function() {
   const msgBox = getElementById("debt-form-msg-Box");
   const message = "You don't have enough money to pay..";
   msgBox.innerHTML = message;
-  closeOverlay("debt-input");
+  hideOverlay("debt-input");
 };
 
 const payDebt = function(player, intervalId) {
@@ -111,8 +111,8 @@ const payDebt = function(player, intervalId) {
     .then(updateStatementBoard)
     .then(setFinancialStatement)
     .then(setCashLedger);
-  closeOverlay("manage-debt-form");
-  closeOverlay("debt-input");
+  hideOverlay("manage-debt-form");
+  hideOverlay("debt-input");
   const notification = `$${
     liabilityDetails.liabilityPrice
   } deducted from your ledgerBalance for ${liabilityDetails.liability}`;
@@ -120,11 +120,12 @@ const payDebt = function(player, intervalId) {
 };
 
 const showBankForm = function() {
+  console.log("showing bank form");
   const form = getElementById("manage-debt-form");
   const closeButton = createButton("&times;", "close");
   const loanButton = createButton("Take Loan", "form-button");
   const payDebtButton = createButton("Pay Debt", "form-button");
-  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
+  closeButton.onclick = hideOverlay.bind(null, "manage-debt-form");
   loanButton.onclick = displayLoanForm;
   payDebtButton.onclick = displayPayDebtForm;
   appendChildren(form, [closeButton, loanButton, payDebtButton]);
@@ -147,10 +148,10 @@ const displayLiabilityOptions = function(player) {
   const intervalId = setInterval(() => {
     const options = getElementById("options");
     if (isBankLiability(options.value)) return showOverlay("debt-input");
-    closeOverlay("debt-input");
+    hideOverlay("debt-input");
   }, 100);
   const closeButton = createButton("&times;", "close");
-  closeButton.onclick = closeOverlay.bind(null, "manage-debt-form");
+  closeButton.onclick = hideOverlay.bind(null, "manage-debt-form");
   amountInput.style.visibility = "hidden";
   const payButton = createButton("Pay", "form-button");
   payButton.id = "debt-button";
