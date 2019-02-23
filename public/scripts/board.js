@@ -34,7 +34,7 @@ const getEntriesHtml = function(entry) {
     debit: "-",
     credit: "+"
   };
-  const { time } = entry;
+  const {time} = entry;
   const currentTime = formatTime(new Date(time));
   const entryDiv = createElement("div");
   entryDiv.className = "entry";
@@ -50,7 +50,7 @@ const getEntriesHtml = function(entry) {
 };
 
 const setCashLedger = function(player) {
-  const { entries } = player;
+  const {entries} = player;
   const entriesDiv = getElementById("cash-ledger-entries");
   const entriesHtml = entries.map(getEntriesHtml);
   appendChildren(entriesDiv, entriesHtml);
@@ -134,7 +134,7 @@ const gamePiece = {
 };
 
 const getProfessionsDiv = function(player) {
-  let { name, turn } = player;
+  let {name, turn} = player;
   let mainDiv = createDivWithClass("details");
   let container = document.getElementById("container");
   let playerName = createDiv(`Name : ${name}`);
@@ -185,7 +185,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({ isAble, msg }) => {
+    .then(({isAble, msg}) => {
       const msgContainer = getElementById("notification");
       msgContainer.innerText = msg;
       if (isAble) doCharity();
@@ -213,7 +213,7 @@ const declineSmallDeal = function() {
 const acceptBigDeal = function(event) {
   fetch("/acceptBigDeal")
     .then(data => data.json())
-    .then(({ isSuccessful }) => {
+    .then(({isSuccessful}) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
         parent.style.display = "none";
@@ -261,13 +261,13 @@ const createCardDiv = function(type) {
 };
 
 const createSharesSmallDeal = function(actions, card) {
-  const { title, message, symbol, historicTradingRange, currentPrice } = card;
+  const {title, message, symbol, historicTradingRange, currentPrice} = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
-  const rangeDiv = createTextDiv(historicTradingRange);
-  const currentPriceDiv = createTextDiv(currentPrice);
+  const rangeDiv = createTextDiv(`Range : ${historicTradingRange}`);
+  const currentPriceDiv = createTextDiv(`current price : ${currentPrice}`);
   const bottomDiv = createElement("div");
   bottomDiv.classList.add("card-bottom");
   const buttons = createCardButtons(actions);
@@ -276,14 +276,14 @@ const createSharesSmallDeal = function(actions, card) {
 };
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
-  const { title, message, cost, mortgage, downPayment, cashflow } = card;
+  const {title, message, cost, mortgage, downPayment, cashflow} = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
-  const mortgageDiv = createTextDiv(mortgage);
-  const costDiv = createTextDiv(cost);
-  const downPaymentDiv = createTextDiv(downPayment);
-  const cashflowDiv = createTextDiv(cashflow);
+  const mortgageDiv = createTextDiv(`mortgage : ${mortgage}`);
+  const costDiv = createTextDiv(`cost : ${cost}`);
+  const downPaymentDiv = createTextDiv(`down payment : ${downPayment}`);
+  const cashflowDiv = createTextDiv(`cashflow ${cashflow}`);
   const bottomDiv1 = createElement("div");
   const bottomDiv2 = createElement("div");
   bottomDiv1.classList.add("card-bottom");
@@ -295,12 +295,12 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
-  const { title, message, numberOfCoins, cost } = card;
+  const {title, message, numberOfCoins, cost} = card;
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
-  const numberDiv = createTextDiv(numberOfCoins);
-  const costDiv = createTextDiv(cost);
+  const numberDiv = createTextDiv(`coins : ${numberOfCoins}`);
+  const costDiv = createTextDiv(`cost : ${cost}`);
   const bottomDiv = createElement("div");
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [numberDiv, costDiv]);
@@ -451,13 +451,12 @@ const rollDice = function(numberOfDice) {
   };
   fetch("/rolldice", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ numberOfDice })
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({numberOfDice})
   })
     .then(res => res.json())
-    .then(({ diceValues, spaceType }) => {
+    .then(({diceValues, spaceType}) => {
       showDice(diceValues);
-      console.log(diceValues);
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       getElementById("notification").innerText = null;
     });
@@ -471,7 +470,7 @@ const rollOneDice = function() {
 const rollDie = function() {
   fetch("/hascharity")
     .then(res => res.json())
-    .then(({ hasCharityTurns }) => {
+    .then(({hasCharityTurns}) => {
       if (hasCharityTurns) {
         showOverlay("num_of_dice");
         const oneDiceButton = getElementById("one_dice_button");
@@ -488,7 +487,7 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let { players, requestedPlayer } = game;
+  let {players, requestedPlayer} = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
@@ -532,7 +531,7 @@ const hideHover = function(parent) {
   anchor.style.visibility = "hidden";
 };
 
-const createActivity = function({ playerName, msg, time }) {
+const createActivity = function({playerName, msg, time}) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   const timeHoverPara = createElement("p");
@@ -561,8 +560,8 @@ const updateActivityLog = function(activityLog) {
 };
 
 const getPlayerData = function(playersData) {
-  const { playerName } = parseCookie();
-  const playerData = playersData.filter(({ name }) => name == playerName)[0];
+  const {playerName} = parseCookie();
+  const playerData = playersData.filter(({name}) => name == playerName)[0];
   return playerData;
 };
 
