@@ -2,7 +2,6 @@ const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
 const { CHARITY_MSG } = require("../constant");
 
-
 class Player extends FinancialStatement {
   constructor(name) {
     super();
@@ -94,7 +93,7 @@ class Player extends FinancialStatement {
     this.addCreditEvent(cost * numberOfCoins, "brought gold coins");
     return true;
   }
-  
+
   setNotification(notification) {
     this.notification = notification;
   }
@@ -102,7 +101,10 @@ class Player extends FinancialStatement {
   doChildExpenses(amount) {
     if (!this.childrenCount) return;
     this.ledgerBalance -= this.childrenCount * amount;
-    this.setNotification()
+    this.setNotification(
+      this.childrenCount * amount + "  deducted from your account"
+    );
+    return this.childrenCount * amount;
   }
 }
 

@@ -101,16 +101,24 @@ class Game extends ActivityLog {
   handleBabySpace() {
     this.currentPlayer.addBaby();
     this.addActivity(` got a baby`, this.currentPlayer.name);
-    this.currentPlayer.setNotification('You got a baby');
+    this.currentPlayer.setNotification("You got a baby");
     this.nextPlayer();
   }
 
   handleDoodadSpace() {
-    const doodadCard = this.cardStore.doodads.drawCard();
-    if(doodadCard.isChildExpense) {
-       return this.currentPlayer.doChildExpenses(doodadCard.expenseAmount);
-    }
+    let doodadCard = this.cardStore.doodads.drawCard();
     this.activeCard = { type: "doodad", data: doodadCard };
+    if (doodadCard.isChildExpense) {
+      const deductAmount = this.currentPlayer.doChildExpenses(
+        +doodadCard.expenseAmount
+      );
+      const msg = `${deductAmount} is deducted from ${
+        this.currentPlayer.name
+      } for doodad`;
+      this.addActivity(msg);
+      this.nextPlayer();
+      return;
+    }
     this.handleExpenseCard("doodad", doodadCard.expenseAmount);
   }
 
@@ -151,7 +159,9 @@ class Game extends ActivityLog {
 
   handlePayday() {
     const paydayAmount = this.currentPlayer.addPayday();
-    this.currentPlayer.setNotification(`You got Payday.${paydayAmount} added to your Savings`);
+    this.currentPlayer.setNotification(
+      `You got Payday.${paydayAmount} added to your Savings`
+    );
     this.nextPlayer();
   }
 
@@ -183,7 +193,9 @@ class Game extends ActivityLog {
       crossedPaydays.forEach(() => {
         this.addActivity(" crossed payday", this.currentPlayer.name);
         const paydayAmount = this.currentPlayer.addPayday();
-        this.currentPlayer.setNotification(`You got Payday.${paydayAmount} added to your Savings`);
+        this.currentPlayer.setNotification(
+          `You got Payday.${paydayAmount} added to your Savings`
+        );
       });
     }
   }
