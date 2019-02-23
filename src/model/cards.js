@@ -6,8 +6,12 @@ class Cards {
   }
 
   drawCard() {
-    let cards = lodash.shuffle(this.cards);
-    let card = cards.pop();
+    if (this.cards.length == 0) {
+      this.cards = this.usedCards;
+      this.usedCards = [];
+    }
+    const cards = lodash.shuffle(this.cards);
+    const card = cards.pop();
     this.usedCards.push(card);
     this.cards = cards;
     return card;
