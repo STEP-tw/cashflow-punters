@@ -638,6 +638,10 @@ button:hover {
   border-radius: 5px;
 }
 
+.scrollable {
+  overflow: scroll;
+}
+
 .popup-background {
   display: none;
 

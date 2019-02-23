@@ -526,8 +526,11 @@ const polling = function(game) {
 };
 
 const showNotification = function(notification) {
-  if (!notification) return;
+  const odlNotifDiv = document.getElementById("notification-div").children[0];
+  const oldNotification = odlNotifDiv && odlNotifDiv.children[0].innerText;
+  if (!notification || oldNotification == notification) return;
   const notificationDiv = createTextDiv(notification);
+  notificationDiv.classList.add("scrollable");
   const time = new Date().toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
