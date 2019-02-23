@@ -20,11 +20,16 @@ const isSame = function(firstArg, secondArg) {
   return firstArg == secondArg;
 };
 
+const calculateLoanToTake = function(ledgerBalance) {
+  return Math.ceil(Math.abs(ledgerBalance) / 1000) * 1000;
+};
+
 module.exports = {
   randomNum,
   createGameId,
   getNextNum,
   isBetween,
   add,
-  isSame
+  isSame,
+  calculateLoanToTake
 };

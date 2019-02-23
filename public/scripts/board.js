@@ -514,6 +514,7 @@ const polling = function(game) {
   }
   updateStatementBoard(requestedPlayer);
   setFinancialStatement(requestedPlayer);
+  setCashLedger(requestedPlayer);
   showNotification(requestedPlayer.notification);
   players.forEach(updateGamePiece);
   if (game.isMyTurn) {

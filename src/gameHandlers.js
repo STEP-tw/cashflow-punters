@@ -17,6 +17,10 @@ const isCurrentPlayer = function(player, playerName) {
 const getGame = function(req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
+  const { currentPlayer } = game;
+  if (currentPlayer.isDownSized()) {
+    game.skipTurn();
+  }
   game.requestedPlayer = game.getPlayer(playerName);
   game.isMyTurn = isCurrentPlayer(game.currentPlayer, playerName);
   res.send(JSON.stringify(game));
@@ -32,6 +36,11 @@ const rollDice = function(req, res) {
   const { numberOfDice } = req.body;
   const { playerName } = req.cookies;
   const { currentPlayer } = req.game;
+  if (currentPlayer.isDownSized()) {
+    req.game.skipTurn();
+    res.json({ diceValues: [null] });
+    return;
+  }
   if (!isCurrentPlayer(currentPlayer, playerName) || currentPlayer.rolledDice) {
     res.json({ diceValues: [null] });
     return;

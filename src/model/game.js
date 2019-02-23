@@ -1,7 +1,12 @@
 const lodash = require("lodash");
 const Board = require("./board");
 const { assignId } = require("../utils/array.js");
-const { getNextNum, isBetween, add } = require("../utils/utils.js");
+const {
+  getNextNum,
+  isBetween,
+  add,
+  calculateLoanToTake
+} = require("../utils/utils.js");
 
 class ActivityLog {
   constructor() {
@@ -155,7 +160,30 @@ class Game extends ActivityLog {
     this.currentPlayer.gotDeal = true;
   }
 
+  skipTurn() {
+    const currentPlayer = this.currentPlayer;
+    currentPlayer.decrementDownSizeTurns();
+    const msg = "Your turn has been skipped due to downSize";
+    currentPlayer.notification = msg;
+    const activityMsg = "'s turn was skipped.";
+    this.addActivity(activityMsg, currentPlayer.name);
+    this.nextPlayer();
+  }
+
   handleDownsizedSpace() {
+    const currentPlayer = this.currentPlayer;
+    let notificationMsg = `Oops! You have landed on Downsize space amount 
+      equal to your expenses is deducted from your ledger balance`;
+    currentPlayer.downsize();
+    currentPlayer.removeCharityEffect();
+    const { ledgerBalance } = currentPlayer;
+    if (currentPlayer.isLedgerBalanceNegative()) {
+      const loanAmount = calculateLoanToTake(ledgerBalance);
+      this.grantLoan(currentPlayer.name, loanAmount);
+      notificationMsg = `Oops! You have landed on Downsize space. You dont had enough amount
+        to pay the penalty so loan of $${loanAmount} added to your ledger balance and deducted the penalty`;
+    }
+    currentPlayer.notification = notificationMsg;
     this.nextPlayer();
   }
 

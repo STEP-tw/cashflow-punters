@@ -268,16 +268,9 @@ describe("handleCharitySpace", function () {
     expect(game.currentPlayer.gotCharitySpace).to.be.true;
   });
 });
-describe("handleDownsizedSpace", function () {
-  it("should call game method nextPlayer", function () {
-    const game = new Game();
-    game.nextPlayer = sinon.spy();
-    game.handleDownsizedSpace();
-    expect(game.nextPlayer.calledOnce).to.be.true;
-  });
-});
-describe("handlePayday", function () {
-  it("should call game method nextPlayer", function () {
+
+describe("handlePayday", function() {
+  it("should call game method nextPlayer", function() {
     const game = new Game();
     const player = {
       name: "player1",

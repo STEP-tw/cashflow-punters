@@ -20,8 +20,27 @@ class Player extends FinancialStatement {
     this.turn = turn;
   }
 
+  removeCharityEffect() {
+    this.charityTurns = 0;
+  }
+
   isDownSized() {
     return this.downSizedForTurns != 0;
+  }
+  isledgerBalanceNegative() {
+    return this.ledgerBalance < 0;
+  }
+
+  downsize() {
+    this.downSizedForTurns = 2;
+    const downSizePenalty = this.totalExpense;
+    this.ledgerBalance -= downSizePenalty;
+    const eventMsg = "Downsize Penalty";
+    this.addDebitEvent(downSizePenalty, eventMsg);
+  }
+
+  decrementDownSizeTurns() {
+    this.downSizedForTurns -= 1;
   }
 
   move(spacesCount) {

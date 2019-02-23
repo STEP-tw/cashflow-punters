@@ -25,7 +25,8 @@ describe("getgame", function() {
   beforeEach(function() {
     req.game = {
       currentPlayer: {
-        name: "tilak"
+        name: "tilak",
+        isDownSized: sinon.stub()
       },
       getPlayer: sinon.spy()
     };
@@ -35,6 +36,8 @@ describe("getgame", function() {
     res.send = function(response) {
       res.content = response;
     };
+
+    req.game.currentPlayer.isDownSized.onFirstCall().returns(false);
   });
   it("should return game with isMyTurn true when currentPlayer is request player", function() {
     getGame(req, res);
