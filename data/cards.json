@@ -504,6 +504,7 @@
       "title": "Condo for Sale - 2BR/1BA",
       "message": "Parents selling 2/1 condo used by their child in college town. Lots of demands for rentals in this area.",
       "relatedTo": "realEstate",
+      "type": "2BR/1BA condo",
       "cost": "40000",
       "mortgage": "36000",
       "downPayment": "4000",
@@ -513,6 +514,7 @@
       "title": "Condo for Sale - 2BR/1BA",
       "message": "Excellent 2/1 condo with many extras. Owner wants to relocate for dream job FAST! She's moving up- you can too! No Cash Flow, but a possible capital gains opportunity",
       "relatedTo": "realEstate",
+      "type": "2BR/1BA condo",
       "cost": "40000",
       "mortgage": "39000",
       "downPayment": "1000",
@@ -523,6 +525,7 @@
       "message": "Low down payment to pickup this 2/1 house. Owner/ Seller unexpectedly moving out of town. Right person will do well.",
       "relatedTo": "realEstate",
       "cost": "50000",
+      "type": "2BR/1BA house",
       "mortgage": "47000",
       "downPayment": "3000",
       "cashflow": "100"
@@ -532,6 +535,7 @@
       "message": "Nice 2/1 house available in a depressed market due to layoffs. Would make a good investment property for the right buyer.",
       "relatedTo": "realEstate",
       "cost": "50000",
+      "type": "2BR/1BA house",
       "mortgage": "46000",
       "downPayment": "4000",
       "cashflow": "200"
@@ -540,6 +544,7 @@
       "title": "House for Sale - 2BR/1BA",
       "message": "Not lived in for six months, this bank fore closed house just reduced. Loan includes estimated repair cost.",
       "relatedTo": "realEstate",
+      "type": "2BR/1BA house",
       "cost": "50000",
       "mortgage": "48000",
       "downPayment": "2000",
@@ -550,6 +555,7 @@
       "message": "Company bought transfered manager's 2/1 house. No current tenant, it has been on the market six months and it has just been reduced. Take out a loan if you must,BUY THIS!",
       "relatedTo": "realEstate",
       "cost": "45000",
+      "type": "2/1 house",
       "mortgage": "43000",
       "downPayment": "2000",
       "cashflow": "250"
@@ -559,6 +565,7 @@
       "message": "Bank force closure! 2/1 condo in a desirable neighbourhood close to jobs and stores make offer, favourable financing by bank.",
       "relatedTo": "realEstate",
       "cost": "40000",
+      "type": "2BR/1BA condo",
       "mortgage": "35000",
       "downPayment": "5000",
       "cashflow": "220"
@@ -568,6 +575,7 @@
       "message": "Older 2/1 condo offered by young couple who want to move up to a 3/2 house due to growing family. Available soon.",
       "relatedTo": "realEstate",
       "cost": "55000",
+      "type": "2BR/1BA condo",
       "mortgage": "50000",
       "downPayment": "5000",
       "cashflow": "160"
@@ -577,6 +585,7 @@
       "message": "2/1 house in an older area offered by the highway department. The market has crashed and the city MUST sell. No cashflow but a possible capital gain opportunity.",
       "relatedTo": "realEstate",
       "cost": "30000",
+      "type": "2BR/1BA house",
       "mortgage": "29000",
       "downPayment": "1000",
       "cashflow": "0"
@@ -586,6 +595,7 @@
       "message": "Nice 2/1 rental house suddenly available due to estate closing. Well-maintained older property with existing tenant.",
       "relatedTo": "realEstate",
       "cost": "65000",
+      "type": "2BR/1BA house",
       "mortgage": "60000",
       "downPayment": "5000",
       "cashflow": "160"
@@ -595,6 +605,7 @@
       "message": "Older 2/1 house, repossed by government agency. Ready to go with government agency. Ready to go with government financing and tenant. Take out a loan if you mustt, but BUY THIS!",
       "relatedTo": "realEstate",
       "cost": "35000",
+      "type": "2/1 house",
       "mortgage": "33000",
       "downPayment": "2000",
       "cashflow": "220"
