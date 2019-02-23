@@ -201,7 +201,7 @@ const acceptSmallDeal = function(event) {
     .then(data => data.json())
     .then(({ isSuccessful }) => {
       if (isSuccessful) {
-        parent.style.display = "none";
+        parent.style.visibility = "hidden";
         return;
       }
       openOverlay("low-balance");
@@ -210,7 +210,7 @@ const acceptSmallDeal = function(event) {
 
 const declineSmallDeal = function() {
   let parent = event.target.parentElement;
-  parent.style.display = "none";
+  parent.style.visibility = "hidden";
   fetch("/declineSmallDeal");
 };
 
@@ -220,7 +220,7 @@ const acceptBigDeal = function(event) {
     .then(({ isSuccessful }) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
-        parent.style.display = "none";
+        parent.style.visibility = "hidden";
         return;
       }
       openOverlay("low-balance");
@@ -229,12 +229,13 @@ const acceptBigDeal = function(event) {
 
 const declineBigDeal = function() {
   let parent = event.target.parentElement;
-  parent.style.display = "none";
+  parent.style.visibility = "hidden";
   fetch("/declineBigDeal");
 };
 
 const createCardButtons = function(actions) {
   const buttons = createElement("div");
+  buttons.classList.add("buttons-div");
   const button1 = createButton(
     "Accept",
     "button_div",

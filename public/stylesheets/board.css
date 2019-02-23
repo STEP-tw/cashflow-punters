@@ -257,13 +257,7 @@ button:hover {
   display: none;
 }
 
-.buttons_div {
-  display: flex;
-  width: 40%;
-  align-self: flex-end;
-}
-
-.buttons_div > button {
+.button_div {
   padding: 5%;
   height: fit-content;
   width: fit-content;
@@ -636,6 +630,13 @@ button:hover {
 
   border-bottom: 1px solid black;
   border-radius: 5px;
+}
+
+.buttons-div {
+  display: flex;
+}
+.buttons-div > div {
+  margin-right: 2%;
 }
 
 .scrollable-notification {
