@@ -530,13 +530,14 @@ const showNotification = function(notification) {
   const oldNotification = odlNotifDiv && odlNotifDiv.children[0].innerText;
   if (!notification || oldNotification == notification) return;
   const notificationDiv = createTextDiv(notification);
-  notificationDiv.classList.add("scrollable");
+  notificationDiv.classList.add("scrollable-notification");
   const time = new Date().toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
     hour12: true
   });
   const timeDiv = createTextDiv(time);
+  timeDiv.classList.add("time-notification");
   const notificationsDiv = getElementById("notification-div");
   notificationsDiv.innerHTML = "";
   notificationsDiv.appendChild(notificationDiv);

@@ -638,8 +638,17 @@ button:hover {
   border-radius: 5px;
 }
 
-.scrollable {
+.scrollable-notification {
   overflow: scroll;
+
+  height: 70%;
+}
+
+.time-notification {
+  height: 30%;
+}
+.time-notification > p {
+  margin: 0;
 }
 
 .popup-background {
