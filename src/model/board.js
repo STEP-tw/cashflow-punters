@@ -1,7 +1,5 @@
-const { board } = require("../constant");
-
 class Board {
-  constructor() {
+  constructor(board) {
     this.board = board;
     this.paydaySpaces = [6, 14, 22];
   }

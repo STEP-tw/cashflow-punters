@@ -34,6 +34,7 @@ describe("", function() {
     it("should setup financial statement for player", function() {
       financialStatement.addPayday();
       expect(financialStatement).has.property("totalIncome");
+      expect(financialStatement).has.property("ledgerBalance");
       expect(financialStatement.ledgerBalance).to.equal(23500);
     });
   });

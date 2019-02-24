@@ -1,17 +1,8 @@
-const { CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
+const { UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
 
 const startGame = function(req, res) {
-  req.game.getInitialDetails();
-  req.game.hasStarted = true;
+  req.game.startGame();
   res.end();
-};
-
-const getPlayers = function(req, res) {
-  res.send(JSON.stringify(req.game.players));
-};
-
-const isCurrentPlayer = function(player, playerName) {
-  return player.name == playerName;
 };
 
 const getGame = function(req, res) {
@@ -21,8 +12,8 @@ const getGame = function(req, res) {
   if (currentPlayer.isDownSized()) {
     game.skipTurn();
   }
-  game.requestedPlayer = game.getPlayer(playerName);
-  game.isMyTurn = isCurrentPlayer(game.currentPlayer, playerName);
+  game.requester = game.getPlayerByName(playerName);
+  game.isMyTurn = game.isCurrentPlayer(playerName);
   res.send(JSON.stringify(game));
 };
 
@@ -35,13 +26,14 @@ const getPlayersFinancialStatement = function(req, res) {
 const rollDice = function(req, res) {
   const { numberOfDice } = req.body;
   const { playerName } = req.cookies;
-  const { currentPlayer } = req.game;
+  const game = req.game;
+  const { currentPlayer } = game;
   if (currentPlayer.isDownSized()) {
-    req.game.skipTurn();
+    game.skipTurn();
     res.json({ diceValues: [null] });
     return;
   }
-  if (!isCurrentPlayer(currentPlayer, playerName) || currentPlayer.rolledDice) {
+  if (!game.isCurrentPlayer(playerName) || currentPlayer.rolledDice) {
     res.json({ diceValues: [null] });
     return;
   }
@@ -180,17 +172,16 @@ const rejectBigDeal = function(req, res) {
 
 const hasCharity = function(req, res) {
   const { playerName } = req.cookies;
-  const currentPlayer = req.game.currentPlayer;
-  if(!isCurrentPlayer(currentPlayer, playerName)){
+  const game = req.game;
+  if (!game.isCurrentPlayer(playerName)) {
     res.send(JSON.stringify({ hasCharityTurns: false }));
-    return
+    return;
   }
   const hasCharityTurns = req.game.hasCharityTurns();
   res.send(JSON.stringify({ hasCharityTurns }));
 };
 
 module.exports = {
-  getPlayers,
   getGame,
   startGame,
   getPlayersFinancialStatement,

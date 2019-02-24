@@ -10,36 +10,12 @@ class FinancialStatement extends CashLedger {
     this.totalExpense;
     this.totalIncome;
     this.cashflow;
-    this.legerBalance;
+    this.ledgerBalance;
     this.income;
     this.expenses;
     this.liabilities;
     this.assets;
     this.perChildExpense;
-  }
-
-  setFinancialStatement(profession) {
-    this.profession = profession.profession;
-    this.perChildExpense = profession.perChildExpense;
-    this.income = profession.income;
-    this.income.realEstates = [];
-    this.expenses = profession.expenses;
-    this.assets = profession.assets;
-    this.assets.realEstates = [];
-    this.assets.goldCoins = 0;
-    this.liabilities = profession.liabilities;
-    this.liabilities.realEstate = [];
-    this.updateTotalIncome();
-    this.updateTotalExpense();
-    this.updateCashFlow();
-    this.ledgerBalance = this.cashflow + profession.assets.savings;
-    const initialAmount = this.cashflow + profession.assets.savings;
-    this.addCreditEvent(initialAmount, "Initial Cash");
-  }
-
-  updateFs() {
-    this.updateTotalExpense();
-    this.updateCashFlow();
   }
 
   updateTotalIncome() {
@@ -55,6 +31,28 @@ class FinancialStatement extends CashLedger {
     this.cashflow = this.totalIncome - this.totalExpense;
   }
 
+  updateFinancialStatement() {
+    this.updateTotalExpense();
+    this.updateTotalIncome();
+    this.updateCashFlow();
+  }
+
+  setFinancialStatement(profession) {
+    this.profession = profession.profession;
+    this.perChildExpense = profession.perChildExpense;
+    this.income = profession.income;
+    this.income.realEstates = [];
+    this.expenses = profession.expenses;
+    this.assets = profession.assets;
+    this.assets.realEstates = [];
+    this.assets.goldCoins = 0;
+    this.liabilities = profession.liabilities;
+    this.liabilities.realEstate = [];
+    this.updateFinancialStatement();
+    this.ledgerBalance = this.cashflow + profession.assets.savings;
+    const initialAmount = this.cashflow + profession.assets.savings;
+    this.addCreditEvent(initialAmount, "Initial Cash");
+  }
   addToLedgerBalance(amount) {
     this.ledgerBalance += amount;
   }
@@ -79,6 +77,7 @@ class FinancialStatement extends CashLedger {
       return;
     }
     this.liabilities[liability] = amount;
+    this.addToLedgerBalance(amount);
   }
 
   addExpense(expense, amount) {
@@ -87,7 +86,7 @@ class FinancialStatement extends CashLedger {
       return;
     }
     this.expenses[expense] = amount;
-    this.updateFs();
+    this.updateFinancialStatement();
   }
 
   addGoldCoins(count) {
@@ -100,6 +99,7 @@ class FinancialStatement extends CashLedger {
 
   removeLiability(liability, amount) {
     this.liabilities[liability] -= amount;
+    this.deductLedgerBalance(amount);
   }
 
   removeExpense(expense, amount) {

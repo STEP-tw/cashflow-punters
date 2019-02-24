@@ -105,3 +105,23 @@ const formatTime = function(date) {
     hour12: true
   });
 };
+
+const hideOverlay = function(id) {
+  const element = getElementById(id);
+  element.style.visibility = "hidden";
+};
+
+const closeOverlay = function(id) {
+  const element = getElementById(id);
+  element.style.display = "none";
+};
+
+const openOverlay = function(id, displayType = "block") {
+  const element = getElementById(id);
+  element.style.display = displayType;
+};
+
+const showOverlay = function(id) {
+  const element = getElementById(id);
+  element.style.visibility = "visible";
+};

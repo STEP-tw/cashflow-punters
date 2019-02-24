@@ -6,7 +6,6 @@ const {
   acceptBigDeal,
   rejectBigDeal,
   getPlayersFinancialStatement,
-  getPlayers,
   getGame,
   startGame,
   acceptCharity,
@@ -28,6 +27,10 @@ describe("getgame", function() {
         name: "tilak",
         isDownSized: sinon.stub()
       },
+      isCurrentPlayer: player => {
+        return req.game.currentPlayer.name == player;
+      },
+      getPlayerByName: sinon.stub(),
       getPlayer: sinon.spy()
     };
     req.cookies = {
@@ -36,8 +39,10 @@ describe("getgame", function() {
     res.send = function(response) {
       res.content = response;
     };
+    const player = { name: "player" };
 
     req.game.currentPlayer.isDownSized.onFirstCall().returns(false);
+    req.game.getPlayerByName.onFirstCall().returns(player);
   });
   it("should return game with isMyTurn true when currentPlayer is request player", function() {
     getGame(req, res);
@@ -51,28 +56,17 @@ describe("getgame", function() {
   });
 });
 
-describe("getPlayers", function() {
-  it("should return game", function() {
-    const req = {
-      game: {
-        player: [1, 2]
-      }
-    };
-    const res = {
-      send: () => {
-        expect(req.game.player).to.eql([1, 2]);
-      }
-    };
-    getPlayers(req, res);
-  });
-});
-
 describe("startGame", function() {
   it("should redirect to board.html", function() {
     let req = {
       game: {
         hasStarted: false,
-        getInitialDetails: () => {}
+        startGame: () => {
+          req.game.initializeGame();
+        },
+        initializeGame: () => {
+          req.game.hasStarted = true;
+        }
       }
     };
     let res = {

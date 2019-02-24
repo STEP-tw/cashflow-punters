@@ -15,7 +15,7 @@ describe("Game", function() {
       expect(game)
         .to.have.property("players")
         .to.be.an("Array")
-        .to.deep.equals([{ name: "player" }]);
+        .to.deep.equals([{ name: "player", turn: 1 }]);
     });
   });
   describe("getPlayerNames", function() {
@@ -51,9 +51,15 @@ describe("Game", function() {
 
 describe("startGame", function() {
   it("should set the isStarted property of game to true", function() {
+<<<<<<< HEAD
     const player1 = { name: "player1" };
     const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
+=======
+    const player1 = { name: "player1", setFinancialStatement: () => {} };
+    const professions = new Cards([{ profession: "driver" }]);
+    const game = new Game({ professions });
+>>>>>>> Refactored the code
     game.addPlayer(player1);
     game.startGame();
     expect(game)
@@ -103,7 +109,14 @@ describe("handleSpace", function() {
     game.currentPlayer.currentSpace = 9;
     game.handleCrossedPayDay = sinon.spy();
     game.nextPlayer = sinon.spy();
+    game.handleBabySpace = sinon.spy();
+    game.board = {
+      getSpaceType: sinon.stub()
+    };
+
+    game.board.getSpaceType.onFirstCall().returns("baby");
     game.handleSpace(5);
+
     expect(game.handleCrossedPayDay.calledOnce).to.be.true;
   });
 });
@@ -117,6 +130,11 @@ describe("handleCrossedPayday", function() {
         this.notification = msg;
       }
     };
+    game.board = {
+      getPayDaySpaces: sinon.stub()
+    };
+
+    game.board.getPayDaySpaces.onFirstCall().returns([6, 14, 22]);
   });
   it("should addActivity on crossing payday", function() {
     game.currentPlayer.currentSpace = 10;
@@ -135,9 +153,9 @@ describe("handleCrossedPayday", function() {
   });
 });
 
-describe("getInitialDetails", function() {
+describe("initializeGame", function() {
   it("should return initial details of player", function() {
-    let cards = new Cards([{ 1: "p1" }, { 1: "p2" }]);
+    let cards = [{ 1: "p1" }, { 1: "p2" }];
     let professions = new Cards(cards);
     let game = new Game({ professions });
     const player1 = { name: "player1", setFinancialStatement: () => {} };
@@ -145,7 +163,7 @@ describe("getInitialDetails", function() {
 
     game.addPlayer(player1);
     game.addPlayer(player2);
-    game.getInitialDetails();
+    game.initializeGame();
 
     expect(game)
       .to.have.property("currentPlayer")
@@ -334,9 +352,7 @@ describe("grantLoan", function() {
     player.name = "player";
     player.addLiability = sinon.spy();
     player.addExpense = sinon.spy();
-    player.addToLedgerBalance = sinon.spy();
-    player.updateCashFlow = sinon.spy();
-    player.updateTotalExpense = sinon.spy();
+    player.updateFinancialStatement = sinon.spy();
     player.addCreditEvent = sinon.spy();
     game.getPlayerByName = sinon.stub();
     game.getPlayerByName.onFirstCall().returns(player);
@@ -345,10 +361,7 @@ describe("grantLoan", function() {
 
     sinon.assert.calledOnce(player.addLiability);
     sinon.assert.calledOnce(player.addExpense);
-    sinon.assert.calledOnce(player.addToLedgerBalance);
-    sinon.assert.calledOnce(player.updateCashFlow);
-    sinon.assert.calledOnce(player.addCreditEvent);
-    sinon.assert.calledOnce(player.updateTotalExpense);
+    sinon.assert.calledOnce(player.updateFinancialStatement);
   });
 });
 
@@ -365,10 +378,8 @@ describe("payDebt", function() {
 
     player.removeLiability = sinon.spy();
     player.removeExpense = sinon.spy();
-    player.deductLedgerBalance = sinon.spy();
     player.addDebitEvent = sinon.spy();
-    player.updateCashFlow = sinon.spy();
-    player.updateTotalExpense = sinon.spy();
+    player.updateFinancialStatement = sinon.spy();
     game.getPlayerByName = sinon.stub();
     game.getPlayerByName.onFirstCall().returns(player);
 
@@ -376,10 +387,8 @@ describe("payDebt", function() {
 
     sinon.assert.calledOnce(player.removeLiability);
     sinon.assert.calledOnce(player.removeExpense);
-    sinon.assert.calledOnce(player.deductLedgerBalance);
-    sinon.assert.calledOnce(player.updateCashFlow);
     sinon.assert.calledOnce(player.addDebitEvent);
-    sinon.assert.calledOnce(player.updateTotalExpense);
+    sinon.assert.calledOnce(player.updateFinancialStatement);
   });
 });
 

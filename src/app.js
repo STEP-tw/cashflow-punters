@@ -16,7 +16,6 @@ const {
   rollDice,
   startGame,
   grantLoan,
-  getPlayers,
   hasCharity,
   selectBigDeal,
   acceptBigDeal,
@@ -50,7 +49,6 @@ app.get("/acceptBigDeal", acceptBigDeal);
 app.get("/declineBigDeal", rejectBigDeal);
 app.get("/declineCharity", declineCharity);
 app.get("/liabilities", provideLiabilities);
-app.get("/getPlayerProfessions", getPlayers);
 app.get("/selectSmallDeal", selectSmallDeal);
 app.get("/acceptSmallDeal", acceptSmallDeal);
 app.get("/declineSmallDeal", rejectSmallDeal);

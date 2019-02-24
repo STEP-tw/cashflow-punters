@@ -18,6 +18,7 @@ describe("rollDice", function() {
         move: sinon.spy(),
         isDownSized: sinon.stub()
       },
+      isCurrentPlayer: sinon.stub(),
       rollDice: sinon.spy(),
       handleSpace: sinon.spy()
     };
@@ -29,6 +30,7 @@ describe("rollDice", function() {
     res.json = sinon.spy();
 
     req.game.currentPlayer.isDownSized.onFirstCall().returns(false);
+    req.game.isCurrentPlayer.onFirstCall().returns(true);
   });
   it("should return a number between 1 and 6 ", function() {
     rollDice(req, res);

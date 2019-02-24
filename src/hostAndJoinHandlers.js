@@ -2,6 +2,8 @@ const Game = require("./model/game");
 const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
+const Board = require("./model/board");
+const { gameSpaces } = require("./constant");
 
 const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
@@ -9,7 +11,9 @@ const initializeGame = function(host) {
   const market = new Cards(cards.market);
   const doodads = new Cards(cards.doodads);
   const professions = new Cards(cards.professions);
-  return new Game({ bigDeals, smallDeals, market, doodads, professions }, host);
+  const cardsStore = { bigDeals, smallDeals, market, doodads, professions };
+  const board = new Board(gameSpaces);
+  return new Game(cardsStore, board, host);
 };
 
 const hostGame = function(req, res) {

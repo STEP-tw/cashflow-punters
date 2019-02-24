@@ -58,7 +58,8 @@ describe("hostGame", function() {
           entries: [],
           didUpdateSpace: false,
           currentSpace: 0,
-          passiveIncome: 0
+          passiveIncome: 0,
+          turn:1
         }
       ]);
   });

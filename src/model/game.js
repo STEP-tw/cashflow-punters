@@ -1,6 +1,3 @@
-const lodash = require("lodash");
-const Board = require("./board");
-const { assignId } = require("../utils/array.js");
 const {
   getNextNum,
   isBetween,
@@ -19,9 +16,9 @@ class ActivityLog {
 }
 
 class Game extends ActivityLog {
-  constructor(cardStore, host) {
+  constructor(cardStore, board, host) {
     super();
-    this.board = new Board();
+    this.board = board;
     this.host = host;
     this.cardStore = cardStore;
     this.currentPlayer;
@@ -32,6 +29,7 @@ class Game extends ActivityLog {
   }
 
   addPlayer(player) {
+    player.turn = this.players.length + 1;
     this.players.push(player);
   }
 
@@ -43,47 +41,45 @@ class Game extends ActivityLog {
     this.currentPlayer = player;
   }
 
-  getInitialDetails() {
-    const ids = lodash.range(1, this.players.length + 1);
-    lodash.zip(this.players, ids).map(assignId);
-    this.players.map(this.getProfession, this);
+  isCurrentPlayer(playerName) {
+    return this.currentPlayer.name == playerName;
+  }
+
+  initializeGame() {
+    this.players.map(this.setProfession, this);
     this.currentPlayer = this.players[0];
     this.addActivity("Game has Started");
     this.addActivity("'s turn", this.currentPlayer.name);
   }
 
-  getProfession(player) {
-    let { professions } = this.cardStore;
+  setProfession(player) {
+    const { professions } = this.cardStore;
     const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);
   }
 
-  getPlayer(name) {
+  getPlayerByName(name) {
     return this.players.filter(player => player.name == name)[0];
-  }
-
-  getTotalPlayers() {
-    return this.players.length;
-  }
-
-  startGame() {
-    this.hasStarted = true;
   }
 
   getPlayersCount() {
     return this.players.length;
   }
 
+  startGame() {
+    this.initializeGame();
+    this.hasStarted = true;
+  }
+
   isPlaceAvailable() {
-    const playersCount = this.getPlayersCount();
-    return playersCount < 6;
+    return this.getPlayersCount() < 6;
   }
 
   nextPlayer() {
     this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
-    const nextPlayerTurn = getNextNum(currTurn, this.getTotalPlayers());
+    const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
     this.addActivity("'s turn ", this.currentPlayer.name);
   }
@@ -231,9 +227,7 @@ class Game extends ActivityLog {
     const loanInterest = loanAmount / 10;
     player.addLiability("Bank Loan", loanAmount);
     player.addExpense("Bank Loan Payment", loanInterest);
-    player.addToLedgerBalance(loanAmount);
-    player.updateTotalExpense();
-    player.updateCashFlow();
+    player.updateFinancialStatement();
     const activityMessage = ` took loan of $${loanAmount}`;
     player.addCreditEvent(loanAmount, "took loan");
     this.addActivity(activityMessage, playerName);
@@ -245,18 +239,11 @@ class Game extends ActivityLog {
     const player = this.getPlayerByName(playerName);
     player.removeLiability(liability, liabilityPrice);
     player.removeExpense(expense, expenseAmount);
-    player.deductLedgerBalance(liabilityPrice);
-    player.updateTotalExpense();
-    player.updateCashFlow();
+    player.updateFinancialStatement();
     player.addDebitEvent(liabilityPrice, `paid loan for ${liability}`);
-    const activityMessage = ` payed debt $${liabilityPrice} for liability - ${liability}`;
+    const activityMessage = ` paid debt $${liabilityPrice} for liability - ${liability}`;
     this.addActivity(activityMessage, playerName);
     player.setNotification("you" + activityMessage);
-  }
-
-  getPlayerByName(playerName) {
-    const player = this.players.filter(player => player.name == playerName)[0];
-    return player;
   }
 
   acceptCharity() {

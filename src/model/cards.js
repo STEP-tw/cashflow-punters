@@ -1,4 +1,5 @@
 const lodash = require("lodash");
+
 class Cards {
   constructor(cards) {
     this.cards = cards;
@@ -6,15 +7,17 @@ class Cards {
   }
 
   drawCard() {
-    if (this.cards.length == 0) {
-      this.cards = this.usedCards;
-      this.usedCards = [];
-    }
     const cards = lodash.shuffle(this.cards);
     const card = cards.pop();
     this.usedCards.push(card);
     this.cards = cards;
+    if (cards.length == 0) this.restoreStack();
     return card;
+  }
+
+  restoreStack() {
+    this.cards = this.cards.concat(this.usedCards);
+    this.usedCards = [];
   }
 }
 

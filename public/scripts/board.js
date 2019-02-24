@@ -1,22 +1,4 @@
-const hideOverlay = function(id) {
-  const element = document.getElementById(id);
-  element.style.visibility = "hidden";
-};
 
-const closeOverlay = function(id) {
-  const element = document.getElementById(id);
-  element.style.display = "none";
-};
-
-const openOverlay = function(id, displayType = "block") {
-  const element = document.getElementById(id);
-  element.style.display = displayType;
-};
-
-const showOverlay = function(id) {
-  const element = getElementById(id);
-  element.style.visibility = "visible";
-};
 
 const openFinancialStatement = function() {
   let fs = document.getElementById("financial_statement");
@@ -511,14 +493,14 @@ const rollDie = function() {
 };
 
 const polling = function(game) {
-  let { players, requestedPlayer } = game;
+  let { players, requester } = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
-  updateStatementBoard(requestedPlayer);
-  setFinancialStatement(requestedPlayer);
-  setCashLedger(requestedPlayer);
-  showNotification(requestedPlayer.notification);
+  updateStatementBoard(requester);
+  setFinancialStatement(requester);
+  setCashLedger(requester);
+  showNotification(requester.notification);
   players.forEach(updateGamePiece);
   if (game.isMyTurn) {
     const diceBlock = getElementById("dice_block");

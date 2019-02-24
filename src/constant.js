@@ -1,4 +1,4 @@
-const board = [
+const gameSpaces = [
   "deal",
   "doodad",
   "deal",
@@ -31,4 +31,4 @@ const CHARITY_MSG =
 const UNABLE_TO_DO_CHARITY_MSG =
   "Sorry! your ledger balance is not enough to do charity.";
 
-module.exports = { board, CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG };
+module.exports = { gameSpaces, CHARITY_MSG, UNABLE_TO_DO_CHARITY_MSG };
