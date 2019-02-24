@@ -51,15 +51,9 @@ describe("Game", function() {
 
 describe("startGame", function() {
   it("should set the isStarted property of game to true", function() {
-<<<<<<< HEAD
-    const player1 = { name: "player1" };
-    const cards = { bigDeals: [], smallDeals: [] };
-    const game = new Game(cards);
-=======
     const player1 = { name: "player1", setFinancialStatement: () => {} };
     const professions = new Cards([{ profession: "driver" }]);
     const game = new Game({ professions });
->>>>>>> Refactored the code
     game.addPlayer(player1);
     game.startGame();
     expect(game)
