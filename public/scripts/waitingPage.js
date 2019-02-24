@@ -1,33 +1,44 @@
-const displayLobby = function(gameDetails) {
-  const gameIdSpace = getElementById("gameId");
-  const playerList = getElementById("playersList");
-  const playernamesHtml = getPlayerNamesHtml(gameDetails.players);
-  gameIdSpace.innerText = gameDetails.gameId;
-  appendChildren(playerList, playernamesHtml);
+const isChangeInLobby = function ({ players }) {
+  const playersInLobby = document.getElementsByTagName('li');
+  let playerNo = 0
+  return players.every(({ name }) => {
+    return players.length != playersInLobby.length ||
+      name != playersInLobby[playerNo++].innerText;
+  })
+}
+
+const displayLobby = function (gameDetails) {
+  if (isChangeInLobby(gameDetails)) {
+    const gameIdSpace = getElementById("gameId");
+    const playerList = getElementById("playersList");
+    const playernamesHtml = getPlayerNamesHtml(gameDetails.players);
+    gameIdSpace.innerText = gameDetails.gameId;
+    appendChildren(playerList, playernamesHtml);
+  }
   return gameDetails;
 };
 
-const goToGame = function(gameDetails) {
+const goToGame = function (gameDetails) {
   if (gameDetails.hasStarted) window.location.href = "/board.html";
   return gameDetails;
 };
 
-const convertToListElement = function(text) {
+const convertToListElement = function (text) {
   const listElement = createElement("li");
   listElement.innerText = text;
   return listElement;
 };
 
-const getPlayerNamesHtml = function(players) {
+const getPlayerNamesHtml = function (players) {
   return players.map(convertToListElement);
 };
 
-const startNewGame = function() {
+const startNewGame = function () {
   event.target.onclick = null;
   fetch("/startGame");
 };
 
-const checkPlayersCount = function({ players, isHost }) {
+const checkPlayersCount = function ({ players, isHost }) {
   if (players.length >= 2 && isHost) {
     const buttonSpace = getElementById("start_button_space");
     const startButton = createButton("Start Game", "button", "", "button");
@@ -36,7 +47,7 @@ const checkPlayersCount = function({ players, isHost }) {
   }
 };
 
-const insertButtons = function({ isHost }) {
+const insertButtons = function ({ isHost }) {
   const buttonsSpace = getElementById("buttons_space");
   let button = createButton("Leave Game", "button", "", "button");
   if (isHost) {
