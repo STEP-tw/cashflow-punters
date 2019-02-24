@@ -471,30 +471,42 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #c3fcdb;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .player1 {
+  height: 10%;
+  width: 10%;
   background-color: red;
 }
 
 .player2 {
+  height: 10%;
+  width: 10%;
   background-color: green;
 }
 
 .player3 {
+  height: 10%;
+  width: 10%;
   background-color: yellow;
 }
 
 .player4 {
+  height: 10%;
+  width: 10%;
   background-color: violet;
 }
 
 .player5 {
+  height: 10%;
+  width: 10%;
   background-color: purple;
 }
 
 .player6 {
+  height: 10%;
+  width: 10%;
   background-color: saddlebrown;
 }
 
@@ -519,6 +531,8 @@ button:hover {
 .statements {
   height: 90%;
   display: flex;
+  background-color: lightgray;
+  z-index: 1;
 }
 
 .details {
@@ -535,7 +549,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 13px 5px 0px rgba(0, 0, 0, 0.47);
   border-radius: 1vh;
   padding: 10%;
   z-index: 2;
@@ -630,6 +644,7 @@ button:hover {
 .buttons-div {
   display: flex;
 }
+
 .buttons-div > div {
   margin-right: 2%;
 }
@@ -643,6 +658,7 @@ button:hover {
 .time-notification {
   height: 30%;
 }
+
 .time-notification > p {
   margin: 0;
 }

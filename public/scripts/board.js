@@ -5,21 +5,16 @@ const getBoard = function() {
 };
 
 const getEntriesHtml = function(entry) {
-  const symbols = {
-    debit: "-",
-    credit: "+"
-  };
-  const {time} = entry;
+  const {time, type, amount, currentBalance, event} = entry;
+  const symbols = {debit: "-", credit: "+"};
   const currentTime = formatTime(new Date(time));
   const entryDiv = createElement("div");
   entryDiv.className = "entry";
   const eventDiv = createElement("div");
   const totalAmountDiv = createElement("div");
-  const symbol = symbols[entry.type];
-  eventDiv.innerHTML = `${symbol} ${entry.amount} --> ${
-    entry.event
-  } ${currentTime}`;
-  totalAmountDiv.innerHTML = `= ${entry.currentBalance}`;
+  const symbol = symbols[type];
+  eventDiv.innerHTML = `${symbol} ${amount} --> ${event} ${currentTime}`;
+  totalAmountDiv.innerHTML = `= ${currentBalance}`;
   appendChildren(entryDiv, [eventDiv, totalAmountDiv]);
   return entryDiv;
 };
@@ -220,10 +215,10 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
-  const mortgageDiv = createTextDiv(`mortgage : ${mortgage}`);
-  const costDiv = createTextDiv(`cost : ${cost}`);
-  const downPaymentDiv = createTextDiv(`down payment : ${downPayment}`);
-  const cashflowDiv = createTextDiv(`cashflow ${cashflow}`);
+  const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
+  const costDiv = createTextDiv(`Cost : ${cost}`);
+  const downPaymentDiv = createTextDiv(`Down Payment : ${downPayment}`);
+  const cashflowDiv = createTextDiv(`Cashflow ${cashflow}`);
   const bottomDiv1 = createElement("div");
   const bottomDiv2 = createElement("div");
   bottomDiv1.classList.add("card-bottom");
@@ -239,8 +234,8 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
   const cardDiv = createCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
-  const numberDiv = createTextDiv(`coins : ${numberOfCoins}`);
-  const costDiv = createTextDiv(`cost : ${cost}`);
+  const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
+  const costDiv = createTextDiv(`Cost : ${cost}`);
   const bottomDiv = createElement("div");
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [numberDiv, costDiv]);
@@ -414,7 +409,7 @@ const rollDice = function(numberOfDice) {
 const rollOneDice = function() {
   closeOverlay("num_of_dice");
   hideOverlay("num_of_dice");
-  disableDice("dice2");
+  hideOverlay("dice2");
   rollDice(1);
 };
 
@@ -429,7 +424,7 @@ const rollDie = function() {
       oneDiceButton.onclick = rollOneDice;
       const twoDiceButton = getElementById("two_dice_button");
       twoDiceButton.onclick = () => {
-        enableDice("dice2");
+        showOverlay("dice2");
         rollDice(2);
       };
     });
@@ -492,9 +487,7 @@ const createActivity = function({playerName, msg, time}) {
 const updateActivityLog = function(activityLog) {
   const activityLogDiv = getElementById("activityLog");
   const localActivitiesCount = activityLogDiv.children.length;
-  if (activityLog.length == localActivitiesCount) {
-    return;
-  }
+  if (activityLog.length == localActivitiesCount) return;
   const newActivities = activityLog.slice(localActivitiesCount);
   newActivities.forEach(activity => {
     let activityDiv = createActivity(activity);
@@ -515,16 +508,6 @@ const getGame = function() {
       updateActivityLog(game.activityLog);
       polling(game);
     });
-};
-
-const enableDice = function(id) {
-  const dice = getElementById(id);
-  dice.style.visibility = "visible";
-};
-
-const disableDice = function(id) {
-  const dice = getElementById(id);
-  dice.style.visibility = "hidden";
 };
 
 const initialize = function() {

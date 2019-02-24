@@ -20,10 +20,7 @@ const getProfessionsDiv = function(player) {
   const playerName = createParagraph(`Name : ${name}`, "sub-header");
   const playerProfession = createParagraph(`Profession : ${profession}`);
   const playerTurn = createParagraph(`Playing Turn : ${turn}`);
-  const playerGamePiece = createParagraph(
-    `Game Piece : ${gamePiece[turn]}`,
-    "player" + turn
-  );
+  const playerGamePiece = createParagraph(``, "player" + turn);
   appendChildren(mainDiv, [
     playerName,
     playerProfession,
