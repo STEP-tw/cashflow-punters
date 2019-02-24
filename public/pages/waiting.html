@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Waiting to start game</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
-    <link href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto"
+      rel="stylesheet"
+    />
     <script src="/waitingPage.js"></script>
     <script src="/utils.js"></script>
   </head>
@@ -16,16 +19,14 @@
     </header>
     <main>
       <p>Game ID : <span id="gameId">1234</span></p>
-      <img class="waiting-gif" src="/waiting.gif" alt="waiting">
+      <img class="waiting-gif" src="/waiting.gif" alt="waiting" />
       <section class="box">
         <p>Players in lobby :</p>
-        <ul id="playersList">
-        </ul>
+        <ul id="playersList"></ul>
       </section>
       <section class="buttons" id="buttons_space">
         <a id="start_button_space"></a>
       </section>
     </main>
   </body>
-
 </html>
