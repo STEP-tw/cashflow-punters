@@ -122,6 +122,9 @@ describe("handleCrossedPayday", function() {
       addPayday: () => {},
       setNotification: function(msg) {
         this.notification = msg;
+      },
+      isBankrupt:function() {
+        return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
       }
     };
     game.board = {
@@ -296,6 +299,9 @@ describe("handlePayday", function() {
       getTurn: sinon.spy(),
       setNotification: function(msg) {
         this.notification = msg;
+      },
+      isBankrupt:function() {
+        return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
       }
     };
     game.addPlayer(player);

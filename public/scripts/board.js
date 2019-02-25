@@ -1,3 +1,8 @@
+const openFinancialStatement = function() {
+  let fs = document.getElementById("financial_statement");
+  fs.style.visibility = "visible";
+};
+
 const getBoard = function() {
   const container = document.getElementById("container");
   const parent = container.parentElement;
@@ -430,8 +435,12 @@ const rollDie = function() {
     });
 };
 
+const processBankruptcy = function(currentPlayer) {
+  alert("hii");
+}
+
 const polling = function(game) {
-  let { players, requester } = game;
+  let { players, requester, currentPlayer } = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }
@@ -443,6 +452,9 @@ const polling = function(game) {
   if (game.isMyTurn) {
     const diceBlock = getElementById("dice_block");
     diceBlock.onclick = rollDie;
+  }
+  if (currentPlayer.bankrupt) {
+    processBankruptcy(currentPlayer);
   }
 };
 
@@ -466,6 +478,7 @@ const showNotification = function(notification) {
 };
 
 const updateGamePiece = function(player) {
+  console.log(player);
   let gamePiece = document.getElementById("gamePiece" + player.turn);
   gamePiece.classList.add("visible");
   let space = gamePiece.parentNode;

@@ -180,12 +180,16 @@ class Game extends ActivityLog {
   }
 
   handlePayday() {
-    const paydayAmount = this.currentPlayer.addPayday();
-    this.currentPlayer.setNotification(
-      `You got Payday.${paydayAmount} added to your Savings`
-    );
-    this.nextPlayer();
-  }
+    if (this.currentPlayer.isBankrupt()) {
+      this.currentPlayer.bankrupt = true;
+      return;
+    };
+      const paydayAmount = this.currentPlayer.addPayday();
+      this.currentPlayer.setNotification(
+        `You got Payday.${paydayAmount} added to your Savings`
+      );
+      this.nextPlayer();
+  };
 
   handleSpace(oldSpaceNo) {
     const handlers = {
@@ -213,14 +217,18 @@ class Game extends ActivityLog {
     );
     if (crossedPaydays.length > 0) {
       crossedPaydays.forEach(() => {
-        this.addActivity(" crossed payday", this.currentPlayer.name);
-        const paydayAmount = this.currentPlayer.addPayday();
-        this.currentPlayer.setNotification(
-          `You got Payday.${paydayAmount} added to your Savings`
-        );
+        if (this.currentPlayer.isBankrupt()) {
+          this.currentPlayer.bankrupt = true;
+          return;
+        };
+          this.addActivity(" crossed payday", this.currentPlayer.name);
+          const paydayAmount = this.currentPlayer.addPayday();
+          this.currentPlayer.setNotification(
+            `You got Payday.${paydayAmount} added to your Savings`
+          );
       });
-    }
-  }
+    };
+  };
 
   grantLoan(playerName, loanAmount) {
     const player = this.getPlayerByName(playerName);

@@ -50,6 +50,7 @@ describe("hostGame", function() {
       .to.be.an("Array")
       .to.deep.equals([
         {
+          bankrupt: false,
           charityTurns: 0,
           notification: "",
           childrenCount: 0,
@@ -132,6 +133,7 @@ describe("joinGame", function() {
       .to.have.property("players")
       .to.deep.equals([
         {
+          bankrupt:false,
           charityTurns: 0,
           notification: "",
           name: "player",

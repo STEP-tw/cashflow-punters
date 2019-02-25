@@ -14,10 +14,15 @@ class Player extends FinancialStatement {
     this.didUpdateSpace = false;
     this.notification = "";
     this.downSizedForTurns = 0;
+    this.bankrupt = false;
   }
 
   setTurn(turn) {
     this.turn = turn;
+  }
+
+  isBankrupt() {
+    return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
   }
 
   removeCharityEffect() {
