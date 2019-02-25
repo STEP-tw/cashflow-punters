@@ -1,4 +1,4 @@
-const { add } = require("../utils/utils");
+const {add} = require("../utils/utils");
 const CashLedger = require("./cashLedger");
 const getIncome = (value, content) => value + content.cashflow;
 
@@ -46,6 +46,7 @@ class FinancialStatement extends CashLedger {
     this.assets = profession.assets;
     this.assets.realEstates = [];
     this.assets.goldCoins = 0;
+    this.assets.shares = {};
     this.liabilities = profession.liabilities;
     this.liabilities.realEstate = [];
     this.updateFinancialStatement();
@@ -68,7 +69,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addAsset(type, downPayment, cost) {
-    this.assets.realEstates.push({ type, downPayment, cost });
+    this.assets.realEstates.push({type, downPayment, cost});
   }
 
   addLiability(liability, amount) {
@@ -94,7 +95,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addIncomeRealEstate(type, cashflow) {
-    this.income.realEstates.push({ type, cashflow });
+    this.income.realEstates.push({type, cashflow});
   }
 
   removeLiability(liability, amount) {
@@ -104,6 +105,10 @@ class FinancialStatement extends CashLedger {
 
   removeExpense(expense, amount) {
     this.expenses[expense] -= amount;
+  }
+
+  hasShares(symbol) {
+    return Object.keys(this.assets.shares).includes(symbol);
   }
 }
 

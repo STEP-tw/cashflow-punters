@@ -1,5 +1,5 @@
 const sinon = require("sinon");
-const { expect } = require("chai");
+const {expect} = require("chai");
 const {
   acceptSmallDeal,
   rejectSmallDeal,
@@ -15,7 +15,10 @@ const {
   isAbleToDoCharity,
   grantLoan,
   provideLiabilities,
-  payDebt
+  payDebt,
+  isSharePresent,
+  buyShares,
+  sellShares
 } = require("../src/gameHandlers");
 
 describe("getgame", function() {
@@ -39,7 +42,7 @@ describe("getgame", function() {
     res.send = function(response) {
       res.content = response;
     };
-    const player = { name: "player" };
+    const player = {name: "player"};
 
     req.game.currentPlayer.isDownSized.onFirstCall().returns(false);
     req.game.getPlayerByName.onFirstCall().returns(player);
@@ -83,10 +86,10 @@ describe("startGame", function() {
 describe("getPlayersFinancialStatement", function() {
   it("should give financial statement of current player", function() {
     let req = {
-      cookies: { playerName: "anu" },
-      game: { players: [{ name: "anu" }], getPlayerByName: sinon.stub() }
+      cookies: {playerName: "anu"},
+      game: {players: [{name: "anu"}], getPlayerByName: sinon.stub()}
     };
-    req.game.getPlayerByName.onFirstCall().returns({ name: "anu" });
+    req.game.getPlayerByName.onFirstCall().returns({name: "anu"});
 
     let res = {
       send: player => {
@@ -104,14 +107,14 @@ describe("acceptCharity", function() {
   beforeEach(() => {
     req = {
       game: {
-        currentPlayer: { charityTurns: 0, getLedgerBalance: sinon.spy() },
+        currentPlayer: {charityTurns: 0, getLedgerBalance: sinon.spy()},
         nextPlayer: sinon.spy(),
         acceptCharity: function() {
           this.currentPlayer.charityTurns = 3;
         }
       }
     };
-    res = { send: sinon.spy() };
+    res = {send: sinon.spy()};
   });
   it("should add charity turns to currentPlayer", function() {
     acceptCharity(req, res);
@@ -127,7 +130,7 @@ describe("declineCharity", function() {
       nextPlayer: sinon.spy()
     }
   };
-  const res = { end: sinon.spy() };
+  const res = {end: sinon.spy()};
   declineCharity(req, res);
   expect(req.game.declineCharity.calledOnce).to.be.true;
 });
@@ -137,7 +140,7 @@ describe("selectSmallDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      currentPlayer: { gotDeal: true },
+      currentPlayer: {gotDeal: true},
       handleSmallDeal: sinon.spy()
     };
     res.end = sinon.spy();
@@ -157,7 +160,7 @@ describe("selectBigDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      currentPlayer: { gotDeal: true },
+      currentPlayer: {gotDeal: true},
       handleBigDeal: sinon.spy()
     };
     res.end = sinon.spy();
@@ -213,8 +216,8 @@ describe("isAbleToDoCharity", function() {
 describe("grantLoan", function() {
   it("should update the cash ledger, financial statement and respond with player", function() {
     const req = {};
-    req.cookies = { playerName: "player" };
-    req.body = { amount: 5000 };
+    req.cookies = {playerName: "player"};
+    req.body = {amount: 5000};
     req.game = {
       grantLoan: sinon.spy(),
       getPlayerByName: sinon.spy()
@@ -234,12 +237,12 @@ describe("grantLoan", function() {
 describe("provideLiabilities", function() {
   const req = {};
   const res = {};
-  req.cookies = { playerName: "player1" };
+  req.cookies = {playerName: "player1"};
   req.game = {
     players: [
-      { name: "player1", turn: 1, profession: {} },
-      { name: "player2", turn: 2, profession: {} },
-      { name: "player3", turn: 3, profession: {} }
+      {name: "player1", turn: 1, profession: {}},
+      {name: "player2", turn: 2, profession: {}},
+      {name: "player3", turn: 3, profession: {}}
     ],
     getPlayerByName: function(playerName) {
       return this.players.filter(player => player.name == playerName)[0];
@@ -264,7 +267,7 @@ describe("payDebt", function() {
   it("should deduct the amount from ledgerBalance and return the player", function() {
     const req = {};
     const res = {};
-    req.cookies = { playerName: "player1" };
+    req.cookies = {playerName: "player1"};
     req.body = {
       liability: "Bank Loan",
       liabilityPrice: 5000,
@@ -304,11 +307,11 @@ describe("acceptSmallDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+      activeCard: {data: {relatedTo: ""}, dealDone: false, dealDoneCount: 0}
     };
-    req.game.players = { length: 0 };
+    req.game.players = {length: 0};
     req.game.addActivity = sinon.spy();
-    req.cookies = { playerName: "" };
+    req.cookies = {playerName: ""};
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
     res.send = sinon.spy();
@@ -323,20 +326,6 @@ describe("acceptSmallDeal", function() {
     acceptSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
-  it("should call nextPlayer if deal is shares and all players accept or reject", function() {
-    req.game.players.length = 6;
-    req.game.activeCard.data.relatedTo = "shares";
-    req.game.activeCard.dealDoneCount = 5;
-    acceptSmallDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.true;
-  });
-  it("should not call nextPlayer if deal is shares and all players didn't accept or reject", function() {
-    req.game.players.length = 6;
-    req.game.activeCard.data.relatedTo = "shares";
-    req.game.activeCard.dealDoneCount = 3;
-    acceptSmallDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.false;
-  });
 });
 
 describe("rejectSmallDeal", function() {
@@ -344,11 +333,11 @@ describe("rejectSmallDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+      activeCard: {data: {relatedTo: ""}, dealDone: false, dealDoneCount: 0}
     };
     req.game.addActivity = sinon.spy();
-    req.cookies = { playerName: "" };
-    req.game.players = { length: 0 };
+    req.cookies = {playerName: ""};
+    req.game.players = {length: 0};
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
     res.send = sinon.spy();
@@ -370,13 +359,6 @@ describe("rejectSmallDeal", function() {
     rejectSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
-  it("should not call nextPlayer if deal is shares and all players didn't accept or reject", function() {
-    req.game.players.length = 6;
-    req.game.activeCard.data.relatedTo = "shares";
-    req.game.activeCard.dealDoneCount = 3;
-    rejectSmallDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.false;
-  });
 });
 
 describe("acceptBigDeal", function() {
@@ -384,13 +366,13 @@ describe("acceptBigDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+      activeCard: {data: {relatedTo: ""}, dealDone: false, dealDoneCount: 0}
     };
-    req.game.players = { length: 0 };
+    req.game.players = {length: 0};
     req.game.addActivity = sinon.spy();
-    req.cookies = { playerName: "" };
+    req.cookies = {playerName: ""};
     req.game.nextPlayer = sinon.spy();
-    req.game.currentPlayer = { addRealEstate: sinon.spy() };
+    req.game.currentPlayer = {addRealEstate: sinon.spy()};
     res.end = sinon.spy();
     res.send = sinon.spy();
   });
@@ -407,11 +389,11 @@ describe("rejectBigDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+      activeCard: {data: {relatedTo: ""}, dealDone: false, dealDoneCount: 0}
     };
     req.game.addActivity = sinon.spy();
-    req.cookies = { playerName: "" };
-    req.game.players = { length: 0 };
+    req.cookies = {playerName: ""};
+    req.game.players = {length: 0};
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
   });
@@ -424,5 +406,122 @@ describe("rejectBigDeal", function() {
   it("should call nextPlayer if deal is not done ", function() {
     rejectBigDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
+  });
+});
+
+describe("isSharePresent", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.game = {
+      activeCard: {
+        data: {relatedTo: "smallDeal", symbol: "MYT4U"}
+      }
+    };
+    req.game.addActivity = sinon.spy();
+    req.game.hasShares = function() {
+      return this.players[0].hasShares(this.activeCard.data.symbol);
+    };
+    req.cookies = {playerName: "player1"};
+    req.game.players = [
+      {
+        name: "player1",
+        assets: {
+          shares: {MYT4U: {numberOfShares: 5}}
+        },
+        hasShares: function(symbol) {
+          return Object.keys(this.assets.shares).includes(symbol);
+        }
+      }
+    ];
+    req.game.nextPlayer = sinon.spy();
+    res.json = sinon.spy();
+  });
+  it("should respond with true if player has required shares", function() {
+    isSharePresent(req, res);
+    sinon.assert.calledOnce(res.json);
+    expect(res.json.firstCall.args[0]).to.be.deep.equals({hasShares: true});
+  });
+  it("should respond with false if player doesn't have required shares", function() {
+    req.game.activeCard.data.symbol = "ON2U";
+    isSharePresent(req, res);
+    sinon.assert.calledOnce(res.json);
+    expect(res.json.firstCall.args[0]).to.be.deep.equals({hasShares: false});
+  });
+});
+
+describe("buyShares", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.body = {numberOfShares: 5};
+    req.game = {
+      isPlayerCapableToBuy: () => true,
+      activeCard: {
+        data: {relatedTo: "smallDeal", symbol: "MYT4U"}
+      }
+    };
+    req.game.addActivity = sinon.spy();
+    req.game.hasShares = function() {
+      return this.players[0].hasShares(this.activeCard.data.symbol);
+    };
+    req.cookies = {playerName: "player1"};
+    req.game.players = [
+      {
+        name: "player1",
+        assets: {
+          shares: {MYT4U: {numberOfShares: 5}}
+        },
+        hasShares: function(symbol) {
+          return Object.keys(this.assets.shares).includes(symbol);
+        }
+      }
+    ];
+    req.game.nextPlayer = sinon.spy();
+    req.game.buyShares = sinon.spy();
+    res.json = sinon.spy();
+  });
+  it("should return statement", function() {
+    buyShares(req, res);
+    expect(res.json.calledOnce).to.be.true;
+    expect(req.game.buyShares.calledOnce).to.be.true;
+  });
+});
+
+describe("sellShares", function() {
+  const req = {},
+    res = {};
+  beforeEach(() => {
+    req.body = {numberOfShares: 5};
+    req.game = {
+      isPlayerCapableToSell: () => true,
+      activeCard: {
+        data: {relatedTo: "smallDeal", symbol: "MYT4U"}
+      }
+    };
+    req.game.addActivity = sinon.spy();
+    req.game.hasShares = function() {
+      return this.players[0].hasShares(this.activeCard.data.symbol);
+    };
+    req.cookies = {playerName: "player1"};
+    req.game.players = [
+      {
+        name: "player1",
+        assets: {
+          shares: {MYT4U: {numberOfShares: 5}}
+        },
+        hasShares: function(symbol) {
+          return Object.keys(this.assets.shares).includes(symbol);
+        }
+      }
+    ];
+    req.game.nextPlayer = sinon.spy();
+    req.game.sellShares = sinon.spy();
+    res.json = sinon.spy();
+  });
+  it("should return statement", function() {
+    sellShares(req, res);
+    expect(res.json.calledOnce).to.be.true;
+    expect(req.game.sellShares.calledOnce).to.be.true;
   });
 });

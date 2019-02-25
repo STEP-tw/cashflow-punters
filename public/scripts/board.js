@@ -190,7 +190,7 @@ const createCardButtons = function(actions) {
   return buttons;
 };
 
-const createCardDiv = function(type) {
+const getCardDiv = function(type) {
   const cardDiv = getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -202,7 +202,7 @@ const createCardDiv = function(type) {
 
 const createSharesSmallDeal = function(actions, card) {
   const {title, message, symbol, historicTradingRange, currentPrice} = card;
-  const cardDiv = createCardDiv("smallDeal");
+  const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
@@ -217,7 +217,7 @@ const createSharesSmallDeal = function(actions, card) {
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
   const {title, message, cost, mortgage, downPayment, cashflow} = card;
-  const cardDiv = createCardDiv("smallDeal");
+  const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
@@ -236,7 +236,7 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
   const {title, message, numberOfCoins, cost} = card;
-  const cardDiv = createCardDiv("smallDeal");
+  const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
@@ -249,7 +249,7 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
 };
 
 const showSmallDealCard = function(title, expenseAmount, type) {
-  const cardDiv = createCardDiv(type);
+  const cardDiv = getCardDiv(type);
   const titleDiv = createTextDiv(title);
   titleDiv.classList.add("card-title");
   const expenseDiv = createTextDiv("Pay $ " + expenseAmount);
@@ -275,23 +275,178 @@ const showPlainCard = function(title, expenseAmount, type) {
 
 const nothing = () => {};
 
-const acceptShareDeal = function(event) {
-  acceptSmallDeal(event);
+const createCard = function(card) {
+  const {title, message, symbol, historicTradingRange, currentPrice} = card;
+  const cardDiv = getCardDiv("smallDeal");
+  const titleDiv = createTextDiv(title);
+  const messageDiv = createTextDiv(message);
+  const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
+  const rangeDiv = createTextDiv(`Range : ${historicTradingRange}`);
+  const currentPriceDiv = createTextDiv(`current price : ${currentPrice}`);
+  const bottomDiv = createElement("div");
+  bottomDiv.classList.add("card-bottom");
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+  appendChildren(bottomDiv, [symbolDiv, rangeDiv, currentPriceDiv]);
+  return cardDiv;
 };
 
-const declineShareDeal = function(event) {
-  acceptSmallDeal(event);
+const showNotEnoughBalance = function() {
+  alert(`you don't have enough balance`);
+};
+
+const showInvalidShareCount = function() {
+  alert(`you don't have enough shares`);
+};
+
+const buyShares = function() {
+  const numberOfShares = getElementById("share-count").value;
+  fetch("/buyshares", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({numberOfShares})
+  })
+    .then(res => res.json())
+    .then(({isCapable}) => {
+      if (!isCapable) return showNotEnoughBalance();
+      closeOverlay("share-card");
+      closeOverlay("buttons-container");
+    });
+};
+
+const sellShares = function() {
+  const numberOfShares = getElementById("share-count").value;
+  fetch("/sellshares", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({numberOfShares})
+  })
+    .then(res => res.json())
+    .then(({isCapable}) => {
+      if (!isCapable) return showInvalidShareCount();
+      closeOverlay("share-card");
+      closeOverlay("buttons-container");
+    });
+};
+
+const shareForm = function(func, id, value) {
+  const shareCard = getElementById("share-card");
+  shareCard.style.display = "flex";
+  const numberOfShares = createInput(
+    "shareCount",
+    "Enter No of shares",
+    "text",
+    "share-count"
+  );
+  const submit = createButton(value, "", id, "", func);
+  appendChildren(shareCard, [numberOfShares, submit]);
+};
+
+const passDeal = function() {
+  closeOverlay("buttons-container");
+};
+
+const createSellButton = function() {
+  return createButton(
+    "Sell",
+    "button_div",
+    "sell",
+    "button",
+    shareForm.bind(null, sellShares, "sell", "Sell")
+  );
+};
+
+const createBuyButton = function() {
+  return createButton(
+    "Buy",
+    "button_div",
+    "buy",
+    "button",
+    shareForm.bind(null, buyShares, "buy", "Buy")
+  );
+};
+
+const acceptSharesDeal = function(isAbleToSell) {
+  const buttonDiv = getElementById("buttons-container");
+  const buy = createBuyButton();
+  appendChildren(buttonDiv, [buy]);
+  if (isAbleToSell) {
+    const sell = createSellButton();
+    buttonDiv.appendChild(sell);
+  }
+};
+
+const showBuyAndSellOptions = function(card) {
+  const cardDiv = createCard(card);
+  const buttons = createElement("div", "buttons-container");
+  buttons.classList.add("buttons-div");
+  const accept = createButton(
+    "Accept",
+    "button_div",
+    "accept",
+    "button",
+    acceptSharesDeal.bind(null, true)
+  );
+  const decline = createButton(
+    "Decline",
+    "button_div",
+    "decline",
+    "button",
+    declineSmallDeal
+  );
+  cardDiv.appendChild(buttons);
+  appendChildren(buttons, [accept, decline]);
+};
+
+const showBuyOption = function(card) {
+  const cardDiv = createCard(card);
+  const buttons = createElement("div", "buttons-container");
+  buttons.classList.add("buttons-div");
+  const accept = createButton(
+    "Accept",
+    "button_div",
+    "accept",
+    "button",
+    acceptSharesDeal.bind(null, false)
+  );
+  const decline = createButton(
+    "Decline",
+    "button_div",
+    "decline",
+    "button",
+    declineSmallDeal
+  );
+  cardDiv.appendChild(buttons);
+  appendChildren(buttons, [accept, decline]);
+};
+
+const showSellOption = function(card) {
+  const cardDiv = createCard(card);
+  const buttons = createElement("div", "buttons-container");
+  buttons.classList.add("buttons-div");
+  const sell = createSellButton();
+  const pass = createButton("Pass", "button_div", "pass", "button", passDeal);
+  cardDiv.appendChild(buttons);
+  appendChildren(buttons, [sell, pass]);
+};
+
+const handleSharesSmallDeal = function(card, isMyTurn) {
+  fetch("/issharepresent")
+    .then(data => data.json())
+    .then(({hasShares}) => {
+      if (hasShares && isMyTurn) return showBuyAndSellOptions(card.data);
+      if (hasShares) return showSellOption(card.data);
+      if (isMyTurn) return showBuyOption(card.data);
+      createCard(card.data);
+    });
 };
 
 const getSmallDealHandler = function(card, isMyTurn) {
-  const shareDealactions = [acceptShareDeal, declineShareDeal];
   const smallDealactions = [acceptSmallDeal, declineSmallDeal];
   let actions = smallDealactions;
   if (card.data.relatedTo == "shares") {
-    actions = shareDealactions;
+    return handleSharesSmallDeal(card, isMyTurn);
   }
   const dealCardTypes = {
-    shares: createSharesSmallDeal.bind(null, actions),
     goldCoins: createGoldSmallDeal.bind(null, actions),
     realEstate: createRealEstateDealCard.bind(null, actions)
   };
@@ -383,7 +538,6 @@ const displayDiceValue = function(diceValue, count) {
 
 const showDice = function(diceValues) {
   let count = 1;
-  console.log(diceValues, diceValues[0], typeof diceValues[0]);
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
     count++;
@@ -437,10 +591,10 @@ const rollDie = function() {
 
 const processBankruptcy = function(currentPlayer) {
   alert("hii");
-}
+};
 
 const polling = function(game) {
-  let { players, requester, currentPlayer } = game;
+  let {players, requester, currentPlayer} = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn);
   }

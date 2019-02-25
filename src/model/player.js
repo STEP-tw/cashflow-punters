@@ -1,6 +1,6 @@
-const { getNextNum, add, randomNum } = require("../utils/utils.js");
+const {getNextNum, add, randomNum} = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
-const { CHARITY_MSG } = require("../constant");
+const {CHARITY_MSG} = require("../constant");
 
 class Player extends FinancialStatement {
   constructor(name) {
@@ -103,7 +103,7 @@ class Player extends FinancialStatement {
   }
 
   addRealEstate(card) {
-    const { downPayment, type, cost, cashflow, mortgage } = card;
+    const {downPayment, type, cost, cashflow, mortgage} = card;
     if (this.ledgerBalance < downPayment) return false;
     this.deductLedgerBalance(+downPayment);
     this.addDebitEvent(+downPayment, "brought realEstate");
@@ -114,7 +114,7 @@ class Player extends FinancialStatement {
   }
 
   buyGoldCoins(card) {
-    const { cost, numberOfCoins } = card;
+    const {cost, numberOfCoins} = card;
     if (this.ledgerBalance < cost * numberOfCoins) return false;
     this.deductLedgerBalance(cost * numberOfCoins);
     this.addGoldCoins(+numberOfCoins);
@@ -132,6 +132,32 @@ class Player extends FinancialStatement {
 
   hasChild() {
     return this.childrenCount > 0;
+  }
+
+  buyShares(card, numberOfShares) {
+    const {symbol, currentPrice} = card;
+    let price = numberOfShares * currentPrice;
+    this.deductLedgerBalance(price);
+    this.addDebitEvent(price, ` brought shares of ${symbol}`);
+    this.assets.shares[symbol] = {numberOfShares, currentPrice};
+  }
+
+  sellShares(card, numberOfShares) {
+    const {symbol, currentPrice} = card;
+    let price = numberOfShares * currentPrice;
+    this.addCreditEvent(price, ` sold shares of ${symbol}`);
+    this.addToLedgerBalance(price);
+    this.assets.shares[symbol].numberOfShares -= numberOfShares;
+    const shareOfCompany = this.assets.shares[symbol].numberOfShares;
+    if (shareOfCompany == 0) delete this.assets.shares[symbol];
+  }
+
+  isCapableToPay(amount) {
+    return this.ledgerBalance >= amount;
+  }
+
+  isCapableToSell(symbol, numberOfShares) {
+    return this.assets.shares[symbol].numberOfShares >= numberOfShares;
   }
 }
 
