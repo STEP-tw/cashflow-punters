@@ -192,6 +192,30 @@ const sellShares = function(req, res) {
   res.json({isCapable});
 };
 
+const completeTurn = function(req, res) {
+  const { playerName } = req.cookies;
+  const player = req.game.getPlayerByName(playerName);
+  player.completeTurn();
+  res.end();
+};
+
+const sellEstate = function(req, res) {
+  const estate = req.body;
+  const game = req.game;
+  const marketCard = game.activeCard;
+  const { playerName } = req.cookies;
+  const player = req.game.getPlayerByName(playerName);
+  const profit = player.sellEstate(estate, marketCard);
+  game.addActivity(`sold realEstate for $${profit} `, playerName);
+  res.end();
+};
+
+const provideCommonEstates = function(req, res) {
+  const { playerName } = req.cookies;
+  const commonEstates = req.game.getCommonEstates(playerName);
+  res.send(JSON.stringify(commonEstates));
+};
+
 module.exports = {
   getGame,
   startGame,
@@ -212,5 +236,8 @@ module.exports = {
   hasCharity,
   rollDice,
   isSharePresent,
-  sellShares
+  sellShares,
+  completeTurn,
+  sellEstate,
+  provideCommonEstates
 };

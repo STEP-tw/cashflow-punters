@@ -1,4 +1,4 @@
-const {add} = require("../utils/utils");
+const { add } = require("../utils/utils");
 const CashLedger = require("./cashLedger");
 const getIncome = (value, content) => value + content.cashflow;
 
@@ -69,7 +69,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addAsset(type, downPayment, cost) {
-    this.assets.realEstates.push({type, downPayment, cost});
+    this.assets.realEstates.push({ type, downPayment, cost });
   }
 
   addLiability(liability, amount) {
@@ -95,7 +95,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addIncomeRealEstate(type, cashflow) {
-    this.income.realEstates.push({type, cashflow});
+    this.income.realEstates.push({ type, cashflow });
   }
 
   removeLiability(liability, amount) {
@@ -109,6 +109,25 @@ class FinancialStatement extends CashLedger {
 
   hasShares(symbol) {
     return Object.keys(this.assets.shares).includes(symbol);
+  }
+  
+  calculateProfit(estate, marketCard) {
+    const { cash, percentage } = marketCard.data;
+    const { mortgage, cost } = estate;
+    if (cash) {
+      return cost + cash - mortgage;
+    }
+    return (1 + percentage / 100) * cost - mortgage;
+  }
+
+  sellEstate(estate, marketCard) {
+    const profit = this.calculateProfit(estate, marketCard);
+    this.addToLedgerBalance(profit);
+    this.liabilities.realEstate = this.liabilities.realEstate.filter(
+      realEstate => realEstate !== estate
+    );
+    this.addCreditEvent(profit, "sold Real Estate");
+    return profit;
   }
 }
 

@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 const randomNum = maxNum => Math.ceil(Math.random() * maxNum);
 
 const getNextNum = (currNum, lastNum, next = 1) =>
@@ -24,6 +26,10 @@ const calculateLoanToTake = function(ledgerBalance) {
   return Math.ceil(Math.abs(ledgerBalance) / 1000) * 1000;
 };
 
+const hasIntersection = function(list1, list2) {
+  return _.intersection(list1, list2).length > 0;
+};
+
 module.exports = {
   randomNum,
   createGameId,
@@ -31,5 +37,6 @@ module.exports = {
   isBetween,
   add,
   isSame,
-  calculateLoanToTake
+  calculateLoanToTake,
+  hasIntersection
 };

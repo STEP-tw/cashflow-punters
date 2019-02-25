@@ -1,6 +1,6 @@
-const {getNextNum, add, randomNum} = require("../utils/utils.js");
+const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
-const {CHARITY_MSG} = require("../constant");
+const { CHARITY_MSG } = require("../constant");
 
 class Player extends FinancialStatement {
   constructor(name) {
@@ -15,6 +15,7 @@ class Player extends FinancialStatement {
     this.notification = "";
     this.downSizedForTurns = 0;
     this.bankrupt = false;
+    this.isTurnComplete = true;
   }
 
   setTurn(turn) {
@@ -22,7 +23,7 @@ class Player extends FinancialStatement {
   }
 
   isBankrupt() {
-    return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
+    return this.cashflow < 0 && this.ledgerBalance + this.cashflow < 0;
   }
 
   removeCharityEffect() {
@@ -91,7 +92,7 @@ class Player extends FinancialStatement {
   rollDice(numberOfDice = 1) {
     const diceValues = new Array(numberOfDice)
       .fill(6)
-      .map(value => randomNum(value));
+      .map(value => 4 || randomNum(value));
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.reduceCharityTurns();
@@ -103,7 +104,7 @@ class Player extends FinancialStatement {
   }
 
   addRealEstate(card) {
-    const {downPayment, type, cost, cashflow, mortgage} = card;
+    const { downPayment, type, cost, cashflow, mortgage } = card;
     if (this.ledgerBalance < downPayment) return false;
     this.deductLedgerBalance(+downPayment);
     this.addDebitEvent(+downPayment, "brought realEstate");
@@ -114,7 +115,7 @@ class Player extends FinancialStatement {
   }
 
   buyGoldCoins(card) {
-    const {cost, numberOfCoins} = card;
+    const { cost, numberOfCoins } = card;
     if (this.ledgerBalance < cost * numberOfCoins) return false;
     this.deductLedgerBalance(cost * numberOfCoins);
     this.addGoldCoins(+numberOfCoins);
@@ -135,15 +136,15 @@ class Player extends FinancialStatement {
   }
 
   buyShares(card, numberOfShares) {
-    const {symbol, currentPrice} = card;
+    const { symbol, currentPrice } = card;
     let price = numberOfShares * currentPrice;
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
-    this.assets.shares[symbol] = {numberOfShares, currentPrice};
+    this.assets.shares[symbol] = { numberOfShares, currentPrice };
   }
 
   sellShares(card, numberOfShares) {
-    const {symbol, currentPrice} = card;
+    const { symbol, currentPrice } = card;
     let price = numberOfShares * currentPrice;
     this.addCreditEvent(price, ` sold shares of ${symbol}`);
     this.addToLedgerBalance(price);
@@ -158,6 +159,14 @@ class Player extends FinancialStatement {
 
   isCapableToSell(symbol, numberOfShares) {
     return this.assets.shares[symbol].numberOfShares >= numberOfShares;
+  }
+
+  completeTurn() {
+    this.isTurnComplete = true;
+  }
+
+  holdTurn() {
+    this.isTurnComplete = false;
   }
 }
 

@@ -2,8 +2,10 @@ const {
   getNextNum,
   isBetween,
   add,
-  calculateLoanToTake
+  calculateLoanToTake,
+  hasIntersection
 } = require("../utils/utils.js");
+const _ = require("lodash");
 
 class ActivityLog {
   constructor() {
@@ -76,7 +78,12 @@ class Game extends ActivityLog {
     return this.getPlayersCount() < 6;
   }
 
+  isPlayersTurnCompleted() {
+    return this.players.every(player => player.isTurnComplete);
+  }
+
   nextPlayer() {
+    if (!this.isPlayersTurnCompleted) return;
     this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
@@ -141,7 +148,25 @@ class Game extends ActivityLog {
       this.handleExpenseCard("market", marketCard.cash);
       return;
     }
+    if (marketCard.relatedTo == "realEstate") {
+      this.players.forEach(player => {
+        const playerRealEstates = player.liabilities.realEstate;
+        const marketRealEstates = marketCard.relatedRealEstates;
+        const hasRealEstate = hasIntersection(
+          playerRealEstates,
+          marketRealEstates
+        );
+        if (hasRealEstate) player.isTurnComplete = false;
+      });
+    }
     this.nextPlayer();
+  }
+
+  getCommonEstates(name) {
+    const player = this.getPlayerByName(name);
+    const playerRealEstates = player.liabilities.realEstate;
+    const marketRealEstates = this.activeCard.relatedRealEstates;
+    return _.intersection(playerRealEstates, marketRealEstates);
   }
 
   handleCharitySpace() {

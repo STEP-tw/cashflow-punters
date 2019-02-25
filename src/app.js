@@ -18,6 +18,7 @@ const {
   startGame,
   grantLoan,
   hasCharity,
+  sellEstate,
   selectBigDeal,
   acceptBigDeal,
   acceptCharity,
@@ -30,7 +31,9 @@ const {
   provideLiabilities,
   getPlayersFinancialStatement,
   isSharePresent,
-  sellShares
+  sellShares,
+  provideCommonEstates,
+  completeTurn
 } = require("./gameHandlers");
 
 app.games = {};
@@ -48,6 +51,7 @@ app.get("/hascharity", hasCharity);
 app.get("/gamelobby", provideGameLobby);
 app.get("/selectBigDeal", selectBigDeal);
 app.get("/acceptCharity", acceptCharity);
+app.get("/completeturn", completeTurn);
 app.get("/acceptBigDeal", acceptBigDeal);
 app.get("/declineBigDeal", rejectBigDeal);
 app.get("/declineCharity", declineCharity);
@@ -55,6 +59,7 @@ app.get("/liabilities", provideLiabilities);
 app.get("/selectSmallDeal", selectSmallDeal);
 app.get("/acceptSmallDeal", acceptSmallDeal);
 app.get("/declineSmallDeal", rejectSmallDeal);
+app.get("/commonestates", provideCommonEstates);
 app.get("/isabletodocharity", isAbleToDoCharity);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.get("/issharepresent", isSharePresent);
@@ -63,6 +68,7 @@ app.post("/buyshares", buyShares);
 app.post("/sellshares", sellShares);
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);
+app.post("/sellestate", sellEstate);
 app.post("/joingame", joinGame);
 app.post("/hostgame", hostGame);
 app.post("/rolldice", rollDice);

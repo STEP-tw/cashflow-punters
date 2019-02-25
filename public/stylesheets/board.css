@@ -326,7 +326,7 @@ button:hover {
 }
 
 .plain-card > div > p {
-  margin: 0;
+  margin: 0%;
 }
 
 .financial_details {
@@ -594,6 +594,26 @@ button:hover {
 }
 
 .manage-debt-form {
+  height: 250px;
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 36%;
+  left: 42%;
+
+  visibility: hidden;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.real-estate-div {
   height: 250px;
   width: 300px;
 

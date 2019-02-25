@@ -54,13 +54,14 @@ describe("hostGame", function() {
           charityTurns: 0,
           notification: "",
           childrenCount: 0,
+          isTurnComplete: true,
           downSizedForTurns: 0,
           name: "player",
           entries: [],
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,
-          turn:1
+          turn: 1
         }
       ]);
   });
@@ -133,10 +134,11 @@ describe("joinGame", function() {
       .to.have.property("players")
       .to.deep.equals([
         {
-          bankrupt:false,
+          bankrupt: false,
           charityTurns: 0,
           notification: "",
           name: "player",
+          isTurnComplete: true,
           charityTurns: 0,
           downSizedForTurns: 0,
           entries: [],

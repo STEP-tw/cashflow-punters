@@ -10,8 +10,8 @@ const getBoard = function() {
 };
 
 const getEntriesHtml = function(entry) {
-  const {time, type, amount, currentBalance, event} = entry;
-  const symbols = {debit: "-", credit: "+"};
+  const { time, type, amount, currentBalance, event } = entry;
+  const symbols = { debit: "-", credit: "+" };
   const currentTime = formatTime(new Date(time));
   const entryDiv = createElement("div");
   entryDiv.className = "entry";
@@ -25,7 +25,7 @@ const getEntriesHtml = function(entry) {
 };
 
 const setCashLedger = function(player) {
-  const {entries} = player;
+  const { entries } = player;
   const entriesDiv = getElementById("cash-ledger-entries");
   const entriesHtml = entries.map(getEntriesHtml);
   appendChildren(entriesDiv, entriesHtml);
@@ -119,7 +119,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({isAble}) => {
+    .then(({ isAble }) => {
       if (isAble) doCharity();
     });
 };
@@ -134,7 +134,7 @@ const acceptSmallDeal = function(event) {
   let parent = event.target.parentElement;
   fetch("/acceptSmallDeal")
     .then(data => data.json())
-    .then(({isSuccessful}) => {
+    .then(({ isSuccessful }) => {
       if (isSuccessful) {
         parent.style.visibility = "hidden";
         return;
@@ -152,7 +152,7 @@ const declineSmallDeal = function() {
 const acceptBigDeal = function(event) {
   fetch("/acceptBigDeal")
     .then(data => data.json())
-    .then(({isSuccessful}) => {
+    .then(({ isSuccessful }) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
         parent.style.visibility = "hidden";
@@ -201,8 +201,13 @@ const getCardDiv = function(type) {
 };
 
 const createSharesSmallDeal = function(actions, card) {
+<<<<<<< HEAD
   const {title, message, symbol, historicTradingRange, currentPrice} = card;
   const cardDiv = getCardDiv("smallDeal");
+=======
+  const { title, message, symbol, historicTradingRange, currentPrice } = card;
+  const cardDiv = createCardDiv("smallDeal");
+>>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
@@ -216,8 +221,13 @@ const createSharesSmallDeal = function(actions, card) {
 };
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
+<<<<<<< HEAD
   const {title, message, cost, mortgage, downPayment, cashflow} = card;
   const cardDiv = getCardDiv("smallDeal");
+=======
+  const { title, message, cost, mortgage, downPayment, cashflow } = card;
+  const cardDiv = createCardDiv("smallDeal");
+>>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
@@ -235,8 +245,13 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
+<<<<<<< HEAD
   const {title, message, numberOfCoins, cost} = card;
   const cardDiv = getCardDiv("smallDeal");
+=======
+  const { title, message, numberOfCoins, cost } = card;
+  const cardDiv = createCardDiv("smallDeal");
+>>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
@@ -258,7 +273,7 @@ const showSmallDealCard = function(title, expenseAmount, type) {
   cardDiv.appendChild(expenseDiv);
 };
 
-const showPlainCard = function(title, expenseAmount, type) {
+const showPlainCard = function(title, expenseAmount, type, msg) {
   const cardDiv = getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -466,34 +481,6 @@ const isSameCard = function(cardTitle) {
   return cardTitle == getCardTitle();
 };
 
-const showCard = function(card, isMyTurn) {
-  if (isSameCard(card.data.title)) return;
-  const bigDealactions = [acceptBigDeal, declineBigDeal];
-
-  const cardHandlers = {
-    doodad: showPlainCard.bind(
-      null,
-      card.data.title,
-      card.data.expenseAmount,
-      "doodad-card"
-    ),
-    market: showPlainCard.bind(
-      null,
-      card.data.title,
-      card.data.cash,
-      "market-card"
-    ),
-    smallDeal: getSmallDealHandler(card, isMyTurn),
-    bigDeal: createRealEstateDealCard.bind(
-      null,
-      bigDealactions,
-      card.data,
-      isMyTurn
-    )
-  };
-  cardHandlers[card.type] && cardHandlers[card.type]();
-};
-
 const handleCharity = function() {
   const askCharity = getElementById("askCharity");
   openOverlay("card-overlay");
@@ -555,11 +542,11 @@ const rollDice = function(numberOfDice) {
   };
   fetch("/rolldice", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({numberOfDice})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfDice })
   })
     .then(res => res.json())
-    .then(({diceValues, spaceType}) => {
+    .then(({ diceValues, spaceType }) => {
       showDice(diceValues);
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
     });
@@ -575,7 +562,7 @@ const rollOneDice = function() {
 const rollDie = function() {
   fetch("/hascharity")
     .then(res => res.json())
-    .then(({hasCharityTurns}) => {
+    .then(({ hasCharityTurns }) => {
       if (!hasCharityTurns) return rollOneDice();
       showOverlay("num_of_dice");
       openOverlay("num_of_dice");
@@ -596,7 +583,7 @@ const processBankruptcy = function(currentPlayer) {
 const polling = function(game) {
   let {players, requester, currentPlayer} = game;
   if (game.activeCard) {
-    showCard(game.activeCard, game.isMyTurn);
+    showCard(game.activeCard, game.isMyTurn, requester);
   }
   updateStatementBoard(requester);
   setFinancialStatement(requester);
@@ -610,6 +597,48 @@ const polling = function(game) {
   if (currentPlayer.bankrupt) {
     processBankruptcy(currentPlayer);
   }
+};
+
+const showCard = function(card, isMyTurn, player) {
+  if (isSameCard(card.data.title)) return;
+  const bigDealactions = [acceptBigDeal, declineBigDeal];
+
+  const cardHandlers = {
+    doodad: showPlainCard.bind(
+      null,
+      card.data.title,
+      card.data.expenseAmount,
+      "doodad-card"
+    ),
+    market: showMarketCard.bind(null, card, player),
+    smallDeal: getSmallDealHandler(card, isMyTurn),
+    bigDeal: createRealEstateDealCard.bind(
+      null,
+      bigDealactions,
+      card.data,
+      isMyTurn
+    )
+  };
+  cardHandlers[card.type] && cardHandlers[card.type]();
+};
+
+const getSmallDealHandler = function(card, isMyTurn) {
+  const shareDealactions = [acceptShareDeal, declineShareDeal];
+  const smallDealactions = [acceptSmallDeal, declineSmallDeal];
+  let actions = smallDealactions;
+  if (card.data.relatedTo == "shares") {
+    actions = shareDealactions;
+  }
+  const dealCardTypes = {
+    shares: createSharesSmallDeal.bind(null, actions),
+    goldCoins: createGoldSmallDeal.bind(null, actions),
+    realEstate: createRealEstateDealCard.bind(null, actions)
+  };
+  if (card.dealDone) return nothing;
+  return (
+    dealCardTypes[card.data.relatedTo] &&
+    dealCardTypes[card.data.relatedTo].bind(null, card.data, isMyTurn)
+  );
 };
 
 const showNotification = function(notification) {
@@ -641,7 +670,7 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   activity.classList.add("activity");
@@ -663,8 +692,8 @@ const updateActivityLog = function(activityLog) {
 };
 
 const getPlayerData = function(playersData) {
-  const {playerName} = parseCookie();
-  const playerData = playersData.filter(({name}) => name == playerName)[0];
+  const { playerName } = parseCookie();
+  const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 
