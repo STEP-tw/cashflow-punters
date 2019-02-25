@@ -141,6 +141,7 @@ describe("joinGame", function() {
           isTurnComplete: true,
           charityTurns: 0,
           downSizedForTurns: 0,
+          isTurnComplete: true,
           entries: [],
           childrenCount: 0,
           didUpdateSpace: false,
