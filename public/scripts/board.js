@@ -241,8 +241,56 @@ const rollDie = function() {
     });
 };
 
-const processBankruptcy = function(currentPlayer) {
-  alert("hii");
+
+const updateRealEstateDiv= function(player){
+  let realEstates = player.realEstatesAsset;
+  let selectDiv = getElementById('Real-Estate');
+  let bankDiv = getElementById('bankruptcyNotification');
+  realEstates.forEach(realEstate => {
+    selectDiv.appendChild(createOptionTag(realEstate.type))
+  })
+  let msg = player.notification;
+  const bankruptcyMsgDiv = getElementById("bankruptcyMsg")
+  if(msg=="please sale other asset your cash flow is stil negative"){
+    showNotification(msg);
+    updateStatementBoard(player)
+    setFinancialStatement(player)
+    setCashLedger(player);
+    bankruptcyMsgDiv.innerHTML=msg;
+    bankDiv.style.visibility = "visible";
+    return;
+  }
+  showNotification(msg);
+  hideOverlay("bankruptcyNotification");
+}
+
+const payLoan = function(){
+  let selectDiv = getElementById('Real-Estate');
+  let selectedAsset = selectDiv.name;
+  fetch("/soldAsset",{method: "POST",
+  body: JSON.stringify({ selectedAsset})})
+  .then(res => res.json())
+  .then(updateRealEstateDiv)
+}
+
+const createRealEstateCheckList = function(realEstate, downPayment){
+  let realEstate = createElement('input');
+  realEstate.type = "checkbox";
+  realEstate.innerText = realEstate + " -- " + downPayment;
+  realEstate.name = realEstate+downPayment;
+  return realEstate;
+};
+
+const processBankruptcy = function(requester) {
+  let realEstates = requester.assets.realEstate;
+  let selectDiv = getElementById('Real-Estate');
+  let bankDiv = getElementById('bankruptcyNotification');
+  realEstates.forEach(realEstate => {
+    if(bankDiv.style.visibility == ""){
+      selectDiv.appendChild(createRealEstateCheckList(realEstate.type, realEstate.downPayment))
+    };
+  })
+  bankDiv.style.visibility = "visible";
 };
 
 const polling = function(game) {
