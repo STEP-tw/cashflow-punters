@@ -77,11 +77,13 @@ const nothing = () => {};
 const passDeal = () => closeOverlay("buttons-container");
 
 const showNotEnoughBalance = function() {
-  alert(`you don't have enough balance`);
+  const shareMsg = getElementById("share-notification");
+  shareMsg.innerText = "You don't have enough balance.";
 };
 
 const showInvalidShareCount = function() {
-  alert(`you don't have enough shares`);
+  const shareMsg = getElementById("share-notification");
+  shareMsg.innerText = "You don't have enough shares.";
 };
 
 const createCardButtons = function(actions) {
@@ -172,16 +174,21 @@ const sellShares = function() {
 };
 
 const shareForm = function(func, id, value) {
-  const shareCard = getElementById("share-card");
-  shareCard.style.display = "flex";
-  const numberOfShares = createInput(
-    "shareCount",
-    "Enter No of shares",
-    "text",
+  const form = getElementById("share-card");
+  form.style.display = "flex";
+  const input = createInput(
+    "amount",
+    "Enter No of Shares",
+    "number",
     "share-count"
   );
-  const submit = createButton(value, "", id, "", func);
-  appendChildren(shareCard, [numberOfShares, submit]);
+  input.className = "debt-input";
+  const submit = createButton(value, "form-button", id, "", func);
+  const closeButton = createButton("&times;", "close");
+  const message = "Enter no of shares you want to " + id;
+  const msgDiv = createDiv(message, "share-notification", "debt-form-msg");
+  closeButton.onclick = closeOverlay.bind(null, "share-card");
+  appendChildren(form, [closeButton, input, submit, msgDiv]);
 };
 
 const showOptions = function(isAbleToSell) {
