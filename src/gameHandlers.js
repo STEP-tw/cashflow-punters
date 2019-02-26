@@ -100,7 +100,6 @@ const acceptSmallDeal = function(req, res) {
   let isSuccessful = true;
   if (activeCard.data.relatedTo == "realEstate") {
     isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
-    console.log(isSuccessful);
   }
   if (activeCard.data.relatedTo == "goldCoins") {
     isSuccessful = req.game.currentPlayer.buyGoldCoins(activeCard.data);

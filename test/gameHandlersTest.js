@@ -304,7 +304,7 @@ describe("acceptSmallDeal", function() {
     req.cookies = {playerName: ""};
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
-    res.send = sinon.spy();
+    res.json = sinon.spy();
   });
   it("should call nextPlayer if deal is not done ", function() {
     acceptSmallDeal(req, res);

@@ -34,9 +34,9 @@ const getProfessions = function() {
   fetch("/getgame")
     .then(data => data.json())
     .then(({players}) => {
-      // let container = document.getElementById("");
+      let container = document.getElementById("container");
       players.map(getProfessionsDiv).join("");
-      // let button = createPopupButton("continue", createFinancialStatement);
-      // container.appendChild(button);
+      let button = createPopupButton("continue", createFinancialStatement);
+      container.appendChild(button);
     });
 };
