@@ -30,6 +30,10 @@ const hasIntersection = function(list1, list2) {
   return _.intersection(list1, list2).length > 0;
 };
 
+const isEqual = function(entity1, entity2) {
+  return _.isEqual(entity1, entity2);
+};
+
 module.exports = {
   randomNum,
   createGameId,
@@ -38,5 +42,6 @@ module.exports = {
   add,
   isSame,
   calculateLoanToTake,
-  hasIntersection
+  hasIntersection,
+  isEqual
 };

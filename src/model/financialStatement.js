@@ -1,4 +1,4 @@
-const {add, hasIntersection} = require("../utils/utils.js");
+const { add, hasIntersection, isEqual } = require("../utils/utils.js");
 const CashLedger = require("./cashLedger");
 const getIncome = (value, content) => value + content.cashflow;
 
@@ -133,10 +133,10 @@ class FinancialStatement extends CashLedger {
     const profit = this.calculateProfit(estate, marketCard);
     this.addToLedgerBalance(profit);
     this.liabilities.realEstate = this.liabilities.realEstate.filter(
-      realEstate => JSON.stringify(realEstate) !== JSON.stringify(estate)
+      realEstate => !isEqual(realEstate, estate)
     );
 
-    this.addCreditEvent(profit, "sold Real Estate");
+    this.addCreditEvent(profit, " sold Real Estate");
     return profit;
   }
 

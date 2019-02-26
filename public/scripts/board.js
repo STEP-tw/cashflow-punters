@@ -10,8 +10,8 @@ const getBoard = function() {
 };
 
 const getEntriesHtml = function(entry) {
-  const {time, type, amount, currentBalance, event} = entry;
-  const symbols = {debit: "-", credit: "+"};
+  const { time, type, amount, currentBalance, event } = entry;
+  const symbols = { debit: "-", credit: "+" };
   const currentTime = formatTime(new Date(time));
   const entryDiv = createElement("div");
   entryDiv.className = "entry";
@@ -25,7 +25,7 @@ const getEntriesHtml = function(entry) {
 };
 
 const setCashLedger = function(player) {
-  const {entries} = player;
+  const { entries } = player;
   const entriesDiv = getElementById("cash-ledger-entries");
   const entriesHtml = entries.map(getEntriesHtml);
   appendChildren(entriesDiv, entriesHtml);
@@ -111,7 +111,7 @@ const doCharity = function() {
 const acceptCharity = function() {
   fetch("/isabletodocharity")
     .then(res => res.json())
-    .then(({isAble}) => {
+    .then(({ isAble }) => {
       if (isAble) doCharity();
     });
 };
@@ -207,11 +207,11 @@ const rollDice = function(numberOfDice) {
   };
   fetch("/rolldice", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({numberOfDice})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfDice })
   })
     .then(res => res.json())
-    .then(({diceValues, spaceType}) => {
+    .then(({ diceValues, spaceType }) => {
       showDice(diceValues);
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
     });
@@ -227,7 +227,7 @@ const rollOneDice = function() {
 const rollDie = function() {
   fetch("/hascharity")
     .then(res => res.json())
-    .then(({hasCharityTurns}) => {
+    .then(({ hasCharityTurns }) => {
       if (!hasCharityTurns) return rollOneDice();
       showOverlay("num_of_dice");
       openOverlay("num_of_dice");
@@ -246,7 +246,7 @@ const processBankruptcy = function(currentPlayer) {
 };
 
 const polling = function(game) {
-  let {players, requester, currentPlayer} = game;
+  let { players, requester, currentPlayer } = game;
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
@@ -265,7 +265,6 @@ const polling = function(game) {
 };
 
 const showCard = function(card, isMyTurn, player) {
-  if (isSameCard(card.data.title)) return;
   const bigDealactions = [acceptBigDeal, declineBigDeal];
 
   const cardHandlers = {
@@ -315,7 +314,7 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const createActivity = function({playerName, msg, time}) {
+const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   activity.classList.add("activity");
@@ -337,8 +336,8 @@ const updateActivityLog = function(activityLog) {
 };
 
 const getPlayerData = function(playersData) {
-  const {playerName} = parseCookie();
-  const playerData = playersData.filter(({name}) => name == playerName)[0];
+  const { playerName } = parseCookie();
+  const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 

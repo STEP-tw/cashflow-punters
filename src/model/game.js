@@ -152,7 +152,7 @@ class Game extends ActivityLog {
         const marketRealEstatesType = marketCard.relatedRealEstates;
         const hasRealEstate = player.hasRealEstate(marketRealEstatesType);
         if (hasRealEstate) {
-          player.isTurnComplete = false;
+          player.holdTurn();
         }
       });
     }

@@ -1,6 +1,6 @@
-const {getNextNum, add, randomNum} = require("../utils/utils.js");
+const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
-const {CHARITY_MSG} = require("../constant");
+const { CHARITY_MSG } = require("../constant");
 
 class Player extends FinancialStatement {
   constructor(name) {
@@ -115,7 +115,7 @@ class Player extends FinancialStatement {
   }
 
   buyGoldCoins(card) {
-    const {cost, numberOfCoins} = card;
+    const { cost, numberOfCoins } = card;
     if (this.ledgerBalance < cost * numberOfCoins) return false;
     this.deductLedgerBalance(cost * numberOfCoins);
     this.addGoldCoins(+numberOfCoins);
@@ -136,15 +136,15 @@ class Player extends FinancialStatement {
   }
 
   buyShares(card, numberOfShares) {
-    const {symbol, currentPrice} = card;
+    const { symbol, currentPrice } = card;
     let price = numberOfShares * currentPrice;
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
-    this.assets.shares[symbol] = {numberOfShares, currentPrice};
+    this.assets.shares[symbol] = { numberOfShares, currentPrice };
   }
 
   sellShares(card, numberOfShares) {
-    const {symbol, currentPrice} = card;
+    const { symbol, currentPrice } = card;
     let price = numberOfShares * currentPrice;
     this.addCreditEvent(price, ` sold shares of ${symbol}`);
     this.addToLedgerBalance(price);
