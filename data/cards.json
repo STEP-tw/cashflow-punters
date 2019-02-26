@@ -349,7 +349,7 @@
       "symbol": "GRO4US",
       "currentPrice": 20,
       "historicTradingRange": "20-30"
-        },
+    },
     {
       "title": "Stock - ON2U Entertainment Co.",
       "message": "Strong demand for company's libraryof old movies leads to good share price.",
@@ -828,7 +828,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $5000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -839,7 +839,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BA/2BA house. Offers your original cost plus $15000.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -850,7 +850,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BR/2BA house. Offers your original cost plus $5000.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -861,7 +861,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BR/2BA house. Offers your original cost plus $20000.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -872,7 +872,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 10%.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -883,7 +883,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BR/2BA house. Offers your original cost plus 10%.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -894,7 +894,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 20%.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -905,7 +905,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. offers your original cost plus $30000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -916,7 +916,7 @@
       "title": "House or Condo Buyer 2BR/1BA",
       "message": "You are offered $45,000 for a 2BR/1BA House or Condo. Buyer has their own financing.",
       "type": "optional",
-      "relatedRealEstates":["2BR/1BA house","2BR/1BA condo"],
+      "relatedRealEstates": ["2BR/1BA house", "2BR/1BA condo"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -927,7 +927,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $10000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -938,7 +938,7 @@
       "title": "House Buyer - 2BR/1BA",
       "message": "Buyer looking to acquire 2BR/1BA rentals. Offers your original cost plus 10%.",
       "type": "optional",
-      "relatedRealEstates":["2BR/1BA house"],
+      "relatedRealEstates": ["2BR/1BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -949,7 +949,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 5%.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -960,7 +960,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BR/2BA house. Offers your original cost plus 15%.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -971,7 +971,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $20000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -982,7 +982,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $15000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -993,7 +993,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 15%.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -1004,7 +1004,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BA/2BA house. Offers your original cost plus $10000.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -1015,7 +1015,7 @@
       "title": "Plex Buyer",
       "message": "Buyer looking for Apartment and Plexes in any combination of units. Offers your original cost plus $1000.",
       "type": "optional",
-      "relatedRealEstates":["duplex","4-plex","8-plex"],
+      "relatedRealEstates": ["duplex", "4-plex", "8-plex"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "cash",
@@ -1026,7 +1026,7 @@
       "title": "Home Buyer - 2BR/1BA",
       "message": "Buyer looking to acquire 3BR/1BA rentals. Offers your original cost plus 20%.",
       "type": "optional",
-      "relatedRealEstates":["2BR/1BA house"],
+      "relatedRealEstates": ["2BR/1BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -1037,7 +1037,7 @@
       "title": "House Buyer - 3BR/2BA",
       "message": "Buyer searching for 3BR/2BA house. Offers your original cost plus 20%.",
       "type": "optional",
-      "relatedRealEstates":["3BR/2BA house"],
+      "relatedRealEstates": ["3BR/2BA house"],
       "relatedTo": "realEstate",
       "applicableTo": "everyone",
       "gettingMoneyIn": "percentage",
@@ -1152,7 +1152,7 @@
   "professions": [
     {
       "profession": "Engineer",
-      "income": { "salary": 4900 },
+      "income": {"salary": 4900},
       "expenses": {
         "taxes": 1000,
         "Home Mortgage Payment": 700,
@@ -1164,7 +1164,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 75000,
         "School Loan": 12000,
@@ -1174,7 +1174,7 @@
     },
     {
       "profession": "Secretary",
-      "income": { "salary": 2500 },
+      "income": {"salary": 2500},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 400,
@@ -1186,7 +1186,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 700 },
+      "assets": {"savings": 700},
       "liabilities": {
         "Home Mortgage": 38000,
         "School Loan": 0,
@@ -1196,7 +1196,7 @@
     },
     {
       "profession": "Truck Driver",
-      "income": { "salary": 2500 },
+      "income": {"salary": 2500},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 400,
@@ -1208,7 +1208,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 800 },
+      "assets": {"savings": 800},
       "liabilities": {
         "Home Mortgage": 38000,
         "School Loan": 0,
@@ -1218,7 +1218,7 @@
     },
     {
       "profession": "Airline Pilot",
-      "income": { "salary": 9500 },
+      "income": {"salary": 9500},
       "expenses": {
         "taxes": 2000,
         "Home Mortgage Payment": 1000,
@@ -1230,7 +1230,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 400,
-      "assets": { "savings": 2500 },
+      "assets": {"savings": 2500},
       "liabilities": {
         "Home Mortgage": 90000,
         "School Loan": 0,
@@ -1240,7 +1240,7 @@
     },
     {
       "profession": "Janitor",
-      "income": { "salary": 1600 },
+      "income": {"salary": 1600},
       "expenses": {
         "taxes": 300,
         "Home Mortgage Payment": 200,
@@ -1252,7 +1252,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 600 },
+      "assets": {"savings": 600},
       "liabilities": {
         "Home Mortgage": 20000,
         "School Loan": 0,
@@ -1262,7 +1262,7 @@
     },
     {
       "profession": "Doctor",
-      "income": { "salary": 13200 },
+      "income": {"salary": 13200},
       "expenses": {
         "taxes": 3200,
         "Home Mortgage Payment": 1900,
@@ -1274,7 +1274,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 700,
-      "assets": { "savings": 3500 },
+      "assets": {"savings": 3500},
       "liabilities": {
         "Home Mortgage": 202000,
         "School Loan": 150000,
@@ -1284,7 +1284,7 @@
     },
     {
       "profession": "Teacher",
-      "income": { "salary": 3300 },
+      "income": {"salary": 3300},
       "expenses": {
         "taxes": 500,
         "Home Mortgage Payment": 500,
@@ -1296,7 +1296,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 50000,
         "School Loan": 12000,
@@ -1306,7 +1306,7 @@
     },
     {
       "profession": "Lawyer",
-      "income": { "salary": 7500 },
+      "income": {"salary": 7500},
       "expenses": {
         "taxes": 1800,
         "Home Mortgage Payment": 1100,
@@ -1318,7 +1318,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 400,
-      "assets": { "savings": 2000 },
+      "assets": {"savings": 2000},
       "liabilities": {
         "Home Mortgage": 115000,
         "School Loan": 78000,
@@ -1328,7 +1328,7 @@
     },
     {
       "profession": "Business Manager",
-      "income": { "salary": 4600 },
+      "income": {"salary": 4600},
       "expenses": {
         "taxes": 900,
         "Home Mortgage Payment": 700,
@@ -1340,7 +1340,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 300,
-      "assets": { "savings": 400 },
+      "assets": {"savings": 400},
       "liabilities": {
         "Home Mortgage": 75000,
         "School Loan": 12000,
@@ -1350,7 +1350,7 @@
     },
     {
       "profession": "Nurse",
-      "income": { "salary": 3100 },
+      "income": {"salary": 3100},
       "expenses": {
         "taxes": 600,
         "Home Mortgage Payment": 400,
@@ -1362,7 +1362,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 500 },
+      "assets": {"savings": 500},
       "liabilities": {
         "Home Mortgage": 47000,
         "School Loan": 6000,
@@ -1372,7 +1372,7 @@
     },
     {
       "profession": "Mechanic",
-      "income": { "salary": 2000 },
+      "income": {"salary": 2000},
       "expenses": {
         "taxes": 400,
         "Home Mortgage Payment": 300,
@@ -1384,7 +1384,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 100,
-      "assets": { "savings": 700 },
+      "assets": {"savings": 700},
       "liabilities": {
         "Home Mortgage": 31000,
         "School Loan": 0,
@@ -1394,7 +1394,7 @@
     },
     {
       "profession": "Police Officer",
-      "income": { "salary": 3000 },
+      "income": {"salary": 3000},
       "expenses": {
         "taxes": 600,
         "Home Mortgage Payment": 400,
@@ -1406,7 +1406,7 @@
         "Child Expenses": 0
       },
       "perChildExpense": 200,
-      "assets": { "savings": 500 },
+      "assets": {"savings": 500},
       "liabilities": {
         "Home Mortgage": 46000,
         "School Loan": 0,

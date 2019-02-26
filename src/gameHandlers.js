@@ -100,15 +100,16 @@ const acceptSmallDeal = function(req, res) {
   let isSuccessful = true;
   if (activeCard.data.relatedTo == "realEstate") {
     isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
+    console.log(isSuccessful);
   }
   if (activeCard.data.relatedTo == "goldCoins") {
     isSuccessful = req.game.currentPlayer.buyGoldCoins(activeCard.data);
   }
-  if (!isSuccessful) return res.send({isSuccessful});
+  if (!isSuccessful) return res.json({isSuccessful});
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
-  res.send({isSuccessful});
+  res.json({isSuccessful});
 };
 
 const rejectSmallDeal = function(req, res) {

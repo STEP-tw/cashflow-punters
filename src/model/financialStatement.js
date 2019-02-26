@@ -1,4 +1,4 @@
-const { add, hasIntersection } = require("../utils/utils.js");
+const {add, hasIntersection} = require("../utils/utils.js");
 const CashLedger = require("./cashLedger");
 const getIncome = (value, content) => value + content.cashflow;
 
@@ -19,7 +19,7 @@ class FinancialStatement extends CashLedger {
   }
 
   updateTotalIncome() {
-    let assetIncome = this.assets.realEstates.reduce(getIncome, 0);
+    let assetIncome = this.income.realEstates.reduce(getIncome, 0);
     this.totalIncome = assetIncome + this.income.salary;
   }
 
@@ -48,23 +48,13 @@ class FinancialStatement extends CashLedger {
     this.assets.goldCoins = 0;
     this.assets.shares = {};
     this.liabilities = profession.liabilities;
-    this.liabilities.realEstate = [
-      {
-        title: "4-Plex for Sale",
-        message:
-          "4-Plex for sale in rehabilitating neighbourhood. Owner being forced out by income tax liens.",
-        cost: 370000,
-        type: "4-plex",
-        mortgage: 360000,
-        downPayment: 10000,
-        cashflow: 900
-      }
-    ];
+    this.liabilities.realEstates = [];
     this.updateFinancialStatement();
     this.ledgerBalance = this.cashflow + profession.assets.savings;
     const initialAmount = this.cashflow + profession.assets.savings;
     this.addCreditEvent(initialAmount, "Initial Cash");
   }
+
   addToLedgerBalance(amount) {
     this.ledgerBalance += amount;
   }
@@ -79,17 +69,24 @@ class FinancialStatement extends CashLedger {
     return this.cashflow;
   }
 
-  addAsset(type, downPayment, cost) {
-    this.assets.realEstates.push({ type, downPayment, cost });
+  addAsset(title, type, downPayment, cost) {
+    this.assets.realEstates.push({title, type, downPayment, cost});
   }
 
   addLiability(liability, amount) {
     if (this.liabilities[liability]) {
       this.liabilities[liability] += amount;
+      this.addToLedgerBalance(amount);
       return;
     }
     this.liabilities[liability] = amount;
     this.addToLedgerBalance(amount);
+  }
+
+  addRealEstateLiability(title, type, mortgage) {
+    this.liabilities.realEstates.push({title, type, mortgage});
+    this.updateTotalIncome();
+    this.updateCashFlow();
   }
 
   addExpense(expense, amount) {
@@ -105,8 +102,9 @@ class FinancialStatement extends CashLedger {
     this.assets.goldCoins += count;
   }
 
-  addIncomeRealEstate(type, cashflow) {
-    this.income.realEstates.push({ type, cashflow });
+  addIncomeRealEstate(title, type, cashflow) {
+    this.income.realEstates.push({title, type, cashflow});
+    this.passiveIncome += cashflow;
   }
 
   removeLiability(liability, amount) {
@@ -123,8 +121,8 @@ class FinancialStatement extends CashLedger {
   }
 
   calculateProfit(estate, marketCard) {
-    const { cash, percentage } = marketCard.data;
-    const { mortgage, cost } = estate;
+    const {cash, percentage} = marketCard.data;
+    const {mortgage, cost} = estate;
     if (cash) {
       return cost + cash - mortgage;
     }

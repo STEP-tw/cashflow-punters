@@ -104,13 +104,13 @@ class Player extends FinancialStatement {
   }
 
   addRealEstate(card) {
-    const {downPayment, type, cost, cashflow, mortgage} = card;
+    const {downPayment, type, cost, cashflow, mortgage, title} = card;
     if (this.ledgerBalance < downPayment) return false;
     this.deductLedgerBalance(+downPayment);
     this.addDebitEvent(+downPayment, "brought realEstate");
-    this.addAsset(type, downPayment, cost);
-    this.addLiability(type, mortgage);
-    this.addIncomeRealEstate(type, cashflow);
+    this.addAsset(title, type, downPayment, cost);
+    this.addRealEstateLiability(title, type, mortgage);
+    this.addIncomeRealEstate(title, type, cashflow);
     return true;
   }
 
