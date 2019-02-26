@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
-const {createGameId} = require("./utils/utils");
-const {renderHomePage, getCurrentGame, logRequest} = require("./handlers.js");
+const { createGameId } = require("./utils/utils");
+const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 const {
   canJoin,
   hostGame,
@@ -33,7 +33,8 @@ const {
   isSharePresent,
   sellShares,
   provideCommonEstates,
-  completeTurn
+  completeTurn,
+  sellGoldCoins
 } = require("./gameHandlers");
 
 app.games = {};
@@ -41,7 +42,7 @@ app.createGameId = createGameId;
 app.use(logRequest);
 app.use(cookieParser());
 app.use(getCurrentGame);
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", renderHomePage);
@@ -73,6 +74,7 @@ app.post("/joingame", joinGame);
 app.post("/hostgame", hostGame);
 app.post("/rolldice", rollDice);
 app.post("/takeloan", grantLoan);
+app.post("/sellgoldcoins", sellGoldCoins);
 
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));

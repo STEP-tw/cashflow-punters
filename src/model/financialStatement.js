@@ -70,7 +70,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addAsset(title, type, downPayment, cost) {
-    this.assets.realEstates.push({title, type, downPayment, cost});
+    this.assets.realEstates.push({ title, type, downPayment, cost });
   }
 
   addLiability(liability, amount) {
@@ -84,7 +84,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addRealEstateLiability(title, type, mortgage) {
-    this.liabilities.realEstates.push({title, type, mortgage});
+    this.liabilities.realEstates.push({ title, type, mortgage });
     this.updateTotalIncome();
     this.updateCashFlow();
   }
@@ -103,7 +103,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addIncomeRealEstate(title, type, cashflow) {
-    this.income.realEstates.push({title, type, cashflow});
+    this.income.realEstates.push({ title, type, cashflow });
     this.passiveIncome += cashflow;
   }
 
@@ -121,8 +121,8 @@ class FinancialStatement extends CashLedger {
   }
 
   calculateProfit(estate, marketCard) {
-    const {cash, percentage} = marketCard.data;
-    const {mortgage, cost} = estate;
+    const { cash, percentage } = marketCard.data;
+    const { mortgage, cost } = estate;
     if (cash) {
       return cost + cash - mortgage;
     }
@@ -146,6 +146,20 @@ class FinancialStatement extends CashLedger {
 
   hasRealEstate(realEstatesType) {
     return hasIntersection(this.getRealEstatesType(), realEstatesType);
+  }
+
+  hasGoldCoins() {
+    return this.assets.goldCoins > 0;
+  }
+
+  sellGoldCoins(numberOfCoins, cost) {
+    const totalAmout = numberOfCoins * cost;
+    this.assets.goldCoins -= numberOfCoins;
+    this.ledgerBalance += totalAmout;
+    this.addCreditEvent(totalAmout, ` Sold ${numberOfCoins} gold coins.`);
+    this.setNotification(
+      `You sold ${numberOfCoins} gold coins at rate of ${cost}.$${totalAmout} added to your Ledger Balance`
+    );
   }
 }
 

@@ -78,11 +78,12 @@ class Game extends ActivityLog {
   }
 
   isPlayersTurnCompleted() {
+    this.players.forEach(player => {
+    });
     return this.players.every(player => player.isTurnComplete);
   }
 
   nextPlayer() {
-    if (this.isPlayersTurnCompleted() == false) return;
     this.currentPlayer.rolledDice = false;
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
@@ -151,12 +152,19 @@ class Game extends ActivityLog {
       this.players.forEach(player => {
         const marketRealEstatesType = marketCard.relatedRealEstates;
         const hasRealEstate = player.hasRealEstate(marketRealEstatesType);
-        if (hasRealEstate) {
+        if (hasRealEstate || player.hasGoldCoins()) {
           player.holdTurn();
         }
       });
     }
-    this.nextPlayer();
+    if (marketCard.relatedTo == "goldCoin") {
+      this.players.forEach(player => {
+        if (player.hasGoldCoins()) {
+          player.holdTurn();
+        }
+      });
+    }
+    this.isPlayersTurnCompleted() && this.nextPlayer();
   }
 
   getCommonEstates(name) {

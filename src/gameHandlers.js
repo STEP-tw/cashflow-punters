@@ -104,11 +104,11 @@ const acceptSmallDeal = function(req, res) {
   if (activeCard.data.relatedTo == "goldCoins") {
     isSuccessful = req.game.currentPlayer.buyGoldCoins(activeCard.data);
   }
-  if (!isSuccessful) return res.json({isSuccessful});
+  if (!isSuccessful) return res.json({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
-  res.json({isSuccessful});
+  res.json({ isSuccessful });
 };
 
 const rejectSmallDeal = function(req, res) {
@@ -175,7 +175,7 @@ const completeTurn = function(req, res) {
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   player.completeTurn();
-  req.game.nextPlayer();
+  if (req.game.isPlayersTurnCompleted()) req.game.nextPlayer();
   res.end();
 };
 
@@ -194,6 +194,16 @@ const provideCommonEstates = function(req, res) {
   const { playerName } = req.cookies;
   const commonEstates = req.game.getCommonEstates(playerName);
   res.send(JSON.stringify(commonEstates));
+};
+
+const sellGoldCoins = function(req, res) {
+  const { cost, numberOfCoins } = req.body;
+  const game = req.game;
+  const { playerName } = req.cookies;
+  const player = game.getPlayerByName(playerName);
+  game.addActivity(` sold ${numberOfCoins} at rate of ${cost}`, playerName);
+  player.sellGoldCoins(numberOfCoins, cost);
+  res.end();
 };
 
 module.exports = {
@@ -219,5 +229,6 @@ module.exports = {
   sellShares,
   completeTurn,
   sellEstate,
-  provideCommonEstates
+  provideCommonEstates,
+  sellGoldCoins
 };

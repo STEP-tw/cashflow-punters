@@ -21,7 +21,47 @@ const handleRealEstate = function(player, {relatedRealEstates}) {
   }
 };
 
-const handleGoldCoin = function() {};
+const sellCoins = function(player, card) {
+  const { goldCoins } = player.assets;
+  const cost = card.cash;
+  const numberOfCoins = getElementById("gold-coin").value;
+  const msg = `Sorry! You have only ${goldCoins} gold coins.`;
+  if (numberOfCoins > goldCoins) {
+    return displaySellGoldCoinForm(player, card, msg);
+  }
+  fetch("/sellgoldcoins", {
+    method: "POST",
+    body: JSON.stringify({ cost, numberOfCoins }),
+    headers: { "Content-Type": "application/json" }
+  });
+  completeTurn();
+};
+
+const displaySellGoldCoinForm = function(player, card, msg) {
+  const marketDiv = getElementById("market-card-div");
+  const sellGoldCoins = sellCoins.bind(null, player, card);
+  const goldCoinCount = createInput("goldCoins", "", "number", "gold-coin");
+  const sellButton = createPopupButton("Sell Coins", sellGoldCoins);
+  const msgBox = createElement("p");
+
+  msgBox.innerText = msg;
+  appendChildren(marketDiv, [goldCoinCount, sellButton, msgBox]);
+  hideOverlay("card");
+  showOverlay("market-card-div");
+};
+
+const handleGoldCoin = function(player, card) {
+  const cardDiv = getElementById("card");
+  const msg = "Enter number of coins you want to sell";
+  const sellForm = displaySellGoldCoinForm.bind(null, player, card, msg);
+  if (player.assets.goldCoins > 0 && !player.isTurnComplete) {
+    const sellButton = createPopupButton("Sell", sellForm);
+    const cancelButton = createPopupButton("Cancel", completeTurn);
+    cardDiv.appendChild(sellButton);
+    cardDiv.appendChild(cancelButton);
+  }
+};
+
 const handleMarketCard = function(player, card) {
   const {relatedTo} = card;
   const marketHandlers = {
@@ -92,10 +132,10 @@ const showCommonEstates = function() {
 
 const displayEstates = function(commonEstates) {
   if (commonEstates.length == 0) return completeTurn();
-  hideOverlay("card");
   const estateDiv = getElementById("market-card-div");
   const estateTable = createTableHtml(commonEstates);
   const doneButton = createPopupButton("Done", completeTurn);
   appendChildren(estateDiv, [estateTable, doneButton]);
+  hideOverlay("card");
   showOverlay("market-card-div");
 };

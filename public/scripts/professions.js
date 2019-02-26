@@ -37,6 +37,5 @@ const getProfessions = function() {
       let container = document.getElementById("profession-container");
       players.map(getProfessionsDiv).join("");
       let button = createPopupButton("continue", createFinancialStatement);
-      container.appendChild(button);
     });
 };
