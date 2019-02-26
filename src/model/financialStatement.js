@@ -1,4 +1,4 @@
-const { add } = require("../utils/utils");
+const { add, hasIntersection } = require("../utils/utils.js");
 const CashLedger = require("./cashLedger");
 const getIncome = (value, content) => value + content.cashflow;
 
@@ -48,7 +48,18 @@ class FinancialStatement extends CashLedger {
     this.assets.goldCoins = 0;
     this.assets.shares = {};
     this.liabilities = profession.liabilities;
-    this.liabilities.realEstate = [];
+    this.liabilities.realEstate = [
+      {
+        title: "4-Plex for Sale",
+        message:
+          "4-Plex for sale in rehabilitating neighbourhood. Owner being forced out by income tax liens.",
+        cost: 370000,
+        type: "4-plex",
+        mortgage: 360000,
+        downPayment: 10000,
+        cashflow: 900
+      }
+    ];
     this.updateFinancialStatement();
     this.ledgerBalance = this.cashflow + profession.assets.savings;
     const initialAmount = this.cashflow + profession.assets.savings;
@@ -110,7 +121,7 @@ class FinancialStatement extends CashLedger {
   hasShares(symbol) {
     return Object.keys(this.assets.shares).includes(symbol);
   }
-  
+
   calculateProfit(estate, marketCard) {
     const { cash, percentage } = marketCard.data;
     const { mortgage, cost } = estate;
@@ -124,10 +135,19 @@ class FinancialStatement extends CashLedger {
     const profit = this.calculateProfit(estate, marketCard);
     this.addToLedgerBalance(profit);
     this.liabilities.realEstate = this.liabilities.realEstate.filter(
-      realEstate => realEstate !== estate
+      realEstate => JSON.stringify(realEstate) !== JSON.stringify(estate)
     );
+
     this.addCreditEvent(profit, "sold Real Estate");
     return profit;
+  }
+
+  getRealEstatesType() {
+    return this.liabilities.realEstate.map(estate => estate.type);
+  }
+
+  hasRealEstate(realEstatesType) {
+    return hasIntersection(this.getRealEstatesType(), realEstatesType);
   }
 }
 

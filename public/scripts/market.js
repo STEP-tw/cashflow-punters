@@ -21,8 +21,7 @@ const showMarketCard = function(card, player) {
   appendChildren(cardDiv, [titleDiv, messageDiv]);
   const playerRealEstates = player.liabilities.realEstate;
   const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
-
-  if (commonEstates.length > 0) {
+  if (commonEstates.length > 0 && !player.isTurnComplete) {
     const sellButton = createPopupButton(
       "Sell",
       displayEstates.bind(null, commonEstates)
@@ -65,8 +64,7 @@ const createRow = data => {
 const createTableHtml = function(estates) {
   const table = createElement("table");
   const tableRows = estates.map(createRow);
-  const doneButton = createPopupButton("Done", completeTurn);
-  tableRows.push(doneButton);
+
   appendChildren(table, tableRows);
   return table;
 };
@@ -78,9 +76,11 @@ const showCommonEstates = function() {
 };
 
 const displayEstates = function(commonEstates) {
+  if (commonEstates.length == 0) return completeTurn();
   hideOverlay("card");
   const estateDiv = getElementById("real-estate-div");
   const estateTable = createTableHtml(commonEstates);
-  appendChildren(estateDiv, [estateTable]);
+  const doneButton = createPopupButton("Done", completeTurn);
+  appendChildren(estateDiv, [estateTable, doneButton]);
   showOverlay("real-estate-div");
 };
