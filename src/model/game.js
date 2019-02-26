@@ -177,7 +177,8 @@ class Game extends ActivityLog {
   skipTurn() {
     const currentPlayer = this.currentPlayer;
     currentPlayer.decrementDownSizeTurns();
-    const msg = "Your turn has been skipped due to downSize";
+    const turnsRemaining = currentPlayer.downSizeTurns();
+    const msg = `Your turn has been skipped due to downSize ${turnsRemaining} turns to go..`;
     currentPlayer.notification = msg;
     const activityMsg = "'s turn was skipped.";
     this.addActivity(activityMsg, currentPlayer.name);

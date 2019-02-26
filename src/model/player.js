@@ -34,6 +34,10 @@ class Player extends FinancialStatement {
     return this.downSizedForTurns != 0;
   }
 
+  downSizeTurns() {
+    return this.downSizedForTurns;
+  }
+
   isLedgerBalanceNegative() {
     return this.ledgerBalance < 0;
   }
@@ -104,7 +108,7 @@ class Player extends FinancialStatement {
   }
 
   addRealEstate(card) {
-    const {downPayment, type, cost, cashflow, mortgage, title} = card;
+    const { downPayment, type, cost, cashflow, mortgage, title } = card;
     if (this.ledgerBalance < downPayment) return false;
     this.deductLedgerBalance(+downPayment);
     this.addDebitEvent(+downPayment, "brought realEstate");
