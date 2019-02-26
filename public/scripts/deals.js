@@ -12,7 +12,7 @@ const acceptSmallDeal = function(event) {
   let parent = event.target.parentElement;
   fetch("/acceptSmallDeal")
     .then(data => data.json())
-    .then(({isSuccessful}) => {
+    .then(({ isSuccessful }) => {
       if (isSuccessful) {
         parent.style.visibility = "hidden";
         return;
@@ -30,7 +30,7 @@ const declineSmallDeal = function() {
 const acceptBigDeal = function(event) {
   fetch("/acceptBigDeal")
     .then(data => data.json())
-    .then(({isSuccessful}) => {
+    .then(({ isSuccessful }) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
         parent.style.visibility = "hidden";
@@ -50,7 +50,7 @@ const createAcceptButton = actions =>
   createButton("Accept", "button_div", "accept", "button", actions);
 
 const createDeclineButton = actions =>
-  createButton("decline", "button_div", "reject", "button", actions);
+  createButton("Decline", "button_div", "reject", "button", actions);
 
 const createSellButton = function() {
   return createButton(
@@ -94,7 +94,7 @@ const createCardButtons = function(actions) {
 };
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
-  const {title, message, cost, mortgage, downPayment, cashflow} = card;
+  const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -113,7 +113,7 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
-  const {title, message, numberOfCoins, cost} = card;
+  const { title, message, numberOfCoins, cost } = card;
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -127,7 +127,7 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
 };
 
 const createCard = function(card) {
-  const {title, message, symbol, historicTradingRange, currentPrice} = card;
+  const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
@@ -145,11 +145,11 @@ const buyShares = function() {
   const numberOfShares = getElementById("share-count").value;
   fetch("/buyshares", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({numberOfShares})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfShares })
   })
     .then(res => res.json())
-    .then(({isCapable}) => {
+    .then(({ isCapable }) => {
       if (!isCapable) return showNotEnoughBalance();
       closeOverlay("share-card");
       closeOverlay("buttons-container");
@@ -160,11 +160,11 @@ const sellShares = function() {
   const numberOfShares = getElementById("share-count").value;
   fetch("/sellshares", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({numberOfShares})
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ numberOfShares })
   })
     .then(res => res.json())
-    .then(({isCapable}) => {
+    .then(({ isCapable }) => {
       if (!isCapable) return showInvalidShareCount();
       closeOverlay("share-card");
       closeOverlay("buttons-container");
@@ -227,7 +227,7 @@ const showSellOption = function(card) {
 const handleSharesSmallDeal = function(card, isMyTurn) {
   fetch("/issharepresent")
     .then(data => data.json())
-    .then(({hasShares}) => {
+    .then(({ hasShares }) => {
       if (hasShares && isMyTurn) return showBuyAndSellOptions(card.data);
       if (hasShares) return showSellOption(card.data);
       if (isMyTurn) return showBuyOption(card.data);
