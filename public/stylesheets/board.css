@@ -27,8 +27,12 @@ button {
   color: white;
   font-size: small;
   cursor: pointer;
-  padding: 1%;
-  margin: 1%;
+
+  height: fit-content;
+  width: fit-content;
+
+  padding: 3% 5%;
+  margin: 1% 8%;
 }
 
 button:hover {
@@ -267,6 +271,8 @@ button:hover {
 
 .button_div {
   padding: 5%;
+  margin: 0 14%;
+
   height: fit-content;
   width: fit-content;
 }
@@ -689,6 +695,7 @@ button:hover {
 
 .buttons-div {
   display: flex;
+  justify-content: center;
 }
 
 .buttons-div > div {
@@ -724,16 +731,27 @@ button:hover {
 .top-popup {
   z-index: 10;
 
+  display: flex;
+  flex-direction: column;
+
   position: absolute;
-  top: 30%;
-  left: 25;
+  top: 32%;
+  left: 37%;
 
   width: 25%;
-  height: 25%;
+  height: fit-content;
 
   padding: 5%;
   background-color: white;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
+}
+
+.top-popup > button {
+  height: fit-content;
+  width: fit-content;
+  align-self: center;
+  margin-top: 7%;
+  padding: 2% 4%;
 }
 
 .share-popup {
