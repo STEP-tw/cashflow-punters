@@ -146,34 +146,6 @@ const showPlainCard = function(title, expenseAmount, type, msg) {
   cardDiv.appendChild(expenseDiv);
 };
 
-const showCard = function(card, isMyTurn) {
-  if (isSameCard(card.data.title)) return;
-  const bigDealactions = [acceptBigDeal, declineBigDeal];
-
-  const cardHandlers = {
-    doodad: showPlainCard.bind(
-      null,
-      card.data.title,
-      card.data.expenseAmount,
-      "doodad-card"
-    ),
-    market: showPlainCard.bind(
-      null,
-      card.data.title,
-      card.data.cash,
-      "market-card"
-    ),
-    smallDeal: getSmallDealHandler(card, isMyTurn),
-    bigDeal: createRealEstateDealCard.bind(
-      null,
-      bigDealactions,
-      card.data,
-      isMyTurn
-    )
-  };
-  cardHandlers[card.type] && cardHandlers[card.type]();
-};
-
 const handleCharity = function() {
   const askCharity = getElementById("askCharity");
   openOverlay("card-overlay");
