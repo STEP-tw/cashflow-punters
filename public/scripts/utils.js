@@ -55,7 +55,7 @@ const parseCookie = function() {
   keyValuePairs.forEach(keyValue => {
     const [key, value] = keyValue.split("=");
     parsedCookie[decodeURI(key)] = decodeURI(value);
-  }); 
+  });
   return parsedCookie;
 };
 
@@ -124,4 +124,12 @@ const openOverlay = function(id, displayType = "block") {
 const showOverlay = function(id) {
   const element = getElementById(id);
   element.style.visibility = "visible";
+};
+
+const createTextDiv = function(text) {
+  const textDiv = document.createElement("div");
+  const textPara = document.createElement("p");
+  textPara.innerText = text;
+  textDiv.appendChild(textPara);
+  return textDiv;
 };

@@ -55,20 +55,12 @@ const declineCharity = function(req, res) {
 };
 
 const selectSmallDeal = function(req, res) {
-  let {currentPlayer} = req.game;
-  if (currentPlayer.gotDeal) {
-    req.game.handleSmallDeal();
-    currentPlayer.gotDeal = false;
-  }
+  req.game.handleSmallDeal();
   res.end();
 };
 
 const selectBigDeal = function(req, res) {
-  let {currentPlayer} = req.game;
-  if (currentPlayer.gotDeal) {
-    req.game.handleBigDeal();
-    currentPlayer.gotDeal = false;
-  }
+  req.game.handleBigDeal();
   res.end();
 };
 
@@ -105,7 +97,6 @@ const isAbleToDoCharity = function(req, res) {
 
 const acceptSmallDeal = function(req, res) {
   const {activeCard} = req.game;
-  if (activeCard.dealDone) return res.end();
   let isSuccessful = true;
   if (activeCard.data.relatedTo == "realEstate") {
     isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
@@ -116,43 +107,31 @@ const acceptSmallDeal = function(req, res) {
   if (!isSuccessful) return res.send({isSuccessful});
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
-  if (activeCard.data.relatedTo == "shares") {
-    return handleShareSmallDeal(req, res);
-  }
   req.game.nextPlayer();
-  activeCard.dealDone = true;
   res.send({isSuccessful});
 };
 
 const rejectSmallDeal = function(req, res) {
-  const {activeCard} = req.game;
-  if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has rejected the deal`);
   req.game.nextPlayer();
-  activeCard.dealDone = true;
   res.end();
 };
 
 const acceptBigDeal = function(req, res) {
   const {activeCard} = req.game;
-  if (activeCard.dealDone) return res.end();
   const isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
   if (!isSuccessful) return res.send({isSuccessful});
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
-  activeCard.dealDone = true;
   res.end();
 };
 
 const rejectBigDeal = function(req, res) {
-  const {activeCard} = req.game;
-  if (activeCard.dealDone) return res.end();
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has rejected the deal`);
   req.game.nextPlayer();
-  activeCard.dealDone = true;
   res.end();
 };
 
@@ -193,7 +172,7 @@ const sellShares = function(req, res) {
 };
 
 const completeTurn = function(req, res) {
-  const { playerName } = req.cookies;
+  const {playerName} = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   player.completeTurn();
   res.end();
@@ -203,7 +182,7 @@ const sellEstate = function(req, res) {
   const estate = req.body;
   const game = req.game;
   const marketCard = game.activeCard;
-  const { playerName } = req.cookies;
+  const {playerName} = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   const profit = player.sellEstate(estate, marketCard);
   game.addActivity(`sold realEstate for $${profit} `, playerName);
@@ -211,7 +190,7 @@ const sellEstate = function(req, res) {
 };
 
 const provideCommonEstates = function(req, res) {
-  const { playerName } = req.cookies;
+  const {playerName} = req.cookies;
   const commonEstates = req.game.getCommonEstates(playerName);
   res.send(JSON.stringify(commonEstates));
 };

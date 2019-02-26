@@ -145,14 +145,9 @@ describe("selectSmallDeal", function() {
     };
     res.end = sinon.spy();
   });
-  it("should call handleSmallDeal when current player got deal", function() {
+  it("should call handleSmallDeal when current player wants to take small deal", function() {
     selectSmallDeal(req, res);
     expect(req.game.handleSmallDeal.calledOnce).to.be.true;
-  });
-  it("should not call handleSmallDeal when current player didntgot deal", function() {
-    req.game.currentPlayer.gotDeal = false;
-    selectSmallDeal(req, res);
-    expect(req.game.handleSmallDeal.calledOnce).to.be.false;
   });
 });
 describe("selectBigDeal", function() {
@@ -165,14 +160,9 @@ describe("selectBigDeal", function() {
     };
     res.end = sinon.spy();
   });
-  it("should call handleBigDeal when current player got deal", function() {
+  it("should call handleBigDeal when player selected big deal", function() {
     selectBigDeal(req, res);
     expect(req.game.handleBigDeal.calledOnce).to.be.true;
-  });
-  it("should not call handleBigDeal when current player didntgot deal", function() {
-    req.game.currentPlayer.gotDeal = false;
-    selectBigDeal(req, res);
-    expect(req.game.handleBigDeal.calledOnce).to.be.false;
   });
 });
 
@@ -316,12 +306,6 @@ describe("acceptSmallDeal", function() {
     res.end = sinon.spy();
     res.send = sinon.spy();
   });
-  it("should return nothing if deal is already done ", function() {
-    req.game.activeCard.dealDone = true;
-    const output = acceptSmallDeal(req, res);
-    expect(output).to.be.undefined;
-    expect(req.game.nextPlayer.calledOnce).to.be.false;
-  });
   it("should call nextPlayer if deal is not done ", function() {
     acceptSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
@@ -342,12 +326,7 @@ describe("rejectSmallDeal", function() {
     res.end = sinon.spy();
     res.send = sinon.spy();
   });
-  it("should return nothing if deal is already done ", function() {
-    req.game.activeCard.dealDone = true;
-    const output = rejectSmallDeal(req, res);
-    expect(output).to.be.undefined;
-    expect(req.game.nextPlayer.calledOnce).to.be.false;
-  });
+
   it("should call nextPlayer if deal is not done ", function() {
     rejectSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
@@ -396,12 +375,6 @@ describe("rejectBigDeal", function() {
     req.game.players = {length: 0};
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
-  });
-  it("should return nothing if deal is already done ", function() {
-    req.game.activeCard.dealDone = true;
-    const output = rejectBigDeal(req, res);
-    expect(output).to.be.undefined;
-    expect(req.game.nextPlayer.calledOnce).to.be.false;
   });
   it("should call nextPlayer if deal is not done ", function() {
     rejectBigDeal(req, res);
