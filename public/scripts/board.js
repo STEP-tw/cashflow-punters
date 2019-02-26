@@ -201,13 +201,8 @@ const getCardDiv = function(type) {
 };
 
 const createSharesSmallDeal = function(actions, card) {
-<<<<<<< HEAD
-  const {title, message, symbol, historicTradingRange, currentPrice} = card;
-  const cardDiv = getCardDiv("smallDeal");
-=======
   const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = createCardDiv("smallDeal");
->>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
@@ -221,13 +216,8 @@ const createSharesSmallDeal = function(actions, card) {
 };
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
-<<<<<<< HEAD
-  const {title, message, cost, mortgage, downPayment, cashflow} = card;
-  const cardDiv = getCardDiv("smallDeal");
-=======
   const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDiv = createCardDiv("smallDeal");
->>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
@@ -245,13 +235,8 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
-<<<<<<< HEAD
-  const {title, message, numberOfCoins, cost} = card;
-  const cardDiv = getCardDiv("smallDeal");
-=======
   const { title, message, numberOfCoins, cost } = card;
   const cardDiv = createCardDiv("smallDeal");
->>>>>>> [#33] Mustakim/Swapnil - handled realestate selling in market
   const titleDiv = createTextDiv(title);
   const messageDiv = createTextDiv(message);
   const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
