@@ -10,7 +10,6 @@ const getCardDiv = function(type) {
 
 const acceptSmallDeal = function(event) {
   let parent = event.target.parentElement;
-  console.log(parent);
   fetch("/acceptSmallDeal")
     .then(data => data.json())
     .then(({isSuccessful}) => {
@@ -99,8 +98,8 @@ const createCardButtons = function(actions) {
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
   const {title, message, cost, mortgage, downPayment, cashflow} = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title);
-  const messageDiv = createTextDiv(message);
+  const titleDiv = createTextDiv(title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
   const costDiv = createTextDiv(`Cost : ${cost}`);
   const downPaymentDiv = createTextDiv(`Down Payment : ${downPayment}`);
@@ -118,8 +117,8 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
   const {title, message, numberOfCoins, cost} = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title);
-  const messageDiv = createTextDiv(message);
+  const titleDiv = createTextDiv(title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
   const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
   const costDiv = createTextDiv(`Cost : ${cost}`);
   const bottomDiv = createElement("div");
@@ -132,8 +131,8 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
 const createCard = function(card) {
   const {title, message, symbol, historicTradingRange, currentPrice} = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title);
-  const messageDiv = createTextDiv(message);
+  const titleDiv = createTextDiv(title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
   const rangeDiv = createTextDiv(`Range : ${historicTradingRange}`);
   const currentPriceDiv = createTextDiv(`current price : ${currentPrice}`);
@@ -214,7 +213,6 @@ const showBuyAndSellOptions = function(card) {
 
 const showBuyOption = function(card) {
   const cardDiv = createCard(card);
-  console.log("in show buy option");
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
   const accept = createAcceptButton(showOptions.bind(null, false));
@@ -251,7 +249,6 @@ const getSmallDealHandler = function(card, isMyTurn) {
     goldCoins: createGoldSmallDeal.bind(null, smallDealactions),
     realEstate: createRealEstateDealCard.bind(null, smallDealactions)
   };
-  // if (card.dealDone) return nothing;
   return (
     dealCardTypes[card.data.relatedTo] &&
     dealCardTypes[card.data.relatedTo].bind(null, card.data, isMyTurn)

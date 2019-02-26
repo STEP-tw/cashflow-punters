@@ -122,13 +122,13 @@ const declineCharity = function() {
   fetch("/declineCharity");
 };
 
-const getCardTitle = function() {
-  let card = getElementById("card");
-  return card.children[0] && card.children[0].children[0].innerText;
-};
-
-const isSameCard = function(cardTitle) {
-  return cardTitle == getCardTitle();
+const isSameCard = function(card) {
+  const {title, message} = card;
+  const cardTitleDiv = getElementById("card-title");
+  const cardMessageDiv = getElementById("card-message");
+  const cardTitle = cardTitleDiv && cardTitleDiv.innerText;
+  const cardMessage = cardMessageDiv && cardMessageDiv.innerText;
+  return cardTitle == title && cardMessage == message;
 };
 
 const showPlainCard = function(title, expenseAmount, type, msg) {
@@ -138,9 +138,9 @@ const showPlainCard = function(title, expenseAmount, type, msg) {
   cardDiv.classList = [];
   cardDiv.classList.add("plain-card");
   cardDiv.classList.add(type);
-  const titleDiv = createTextDiv(title);
+  const titleDiv = createTextDiv(title, "card-title");
   titleDiv.classList.add("card-title");
-  const expenseDiv = createTextDiv("Pay $ " + expenseAmount);
+  const expenseDiv = createTextDiv("Pay $ " + expenseAmount, "card-message");
   expenseDiv.classList.add("card-expense");
   cardDiv.appendChild(titleDiv);
   cardDiv.appendChild(expenseDiv);
@@ -265,6 +265,7 @@ const polling = function(game) {
 };
 
 const showCard = function(card, isMyTurn, player) {
+  if (isSameCard(card.data)) return;
   const bigDealactions = [acceptBigDeal, declineBigDeal];
 
   const cardHandlers = {

@@ -7,7 +7,7 @@ const getCommon = function(list1, list2) {
   }, []);
 };
 
-const handleRealEstate = function(player, { relatedRealEstates }) {
+const handleRealEstate = function(player, {relatedRealEstates}) {
   const playerRealEstates = player.liabilities.realEstate;
   const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
   const cardDiv = getElementById("card");
@@ -23,7 +23,7 @@ const handleRealEstate = function(player, { relatedRealEstates }) {
 
 const handleGoldCoin = function() {};
 const handleMarketCard = function(player, card) {
-  const { relatedTo } = card;
+  const {relatedTo} = card;
   const marketHandlers = {
     realEstate: handleRealEstate,
     goldCoin: handleGoldCoin
@@ -33,10 +33,10 @@ const handleMarketCard = function(player, card) {
 };
 
 const showMarketCard = function(card, player) {
-  const { title, message } = card.data;
+  const {title, message} = card.data;
   const cardDiv = getElementById("card");
-  const titleDiv = createTextDiv(title);
-  const messageDiv = createTextDiv(message);
+  const titleDiv = createTextDiv(title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
   cardDiv.className = "plain-card market-card";
   titleDiv.className = "card-title";
   messageDiv.className = "card-message";
@@ -55,7 +55,7 @@ const completeTurn = function() {
 const sellEstate = function(estate) {
   fetch("/sellestate", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify(estate)
   });
   showCommonEstates();

@@ -127,10 +127,11 @@ const showOverlay = function(id) {
   element.style.visibility = "visible";
 };
 
-const createTextDiv = function(text) {
+const createTextDiv = function(text, id) {
   const textDiv = document.createElement("div");
   const textPara = document.createElement("p");
   textPara.innerText = text;
+  textPara.id = id;
   textDiv.appendChild(textPara);
   return textDiv;
 };
