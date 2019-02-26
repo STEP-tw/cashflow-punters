@@ -94,6 +94,7 @@ const createDivWithClass = function(classname) {
 const createPopupButton = function(text, func) {
   let button = createElement("button");
   button.innerText = text;
+  button.className = "continue-button";
   button.onclick = func;
   return button;
 };

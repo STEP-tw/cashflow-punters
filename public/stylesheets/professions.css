@@ -54,6 +54,8 @@
 
 .continue-button {
   align-self: center;
+  height: fit-content;
+  width: fit-content;
 }
 
 .professions-container {
