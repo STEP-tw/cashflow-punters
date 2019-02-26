@@ -123,10 +123,12 @@ describe("handleCrossedPayday", function() {
       setNotification: function(msg) {
         this.notification = msg;
       },
-      isBankrupt:function() {
+      isBankrupted:function() {
         return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
-      }
-    };
+      },
+      isBankruptcy:sinon.spy()
+    }
+  
     game.board = {
       getPayDaySpaces: sinon.stub()
     };
@@ -300,9 +302,10 @@ describe("handlePayday", function() {
       setNotification: function(msg) {
         this.notification = msg;
       },
-      isBankrupt:function() {
+      isBankrupted:function() {
         return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
-      }
+      },
+      isBankruptcy:sinon.spy()
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
