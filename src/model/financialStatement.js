@@ -161,6 +161,26 @@ class FinancialStatement extends CashLedger {
       `You sold ${numberOfCoins} gold coins at rate of ${cost}.$${totalAmout} added to your Ledger Balance`
     );
   }
+  
+  getAsset(assetName) {
+    return this.assets.realEstates.filter(
+      realEstate => realEstate.type == assetName
+    );
+  }
+
+  removeRealState(asset) {
+    const assets = this.assets.realEstates;
+    let indexNo = assets.indexOf(asset);
+    assets.splice(indexNo, 1);
+  }
+
+  getDownPayment(assetName) {
+    const asset = this.getAsset(assetName)[0];
+    const refundableAmount = asset.downPayment / 2;
+    this.addToLedgerBalance(refundableAmount);
+    this.removeRealState(asset);
+    return refundableAmount;
+  }
 }
 
 module.exports = FinancialStatement;

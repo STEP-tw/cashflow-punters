@@ -82,6 +82,15 @@ const payDebt = function(req, res) {
   res.send(JSON.stringify(player));
 };
 
+const sellAssets = function(req, res) {
+  const { playerName } = req.cookies;
+  const assetNames = req.body.selectedAsset;
+  const game = req.game;
+  game.soldAsset(playerName, assetNames);
+  const player = game.getPlayerByName(playerName);
+  res.send(JSON.stringify(player));
+};
+
 const provideLiabilities = function(req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
@@ -104,11 +113,11 @@ const acceptSmallDeal = function(req, res) {
   if (activeCard.data.relatedTo == "goldCoins") {
     isSuccessful = req.game.currentPlayer.buyGoldCoins(activeCard.data);
   }
-  if (!isSuccessful) return res.json({ isSuccessful });
+  if (!isSuccessful) return res.send({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
-  res.json({ isSuccessful });
+  res.send({ isSuccessful });
 };
 
 const rejectSmallDeal = function(req, res) {
@@ -230,5 +239,6 @@ module.exports = {
   completeTurn,
   sellEstate,
   provideCommonEstates,
-  sellGoldCoins
+  sellGoldCoins,
+  sellAssets
 };

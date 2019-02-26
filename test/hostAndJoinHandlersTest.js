@@ -51,6 +51,7 @@ describe("hostGame", function() {
       .to.deep.equals([
         {
           bankrupt: false,
+          bankruptcy: false,
           charityTurns: 0,
           notification: "",
           childrenCount: 0,
@@ -61,6 +62,7 @@ describe("hostGame", function() {
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,
+          removed: false,
           turn: 1
         }
       ]);
@@ -135,6 +137,7 @@ describe("joinGame", function() {
       .to.deep.equals([
         {
           bankrupt: false,
+          bankruptcy: false,
           charityTurns: 0,
           notification: "",
           name: "player",
@@ -146,7 +149,8 @@ describe("joinGame", function() {
           childrenCount: 0,
           didUpdateSpace: false,
           currentSpace: 0,
-          passiveIncome: 0
+          passiveIncome: 0,
+          removed: false
         }
       ]);
   });

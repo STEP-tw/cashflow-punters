@@ -27,6 +27,7 @@ class Game extends ActivityLog {
     this.hasStarted = false;
     this.financialStatement;
     this.activeCard;
+    // this.lostPlayers = [];
   }
 
   addPlayer(player) {
@@ -88,6 +89,9 @@ class Game extends ActivityLog {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
+    if(this.currentPlayer.removed){
+      this.nextPlayer();
+    }
     this.addActivity("'s turn ", this.currentPlayer.name);
   }
 
@@ -210,9 +214,28 @@ class Game extends ActivityLog {
     this.nextPlayer();
   }
 
+  removePlayer(player, msg) {
+    this.addActivity(msg, player.name);
+    player.removed = true;
+    // this.nextPlayer()
+  }
+
   handlePayday() {
-    if (this.currentPlayer.isBankrupt()) {
+    if (this.currentPlayer.isBankrupted()) {
       this.currentPlayer.bankrupt = true;
+      this.currentPlayer.setNotification(
+        "You are bankrupted. You can't continue the game!"
+      );
+      this.removePlayer(
+        this.currentPlayer,
+        " is out of the game because of bankruptcy"
+      );
+      this.nextPlayer();
+      return;
+    }
+    if (this.currentPlayer.isBankruptcy()) {
+      this.currentPlayer.bankruptcy = true;
+      this.addActivity(" is in bankruptcy situation", this.currentPlayer.name);
       return;
     }
     const paydayAmount = this.currentPlayer.addPayday();
@@ -249,8 +272,24 @@ class Game extends ActivityLog {
     );
     if (crossedPaydays.length > 0) {
       crossedPaydays.forEach(() => {
-        if (this.currentPlayer.isBankrupt()) {
+        if (this.currentPlayer.isBankrupted()) {
           this.currentPlayer.bankrupt = true;
+          this.currentPlayer.setNotification(
+            "You are bankrupted. You can't continue the game!"
+          );
+          this.removePlayer(
+            this.currentPlayer,
+            " is out of the game because of bankruptcy"
+          );
+          this.nextPlayer();
+          return;
+        }
+        if (this.currentPlayer.isBankruptcy()) {
+          this.currentPlayer.bankruptcy = true;
+          this.addActivity(
+            " is in bankruptcy situation",
+            this.currentPlayer.name
+          );
           return;
         }
         this.addActivity(" crossed payday", this.currentPlayer.name);
@@ -284,6 +323,29 @@ class Game extends ActivityLog {
     const activityMessage = ` paid debt $${liabilityPrice} for liability - ${liability}`;
     this.addActivity(activityMessage, playerName);
     player.setNotification("you" + activityMessage);
+  }
+
+  soldAsset(playerName, assetNames) {
+    const player = this.getPlayerByName(playerName);
+    assetNames.forEach(assetName => {
+      const amount = player.getDownPayment(assetName);
+      const expenseAmount = amount / 10;
+      const debtDetails = {
+        liability: "Bank Loan",
+        liabilityPrice: amount,
+        expense: "Bank Loan Payment",
+        expenseAmount
+      };
+      this.payDebt(playerName, debtDetails);
+    });
+    if (player.cashflow < 0) {
+      let msg = "please sell other asset your cash flow is stil negative";
+      player.notification = msg;
+      return;
+    }
+    let msg = "you are out of bankruptcy";
+    player.notification = msg;
+    nextPlayer();
   }
 
   acceptCharity() {

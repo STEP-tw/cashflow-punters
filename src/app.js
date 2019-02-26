@@ -34,7 +34,8 @@ const {
   sellShares,
   provideCommonEstates,
   completeTurn,
-  sellGoldCoins
+  sellGoldCoins,
+  sellAssets
 } = require("./gameHandlers");
 
 app.games = {};
@@ -75,6 +76,7 @@ app.post("/hostgame", hostGame);
 app.post("/rolldice", rollDice);
 app.post("/takeloan", grantLoan);
 app.post("/sellgoldcoins", sellGoldCoins);
+app.post("/sellAssets",sellAssets)
 
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));

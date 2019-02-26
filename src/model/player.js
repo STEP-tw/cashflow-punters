@@ -15,6 +15,8 @@ class Player extends FinancialStatement {
     this.notification = "";
     this.downSizedForTurns = 0;
     this.bankrupt = false;
+    this.bankruptcy = false;
+    this.removed = false;
     this.isTurnComplete = true;
   }
 
@@ -22,9 +24,21 @@ class Player extends FinancialStatement {
     this.turn = turn;
   }
 
-  isBankrupt() {
+  isBankruptcy() {
     return this.cashflow < 0 && this.ledgerBalance + this.cashflow < 0;
   }
+
+  isBankrupted() {
+    if(this.isBankruptcy()){
+      if(this.assets.realEstates.length == 0){
+        return true;
+      };
+      let totalDownpayment = this.assets.realEstates.reduce((a, b) => a.downPayment + b.downPayment)/2;
+      let newCashflow = this.cashflow + (totalDownpayment * 0.1);
+      return newCashflow < 0;
+    };
+    return false;
+  };
 
   removeCharityEffect() {
     this.charityTurns = 0;
