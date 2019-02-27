@@ -181,6 +181,24 @@ class FinancialStatement extends CashLedger {
     this.removeRealState(asset);
     return refundableAmount;
   }
+
+  hasShares(symbol) {
+    return this.assets.shares.hasOwnProperty(symbol);
+  }
+
+  removeHalfShares(symbol) {
+    const shares = this.assets.shares[symbol];
+    const numberOfShares = shares.numberOfShares;
+    this.setNotification(`Your ${symbol} shares got halved.`);
+    shares.numberOfShares = Math.ceil(numberOfShares / 2);
+  }
+
+  doubleShares(symbol) {
+    const shares = this.assets.shares[symbol];
+    const numberOfShares = shares.numberOfShares;
+    this.setNotification(`Your ${symbol} shares got doubled.`);
+    shares.numberOfShares = numberOfShares * 2;
+  }
 }
 
 module.exports = FinancialStatement;

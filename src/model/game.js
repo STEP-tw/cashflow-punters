@@ -2,7 +2,8 @@ const {
   getNextNum,
   isBetween,
   add,
-  calculateLoanToTake
+  calculateLoanToTake,
+  randomNum
 } = require("../utils/utils.js");
 const _ = require("lodash");
 
@@ -79,8 +80,7 @@ class Game extends ActivityLog {
   }
 
   isPlayersTurnCompleted() {
-    this.players.forEach(player => {
-    });
+    this.players.forEach(player => {});
     return this.players.every(player => player.isTurnComplete);
   }
 
@@ -89,7 +89,7 @@ class Game extends ActivityLog {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
-    if(this.currentPlayer.removed){
+    if (this.currentPlayer.removed) {
       this.nextPlayer();
     }
     this.addActivity("'s turn ", this.currentPlayer.name);
@@ -156,7 +156,7 @@ class Game extends ActivityLog {
       this.players.forEach(player => {
         const marketRealEstatesType = marketCard.relatedRealEstates;
         const hasRealEstate = player.hasRealEstate(marketRealEstatesType);
-        if (hasRealEstate || player.hasGoldCoins()) {
+        if (hasRealEstate) {
           player.holdTurn();
         }
       });
@@ -168,7 +168,17 @@ class Game extends ActivityLog {
         }
       });
     }
+
+    if (marketCard.relatedTo == "splitOrReverse") {
+      if (this.hasAnyoneShares(marketCard.symbol)) {
+        this.currentPlayer.holdTurn();
+      }
+    }
     this.isPlayersTurnCompleted() && this.nextPlayer();
+  }
+
+  hasAnyoneShares(symbol) {
+    return this.players.some(player => player.hasShares(symbol));
   }
 
   getCommonEstates(name) {
@@ -409,6 +419,36 @@ class Game extends ActivityLog {
       symbol,
       numberOfShares
     );
+  }
+
+  getPlayersByShares(symbol) {
+    return this.players.filter(player => player.hasShares(symbol));
+  }
+
+  doublePlayersShares(symbol) {
+    const playerWithShares = this.getPlayersByShares(symbol);
+    playerWithShares.forEach(player => {
+      this.addActivity(`'s shares of ${symbol} got doubled`, player.name);
+      player.doubleShares(symbol);
+    });
+  }
+
+  splitPlayersShares(symbol) {
+    const playerWithShares = this.getPlayersByShares(symbol);
+    playerWithShares.forEach(player => {
+      this.addActivity(`'s shares of ${symbol} got halved`, player.name);
+      player.removeHalfShares(symbol);
+    });
+  }
+
+  rollDiceForSplitReverse(symbol) {
+    const diceValue = randomNum(6);
+    if (diceValue < 4) {
+      this.doublePlayersShares(symbol);
+      return [diceValue];
+    }
+    this.splitPlayersShares(symbol);
+    return [diceValue];
   }
 }
 

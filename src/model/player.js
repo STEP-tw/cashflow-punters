@@ -29,17 +29,17 @@ class Player extends FinancialStatement {
   }
 
   isBankrupted() {
-    if(this.isBankruptcy()){
-      if(this.assets.realEstates.length == 0){
+    if (this.isBankruptcy()) {
+      if (this.assets.realEstates.length == 0) {
         return true;
       };
 			let totalDownpayment = 0;
 			this.assets.realEstates.forEach(realEstate => totalDownpayment += (realEstate.downPayment/2));
       let newCashflow = this.cashflow + (totalDownpayment * 0.1);
       return newCashflow < 0;
-    };
+    }
     return false;
-  };
+  }
 
   removeCharityEffect() {
     this.charityTurns = 0;
@@ -109,9 +109,7 @@ class Player extends FinancialStatement {
   }
 
   rollDice(numberOfDice = 1) {
-    const diceValues = new Array(numberOfDice)
-      .fill(6)
-      .map(value => randomNum(value));
+    const diceValues = new Array(numberOfDice).fill(6).map(randomNum);
     this.move(diceValues.reduce(add));
     this.rolledDice = true;
     this.reduceCharityTurns();
@@ -156,7 +154,7 @@ class Player extends FinancialStatement {
 
   buyShares(card, numberOfShares) {
     const { symbol, currentPrice } = card;
-    let price = numberOfShares * currentPrice;
+    const price = numberOfShares * currentPrice;
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
     this.assets.shares[symbol] = { numberOfShares, currentPrice };
@@ -165,8 +163,8 @@ class Player extends FinancialStatement {
   sellShares(card, numberOfShares) {
     const { symbol, currentPrice } = card;
     let price = numberOfShares * currentPrice;
-    this.addCreditEvent(price, ` sold shares of ${symbol}`);
     this.addToLedgerBalance(price);
+    this.addCreditEvent(price, ` sold shares of ${symbol}`);
     this.assets.shares[symbol].numberOfShares -= numberOfShares;
     const shareOfCompany = this.assets.shares[symbol].numberOfShares;
     if (shareOfCompany == 0) delete this.assets.shares[symbol];

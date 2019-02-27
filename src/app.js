@@ -12,6 +12,7 @@ const {
 } = require("./hostAndJoinHandlers");
 const {
   getGame,
+  hasShares,
   buyShares,
   payDebt,
   rollDice,
@@ -30,6 +31,7 @@ const {
   isAbleToDoCharity,
   provideLiabilities,
   getPlayersFinancialStatement,
+  rollDiceForSplitReverse,
   isSharePresent,
   sellShares,
   provideCommonEstates,
@@ -76,8 +78,9 @@ app.post("/hostgame", hostGame);
 app.post("/rolldice", rollDice);
 app.post("/takeloan", grantLoan);
 app.post("/sellgoldcoins", sellGoldCoins);
-app.post("/sellAssets",sellAssets)
-
+app.post("/sellAssets", sellAssets);
+app.post("/hasshares", hasShares);
+app.post("/rolldiceforsplitreverse", rollDiceForSplitReverse);
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));
 app.use(express.static("public/images"));

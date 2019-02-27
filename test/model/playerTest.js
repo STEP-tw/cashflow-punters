@@ -191,4 +191,24 @@ describe("downsize", function() {
       expect(player.buyGoldCoins(card)).to.equal(true);
     });
   });
+
+  describe("holdTurn", function() {
+    it("should set isTurnComplete property of player as false", function() {
+      player.holdTurn();
+
+      expect(player)
+        .to.have.property("isTurnComplete")
+        .to.equals(false);
+    });
+  });
+
+  describe("completeTurn", function() {
+    it("should set isTurnComplete property of player as true", function() {
+      player.completeTurn();
+
+      expect(player)
+        .to.have.property("isTurnComplete")
+        .to.equals(true);
+    });
+  });
 });

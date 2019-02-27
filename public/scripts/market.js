@@ -7,20 +7,6 @@ const getCommon = function(list1, list2) {
   }, []);
 };
 
-const handleRealEstate = function(player, {relatedRealEstates}) {
-  const playerRealEstates = player.liabilities.realEstate;
-  const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
-  const cardDiv = getElementById("card");
-  const displayCommonEstates = displayEstates.bind(null, commonEstates);
-
-  if (commonEstates.length > 0 && !player.isTurnComplete) {
-    const sellButton = createPopupButton("Sell", displayCommonEstates);
-    const cancelButton = createPopupButton("Cancel", completeTurn);
-    cardDiv.appendChild(cancelButton);
-    cardDiv.appendChild(sellButton);
-  }
-};
-
 const sellCoins = function(player, card) {
   const { goldCoins } = player.assets;
   const cost = card.cash;
@@ -50,42 +36,6 @@ const displaySellGoldCoinForm = function(player, card, msg) {
   showOverlay("market-card-div");
 };
 
-const handleGoldCoin = function(player, card) {
-  const cardDiv = getElementById("card");
-  const msg = "Enter number of coins you want to sell";
-  const sellForm = displaySellGoldCoinForm.bind(null, player, card, msg);
-  if (player.assets.goldCoins > 0 && !player.isTurnComplete) {
-    const sellButton = createPopupButton("Sell", sellForm);
-    const cancelButton = createPopupButton("Cancel", completeTurn);
-    cardDiv.appendChild(sellButton);
-    cardDiv.appendChild(cancelButton);
-  }
-};
-
-const handleMarketCard = function(player, card) {
-  const {relatedTo} = card;
-  const marketHandlers = {
-    realEstate: handleRealEstate,
-    goldCoin: handleGoldCoin
-  };
-
-  marketHandlers[relatedTo](player, card);
-};
-
-const showMarketCard = function(card, player) {
-  const {title, message} = card.data;
-  const cardDiv = getElementById("card");
-  const titleDiv = createTextDiv(title, "card-title");
-  const messageDiv = createTextDiv(message, "card-message");
-  cardDiv.className = "plain-card market-card";
-  titleDiv.className = "card-title";
-  messageDiv.className = "card-message";
-  appendChildren(cardDiv, [titleDiv, messageDiv]);
-
-  handleMarketCard(player, card.data);
-  showOverlay("card");
-};
-
 const completeTurn = function() {
   hideOverlay("card");
   hideOverlay("market-card-div");
@@ -95,7 +45,7 @@ const completeTurn = function() {
 const sellEstate = function(estate) {
   fetch("/sellestate", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(estate)
   });
   showCommonEstates();
@@ -138,4 +88,90 @@ const displayEstates = function(commonEstates) {
   appendChildren(estateDiv, [estateTable, doneButton]);
   hideOverlay("card");
   showOverlay("market-card-div");
+};
+
+const handleGoldCoin = function(player, card) {
+  const cardDiv = getElementById("card");
+  const msg = "Enter number of coins you want to sell";
+  const sellForm = displaySellGoldCoinForm.bind(null, player, card, msg);
+  if (player.assets.goldCoins > 0 && !player.isTurnComplete) {
+    const sellButton = createPopupButton("Sell", sellForm);
+    const cancelButton = createPopupButton("Cancel", completeTurn);
+    cardDiv.appendChild(sellButton);
+    cardDiv.appendChild(cancelButton);
+  }
+};
+
+const handleRealEstate = function(player, { relatedRealEstates }) {
+  const playerRealEstates = player.liabilities.realEstate;
+  const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
+  const cardDiv = getElementById("card");
+  const displayCommonEstates = displayEstates.bind(null, commonEstates);
+
+  if (commonEstates.length > 0 && !player.isTurnComplete) {
+    const sellButton = createPopupButton("Sell", displayCommonEstates);
+    const cancelButton = createPopupButton("Cancel", completeTurn);
+    cardDiv.appendChild(cancelButton);
+    cardDiv.appendChild(sellButton);
+  }
+};
+
+const rollDiceForSplitReverse = function(symbol) {
+  const diceBlock = getElementById("dice1");
+  diceBlock.onclick = null;
+  fetch("/rolldiceforsplitreverse", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ symbol })
+  })
+    .then(res => res.json())
+    .then(showDice)
+    .then(completeTurn);
+};
+
+const enableDiceForMarket = function(symbol) {
+  const diceBlock = getElementById("dice1");
+  diceBlock.onclick = rollDiceForSplitReverse.bind(null, symbol);
+};
+
+const handleShares = function(player, symbol, { hasShares }) {
+  if (!hasShares) return;
+  if (!player.isTurnComplete) {
+    enableDiceForMarket(symbol);
+  }
+};
+
+const handleSplitReverse = function(player, card) {
+  const { symbol } = card;
+  fetch("/hasshares", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ symbol })
+  })
+    .then(res => res.json())
+    .then(handleShares.bind(null, player, symbol));
+};
+
+const handleMarketCard = function(player, card) {
+  const { relatedTo } = card;
+  const marketHandlers = {
+    realEstate: handleRealEstate,
+    goldCoin: handleGoldCoin,
+    splitOrReverse: handleSplitReverse
+  };
+  marketHandlers[relatedTo](player, card);
+};
+
+const showMarketCard = function(card, player) {
+  const { title, message } = card.data;
+  const cardDiv = getElementById("card");
+  const titleDiv = createTextDiv(title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
+  cardDiv.className = "plain-card market-card";
+  titleDiv.className = "card-title";
+  messageDiv.className = "card-message";
+  appendChildren(cardDiv, [titleDiv, messageDiv]);
+
+  handleMarketCard(player, card.data);
+  showOverlay("card");
 };
