@@ -1,6 +1,7 @@
 <html>
   <head>
     <script src="/professions.js"></script>
+    <script src="/auction.js"></script>
     <script src="/board.js"></script>
     <script src="/deals.js"></script>
     <link rel="stylesheet" href="/professions.css" />
@@ -463,6 +464,21 @@
           </button>
       You are bankrupted. So that you can't continue game!! For more details see
       financial details
+    </div>
+    <div id="auction-div" class="auction">
+      <div id="bidder" class="bidding-message">Current Bid
+      </div>
+      <div id="bid-price" class="bidding-price">100</div>
+      <input type="text" placeholder="Enter number of Shares" id="bid-value">
+      <button id="bid" onclick="bid()">bid</button>
+      <button id="pass-bid" onclick="pass()">pass</button>
+      <div id="bid-notification" class="bidding-notification">Bidding for current card</div>
+    </div>
+    <div id="auction-form" class="auction">
+      <div><label>Current-Bid: </label><span id="current-bid"></span></div>
+      <div><label>Current-Bidder: </label><span id="current-bidder"></span></div>
+      <input type="number" id="auction-base-price" placeholder="Enter base price">
+      <button id="submit-base-price">Submit</button>
     </div>
   </body>
 </html>

@@ -1,15 +1,15 @@
-const openFinancialStatement = function() {
+const openFinancialStatement = function () {
   let fs = document.getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
 
-const getBoard = function() {
+const getBoard = function () {
   const container = document.getElementById("container");
   const parent = container.parentElement;
   parent.removeChild(container);
 };
 
-const getEntriesHtml = function(entry) {
+const getEntriesHtml = function (entry) {
   const { time, type, amount, currentBalance, event } = entry;
   const symbols = { debit: "-", credit: "+" };
   const currentTime = formatTime(new Date(time));
@@ -24,14 +24,14 @@ const getEntriesHtml = function(entry) {
   return entryDiv;
 };
 
-const setCashLedger = function(player) {
+const setCashLedger = function (player) {
   const { entries } = player;
   const entriesDiv = getElementById("cash-ledger-entries");
   const entriesHtml = entries.map(getEntriesHtml);
   appendChildren(entriesDiv, entriesHtml);
 };
 
-const getCashLedger = function() {
+const getCashLedger = function () {
   const container = getElementById("container");
   container.innerHTML = "";
   const top = createElement("div");
@@ -49,7 +49,7 @@ const getCashLedger = function() {
     });
 };
 
-const updateStatementBoard = function(player) {
+const updateStatementBoard = function (player) {
   setInnerText("name", player.name);
   setInnerText("Profession", player.profession);
   setInnerText("passiveIn", player.passiveIncome);
@@ -62,105 +62,105 @@ const updateStatementBoard = function(player) {
 };
 
 const createTableRow = function (tableData) {
-	let tableRow = createElement('tr');
-	tableData.forEach( data => {
-		let tableDataHtml = createElement('td');
-		tableDataHtml.innerText = data;
-		tableRow.appendChild(tableDataHtml);
-	})
-	return tableRow;
+  let tableRow = createElement('tr');
+  tableData.forEach(data => {
+    let tableDataHtml = createElement('td');
+    tableDataHtml.innerText = data;
+    tableRow.appendChild(tableDataHtml);
+  })
+  return tableRow;
 };
 
-const updateTableRows = function(id, rowData, properties) {
-	let dataDiv = getElementById(id);
-	dataDiv.innerHTML = '';
-	rowData.forEach( data => {
-		let tableData = [data.title];
-		properties.forEach(property => {
-			let value = data[property];
-			tableData.push(value);
-		});
-		let rowDataHtml = createTableRow(tableData);
-		dataDiv.appendChild(rowDataHtml);
-	});
+const updateTableRows = function (id, rowData, properties) {
+  let dataDiv = getElementById(id);
+  dataDiv.innerHTML = '';
+  rowData.forEach(data => {
+    let tableData = [data.title];
+    properties.forEach(property => {
+      let value = data[property];
+      tableData.push(value);
+    });
+    let rowDataHtml = createTableRow(tableData);
+    dataDiv.appendChild(rowDataHtml);
+  });
 };
 
-const setIncome = function(player) {
-	setInnerText("salary",player.income.salary);
-	let realEstates = player.income.realEstates;
-	updateTableRows('RealEstate-cashflow', realEstates, ["cashflow"]);
+const setIncome = function (player) {
+  setInnerText("salary", player.income.salary);
+  let realEstates = player.income.realEstates;
+  updateTableRows('RealEstate-cashflow', realEstates, ["cashflow"]);
 };
 
-const setExpenses = function(player) {
-	setInnerText("taxes", player.expenses["taxes"]);
-	setInnerText("home-mortage-payment", player.expenses["Home Mortgage Payment"]);
-	setInnerText("school-loan-payment", player.expenses["School Loan Payment"]);
-	setInnerText("car-loan-payment", player.expenses["Car Loan Payment"]);
-	setInnerText("credit-card-payment", player.expenses["Credit Card Payment"]);
-	setInnerText("other-expenses", player.expenses["Other Expenses"]);
-	setInnerText("bank-loan-payment", player.expenses["Bank Loan Payment"]);
-	setInnerText("total-child-expense", player.expenses["Child Expenses"]);
+const setExpenses = function (player) {
+  setInnerText("taxes", player.expenses["taxes"]);
+  setInnerText("home-mortage-payment", player.expenses["Home Mortgage Payment"]);
+  setInnerText("school-loan-payment", player.expenses["School Loan Payment"]);
+  setInnerText("car-loan-payment", player.expenses["Car Loan Payment"]);
+  setInnerText("credit-card-payment", player.expenses["Credit Card Payment"]);
+  setInnerText("other-expenses", player.expenses["Other Expenses"]);
+  setInnerText("bank-loan-payment", player.expenses["Bank Loan Payment"]);
+  setInnerText("total-child-expense", player.expenses["Child Expenses"]);
 };
 
-const updateShares = function(player){
-	let stocksDiv = getElementById('stocks-funds');
-	stocksDiv.innerHTML = '';
-	let stocks = player.assets.shares;
-	let stockNames = Object.keys(stocks);
-	stockNames.forEach( stockName => {
-		let row = createElement('tr');
-		let name = createElement('td');
-		name.innerText = stockName;
-		row.appendChild(name);
-		let number = createElement('td');
-		number.innerText = stocks[stockName]["numberOfShares"];
-		row.appendChild(number);
-		let price = createElement('td');
-		price.innerText = stocks[stockName]["currentPrice"];
-		row.appendChild(price);
-		stocksDiv.appendChild(row);
-	});
+const updateShares = function (player) {
+  let stocksDiv = getElementById('stocks-funds');
+  stocksDiv.innerHTML = '';
+  let stocks = player.assets.shares;
+  let stockNames = Object.keys(stocks);
+  stockNames.forEach(stockName => {
+    let row = createElement('tr');
+    let name = createElement('td');
+    name.innerText = stockName;
+    row.appendChild(name);
+    let number = createElement('td');
+    number.innerText = stocks[stockName]["numberOfShares"];
+    row.appendChild(number);
+    let price = createElement('td');
+    price.innerText = stocks[stockName]["currentPrice"];
+    row.appendChild(price);
+    stocksDiv.appendChild(row);
+  });
 };
 
-const setAssets = function(player){
-	setInnerText("savings", player.assets.savings);
-	setInnerText("gold-coin-number", player.assets.goldCoins);
-	updateShares(player);
-	let realEstates = player.assets.realEstates;
-	updateTableRows("RealEstate-downpayment", realEstates, ["downPayment", "cost"]);
+const setAssets = function (player) {
+  setInnerText("savings", player.assets.savings);
+  setInnerText("gold-coin-number", player.assets.goldCoins);
+  updateShares(player);
+  let realEstates = player.assets.realEstates;
+  updateTableRows("RealEstate-downpayment", realEstates, ["downPayment", "cost"]);
 };
 
-const setLiabilities = function(player){
-	setInnerText("home-mortage", player.liabilities["Home Mortgage"]);
-	setInnerText("school-loans", player.liabilities["School Loan"]);
-	setInnerText("car-loans", player.liabilities["Car Loan"]);
-	setInnerText("credit-card-debt", player.liabilities["Credit Card"]);
-	setInnerText("bank-loan", player.liabilities["Bank Loan"]);
-	let realEstates = player.liabilities.realEstates;
-	updateTableRows("RealEstate-mortage", realEstates, ["mortgage"]);
+const setLiabilities = function (player) {
+  setInnerText("home-mortage", player.liabilities["Home Mortgage"]);
+  setInnerText("school-loans", player.liabilities["School Loan"]);
+  setInnerText("car-loans", player.liabilities["Car Loan"]);
+  setInnerText("credit-card-debt", player.liabilities["Credit Card"]);
+  setInnerText("bank-loan", player.liabilities["Bank Loan"]);
+  let realEstates = player.liabilities.realEstates;
+  updateTableRows("RealEstate-mortage", realEstates, ["mortgage"]);
 };
 
-const setBasicFinancialDetails = function(player){
-	setInnerText("fs-name", player.name);
+const setBasicFinancialDetails = function (player) {
+  setInnerText("fs-name", player.name);
   setInnerText("fs-profession", player.profession);
   setInnerText("fs-income", player.income.salary);
   setInnerText("passive-income", player.passiveIncome);
   setInnerText("total-income", player.totalIncome);
   setInnerText("fs-expenses", player.totalExpense);
-	setInnerText("fs-cashflow", player.cashflow);
+  setInnerText("fs-cashflow", player.cashflow);
 }
 
-const setFinancialStatement = function(player) {
-	setBasicFinancialDetails(player);
-	setIncome(player);
-	setExpenses(player);
-	setAssets(player);
-	setLiabilities(player);
+const setFinancialStatement = function (player) {
+  setBasicFinancialDetails(player);
+  setIncome(player);
+  setExpenses(player);
+  setAssets(player);
+  setLiabilities(player);
   updateStatementBoard(player);
   return player;
 };
 
-const createFinancialStatement = function() {
+const createFinancialStatement = function () {
   closeOverlay("professions");
   const top = createElement("div");
   const leftSection = createElement("section");
@@ -177,7 +177,7 @@ const createFinancialStatement = function() {
     });
 };
 
-const doCharity = function() {
+const doCharity = function () {
   hideOverlay("askCharity");
   closeOverlay("card-overlay");
   fetch("/acceptCharity")
@@ -188,7 +188,7 @@ const doCharity = function() {
     });
 };
 
-const acceptCharity = function() {
+const acceptCharity = function () {
   fetch("/isabletodocharity")
     .then(res => res.json())
     .then(({ isAble }) => {
@@ -196,13 +196,13 @@ const acceptCharity = function() {
     });
 };
 
-const declineCharity = function() {
+const declineCharity = function () {
   hideOverlay("askCharity");
   closeOverlay("card-overlay");
   fetch("/declineCharity");
 };
 
-const isSameCard = function(card) {
+const isSameCard = function (card) {
   const { title, message } = card;
   const cardTitleDiv = getElementById("card-title");
   const cardMessageDiv = getElementById("card-message");
@@ -211,7 +211,7 @@ const isSameCard = function(card) {
   return cardTitle == title && cardMessage == message;
 };
 
-const showPlainCard = function(title, expenseAmount, type, msg) {
+const showPlainCard = function (title, expenseAmount, type, msg) {
   const cardDiv = getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -226,7 +226,7 @@ const showPlainCard = function(title, expenseAmount, type, msg) {
   cardDiv.appendChild(expenseDiv);
 };
 
-const handleCharity = function() {
+const handleCharity = function () {
   const askCharity = getElementById("askCharity");
   openOverlay("card-overlay");
   askCharity.style.visibility = "visible";
@@ -236,24 +236,24 @@ const handleCharity = function() {
   declineCharityButton.onclick = declineCharity;
 };
 
-const handleDeal = function() {
+const handleDeal = function () {
   openOverlay("card-overlay");
   showOverlay("select-deal");
 };
 
-const selectSmallDeal = function() {
+const selectSmallDeal = function () {
   hideOverlay("select-deal");
   closeOverlay("card-overlay");
   fetch("/selectSmallDeal");
 };
 
-const selectBigDeal = function() {
+const selectBigDeal = function () {
   hideOverlay("select-deal");
   closeOverlay("card-overlay");
   fetch("/selectBigDeal");
 };
 
-const displayDiceValue = function(diceValue, count) {
+const displayDiceValue = function (diceValue, count) {
   const diceFaces = {
     1: "&#x2680",
     2: "&#x2681",
@@ -268,7 +268,7 @@ const displayDiceValue = function(diceValue, count) {
   diceDiv.style.display = "block";
 };
 
-const showDice = function(diceValues) {
+const showDice = function (diceValues) {
   let count = 1;
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
@@ -276,7 +276,7 @@ const showDice = function(diceValues) {
   });
 };
 
-const showRandomDiceFace = function() {
+const showRandomDiceFace = function () {
   const diceFaces = {
     1: "&#x2680",
     2: "&#x2681",
@@ -292,7 +292,7 @@ const showRandomDiceFace = function() {
   dice2.innerHTML = diceFaces[randomFaceVal];
 };
 
-const rollDice = function(numberOfDice) {
+const rollDice = function (numberOfDice) {
   hideOverlay("num_of_dice");
   closeOverlay("num_of_dice");
   const diceBlock = getElementById("dice_block");
@@ -301,6 +301,8 @@ const rollDice = function(numberOfDice) {
     charity: handleCharity,
     deal: handleDeal
   };
+
+
   const diceAnimationInterval = setInterval(() => {
     showRandomDiceFace();
   }, 150);
@@ -319,14 +321,14 @@ const rollDice = function(numberOfDice) {
   }, 900);
 };
 
-const rollOneDice = function() {
+const rollOneDice = function () {
   closeOverlay("num_of_dice");
   hideOverlay("num_of_dice");
   closeOverlay("dice2");
   rollDice(1);
 };
 
-const rollDie = function() {
+const rollDie = function () {
   fetch("/hascharity")
     .then(res => res.json())
     .then(({ hasCharityTurns }) => {
@@ -341,9 +343,9 @@ const rollDie = function() {
         rollDice(2);
       };
     });
-};
+}
 
-const updateRealEstateDiv = function(player) {
+const updateRealEstateDiv = function (player) {
   let realEstates = player.assets.realEstates;
   let selectDiv = getElementById("Real-Estate");
   selectDiv.innerHTML = "";
@@ -353,7 +355,8 @@ const updateRealEstateDiv = function(player) {
   });
   let msg = player.notification;
   const bankruptcyMsgDiv = getElementById("bankruptcyMsg");
-  if (msg == "please sell other asset your cash flow is stil negative") {
+  if (msg == "please sell other asset your cash flow is stil negative")
+  {
     showNotification(msg);
     updateStatementBoard(player);
     setFinancialStatement(player);
@@ -366,12 +369,14 @@ const updateRealEstateDiv = function(player) {
   hideOverlay("bankruptcyNotification");
 };
 
-const sellAsset = function() {
+const sellAsset = function () {
   let selectDiv = getElementById("Real-Estate");
   let allAssets = selectDiv.children;
   let selectedAsset = [];
-  for (let pos = 0; pos < allAssets.length; pos++) {
-    if (allAssets[pos].children[0].checked == true) {
+  for (let pos = 0; pos < allAssets.length; pos++)
+  {
+    if (allAssets[pos].children[0].checked == true)
+    {
       selectedAsset.push(allAssets[pos].children[0].value);
     }
   }
@@ -384,7 +389,7 @@ const sellAsset = function() {
     .then(updateRealEstateDiv);
 };
 
-const createRealEstateCheckList = function(realestate, downPayment) {
+const createRealEstateCheckList = function (realestate, downPayment) {
   let checkbox = createElement("input");
   checkbox.type = "checkbox";
   checkbox.value = realestate;
@@ -398,30 +403,38 @@ const createRealEstateCheckList = function(realestate, downPayment) {
   return realEstateOption;
 };
 
-const processBankruptcy = function(requester) {
+const processBankruptcy = function (requester) {
   let realEstates = requester.assets.realEstates;
   let selectDiv = getElementById("Real-Estate");
   let bankDiv = getElementById("bankruptcyNotification");
   realEstates.forEach(({ title, downPayment }) => {
-    if (bankDiv.style.visibility == "") {
+    if (bankDiv.style.visibility == "")
+    {
       selectDiv.appendChild(createRealEstateCheckList(title, downPayment));
     }
   });
   bankDiv.style.visibility = "visible";
 };
 
-const displayOutOfGameMsg = function() {
-  const notifyDiv =  getElementById("bankruptedMsg")
-  if(notifyDiv.style.display == "none"){
+const displayOutOfGameMsg = function () {
+  const notifyDiv = getElementById("bankruptedMsg")
+  if (notifyDiv.style.display == "none")
+  {
     return;
   }
   notifyDiv.style.visibility = "visible";
-};
-
-const polling = function(game) {
+  const displayOutOfGameMsg = function () {
+    getElementById("bankruptedMsg").style.visibility = "visible";
+  };
+}
+const polling = function (game) {
   let { players, requester } = game;
- 
-  if (game.activeCard) {
+  if (requester.removed)
+  {
+    displayOutOfGameMsg();
+  }
+  if (game.activeCard)
+  {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   updateStatementBoard(requester);
@@ -429,20 +442,24 @@ const polling = function(game) {
   setCashLedger(requester);
   showNotification(requester.notification);
   players.forEach(updateGamePiece);
-  if (game.isMyTurn) {
+  if (game.isMyTurn)
+  {
     const diceBlock = getElementById("dice_block");
     diceBlock.onclick = rollDie;
   }
-  
-  if (requester.removed) {
+  if (requester.removed)
+  {
     displayOutOfGameMsg();
-  }
+    if (requester.bankruptcy)
+    {
+      processBankruptcy(requester);
+    }
+  };
 };
 
-const showCard = function(card, isMyTurn, player) {
+const showCard = function (card, isMyTurn, player) {
   if (isSameCard(card.data)) return;
-  const bigDealactions = [acceptBigDeal, declineBigDeal];
-
+  const bigDealactions = [acceptBigDeal, declineBigDeal, createAuction];
   const cardHandlers = {
     doodad: showPlainCard.bind(
       null,
@@ -462,7 +479,7 @@ const showCard = function(card, isMyTurn, player) {
   cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
-const showNotification = function(notification) {
+const showNotification = function (notification) {
   const odlNotifDiv = document.getElementById("notification-div").children[0];
   const oldNotification = odlNotifDiv && odlNotifDiv.children[0].innerText;
   if (!notification || oldNotification == notification) return;
@@ -481,7 +498,7 @@ const showNotification = function(notification) {
   notificationsDiv.appendChild(timeDiv);
 };
 
-const updateGamePiece = function(player) {
+const updateGamePiece = function (player) {
   let gamePiece = document.getElementById("gamePiece" + player.turn);
   gamePiece.classList.add("visible");
   let space = gamePiece.parentNode;
@@ -490,7 +507,7 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const createActivity = function({ playerName, msg, time }) {
+const createActivity = function ({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   activity.classList.add("activity");
@@ -500,7 +517,7 @@ const createActivity = function({ playerName, msg, time }) {
   return activity;
 };
 
-const updateActivityLog = function(activityLog) {
+const updateActivityLog = function (activityLog) {
   const activityLogDiv = getElementById("activityLog");
   const localActivitiesCount = activityLogDiv.children.length;
   if (activityLog.length == localActivitiesCount) return;
@@ -511,22 +528,23 @@ const updateActivityLog = function(activityLog) {
   });
 };
 
-const getPlayerData = function(playersData) {
+const getPlayerData = function (playersData) {
   const { playerName } = parseCookie();
   const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 
-const getGame = function() {
+const getGame = function () {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
       updateActivityLog(game.activityLog);
+      joinAuction(game);
       polling(game);
     });
 };
 
-const initialize = function() {
+const initialize = function () {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
 };

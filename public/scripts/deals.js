@@ -52,7 +52,10 @@ const createAcceptButton = actions =>
 const createDeclineButton = actions =>
   createButton("Decline", "button_div", "reject", "button", actions);
 
-const createSellButton = function(shareCost) {
+const createCardSellButton = action =>
+  createButton("Sell-Card", "button_div", "sell-card", "button", action);
+
+const createShareSellButton = function(shareCost) {
   return createButton(
     "Sell",
     "button_div",
@@ -62,7 +65,7 @@ const createSellButton = function(shareCost) {
   );
 };
 
-const createBuyButton = shareCost => {
+const createShareBuyButton = (shareCost) => {
   return createButton(
     "Buy",
     "button_div",
@@ -89,9 +92,11 @@ const showInvalidShareCount = function() {
 const createCardButtons = function(actions) {
   const buttons = createElement("div");
   buttons.classList.add("buttons-div");
+  buttons.id = "card-button-container";
   const accept = createAcceptButton(actions[0]);
   const decline = createDeclineButton(actions[1]);
-  appendChildren(buttons, [accept, decline]);
+  const sell = createCardSellButton(actions[2]);
+  appendChildren(buttons, [accept, decline, sell]);
   return buttons;
 };
 
@@ -206,10 +211,10 @@ const updatePrice = function(shareCost) {
 
 const showOptions = function(isAbleToSell, shareCost) {
   const buttonDiv = getElementById("buttons-container");
-  const buy = createBuyButton(shareCost);
+  const buy = createShareBuyButton(shareCost);
   appendChildren(buttonDiv, [buy]);
   if (isAbleToSell) {
-    const sell = createSellButton(shareCost);
+    const sell = createShareSellButton();
     buttonDiv.appendChild(sell);
   }
 };
@@ -242,7 +247,7 @@ const showSellOption = function(card) {
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
-  const sell = createSellButton();
+  const sell = createShareSellButton();
   const pass = createButton("Pass", "button_div", "pass", "button", passDeal);
   cardDiv.appendChild(buttons);
   appendChildren(buttons, [sell, pass]);
@@ -260,7 +265,7 @@ const handleSharesSmallDeal = function(card, isMyTurn) {
 };
 
 const getSmallDealHandler = function(card, isMyTurn) {
-  const smallDealactions = [acceptSmallDeal, declineSmallDeal];
+  const smallDealactions = [acceptSmallDeal, declineSmallDeal, createAuction];
   const dealCardTypes = {
     shares: handleSharesSmallDeal,
     goldCoins: createGoldSmallDeal.bind(null, smallDealactions),

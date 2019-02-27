@@ -898,3 +898,23 @@ basic_fs_heading {
   height: 100%;
   visibility: hidden;
 }
+
+.auction {
+  height: 250px;
+  width: 300px;
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 40%;
+  left: 66%;
+
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
+}

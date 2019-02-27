@@ -5,7 +5,9 @@ const {
   calculateLoanToTake,
   randomNum
 } = require("../utils/utils.js");
+
 const _ = require("lodash");
+const Auction = require("./auction");
 
 class ActivityLog {
   constructor() {
@@ -13,7 +15,7 @@ class ActivityLog {
   }
   addActivity(msg, playerName = "") {
     const time = new Date();
-    this.activityLog.push({ playerName, msg, time });
+    this.activityLog.push({playerName, msg, time});
   }
 }
 
@@ -28,7 +30,7 @@ class Game extends ActivityLog {
     this.hasStarted = false;
     this.financialStatement;
     this.activeCard;
-    // this.lostPlayers = [];
+    this.currentAuction = {present: false};
   }
 
   addPlayer(player) {
@@ -57,7 +59,7 @@ class Game extends ActivityLog {
   }
 
   setProfession(player) {
-    const { professions } = this.cardStore;
+    const {professions} = this.cardStore;
     const profession = professions.drawCard();
     player.profession = profession;
     player.setFinancialStatement(profession);
@@ -100,7 +102,7 @@ class Game extends ActivityLog {
     const msg = " selected Small Deal";
     this.addActivity(msg, this.currentPlayer.name);
     const smallDealCard = this.cardStore.smallDeals.drawCard();
-    this.activeCard = { type: "smallDeal", data: smallDealCard };
+    this.activeCard = {type: "smallDeal", data: smallDealCard};
     this.activeCard.dealDoneCount = 0;
   }
 
@@ -108,7 +110,7 @@ class Game extends ActivityLog {
     const msg = " selected Big Deal";
     this.addActivity(msg, this.currentPlayer.name);
     const bigDealCard = this.cardStore.bigDeals.drawCard();
-    this.activeCard = { type: "bigDeal", data: bigDealCard };
+    this.activeCard = {type: "bigDeal", data: bigDealCard};
   }
 
   handleBabySpace() {
@@ -120,8 +122,8 @@ class Game extends ActivityLog {
 
   handleDoodadSpace() {
     const doodadCard = this.cardStore.doodads.drawCard();
-    this.activeCard = { type: "doodad", data: doodadCard };
-    let { isChildExpense, expenseAmount } = doodadCard;
+    this.activeCard = {type: "doodad", data: doodadCard};
+    let {isChildExpense, expenseAmount} = doodadCard;
     if (isChildExpense && !this.currentPlayer.hasChild()) {
       expenseAmount = 0;
     }
@@ -129,7 +131,7 @@ class Game extends ActivityLog {
   }
 
   addDebitActivity(amount, msg, type) {
-    const { name } = this.currentPlayer;
+    const {name} = this.currentPlayer;
     const activityMsg = `${amount}  ${msg} from ${name} for ${type}`;
     this.addActivity(activityMsg);
     this.currentPlayer.setNotification(`${amount}  ${msg} for ${type}`);
@@ -148,7 +150,7 @@ class Game extends ActivityLog {
 
   handleMarketSpace() {
     const marketCard = this.cardStore.market.drawCard();
-    this.activeCard = { type: "market", data: marketCard };
+    this.activeCard = {type: "market", data: marketCard};
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("market", marketCard.cash);
       return;
@@ -214,7 +216,7 @@ class Game extends ActivityLog {
       equal to your expenses is deducted from your ledger balance`;
     currentPlayer.downsize();
     currentPlayer.removeCharityEffect();
-    const { ledgerBalance } = currentPlayer;
+    const {ledgerBalance} = currentPlayer;
     if (currentPlayer.isLedgerBalanceNegative()) {
       const loanAmount = calculateLoanToTake(ledgerBalance);
       this.grantLoan(currentPlayer.name, loanAmount);
@@ -317,7 +319,7 @@ class Game extends ActivityLog {
   }
 
   payDebt(playerName, debtDetails) {
-    const { expense, liability, liabilityPrice, expenseAmount } = debtDetails;
+    const {expense, liability, liabilityPrice, expenseAmount} = debtDetails;
     const player = this.getPlayerByName(playerName);
     player.removeLiability(liability, liabilityPrice);
     player.removeExpense(expense, expenseAmount);
@@ -376,7 +378,7 @@ class Game extends ActivityLog {
     this.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
     this.handleSpace(oldSpaceNo);
-    return { diceValues, spaceType };
+    return {diceValues, spaceType};
   }
 
   hasCharityTurns() {
@@ -441,14 +443,43 @@ class Game extends ActivityLog {
     });
   }
 
-  rollDiceForSplitReverse(symbol) {
+  rollDiceForSplitReverse (symbol) {
     const diceValue = randomNum(6);
-    if (diceValue < 4) {
+    if (diceValue < 4)
+    {
       this.doublePlayersShares(symbol);
       return [diceValue];
     }
     this.splitPlayersShares(symbol);
     return [diceValue];
+  }
+  
+  createAuction(playerName, price) {
+    this.currentAuction.present = true;
+    const host = this.getPlayerByName(playerName);
+    const bidders = this.players.filter(({name}) => name != playerName);
+    this.currentAuction.data = new Auction(host, price, bidders);
+    return true;
+  }
+
+  handleBid(playerName, currentBid) {
+    const data = this.currentAuction.data.setCurrentBid(currentBid, playerName);
+    return data;
+  }
+
+  passBid(playerName) {
+    const isAuctionClosed = this.currentAuction.data.passBid(playerName);
+    if (isAuctionClosed) {
+      this.currentAuction.present = false;
+      this.nextPlayer();
+    }
+  }
+
+  closeAuction() {
+    this.currentAuction.data.sellDeal();
+    this.addActivity(`${this.currentPlayer.name} has closed the auction.`)
+    this.currentAuction.present = false;
+    this.nextPlayer();
   }
 }
 
