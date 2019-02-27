@@ -134,7 +134,7 @@ const acceptBigDeal = function(req, res) {
   let requestedPlayer = req.cookies["playerName"];
   req.game.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
-  res.end();
+  res.send({ isSuccessful });
 };
 
 const rejectBigDeal = function(req, res) {
