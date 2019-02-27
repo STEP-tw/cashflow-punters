@@ -98,9 +98,22 @@ describe("downsize", function() {
 
   describe("isBankrupted", function() {
     it("should return true if player have no assets", function() {
-      player.cashflow = -10;
+      player.assets.realEstates = [
+        { downPayment: 2000 },
+        { downPayment: 1000 }
+      ];
+      player.cashflow = -4000;
+      player.ledgerBalance = -110;
+      expect(player.isBankrupted()).to.equals(true);
+    });
+    it("should return true if player have no assets", function() {
+      player.cashflow = -40;
       player.ledgerBalance = -10;
       expect(player.isBankrupted()).to.equals(true);
+    });
+
+    it("should return false if player is not bankrupted", function() {
+      expect(player.isBankrupted()).to.equals(false);
     });
   });
 
@@ -225,6 +238,69 @@ describe("downsize", function() {
           type: "credit"
         })
       ).to.be.true;
+    });
+  });
+  describe("hasCharityTurns", function() {
+    it("should return true if charity turns is greater than 0", function() {
+      player.addCharityTurn();
+      expect(player.hasCharityTurns()).to.equals(true);
+    });
+
+    it("should return false if charity turns is less than or equal to 0", function() {
+      expect(player.hasCharityTurns()).to.equals(false);
+    });
+  });
+
+  describe("rollDice", function() {
+    it("should roll one dice and return the value on dice", function() {
+      expect(player.rollDice())
+        .to.be.an("Array")
+        .of.length(1);
+      expect(player.rolledDice).to.equals(true);
+    });
+
+    it("should roll two dice and return the value on dice", function() {
+      expect(player.rollDice(2))
+        .to.be.an("Array")
+        .of.length(2);
+      expect(player.rolledDice).to.equals(true);
+    });
+  });
+
+  describe("addBaby", function() {
+    it("should increment children count by 1 if count is less than 3", function() {
+      player.addBaby();
+      expect(player.childrenCount).to.equals(1);
+    });
+
+    it("should not add any baby and return false if children count is greater than or equal to 3", function() {
+      player.childrenCount = 3;
+
+      expect(player.addBaby()).to.equals(false);
+      expect(player.childrenCount).to.equals(3);
+      expect(player.notification).to.equals(
+        "you already have 3 babies so baby is not added"
+      );
+    });
+  });
+
+  describe("downSizeTurns", function() {
+    it("should return 2 if the player is recently downsized", function() {
+      player.downsize();
+
+      expect(player.downSizeTurns()).to.equals(2);
+    });
+    it("should return 0 if the player is not downsized", function() {
+      expect(player.downSizeTurns()).to.equals(0);
+    });
+  });
+
+  describe("removeCharityEffect", function() {
+    it("should set charityTurns of player to 0", function() {
+      player.addCharityTurn();
+      player.removeCharityEffect();
+
+      expect(player.charityTurns).to.equals(0);
     });
   });
 });
