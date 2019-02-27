@@ -1,6 +1,7 @@
 const Player = require("../../src/model/player.js");
-
+const CashLedger = require("./../../src/model/cashLedger.js");
 const { expect } = require("chai");
+const _ = require("lodash");
 
 describe("Player", function() {
   describe("move", () => {
@@ -209,6 +210,21 @@ describe("downsize", function() {
       expect(player)
         .to.have.property("isTurnComplete")
         .to.equals(true);
+    });
+  });
+
+  describe("CashLedger", function() {
+    it("should add creadit event", function() {
+      player.addCreditEvent(100, "adding credit event", "2:30");
+      expect(
+        _.isEqual(player.getCashLedger()[1], {
+          amount: 100,
+          event: "adding credit event",
+          currentBalance: 1600,
+          time: "2:30",
+          type: "credit"
+        })
+      ).to.be.true;
     });
   });
 });
