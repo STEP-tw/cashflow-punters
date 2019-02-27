@@ -52,23 +52,23 @@ const createAcceptButton = actions =>
 const createDeclineButton = actions =>
   createButton("Decline", "button_div", "reject", "button", actions);
 
-const createSellButton = function() {
+const createSellButton = function(shareCost) {
   return createButton(
     "Sell",
     "button_div",
     "sell",
     "button",
-    shareForm.bind(null, sellShares, "sell", "Sell")
+    shareForm.bind(null, sellShares, "sell", "Sell", shareCost)
   );
 };
 
-const createBuyButton = () => {
+const createBuyButton = shareCost => {
   return createButton(
     "Buy",
     "button_div",
     "buy",
     "button",
-    shareForm.bind(null, buyShares, "buy", "Buy")
+    shareForm.bind(null, buyShares, "buy", "Buy", shareCost)
   );
 };
 
@@ -173,7 +173,7 @@ const sellShares = function() {
     });
 };
 
-const shareForm = function(func, id, value) {
+const shareForm = function(func, id, value, shareCost) {
   const form = getElementById("share-card");
   form.style.display = "flex";
   const input = createInput(
@@ -187,16 +187,29 @@ const shareForm = function(func, id, value) {
   const closeButton = createButton("&times;", "close");
   const message = "Enter no of shares you want to " + id;
   const msgDiv = createDiv(message, "share-notification", "debt-form-msg");
+  const priceDiv = createElement("div");
+  const priceVal = document.createElement("span");
+  input.onkeyup = updatePrice.bind(null, shareCost);
+  priceDiv.innerText = "Price:";
+  priceVal.id = "shares-price";
+  priceVal.innerText = "0";
+  priceDiv.appendChild(priceVal);
   closeButton.onclick = closeOverlay.bind(null, "share-card");
-  appendChildren(form, [closeButton, input, submit, msgDiv]);
+  appendChildren(form, [closeButton, input, priceDiv, submit, msgDiv]);
 };
 
-const showOptions = function(isAbleToSell) {
+const updatePrice = function(shareCost) {
+  const priceVal = getElementById("shares-price");
+  const priceInput = getElementById("share-count");
+  priceVal.innerText = +priceInput.value * +shareCost;
+};
+
+const showOptions = function(isAbleToSell, shareCost) {
   const buttonDiv = getElementById("buttons-container");
-  const buy = createBuyButton();
+  const buy = createBuyButton(shareCost);
   appendChildren(buttonDiv, [buy]);
   if (isAbleToSell) {
-    const sell = createSellButton();
+    const sell = createSellButton(shareCost);
     buttonDiv.appendChild(sell);
   }
 };
@@ -205,7 +218,9 @@ const showBuyAndSellOptions = function(card) {
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
-  const accept = createAcceptButton(showOptions.bind(null, true));
+  const accept = createAcceptButton(
+    showOptions.bind(null, true, card.currentPrice)
+  );
   const decline = createDeclineButton(declineSmallDeal);
   cardDiv.appendChild(buttons);
   appendChildren(buttons, [accept, decline]);
@@ -215,7 +230,9 @@ const showBuyOption = function(card) {
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
-  const accept = createAcceptButton(showOptions.bind(null, false));
+  const accept = createAcceptButton(
+    showOptions.bind(null, false, card.currentPrice)
+  );
   const decline = createDeclineButton(declineSmallDeal);
   cardDiv.appendChild(buttons);
   appendChildren(buttons, [accept, decline]);

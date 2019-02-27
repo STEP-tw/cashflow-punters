@@ -141,7 +141,7 @@ class FinancialStatement extends CashLedger {
   }
 
   getRealEstatesType() {
-    return this.liabilities.realEstate.map(estate => estate.type);
+    return this.liabilities.realEstates.map(estate => estate.type);
   }
 
   hasRealEstate(realEstatesType) {
@@ -161,7 +161,7 @@ class FinancialStatement extends CashLedger {
       `You sold ${numberOfCoins} gold coins at rate of ${cost}.$${totalAmout} added to your Ledger Balance`
     );
   }
-  
+
   getAsset(assetName) {
     return this.assets.realEstates.filter(
       realEstate => realEstate.type == assetName
