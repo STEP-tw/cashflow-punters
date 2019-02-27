@@ -123,7 +123,7 @@ const declineCharity = function() {
 };
 
 const isSameCard = function(card) {
-  const {title, message} = card;
+  const { title, message } = card;
   const cardTitleDiv = getElementById("card-title");
   const cardMessageDiv = getElementById("card-message");
   const cardTitle = cardTitleDiv && cardTitleDiv.innerText;
@@ -196,6 +196,22 @@ const showDice = function(diceValues) {
   });
 };
 
+const showRandomDiceFace = function() {
+  const diceFaces = {
+    1: "&#x2680",
+    2: "&#x2681",
+    3: "&#x2682",
+    4: "&#x2683",
+    5: "&#x2684",
+    6: "&#x2685"
+  };
+  const dice1 = document.getElementById("dice1");
+  const dice2 = document.getElementById("dice2");
+  let randomFaceVal = Math.ceil(Math.random() * 6);
+  dice1.innerHTML = diceFaces[randomFaceVal];
+  dice2.innerHTML = diceFaces[randomFaceVal];
+};
+
 const rollDice = function(numberOfDice) {
   hideOverlay("num_of_dice");
   closeOverlay("num_of_dice");
@@ -205,22 +221,28 @@ const rollDice = function(numberOfDice) {
     charity: handleCharity,
     deal: handleDeal
   };
-  fetch("/rolldice", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ numberOfDice })
-  })
-    .then(res => res.json())
-    .then(({ diceValues, spaceType }) => {
-      showDice(diceValues);
-      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
-    });
+  const diceAnimationInterval = setInterval(() => {
+    showRandomDiceFace();
+  }, 150);
+  setTimeout(() => {
+    fetch("/rolldice", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ numberOfDice })
+    })
+      .then(res => res.json())
+      .then(({ diceValues, spaceType }) => {
+        clearInterval(diceAnimationInterval);
+        showDice(diceValues);
+        spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+      });
+  }, 900);
 };
 
 const rollOneDice = function() {
   closeOverlay("num_of_dice");
   hideOverlay("num_of_dice");
-  hideOverlay("dice2");
+  closeOverlay("dice2");
   rollDice(1);
 };
 
@@ -309,14 +331,14 @@ const processBankruptcy = function(requester) {
 };
 
 const displayOutOfGameMsg = function() {
-  getElementById('bankruptedMsg').style.visibility = "visible";
+  getElementById("bankruptedMsg").style.visibility = "visible";
 };
 
 const polling = function(game) {
   let { players, requester } = game;
   if (requester.removed) {
     displayOutOfGameMsg();
-  };
+  }
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
@@ -332,7 +354,6 @@ const polling = function(game) {
   if (requester.bankruptcy) {
     processBankruptcy(requester);
   }
-  
 };
 
 const showCard = function(card, isMyTurn, player) {

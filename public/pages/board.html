@@ -3,7 +3,7 @@
     <script src="/professions.js"></script>
     <script src="/board.js"></script>
     <script src="/deals.js"></script>
-    <link rel="stylesheet" href="/professions.css">
+    <link rel="stylesheet" href="/professions.css" />
     <script src="/utils.js"></script>
     <script src="/manageDebts.js"></script>
     <script src="/market.js"></script>
@@ -107,12 +107,14 @@
                 </p>
                 <button
                   id="one_dice_button"
+                  style="height: unset"
                   onclick="hideOverlay('num_of_dice')"
                 >
                   One
                 </button>
                 <button
                   id="two_dice_button"
+                  style="height: unset"
                   onclick="
                       showOverlay('dice2');
                       hideOverlay('num_of_dice')"
@@ -120,7 +122,7 @@
                   Two
                 </button>
               </div>
-              <div id="dice1" class="dice">&#x2685</div>
+              <div id="dice1" class="dice">&#x2685;</div>
               <div id="dice2" class="dice"></div>
             </div>
             <div id="cardDisplay" class="cardDisplay">
@@ -240,32 +242,34 @@
 
     <div id="professions" class="professions-container">
       <div class="popup-bg">
-                 <div class="heading">Here is Everyone's role in the game!</div>
+        <div class="heading">Here is Everyone's role in the game!</div>
         <div id="players-info" class="players-info"></div>
-        <button class="continue-button" onclick="createFinancialStatement()">continue</button>
+        <button class="continue-button" onclick="createFinancialStatement()">
+          continue
+        </button>
       </div>
     </div>
 
     <div id="manage-debt-form" class="manage-debt-form">
       <div id="manage-debt-form-msg-Box"></div>
     </div>
-    <div id="market-card-div" class="market-card-div">
-</div>
+    <div id="market-card-div" class="market-card-div"></div>
     <div id="low-balance" class="popup-background">
       <div class="top-popup">
         You don't have enough balance
         <button onclick="closeOverlay('low-balance')">OK</button>
       </div>
     </div>
-    <div id="share-card" class="share-popup">
-    </div>
-    </div>
+    <div id="share-card" class="share-popup"></div>
 
     <div id="bankruptcyNotification" class="manage-debt-form">
-      <div id = "bankruptcyMsg">You are bankrupt. Please sell assets</div>
+      <div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
       <div id="Real-Estate"></div>
-      <button onclick="sellAsset()" >Sell</button>
+      <button onclick="sellAsset()">Sell</button>
     </div>
-    <div id="bankruptedMsg" class="manage-debt-form">You are bankrupted. So that you can't continue game!! For more details see financial details</div>
+    <div id="bankruptedMsg" class="manage-debt-form">
+      You are bankrupted. So that you can't continue game!! For more details see
+      financial details
+    </div>
   </body>
 </html>
