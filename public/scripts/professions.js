@@ -15,12 +15,13 @@ const createParagraph = function(text, classname) {
 };
 
 const getProfessionsDiv = function(player) {
-  let {name, turn, profession} = player;
-  const mainDiv = createDivWithClass("box");
-  const playerName = createParagraph(`Name : ${name}`, "sub-header");
+  let { name, turn, profession } = player;
+  const mainDiv = createDivWithClass("professions-box ");
+  const playerName = createParagraph(`Name : ${name}`, "profession-sub-header");
   const playerProfession = createParagraph(`Profession : ${profession}`);
   const playerTurn = createParagraph(`Playing Turn : ${turn}`);
   const playerGamePiece = createParagraph(``, "player" + turn);
+  playerGamePiece.classList.add("center");
   appendChildren(mainDiv, [
     playerName,
     playerProfession,
@@ -33,7 +34,7 @@ const getProfessionsDiv = function(player) {
 const getProfessions = function() {
   fetch("/getgame")
     .then(data => data.json())
-    .then(({players}) => {
+    .then(({ players }) => {
       let container = document.getElementById("profession-container");
       players.map(getProfessionsDiv).join("");
       let button = createPopupButton("continue", createFinancialStatement);
