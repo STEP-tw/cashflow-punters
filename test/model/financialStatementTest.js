@@ -123,4 +123,22 @@ describe("", function() {
         .to.equals(14000);
     });
   });
+
+  describe("getAsset", function() {
+    it("should return the object of given asset name", function() {
+    financialStatement.assets.realEstates = [{type:"BR/2",downPayment:5000,cost:50000},{type:"BR/3",downPayment:4000,cost:50000},{type:"BR/4",downPayment:6000,cost:50000}]
+      expect(financialStatement.getAsset("BR/2"))
+      .to.be.deep.equal([{type:"BR/2",downPayment:5000,cost:50000}])
+    });
+  });
+
+  describe("getDownpayment", function() {
+    it("should return the down refundable amount", function() {
+    financialStatement.assets.realEstates = [{type:"BR/2",downPayment:5000,cost:50000},
+    {type:"BR/3",downPayment:4000,cost:50000},{type:"BR/4",downPayment:6000,cost:50000}]
+      expect(financialStatement.getDownPayment("BR/2"))
+      .to.be.deep.equal(2500)
+    });
+  });
+
 });

@@ -87,6 +87,22 @@ describe("downsize", function() {
     player.setFinancialStatement(profession);
   });
 
+  describe("isBankruptcy", function() {
+    it("should return true if cashflow is negetive", function() {
+      player.cashflow = -10;
+      player.ledgerBalance = -10;
+      expect(player.isBankruptcy()).to.equals(true);
+    });
+  });
+
+  describe("isBankrupted", function() {
+    it("should return true if player have no assets", function() {
+      player.cashflow = -10;
+      player.ledgerBalance = -10;
+      expect(player.isBankrupted()).to.equals(true);
+    });
+  });
+
   describe("downsize", function() {
     it("should set downsizeturns 2 and deduct penalty from ledger balance", function() {
       player.downsize();
