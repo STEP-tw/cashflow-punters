@@ -14,8 +14,8 @@ const isBetween = function(lowerLimit, upperLimit, number) {
   return number < upperLimit && number > lowerLimit;
 };
 
-const add = function(sum, value) {
-  return sum + value;
+const add = function(firstNum, secondNum) {
+  return firstNum + secondNum;
 };
 
 const isSame = function(firstArg, secondArg) {

@@ -32,10 +32,12 @@ class Player extends FinancialStatement {
     if (this.isBankruptcy()) {
       if (this.assets.realEstates.length == 0) {
         return true;
-      };
-			let totalDownpayment = 0;
-			this.assets.realEstates.forEach(realEstate => totalDownpayment += (realEstate.downPayment/2));
-      let newCashflow = this.cashflow + (totalDownpayment * 0.1);
+      }
+      let totalDownpayment = 0;
+      this.assets.realEstates.forEach(
+        realEstate => (totalDownpayment += realEstate.downPayment / 2)
+      );
+      let newCashflow = this.cashflow + totalDownpayment * 0.1;
       return newCashflow < 0;
     }
     return false;
@@ -123,8 +125,8 @@ class Player extends FinancialStatement {
   addRealEstate(card) {
     const { downPayment, type, cost, cashflow, mortgage, title } = card;
     if (this.ledgerBalance < downPayment) return false;
-    this.deductLedgerBalance(+downPayment);
-    this.addDebitEvent(+downPayment, "brought realEstate");
+    this.deductLedgerBalance(downPayment);
+    this.addDebitEvent(downPayment, "bought Real Estate");
     this.addAsset(title, type, downPayment, cost);
     this.addRealEstateLiability(title, type, mortgage);
     this.addIncomeRealEstate(title, type, cashflow);
@@ -136,7 +138,7 @@ class Player extends FinancialStatement {
     if (this.ledgerBalance < cost * numberOfCoins) return false;
     this.deductLedgerBalance(cost * numberOfCoins);
     this.addGoldCoins(+numberOfCoins);
-    this.addCreditEvent(cost * numberOfCoins, "brought gold coins");
+    this.addCreditEvent(cost * numberOfCoins, "bought Gold Coins");
     return true;
   }
 

@@ -65,7 +65,7 @@ class FinancialStatement extends CashLedger {
 
   addPayday() {
     this.ledgerBalance += this.cashflow;
-    this.addCreditEvent(this.cashflow, "gotPayday");
+    this.addCreditEvent(this.cashflow, "got payday");
     return this.cashflow;
   }
 
