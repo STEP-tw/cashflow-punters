@@ -191,41 +191,231 @@
         ></div>
       </div>
 
-      <div class="overlay" id="financial_statement">
-        <button class="close" onclick="hideOverlay('financial_statement')">
-          &times;
-        </button>
-        <header>Financial Statement</header>
-        <div class="vertical_flex half">
-          <div class="fs_box vertical_flex">
-            <h3 id="player_income">Income</h3>
-          </div>
-          <div class="fs_box vertical_flex">
-            <h3 id="player_expense">Expenses</h3>
-          </div>
-          <div class="fs_box vertical_flex">
-            <h3 id="player_assets">Assests</h3>
-          </div>
-        </div>
+      <div class="overlay-fs" id="financial_statement">
+				<div style="display:flex; flex-direction:column; background-color: whitesmoke;">
+						<div class="title">
+								<div>INCOME STATEMENT</div>
+								<button class="close-fs" onclick="hideOverlay('financial_statement')">
+									&times;
+								</button>
+							</div>
+							<div style="overflow:scroll; height:100%;">
+									<div style="display:flex; flex-direction: row; justify-content: space-around;
+									width: 900px; height: 100%; background-color: whitesmoke;">
+						
+									<div style="display:flex; flex-direction: column">
+										<div>
+											<h2 class="sub-header">Income</h2>
+											<table>
+												<tr>
+													<th style="width:300px;">Description</th>
+													<th style="width:100px;">Cash Flow</th>
+												</tr>
+												<tr>
+													<td>Salary:</td>
+													<td id="salary"></td>
+												</tr>
+												<tr>
+													<td>Real Estate/Business:</td>
+													<td></td>
+												</tr>
+												<tbody id="RealEstate-cashflow">
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div>
+											<h2 class="sub-header">Expenses</h2>
+											<table>
+												<tr>
+													<td>Taxes:</td>
+													<td id="taxes"></td>
+												</tr>
+												<tr>
+													<td>Home Mortage Payment:</td>
+													<td id="home-mortage-payment"></td>
+												</tr>
+												<tr>
+													<td>School Loan Payment:</td>
+													<td id="school-loan-payment"></td>
+												</tr>
+												<tr>
+													<td>Car Loan Payment:</td>
+													<td id="car-loan-payment"></td>
+												</tr>
+												<tr>
+													<td>Credit Card Payment:</td>
+													<td id="credit-card-payment"></td>
+												</tr>
+												<tr>
+													<td>Other Expenses:</td>
+													<td id="other-expenses"></td>
+												</tr>
+												<tr>
+													<td>Bank Loan Payment: <span id="bank-loan-payment"></span><span class="extra-info">(10% of Bank Loan
+															Total)</span></td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Per Child Expense:
+														<span class="number" id="child-count"></span> x 200 <span class="extra-info">(# of Children):</span>
+														<span id="total-child-expense"></span>
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div>
+						
+											<h2 class="sub-header">Assests</h2>
+											<table>
+												<tr>
+													<td>Savings:</td>
+													<td id="savings"></td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Precious Metals, Etc.:</td>
+													<td id="gold-coins">Gold Coins</td>
+													<td id="gold-coin-number"></td>
+												</tr>
+												<tr>
+													<td>Stocks/Funds:</td>
+													<td># of Shares:</td>
+													<td>Cost/Share:</td>
+												</tr>
+												<tbody id="stocks-funds">
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+												<tr>
+													<td>Real Estate/Business:</th>
+													<td>Down Payment:</th>
+													<td>Cost:</td>
+												</tr>
+												<tbody id="RealEstate-downpayment">
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+						
+									<div style="display:flex; flex-direction: column">
+										<div style="margin:1%;">
+											<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; "><span class="heading"> Name : </span><span id="fs-name" style="padding-left: 2%;"></span>
+											</h3>
+											<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading"> Profession
+													:  </span><span id="fs-profession" style="padding-left: 2%;"></span></h3>
+											<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading"> Dream : <span
+														id="dream"></span> </span>
+											</h3>
+										</div>
+										<div style="border:3px solid rgb(40, 38, 38); padding:3%;">
+											<p class="block" id="fs-income"> $ Income </p>
+											<p class="operator">+</p>
+											<p class="block" id="passive-income"> $ passive Income</p>
+											<p class="extra-info">(Cash Flow from Interest/Dividends and Real Estate/Business)</p>
+											<p class="operator">=</p>
+											<p class="block" id="total-income"> $ total Income </p>
+											<p class="operator">-</p>
+											<p class="block" id="fs-expenses"> $ expenses </p>
+											<p class="operator">=</p>
+											<p class="block" id="fs-cashflow"> $ cashflow </p>
+											<p class="extra-info">(Monthly Cash Flow)</p>
+										</div>
+										<div style="height: 200px;">
+											<h2 class="sub-header">Liabilities</h2>
+											<table>
+												<tr>
+													<td>Home Mortage:</td>
+													<td id="home-mortage"></td>
+												</tr>
+												<tr>
+													<td>School Loans:</td>
+													<td id="school-loans"></td>
+												</tr>
+												<tr>
+													<td>Car Loans:</td>
+													<td id="car-loans"></td>
+												</tr>
+												<tr>
+													<td>Credit Card Debt:</td>
+													<td id="credit-card-debt"></td>
+												</tr>
+												<tr>
+													<td>Bank Loan</td>
+													<td id="bank-loan"></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td></td>
+												</tr>
+												<td>Real Estate/Business:</td>
+												<td>Mortage/Liability:</td>
+												<tbody id="RealEstate-mortage">
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+					
+				</div>
 
-        <div class="half vertical_flex">
-          <div class="fs_player_details">
-            <h3 id="player_name">Name :</h3>
-            <h3 id="player_profession">Profession :</h3>
-            <h3 id="player_dream">Dream :</h3>
-            <div class="basic_fs">
-              <p>$ <span id="player_salary">Income</span></p>
-              <p>$ <span id="player_passiveIn">passiveIn</span></p>
-              <p>$ <span id="player_totalIn">totalIn</span></p>
-              <p>$ <span id="player_expenses">expenses</span></p>
-              <p>$ <span id="player_cashflow">cashflow</span></p>
-            </div>
-          </div>
-
-          <div class="fs_box">
-            <h3 id="player_liabilities">Liabilities</h3>
-          </div>
-        </div>
       </div>
 
       <div class="overlay" id="cash_ledger">

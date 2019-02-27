@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Page Title</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/financialStatement.css" />
+	<link href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto" rel="stylesheet">
+	<script src="../scripts/board.js"></script>
+</head>
+
+<body>
+	<section>
+		<div class="title">
+			<div>INCOME STATEMENT</div>
+			<button class="close" onclick="hideOverlay('financial_statement')">
+				&times;
+			</button>
+		</div>
+		<div style="display:flex; flex-direction: row; justify-content: space-around;
+			width: 900px; height: 100%; background-color: whitesmoke;">
+
+			<div style="display:flex; flex-direction: column">
+				<div>
+					<h2 class="sub-header">Income</h2>
+					<table>
+						<tr>
+							<th style="width:300px;">Description</th>
+							<th style="width:100px;">Cash Flow</th>
+						</tr>
+						<tr>
+							<td>Salary:</td>
+							<td id="salary"></td>
+						</tr>
+						<tr>
+							<td>Real Estate/Business:</td>
+							<td></td>
+						</tr>
+						<div id="RealEstate-cashflow">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</div>
+					</table>
+				</div>
+				<div>
+					<h2 class="sub-header">Expenses</h2>
+					<table>
+						<tr>
+							<td>Taxes:</td>
+							<td id="taxes"></td>
+						</tr>
+						<tr>
+							<td>Home Mortage Payment:</td>
+							<td id="home-martage-payment"></td>
+						</tr>
+						<tr>
+							<td>School Loan Payment:</td>
+							<td id="school-loan-payment"></td>
+						</tr>
+						<tr>
+							<td>Car Loan Payment:</td>
+							<td id="car-loan-payment"></td>
+						</tr>
+						<tr>
+							<td>Credit Card Payment:</td>
+							<td id="credit-card-payment"></td>
+						</tr>
+						<tr>
+							<td>Other Expenses:</td>
+							<td id="other-expenses"></td>
+						</tr>
+						<tr>
+							<td>Bank Loan Payment: <span id="bank-loan-payment"></span><span class="extra-info">(10% of Bank Loan
+									Total)</span></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Per Child Expense:
+								<span class="number" id="child-count"></span> x 200 <span class="extra-info">(# of Children):</span>
+								<span id="total-child-expense"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+
+					<h2 class="sub-header">Assests</h2>
+					<table>
+						<tr>
+							<td>Savings:</td>
+							<td id="savings"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Precious Metals, Etc.:</td>
+							<td id="gold-coins"></td>
+							<td id="gold-coin-price"></td>
+						</tr>
+						<tr>
+							<td>Stocks/Funds:</td>
+							<td># of Shares:</td>
+							<td>Cost/Share:</td>
+						</tr>
+						<div id="stocks-funds">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</div>
+						<tr>
+							<td>Real Estate/Business:</th>
+							<td>Down Payment:</th>
+							<td>Cost:</td>
+						</tr>
+						<div id="RealEstate-downpayment">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</div>
+					</table>
+				</div>
+			</div>
+
+			<div style="display:flex; flex-direction: column">
+				<div style="margin:1%;">
+					<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; "><span class="heading"> Name : <span
+								id="name"></span> </span>
+					</h3>
+					<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading"> Profession
+							: <span id="profession"></span> </span></h3>
+					<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading"> Dream : <span
+								id="dream"></span> </span>
+					</h3>
+				</div>
+				<div style="border:3px solid rgb(40, 38, 38); padding:3%;">
+					<p class="block" id="income"> $ Income </p>
+					<p class="operator">+</p>
+					<p class="block" id="passive-income"> $ passive Income</p>
+					<p class="extra-info">(Cash Flow from Interest/Dividends and Real Estate/Business)</p>
+					<p class="operator">=</p>
+					<p class="block" id="total-income"> $ total Income </p>
+					<p class="operator">-</p>
+					<p class="block" id="expenses"> $ expenses </p>
+					<p class="operator">=</p>
+					<p class="block" id="cashflow"> $ cashflow </p>
+					<p class="extra-info">(Monthly Cash Flow)</p>
+				</div>
+				<div style="height: 200px;">
+					<h2 class="sub-header">Liabilities</h2>
+					<table>
+						<tr>
+							<td>Home Mortage:</td>
+							<td id="home-mortage"></td>
+						</tr>
+						<tr>
+							<td>School Loans:</td>
+							<td id="school-loans"></td>
+						</tr>
+						<tr>
+							<td>Car Loans:</td>
+							<td id="car-loans"></td>
+						</tr>
+						<tr>
+							<td>Credit Card Debt:</td>
+							<td id="credit-card-debt"></td>
+						</tr>
+						<tr>
+							<td>Bank Loan</td>
+							<td id="bank-loan"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<td>Real Estate/Business:</td>
+						<td>Mortage/Liability:</td>
+						<div id="RealEstate-mortage">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</div>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+</body>
+
+</html>

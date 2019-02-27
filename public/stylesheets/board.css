@@ -3,7 +3,12 @@ body {
   font-family: sans-serif;
   height: 97%;
   width: 99%;
-  background-color: #f9f9f1;
+	/* background-color: #f9f9f1; */
+	color: rgb(53, 52, 52);
+	font-weight: 400;
+	font-family: 'Roboto', sans-serif;
+  color: rgb(82, 79, 79);
+	background-color: rgb(242, 248, 252);
 }
 
 div {
@@ -771,4 +776,122 @@ button:hover {
   background-color: whitesmoke;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+/* ----------------------financial Statement ------------------------------ */
+
+.sub-header {
+	font-size: 25px;
+	font-family: 'Roboto', sans-serif;
+	color: rgb(213, 212, 212);
+	font-weight: lighter;
+	background-color: rgb(40, 38, 38);
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.heading {
+	font-size: 1em;
+	font-family: 'Roboto', sans-serif;
+	color: rgb(213, 212, 212);
+	font-weight: lighter;
+	background-color: rgb(40, 38, 38);
+	border-radius: 20px;
+	padding: 1.5%;
+	padding-left: 3%;
+	padding-right: 3%;
+}
+
+.block {
+ width: 50%;
+ margin-left: auto;
+ margin-right: auto;
+ border: 1px solid grey;
+ padding: 3%;
+}
+
+.box {
+	width: 40%;
+	height: 80%;
+	border-radius: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+table {
+	font-family: arial, sans-serif;
+  border-collapse: collapse;
+	width: 100%;
+	padding: 5px;
+}
+
+td {
+	border-bottom: solid 1px grey;
+	text-align: left;
+	font-weight: bold;
+	height: 2em;
+}
+
+th {
+  text-align: left;
+	text-align: center;
+	font-weight: lighter;
+	border-bottom: solid 2px black;
+}
+
+.extra-info {
+	font-size: 0.8rem;
+	font-weight: lighter;
+	text-align: center;
+}
+
+.operator {
+	text-align: center;
+	font-weight: bolder;
+	font-size: 30px;
+	margin: -5%;
+}
+
+
+basic_fs{
+	width: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+basic_fs_heading{
+	text-align: center;
+	line-height: 3;
+	margin-right: 15px;
+	font-weight: bold;
+}
+
+.title {
+	width: 875px;
+	display: flex;
+	justify-content: space-between;
+	background-color: whitesmoke;
+	font-size: 1.5em;
+	font-weight: lighter;
+	padding-left: 1.1em;
+	color: rgb(96, 94, 94);
+}
+
+.close-fs {
+	font-size: 20px;
+	background-color: rgb(53, 52, 52);
+	color:whitesmoke;
+  padding: 0.5% 1%;
+	border-radius: 50%;
+	outline: none;
+}
+
+.overlay-fs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  visibility: hidden;
 }

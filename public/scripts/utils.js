@@ -3,7 +3,7 @@ const getElementById = function(id) {
 };
 
 const setInnerText = function(id, text) {
-  return (getElementById(id).innerHTML = text);
+  return (getElementById(id).innerText = text);
 };
 
 const createElement = function(tag, id) {
