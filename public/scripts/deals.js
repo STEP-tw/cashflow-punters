@@ -53,7 +53,7 @@ const createDeclineButton = actions =>
   createButton("Decline", "button_div", "reject", "button", actions);
 
 const createCardSellButton = action =>
-  createButton("Sell-Card", "button_div", "sell-card", "button", action);
+  createButton("Sell Card", "button_div", "sell-card", "button", action);
 
 const createShareSellButton = function(shareCost) {
   return createButton(
@@ -102,6 +102,7 @@ const createCardButtons = function(actions) {
 
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
   const { title, message, cost, mortgage, downPayment, cashflow } = card;
+  const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
@@ -116,11 +117,12 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
   appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
   appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
-  if (isMyTurn) cardDiv.appendChild(createCardButtons(actions));
+  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
   const { title, message, numberOfCoins, cost } = card;
+  const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
@@ -130,7 +132,7 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [numberDiv, costDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
-  if (isMyTurn) cardDiv.appendChild(createCardButtons(actions));
+  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
 const createCard = function(card) {
@@ -220,6 +222,7 @@ const showOptions = function(isAbleToSell, shareCost) {
 };
 
 const showBuyAndSellOptions = function(card) {
+  const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
@@ -227,11 +230,12 @@ const showBuyAndSellOptions = function(card) {
     showOptions.bind(null, true, card.currentPrice)
   );
   const decline = createDeclineButton(declineSmallDeal);
-  cardDiv.appendChild(buttons);
+  cardDisplayDiv.appendChild(buttons);
   appendChildren(buttons, [accept, decline]);
 };
 
 const showBuyOption = function(card) {
+  const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
@@ -239,18 +243,19 @@ const showBuyOption = function(card) {
     showOptions.bind(null, false, card.currentPrice)
   );
   const decline = createDeclineButton(declineSmallDeal);
-  cardDiv.appendChild(buttons);
+  cardDisplayDiv.appendChild(buttons);
   appendChildren(buttons, [accept, decline]);
 };
 
 const showSellOption = function(card) {
+  const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
   const buttons = createElement("div", "buttons-container");
   buttons.classList.add("buttons-div");
   const sell = createShareSellButton();
   const pass = createButton("Pass", "button_div", "pass", "button", passDeal);
-  cardDiv.appendChild(buttons);
   appendChildren(buttons, [sell, pass]);
+  cardDisplayDiv.appendChild(buttons);
 };
 
 const handleSharesSmallDeal = function(card, isMyTurn) {

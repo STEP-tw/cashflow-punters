@@ -281,19 +281,19 @@ button:hover {
 }
 
 .button_div {
-  padding: 5%;
-  margin: 0 14%;
-
+  padding: 3%;
+  margin: 0px 7%;
   height: fit-content;
   width: fit-content;
 }
 
 .cardDisplay {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 72%;
   width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   position: relative;
 }
 
