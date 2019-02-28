@@ -58,7 +58,7 @@ describe("Player", function() {
   });
 });
 
-describe("downsize", function() {
+describe("Player", function() {
   let player;
   beforeEach(() => {
     const profession = {
@@ -169,19 +169,19 @@ describe("downsize", function() {
     });
   });
 
-  describe("buyGoldCoins", function() {
+ describe("buyGoldCoins", function() {
     it("should add gold cooins in assets and deduct money form cash ledger", function() {
       const card = {
-        cost: 100,
-        numberOfCoins: 3
+        cost: 1000,
+        numberOfCoins: 5
       };
 
-      player.buyGoldCoins(card);
+      const actualOutput = player.buyGoldCoins(card);
 
-      expect(player.ledgerBalance).to.equal(1300);
-      expect(player.assets.goldCoins).to.equal(3);
+      expect(player.ledgerBalance).to.equal(600);
+      expect(player.assets.goldCoins).to.equal(5);
       expect(player.entries).to.have.length(2);
-      expect(player.buyGoldCoins(card)).to.equal(true);
+      expect(actualOutput).to.equal(true);
     });
   });
 
@@ -244,7 +244,7 @@ describe("downsize", function() {
       expect(player.addBaby()).to.equals(false);
       expect(player.childrenCount).to.equals(3);
       expect(player.notification).to.equals(
-        "you already have 3 babies so baby is not added"
+        "You already have 3 babies so baby is not added"
       );
     });
   });
