@@ -490,7 +490,7 @@ const createActivity = function({ playerName, msg, time }) {
   return activity;
 };
 
-const updateActivityLog = function(activityLog) {
+const updateActivityLog = function({ activityLog }) {
   const activityLogDiv = getElementById("activityLog");
   const localActivitiesCount = activityLogDiv.children.length;
   if (activityLog.length == localActivitiesCount) return;
