@@ -38,7 +38,7 @@
     },
     {
       "title": "House for Sale - 3Br/2Ba",
-      "message": "Divorse leads to sale of this 3/2 house in an area full of owner-occupied homes. It has been on the market for five months.",
+      "message": "Divorce leads to sale of this 3/2 house in an area full of owner-occupied homes. It has been on the market for five months.",
       "cost": 350000,
       "type": "3BR/2BA house",
       "mortgage": 330000,
@@ -56,7 +56,7 @@
     },
     {
       "title": "Automated Business",
-      "message": "Sucessfully 4-bay, coin-operated auto wash near busy intersection. Seller is moving to retirement communityout of state.",
+      "message": "Successfully 4-bay, coin-operated auto wash near busy intersection. Seller is moving to retirement communityout of state.",
       "cost": 125000,
       "type": "automated business",
       "mortgage": 100000,
@@ -146,7 +146,7 @@
     },
     {
       "title": "House for Sale - 3Br/2Ba",
-      "message": "Split level 3/2 house on out-of-way golf couse offered by heirs of owner. Golf membership is included.",
+      "message": "Split level 3/2 house on out-of-way golf course offered by heirs of owner. Golf membership is included.",
       "cost": 275000,
       "mortgage": 260000,
       "type": "3BR/2BA house",
@@ -218,7 +218,7 @@
     },
     {
       "title": "Apartment House for Sale",
-      "message": "Two buildings totailing24 units for sale. Owner managed with on-site assistant. Retirement prompts sale. Big Opportunity.",
+      "message": "Two buildings totalling 24 units for sale. Owner managed with on-site assistant. Retirement prompts sale. Big Opportunity.",
       "cost": 575000,
       "type": "apartment",
       "mortgage": 500000,
@@ -344,7 +344,7 @@
     },
     {
       "title": "Mutual Fund - GRO4US Fund",
-      "message": "Lower intrest rated drive market and found to strong showing.",
+      "message": "Lower interest rated drive market and found to strong showing.",
       "relatedTo": "shares",
       "symbol": "GRO4US",
       "currentPrice": 20,
@@ -352,7 +352,7 @@
     },
     {
       "title": "Stock - ON2U Entertainment Co.",
-      "message": "Strong demand for company's libraryof old movies leads to good share price.",
+      "message": "Strong demand for company's library of old movies leads to good share price.",
       "relatedTo": "shares",
       "symbol": "ON2U",
       "currentPrice": 30,
@@ -384,7 +384,7 @@
     },
     {
       "title": "Stock - MYT4U Electronics Co.",
-      "message": "Record intrest rates lead to substandard share price for this electronics seller.",
+      "message": "Record interest rates lead to substandard share price for this electronics seller.",
       "relatedTo": "shares",
       "symbol": "MYT4U",
       "currentPrice": 5,
@@ -472,7 +472,7 @@
     },
     {
       "title": "Stock - ON2U Entertainment Co.",
-      "message": "Movie buyer fired after third mege-flop! Shares sink. Chairman's bonus canceled.",
+      "message": "Movie buyer fired after third mega-flop! Shares sink. Chairman's bonus canceled.",
       "relatedTo": "shares",
       "symbol": "ON2U",
       "currentPrice": 10,
@@ -552,7 +552,7 @@
     },
     {
       "title": "You Find A Great Deal!",
-      "message": "Company bought transfered manager's 2/1 house. No current tenant, it has been on the market six months and it has just been reduced. Take out a loan if you must,BUY THIS!",
+      "message": "Company bought transferred manager's 2/1 house. No current tenant, it has been on the market six months and it has just been reduced. Take out a loan if you must,BUY THIS!",
       "relatedTo": "realEstate",
       "cost": 45000,
       "type": "2/1 house",
@@ -602,7 +602,7 @@
     },
     {
       "title": "You Find A Great Deal!",
-      "message": "Older 2/1 house, repossed by government agency. Ready to go with government agency. Ready to go with government financing and tenant. Take out a loan if you mustt, but BUY THIS!",
+      "message": "Older 2/1 house, reposted by government agency. Ready to go with government agency. Ready to go with government financing and tenant. Take out a loan if you mustt, but BUY THIS!",
       "relatedTo": "realEstate",
       "cost": 35000,
       "type": "2/1 house",
