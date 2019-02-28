@@ -8,7 +8,7 @@ describe("rollDice", function() {
   beforeEach(() => {
     req = {};
     req.game = {
-      addActivity: sinon.spy(),
+      activityLog: { addActivity: sinon.spy() },
       nextPlayer: sinon.spy(),
       board: { getSpaceType: sinon.stub().returns("a") },
       currentPlayer: {
@@ -42,6 +42,6 @@ describe("rollDice", function() {
     let { currentPlayer } = req.game;
     currentPlayer.name = "a";
     rollDice(req, res);
-    chai.expect(req.game.addActivity.calledOnce).to.be.false;
+    chai.expect(req.game.activityLog.addActivity.calledOnce).to.be.false;
   });
 });

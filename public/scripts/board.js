@@ -39,6 +39,7 @@ const updateStatementBoard = function (player) {
   return player;
 };
 
+<<<<<<< HEAD
 const createTableRow = function (tableData) {
   let tableRow = createElement('tr');
   tableData.forEach(data => {
@@ -52,6 +53,21 @@ const createTableRow = function (tableData) {
 const updateTableRows = function (id, rowData, properties) {
   let dataDiv = getElementById(id);
   dataDiv.innerHTML = '';
+=======
+const createTableRow = function(tableData) {
+  let tableRow = createElement("tr");
+  tableData.forEach(data => {
+    let tableDataHtml = createElement("td");
+    tableDataHtml.innerText = data;
+    tableRow.appendChild(tableDataHtml);
+  });
+  return tableRow;
+};
+
+const updateTableRows = function(id, rowData, properties) {
+  let dataDiv = getElementById(id);
+  dataDiv.innerHTML = "";
+>>>>>>> Made activityLog class
   rowData.forEach(data => {
     let tableData = [data.title];
     properties.forEach(property => {
@@ -63,6 +79,7 @@ const updateTableRows = function (id, rowData, properties) {
   });
 };
 
+<<<<<<< HEAD
 const setIncome = function (player) {
   setInnerText("salary", player.income.salary);
   let realEstates = player.income.realEstates;
@@ -72,6 +89,20 @@ const setIncome = function (player) {
 const setExpenses = function (player) {
   setInnerText("taxes", player.expenses["taxes"]);
   setInnerText("home-mortage-payment", player.expenses["Home Mortgage Payment"]);
+=======
+const setIncome = function(player) {
+  setInnerText("salary", player.income.salary);
+  let realEstates = player.income.realEstates;
+  updateTableRows("RealEstate-cashflow", realEstates, ["cashflow"]);
+};
+
+const setExpenses = function(player) {
+  setInnerText("taxes", player.expenses["taxes"]);
+  setInnerText(
+    "home-mortage-payment",
+    player.expenses["Home Mortgage Payment"]
+  );
+>>>>>>> Made activityLog class
   setInnerText("school-loan-payment", player.expenses["School Loan Payment"]);
   setInnerText("car-loan-payment", player.expenses["Car Loan Payment"]);
   setInnerText("credit-card-payment", player.expenses["Credit Card Payment"]);
@@ -80,6 +111,7 @@ const setExpenses = function (player) {
   setInnerText("total-child-expense", player.expenses["Child Expenses"]);
 };
 
+<<<<<<< HEAD
 const updateShares = function (player) {
   let stocksDiv = getElementById('stocks-funds');
   stocksDiv.innerHTML = '';
@@ -94,21 +126,51 @@ const updateShares = function (player) {
     number.innerText = stocks[stockName]["numberOfShares"];
     row.appendChild(number);
     let price = createElement('td');
+=======
+const updateShares = function(player) {
+  let stocksDiv = getElementById("stocks-funds");
+  stocksDiv.innerHTML = "";
+  let stocks = player.assets.shares;
+  let stockNames = Object.keys(stocks);
+  stockNames.forEach(stockName => {
+    let row = createElement("tr");
+    let name = createElement("td");
+    name.innerText = stockName;
+    row.appendChild(name);
+    let number = createElement("td");
+    number.innerText = stocks[stockName]["numberOfShares"];
+    row.appendChild(number);
+    let price = createElement("td");
+>>>>>>> Made activityLog class
     price.innerText = stocks[stockName]["currentPrice"];
     row.appendChild(price);
     stocksDiv.appendChild(row);
   });
 };
 
+<<<<<<< HEAD
 const setAssets = function (player) {
+=======
+const setAssets = function(player) {
+>>>>>>> Made activityLog class
   setInnerText("savings", player.assets.savings);
   setInnerText("gold-coin-number", player.assets.goldCoins);
   updateShares(player);
   let realEstates = player.assets.realEstates;
+<<<<<<< HEAD
   updateTableRows("RealEstate-downpayment", realEstates, ["downPayment", "cost"]);
 };
 
 const setLiabilities = function (player) {
+=======
+  updateTableRows("RealEstate-downpayment", realEstates, [
+    "downPayment",
+    "cost"
+  ]);
+};
+
+const setLiabilities = function(player) {
+>>>>>>> Made activityLog class
   setInnerText("home-mortage", player.liabilities["Home Mortgage"]);
   setInnerText("school-loans", player.liabilities["School Loan"]);
   setInnerText("car-loans", player.liabilities["Car Loan"]);
@@ -118,7 +180,11 @@ const setLiabilities = function (player) {
   updateTableRows("RealEstate-mortage", realEstates, ["mortgage"]);
 };
 
+<<<<<<< HEAD
 const setBasicFinancialDetails = function (player) {
+=======
+const setBasicFinancialDetails = function(player) {
+>>>>>>> Made activityLog class
   setInnerText("fs-name", player.name);
   setInnerText("fs-profession", player.profession);
   setInnerText("fs-income", player.income.salary);
@@ -126,9 +192,15 @@ const setBasicFinancialDetails = function (player) {
   setInnerText("total-income", player.totalIncome);
   setInnerText("fs-expenses", player.totalExpense);
   setInnerText("fs-cashflow", player.cashflow);
+<<<<<<< HEAD
 }
 
 const setFinancialStatement = function (player) {
+=======
+};
+
+const setFinancialStatement = function(player) {
+>>>>>>> Made activityLog class
   setBasicFinancialDetails(player);
   setIncome(player);
   setExpenses(player);
@@ -506,8 +578,12 @@ const getGame = function () {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
+<<<<<<< HEAD
       updateActivityLog(game.activityLog);
       joinAuction(game);
+=======
+      updateActivityLog(game.activityLog.activityLog);
+>>>>>>> Made activityLog class
       polling(game);
     });
 };

@@ -115,14 +115,14 @@ const acceptSmallDeal = function(req, res) {
   }
   if (!isSuccessful) return res.json({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
-  req.game.addActivity(`${requestedPlayer} has accepted the deal`);
+  req.game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
   res.json({ isSuccessful });
 };
 
 const rejectSmallDeal = function(req, res) {
   let requestedPlayer = req.cookies["playerName"];
-  req.game.addActivity(`${requestedPlayer} has rejected the deal`);
+  req.game.activityLog.addActivity(`${requestedPlayer} has rejected the deal`);
   req.game.nextPlayer();
   res.end();
 };
@@ -132,14 +132,14 @@ const acceptBigDeal = function(req, res) {
   const isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
   if (!isSuccessful) return res.send({isSuccessful});
   let requestedPlayer = req.cookies["playerName"];
-  req.game.addActivity(`${requestedPlayer} has accepted the deal`);
+  req.game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
   res.send({ isSuccessful });
 };
 
 const rejectBigDeal = function(req, res) {
   let requestedPlayer = req.cookies["playerName"];
-  req.game.addActivity(`${requestedPlayer} has rejected the deal`);
+  req.game.activityLog.addActivity(`${requestedPlayer} has rejected the deal`);
   req.game.nextPlayer();
   res.end();
 };
@@ -195,7 +195,7 @@ const sellEstate = function(req, res) {
   const {playerName} = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   const profit = player.sellEstate(estate, marketCard);
-  game.addActivity(` sold Real Estate for $${profit} `, playerName);
+  game.activityLog.addActivity(` sold Real Estate for $${profit} `, playerName);
   res.end();
 };
 
@@ -210,7 +210,7 @@ const sellGoldCoins = function(req, res) {
   const game = req.game;
   const { playerName } = req.cookies;
   const player = game.getPlayerByName(playerName);
-  game.addActivity(` sold ${numberOfCoins} at rate of ${cost}`, playerName);
+  game.activityLog.addActivity(` sold ${numberOfCoins} at rate of ${cost}`, playerName);
   player.sellGoldCoins(numberOfCoins, cost);
   res.end();
 };

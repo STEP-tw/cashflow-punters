@@ -299,7 +299,7 @@ describe("sellAssets", function() {
     const res = {};
     req.cookies = { playerName: "player1" };
     req.body = {
-      selectedAsset:["BR/2","BR/3"]
+      selectedAsset: ["BR/2", "BR/3"]
     };
 
     req.game = {
@@ -321,14 +321,13 @@ describe("sellAssets", function() {
     });
     req.game.getPlayerByName.onFirstCall().returns(player);
 
-    sellAssets(req,res)
+    sellAssets(req, res);
 
     sinon.assert.calledOnce(req.game.getPlayerByName);
     sinon.assert.calledOnce(req.game.soldAsset);
     expect(res.content).to.deep.equals(expectedPlayer);
   });
 });
-
 
 describe("acceptSmallDeal", function() {
   const req = {},
@@ -338,7 +337,7 @@ describe("acceptSmallDeal", function() {
       activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
     };
     req.game.players = { length: 0 };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.cookies = { playerName: "" };
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
@@ -357,7 +356,7 @@ describe("rejectSmallDeal", function() {
     req.game = {
       activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
     };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.cookies = { playerName: "" };
     req.game.players = { length: 0 };
     req.game.nextPlayer = sinon.spy();
@@ -386,7 +385,7 @@ describe("acceptBigDeal", function() {
       activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
     };
     req.game.players = { length: 0 };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.cookies = { playerName: "" };
     req.game.nextPlayer = sinon.spy();
     req.game.currentPlayer = { addRealEstate: sinon.spy() };
@@ -408,7 +407,7 @@ describe("rejectBigDeal", function() {
     req.game = {
       activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
     };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.cookies = { playerName: "" };
     req.game.players = { length: 0 };
     req.game.nextPlayer = sinon.spy();
@@ -429,7 +428,7 @@ describe("isSharePresent", function() {
         data: { relatedTo: "smallDeal", symbol: "MYT4U" }
       }
     };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.game.hasShares = function() {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
@@ -472,7 +471,7 @@ describe("buyShares", function() {
         data: { relatedTo: "smallDeal", symbol: "MYT4U" }
       }
     };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.game.hasShares = function() {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
@@ -510,7 +509,7 @@ describe("sellShares", function() {
         data: { relatedTo: "smallDeal", symbol: "MYT4U" }
       }
     };
-    req.game.addActivity = sinon.spy();
+    req.game.activityLog = { addActivity: sinon.spy() };
     req.game.hasShares = function() {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
