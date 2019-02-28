@@ -9,10 +9,12 @@ const getGame = function(req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
   const { currentPlayer } = game;
+  let player = game.getPlayerByName(playerName);
+ 
   if (currentPlayer.isDownSized()) {
     game.skipTurn();
   }
-  game.requester = game.getPlayerByName(playerName);
+  game.requester = player;
   game.isMyTurn = game.isCurrentPlayer(playerName);
   res.send(JSON.stringify(game));
 };

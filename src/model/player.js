@@ -33,12 +33,6 @@ class Player extends FinancialStatement {
       if (this.assets.realEstates.length == 0) {
         return true;
       }
-      let totalDownpayment = 0;
-      this.assets.realEstates.forEach(
-        realEstate => (totalDownpayment += realEstate.downPayment / 2)
-      );
-      let newCashflow = this.cashflow + totalDownpayment * 0.1;
-      return newCashflow < 0;
     }
     return false;
   }

@@ -227,7 +227,6 @@ class Game extends ActivityLog {
   removePlayer(player, msg) {
     this.addActivity(msg, player.name);
     player.removed = true;
-    // this.nextPlayer()
   }
 
   handlePayday() {
@@ -244,9 +243,7 @@ class Game extends ActivityLog {
       return;
     }
     if (this.currentPlayer.isBankruptcy()) {
-      this.currentPlayer.bankruptcy = true;
-      this.addActivity(" is in bankruptcy situation", this.currentPlayer.name);
-      return;
+    this.soldAsset(this.currentPlayer.name)
     }
     const paydayAmount = this.currentPlayer.addPayday();
     this.currentPlayer.setNotification(
@@ -295,12 +292,7 @@ class Game extends ActivityLog {
           return;
         }
         if (this.currentPlayer.isBankruptcy()) {
-          this.currentPlayer.bankruptcy = true;
-          this.addActivity(
-            " is in bankruptcy situation",
-            this.currentPlayer.name
-          );
-          return;
+          this.soldAsset(this.currentPlayer.name)
         }
         this.addActivity(" crossed payday", this.currentPlayer.name);
         const paydayAmount = this.currentPlayer.addPayday();
@@ -335,10 +327,11 @@ class Game extends ActivityLog {
     player.setNotification("you" + activityMessage);
   }
 
-  soldAsset(playerName, assetNames) {
+  soldAsset(playerName) {
     const player = this.getPlayerByName(playerName);
-    assetNames.forEach(assetName => {
-      const amount = player.getDownPayment(assetName);
+    let AllAssets = player.assets.realEstates;
+    AllAssets.forEach(asset => {
+      const amount = player.getDownPayment(asset);
       const expenseAmount = amount / 10;
       const debtDetails = {
         liability: "Bank Loan",
@@ -347,15 +340,21 @@ class Game extends ActivityLog {
         expenseAmount
       };
       this.payDebt(playerName, debtDetails);
+      if(player.cashflow > 0){
+        let msg = "you are out of bankruptcy";
+        player.notification = msg;
+        // nextPlayer();
+        return;
+      }
     });
-    if (player.cashflow < 0) {
-      let msg = "please sell other asset your cash flow is stil negative";
+      let msg = "you are bankrupted";
       player.notification = msg;
+      this.removePlayer(
+        player,
+        " is out of the game because of bankruptcy"
+      );
+      this.nextPlayer();
       return;
-    }
-    let msg = "you are out of bankruptcy";
-    player.notification = msg;
-    nextPlayer();
   }
 
   acceptCharity() {

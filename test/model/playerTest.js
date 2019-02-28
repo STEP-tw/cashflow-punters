@@ -96,27 +96,6 @@ describe("downsize", function() {
     });
   });
 
-  describe("isBankrupted", function() {
-    it("should return true if player have no assets", function() {
-      player.assets.realEstates = [
-        { downPayment: 2000 },
-        { downPayment: 1000 }
-      ];
-      player.cashflow = -4000;
-      player.ledgerBalance = -110;
-      expect(player.isBankrupted()).to.equals(true);
-    });
-    it("should return true if player have no assets", function() {
-      player.cashflow = -40;
-      player.ledgerBalance = -10;
-      expect(player.isBankrupted()).to.equals(true);
-    });
-
-    it("should return false if player is not bankrupted", function() {
-      expect(player.isBankrupted()).to.equals(false);
-    });
-  });
-
   describe("downsize", function() {
     it("should set downsizeturns 2 and deduct penalty from ledger balance", function() {
       player.downsize();
@@ -226,20 +205,6 @@ describe("downsize", function() {
     });
   });
 
-  describe("CashLedger", function() {
-    it("should add creadit event", function() {
-      player.addCreditEvent(100, "adding credit event", "2:30");
-      expect(
-        _.isEqual(player.getCashLedger()[1], {
-          amount: 100,
-          event: "adding credit event",
-          currentBalance: 1600,
-          time: "2:30",
-          type: "credit"
-        })
-      ).to.be.true;
-    });
-  });
   describe("hasCharityTurns", function() {
     it("should return true if charity turns is greater than 0", function() {
       player.addCharityTurn();

@@ -162,20 +162,13 @@ class FinancialStatement extends CashLedger {
     );
   }
 
-  getAsset(assetName) {
-    return this.assets.realEstates.filter(
-      realEstate => realEstate.type == assetName
-    );
-  }
-
   removeRealState(asset) {
     const assets = this.assets.realEstates;
     let indexNo = assets.indexOf(asset);
     assets.splice(indexNo, 1);
   }
 
-  getDownPayment(assetName) {
-    const asset = this.getAsset(assetName)[0];
+  getDownPayment(asset) {
     const refundableAmount = asset.downPayment / 2;
     this.addToLedgerBalance(refundableAmount);
     this.removeRealState(asset);

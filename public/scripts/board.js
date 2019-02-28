@@ -411,14 +411,16 @@ const processBankruptcy = function(requester) {
 };
 
 const displayOutOfGameMsg = function() {
-  getElementById("bankruptedMsg").style.visibility = "visible";
+  const notifyDiv =  getElementById("bankruptedMsg")
+  if(notifyDiv.style.display == "none"){
+    return;
+  }
+  notifyDiv.style.visibility = "visible";
 };
 
 const polling = function(game) {
   let { players, requester } = game;
-  if (requester.removed) {
-    displayOutOfGameMsg();
-  }
+ 
   if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
@@ -431,8 +433,9 @@ const polling = function(game) {
     const diceBlock = getElementById("dice_block");
     diceBlock.onclick = rollDie;
   }
-  if (requester.bankruptcy) {
-    processBankruptcy(requester);
+  
+  if (requester.removed) {
+    displayOutOfGameMsg();
   }
 };
 

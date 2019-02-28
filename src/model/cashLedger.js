@@ -8,7 +8,7 @@ class CashLedger {
     entry.currentBalance = this.ledgerBalance;
     entry.time = time;
     entry.type = "credit";
-    this.entries.push(entry);
+    this.entries.unshift(entry);
   }
 
   addDebitEvent(amount, event, time = new Date()) {
@@ -16,7 +16,7 @@ class CashLedger {
     entry.currentBalance = this.ledgerBalance;
     entry.time = time;
     entry.type = "debit";
-    this.entries.push(entry);
+    this.entries.unshift(entry);
   }
 
   getCashLedger() {
