@@ -14,7 +14,6 @@ const getGame = function(req, res) {
   }
   game.requester = game.getPlayerByName(playerName);
   game.isMyTurn = game.isCurrentPlayer(playerName);
-  console.log(game);
   res.send(JSON.stringify(game));
 };
 
@@ -234,7 +233,6 @@ const createAuction = function(req, res) {
   const {basePrice} = req.body;
   const {playerName} = req.cookies;
   const isSuccessful = req.game.createAuction(playerName, basePrice);
-  console.log(req.game.currentAuction.data);
   res.json({isSuccessful, playerName, basePrice});
 };
 
