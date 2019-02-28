@@ -77,7 +77,7 @@ class Player extends FinancialStatement {
 
   addBaby() {
     if (this.childrenCount == 3) {
-      this.setNotification("you already have 3 babies so baby is not added");
+      this.setNotification("You already have 3 babies so baby is not added");
       return false;
     }
     this.childrenCount += 1;
@@ -124,15 +124,17 @@ class Player extends FinancialStatement {
     this.addAsset(title, type, downPayment, cost);
     this.addRealEstateLiability(title, type, mortgage);
     this.addIncomeRealEstate(title, type, cashflow);
+    this.setNotification(`You bought ${type} for $${downPayment}`);
     return true;
   }
 
   buyGoldCoins(card) {
     const { cost, numberOfCoins } = card;
-    if (this.ledgerBalance < cost * numberOfCoins) return false;
-    this.deductLedgerBalance(cost * numberOfCoins);
+    if (this.ledgerBalance < cost) return false;
+    this.deductLedgerBalance(cost);
     this.addGoldCoins(+numberOfCoins);
-    this.addCreditEvent(cost * numberOfCoins, "bought Gold Coins");
+    this.addCreditEvent(cost , `bought ${numberOfCoins} Gold Coins`);
+    this.setNotification(`You bought ${numberOfCoins} Gold Coins for $${cost}`);
     return true;
   }
 
@@ -154,6 +156,7 @@ class Player extends FinancialStatement {
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
     this.assets.shares[symbol] = { numberOfShares, currentPrice };
+    this.setNotification(`You bought ${numberOfShares} shares of ${symbol} for $${price}`);
   }
 
   sellShares(card, numberOfShares) {
@@ -164,6 +167,7 @@ class Player extends FinancialStatement {
     this.assets.shares[symbol].numberOfShares -= numberOfShares;
     const shareOfCompany = this.assets.shares[symbol].numberOfShares;
     if (shareOfCompany == 0) delete this.assets.shares[symbol];
+    this.setNotification(`You sold ${numberOfShares} shares of ${symbol} for $${price}`);
   }
 
   isCapableToPay(amount) {

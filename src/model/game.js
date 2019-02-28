@@ -315,7 +315,7 @@ class Game extends ActivityLog {
     const activityMessage = ` took loan of $${loanAmount}`;
     player.addCreditEvent(loanAmount, "took loan");
     this.addActivity(activityMessage, playerName);
-    player.setNotification("you" + activityMessage);
+    player.setNotification("You" + activityMessage);
   }
 
   payDebt(playerName, debtDetails) {
@@ -327,7 +327,7 @@ class Game extends ActivityLog {
     player.addDebitEvent(liabilityPrice, `paid loan for ${liability}`);
     const activityMessage = ` paid debt $${liabilityPrice} for liability - ${liability}`;
     this.addActivity(activityMessage, playerName);
-    player.setNotification("you" + activityMessage);
+    player.setNotification("You" + activityMessage);
   }
 
   soldAsset(playerName) {
@@ -344,13 +344,12 @@ class Game extends ActivityLog {
       };
       this.payDebt(playerName, debtDetails);
       if(player.cashflow > 0){
-        let msg = "you are out of bankruptcy";
+        let msg = "You are out of bankruptcy";
         player.notification = msg;
-        // nextPlayer();
         return;
       }
     });
-      let msg = "you are bankrupted";
+      let msg = "You are bankrupted";
       player.notification = msg;
       this.removePlayer(
         player,
