@@ -9,28 +9,6 @@ const getBoard = function () {
   parent.removeChild(container);
 };
 
-const getEntriesHtml = function (entry) {
-  const { time, type, amount, currentBalance, event } = entry;
-  const symbols = { debit: "-", credit: "+" };
-  const currentTime = formatTime(new Date(time));
-  const entryDiv = createElement("div");
-  entryDiv.className = "entry";
-  const eventDiv = createElement("div");
-  const totalAmountDiv = createElement("div");
-  const symbol = symbols[type];
-  eventDiv.innerHTML = `${symbol} ${amount} --> ${event} ${currentTime}`;
-  totalAmountDiv.innerHTML = `= ${currentBalance}`;
-  appendChildren(entryDiv, [eventDiv, totalAmountDiv]);
-  return entryDiv;
-};
-
-const setCashLedger = function (player) {
-  const { entries } = player;
-  const entriesDiv = getElementById("cash-ledger-entries");
-  const entriesHtml = entries.map(getEntriesHtml);
-  appendChildren(entriesDiv, entriesHtml);
-};
-
 const getCashLedger = function () {
   const container = getElementById("container");
   container.innerHTML = "";
@@ -355,8 +333,7 @@ const updateRealEstateDiv = function (player) {
   });
   let msg = player.notification;
   const bankruptcyMsgDiv = getElementById("bankruptcyMsg");
-  if (msg == "please sell other asset your cash flow is stil negative")
-  {
+  if (msg == "please sell other asset your cash flow is stil negative") {
     showNotification(msg);
     updateStatementBoard(player);
     setFinancialStatement(player);
@@ -373,10 +350,8 @@ const sellAsset = function () {
   let selectDiv = getElementById("Real-Estate");
   let allAssets = selectDiv.children;
   let selectedAsset = [];
-  for (let pos = 0; pos < allAssets.length; pos++)
-  {
-    if (allAssets[pos].children[0].checked == true)
-    {
+  for (let pos = 0; pos < allAssets.length; pos++) {
+    if (allAssets[pos].children[0].checked == true) {
       selectedAsset.push(allAssets[pos].children[0].value);
     }
   }
@@ -408,8 +383,7 @@ const processBankruptcy = function (requester) {
   let selectDiv = getElementById("Real-Estate");
   let bankDiv = getElementById("bankruptcyNotification");
   realEstates.forEach(({ title, downPayment }) => {
-    if (bankDiv.style.visibility == "")
-    {
+    if (bankDiv.style.visibility == "") {
       selectDiv.appendChild(createRealEstateCheckList(title, downPayment));
     }
   });
@@ -418,8 +392,7 @@ const processBankruptcy = function (requester) {
 
 const displayOutOfGameMsg = function () {
   const notifyDiv = getElementById("bankruptedMsg")
-  if (notifyDiv.style.display == "none")
-  {
+  if (notifyDiv.style.display == "none") {
     return;
   }
   notifyDiv.style.visibility = "visible";
@@ -429,12 +402,10 @@ const displayOutOfGameMsg = function () {
 }
 const polling = function (game) {
   let { players, requester } = game;
-  if (requester.removed)
-  {
+  if (requester.removed) {
     displayOutOfGameMsg();
   }
-  if (game.activeCard)
-  {
+  if (game.activeCard) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   updateStatementBoard(requester);
@@ -442,16 +413,13 @@ const polling = function (game) {
   setCashLedger(requester);
   showNotification(requester.notification);
   players.forEach(updateGamePiece);
-  if (game.isMyTurn)
-  {
+  if (game.isMyTurn) {
     const diceBlock = getElementById("dice_block");
     diceBlock.onclick = rollDie;
   }
-  if (requester.removed)
-  {
+  if (requester.removed) {
     displayOutOfGameMsg();
-    if (requester.bankruptcy)
-    {
+    if (requester.bankruptcy) {
       processBankruptcy(requester);
     }
   };
