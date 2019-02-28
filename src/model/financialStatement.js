@@ -85,8 +85,6 @@ class FinancialStatement extends CashLedger {
 
   addRealEstateLiability(title, type, mortgage) {
     this.liabilities.realEstates.push({ title, type, mortgage });
-    this.updateTotalIncome();
-    this.updateCashFlow();
   }
 
   addExpense(expense, amount) {
@@ -105,6 +103,8 @@ class FinancialStatement extends CashLedger {
   addIncomeRealEstate(title, type, cashflow) {
     this.income.realEstates.push({ title, type, cashflow });
     this.passiveIncome += cashflow;
+    this.updateTotalIncome();
+    this.updateCashFlow();
   }
 
   removeLiability(liability, amount) {
