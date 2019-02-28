@@ -33,6 +33,7 @@ class Game extends ActivityLog {
 
   addPlayer(player) {
     player.turn = this.players.length + 1;
+    player.setNotification("Welcome to CashFlow");
     this.players.push(player);
   }
 

@@ -56,6 +56,7 @@ describe("hostGame", function() {
           notification: "",
           childrenCount: 0,
           isTurnComplete: true,
+          notification: "Welcome to CashFlow",
           downSizedForTurns: 0,
           name: "player",
           entries: [],

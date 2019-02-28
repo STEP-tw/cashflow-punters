@@ -2,27 +2,29 @@ const Game = require("../../src/model/game");
 const sinon = require("sinon");
 const Cards = require("../../src/model/cards");
 const Player = require("../../src/model/player");
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 describe("Game", function() {
   describe("addPlayer", function() {
     it("should add the given player to game.players", function() {
-      const player = {name: "player"};
-      const cards = {bigdeals: [], smallDeals: []};
+      const player = { name: "player", setNotification: () => {} };
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player);
 
       expect(game)
         .to.have.property("players")
-        .to.be.an("Array")
-        .to.deep.equals([{name: "player", turn: 1}]);
+        .to.be.an("Array");
+      expect(game.players[0])
+        .to.be.an("Object")
+        .to.have.property("name");
     });
   });
   describe("getPlayerNames", function() {
     it("should return the list of player names in the game ", function() {
-      const player1 = {name: "player1"};
-      const player2 = {name: "player2"};
-      const cards = {bigdeals: [], smallDeals: []};
+      const player1 = { name: "player1", setNotification: sinon.spy() };
+      const player2 = { name: "player2", setNotification: sinon.spy() };
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -38,7 +40,7 @@ describe("Game", function() {
       player1.setTurn(1);
       const player2 = new Player("player2");
       player2.setTurn(2);
-      const cards = {bigdeals: [], smallDeals: []};
+      const cards = { bigdeals: [], smallDeals: [] };
       const game = new Game(cards);
       game.addPlayer(player1);
       game.addPlayer(player2);
@@ -51,9 +53,13 @@ describe("Game", function() {
 
 describe("startGame", function() {
   it("should set the isStarted property of game to true", function() {
-    const player1 = {name: "player1", setFinancialStatement: () => {}};
-    const professions = new Cards([{profession: "driver"}]);
-    const game = new Game({professions});
+    const player1 = {
+      name: "player1",
+      setFinancialStatement: () => {},
+      setNotification: sinon.spy()
+    };
+    const professions = new Cards([{ profession: "driver" }]);
+    const game = new Game({ professions });
     game.addPlayer(player1);
     game.startGame();
     expect(game)
@@ -64,9 +70,9 @@ describe("startGame", function() {
 
 describe("getPlayersCount", function() {
   it("should return the number of players in the game", function() {
-    const player1 = {name: "player1"};
-    const player2 = {name: "player2"};
-    const cards = {bigDeals: [], smallDeals: []};
+    const player1 = { name: "player1", setNotification: sinon.spy() };
+    const player2 = { name: "player2", setNotification: sinon.spy() };
+    const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -80,10 +86,10 @@ describe("getPlayersCount", function() {
 
 describe("isPlaceAvailable", function() {
   it("should tell weather there is place for any more player in the game or not", function() {
-    const player1 = {name: "player1"};
-    const player2 = {name: "player2"};
-    const player3 = {name: "player3"};
-    const cards = {bigDeals: [], smallDeals: []};
+    const player1 = { name: "player1", setNotification: sinon.spy() };
+    const player2 = { name: "player2", setNotification: sinon.spy() };
+    const player3 = { name: "player3", setNotification: sinon.spy() };
+    const cards = { bigDeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -123,12 +129,12 @@ describe("handleCrossedPayday", function() {
       setNotification: function(msg) {
         this.notification = msg;
       },
-      isBankrupted:function() {
-        return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
+      isBankrupted: function() {
+        return this.cashflow < 0 && this.ledgerBalance + this.cashflow < 0;
       },
-      isBankruptcy:sinon.spy()
-    }
-  
+      isBankruptcy: sinon.spy()
+    };
+
     game.board = {
       getPayDaySpaces: sinon.stub()
     };
@@ -154,11 +160,19 @@ describe("handleCrossedPayday", function() {
 
 describe("initializeGame", function() {
   it("should return initial details of player", function() {
-    let cards = [{1: "p1"}, {1: "p2"}];
+    let cards = [{ 1: "p1" }, { 1: "p2" }];
     let professions = new Cards(cards);
-    let game = new Game({professions});
-    const player1 = {name: "player1", setFinancialStatement: () => {}};
-    const player2 = {name: "player2", setFinancialStatement: () => {}};
+    let game = new Game({ professions });
+    const player1 = {
+      name: "player1",
+      setFinancialStatement: () => {},
+      setNotification: sinon.spy()
+    };
+    const player2 = {
+      name: "player2",
+      setFinancialStatement: () => {},
+      setNotification: sinon.spy()
+    };
 
     game.addPlayer(player1);
     game.addPlayer(player2);
@@ -181,7 +195,7 @@ describe("handleDoodaySpace", function() {
     const card = {
       expenseAmount: 500
     };
-    game.cardStore = {doodads: {drawCard: sinon.stub().returns(card)}};
+    game.cardStore = { doodads: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
       ledgerBalance: 3000,
       name: "swapnil",
@@ -218,9 +232,9 @@ describe("handleMarketCard", function() {
     const card = {
       expenseAmount: 500
     };
-    game.cardStore = {market: {drawCard: sinon.stub().returns(card)}};
+    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
-      assets: {savings: 1000},
+      assets: { savings: 1000 },
       name: "swapnil"
     };
     game.addActivity = sinon.spy();
@@ -244,7 +258,7 @@ describe("handleMarketCard", function() {
       expenseAmount: 500,
       cash: 500
     };
-    game.cardStore = {market: {drawCard: sinon.stub().returns(card)}};
+    game.cardStore = { market: { drawCard: sinon.stub().returns(card) } };
     game.currentPlayer = {
       ledgerBalance: 3000,
       name: "swapnil",
@@ -269,7 +283,7 @@ describe("handleMarketCard", function() {
 describe("addBaby", function() {
   it("should add baby to current player", function() {
     const player1 = new Player("player");
-    const cards = {bigdeals: [], smallDeals: []};
+    const cards = { bigdeals: [], smallDeals: [] };
     const game = new Game(cards);
     game.addPlayer(player1);
     game.currentPlayer = player1;
@@ -302,10 +316,10 @@ describe("handlePayday", function() {
       setNotification: function(msg) {
         this.notification = msg;
       },
-      isBankrupted:function() {
-        return this.cashflow < 0 && (this.ledgerBalance + this.cashflow) < 0;
+      isBankrupted: function() {
+        return this.cashflow < 0 && this.ledgerBalance + this.cashflow < 0;
       },
-      isBankruptcy:sinon.spy()
+      isBankruptcy: sinon.spy()
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
@@ -319,8 +333,8 @@ describe("handleSmallDeal", function() {
     const game = new Game();
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
-    game.currentPlayer = {name: "anabelle"};
-    game.cardStore = {smallDeals: {drawCard: sinon.stub().returns("")}};
+    game.currentPlayer = { name: "anabelle" };
+    game.cardStore = { smallDeals: { drawCard: sinon.stub().returns("") } };
     game.handleSmallDeal();
     expect(game.addActivity.firstCall.args).eql([
       " selected Small Deal",
@@ -333,8 +347,8 @@ describe("handleBigDeal", function() {
     const game = new Game();
     game.addActivity = sinon.spy();
     game.nextPlayer = sinon.spy();
-    game.currentPlayer = {name: "anabelle"};
-    game.cardStore = {bigDeals: {drawCard: sinon.stub().returns("")}};
+    game.currentPlayer = { name: "anabelle" };
+    game.cardStore = { bigDeals: { drawCard: sinon.stub().returns("") } };
 
     game.handleBigDeal();
     expect(game.addActivity.firstCall.args).eql([
@@ -399,13 +413,13 @@ describe("getPlayerByName", function() {
   it("should grant loan to the given input player of given amount", function() {
     const game = new Game();
     const players = [
-      {name: "player", profession: "janiator"},
-      {name: "player1", profession: "driver"}
+      { name: "player", profession: "janiator" },
+      { name: "player1", profession: "driver" }
     ];
     game.players = players;
 
     const actualOutput = game.getPlayerByName("player");
-    const expectedOutput = {name: "player", profession: "janiator"};
+    const expectedOutput = { name: "player", profession: "janiator" };
 
     expect(actualOutput).to.deep.equals(expectedOutput);
   });
@@ -415,10 +429,10 @@ describe("hasShares", function() {
   it("should return true if player has shares", function() {
     let player = new Player("player1");
     player.assets = {};
-    player.assets.shares = {MYT4U: {numberOfShares: 5}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U"}
+      data: { symbol: "MYT4U" }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
@@ -434,14 +448,14 @@ describe("buyShares", function() {
     player.assets.shares = {};
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
     game.buyShares(5);
     expect(player.assets.shares)
       .to.have.property("MYT4U")
-      .to.be.deep.equals({numberOfShares: 5, currentPrice: 10});
+      .to.be.deep.equals({ numberOfShares: 5, currentPrice: 10 });
     expect(player.ledgerBalance).to.be.equal(450);
   });
 });
@@ -451,17 +465,17 @@ describe("sellShares", function() {
     let player = new Player("player1");
     player.ledgerBalance = 500;
     player.assets = {};
-    player.assets.shares = {MYT4U: {numberOfShares: 5, currentPrice: 10}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5, currentPrice: 10 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
     game.sellShares("player1", 4);
     expect(player.assets.shares)
       .to.have.property("MYT4U")
-      .to.be.deep.equals({numberOfShares: 1, currentPrice: 10});
+      .to.be.deep.equals({ numberOfShares: 1, currentPrice: 10 });
     expect(player.ledgerBalance).to.be.equal(540);
   });
 });
@@ -471,10 +485,10 @@ describe("isCapableToBuy", function() {
     let player = new Player("player1");
     player.assets = {};
     player.ledgerBalance = 500;
-    player.assets.shares = {MYT4U: {numberOfShares: 5, currentPrice: 10}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5, currentPrice: 10 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
@@ -485,10 +499,10 @@ describe("isCapableToBuy", function() {
     let player = new Player("player1");
     player.assets = {};
     player.ledgerBalance = 30;
-    player.assets.shares = {MYT4U: {numberOfShares: 5, currentPrice: 10}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5, currentPrice: 10 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
@@ -501,10 +515,10 @@ describe("isCapableToSell", function() {
     let player = new Player("player1");
     player.assets = {};
     player.ledgerBalance = 500;
-    player.assets.shares = {MYT4U: {numberOfShares: 5, currentPrice: 10}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5, currentPrice: 10 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
@@ -515,10 +529,10 @@ describe("isCapableToSell", function() {
     let player = new Player("player1");
     player.assets = {};
     player.ledgerBalance = 30;
-    player.assets.shares = {MYT4U: {numberOfShares: 5, currentPrice: 10}};
+    player.assets.shares = { MYT4U: { numberOfShares: 5, currentPrice: 10 } };
     let game = new Game();
     game.activeCard = {
-      data: {symbol: "MYT4U", currentPrice: 10}
+      data: { symbol: "MYT4U", currentPrice: 10 }
     };
     game.addPlayer(player);
     game.setCurrentPlayer(player);
