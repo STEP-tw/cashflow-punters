@@ -135,3 +135,12 @@ const createTextDiv = function(text, id) {
   textDiv.appendChild(textPara);
   return textDiv;
 };
+
+const createHeadingDiv = function(headingNum, text, id) {
+  const textDiv = document.createElement("div");
+  const heading = document.createElement("h" + headingNum);
+  heading.innerText = text;
+  heading.id = id;
+  textDiv.appendChild(heading);
+  return textDiv;
+};

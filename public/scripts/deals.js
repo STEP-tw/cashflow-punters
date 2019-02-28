@@ -65,7 +65,7 @@ const createShareSellButton = function(shareCost) {
   );
 };
 
-const createShareBuyButton = (shareCost) => {
+const createShareBuyButton = shareCost => {
   return createButton(
     "Buy",
     "button_div",
@@ -103,7 +103,7 @@ const createCardButtons = function(actions) {
 const createRealEstateDealCard = function(actions, card, isMyTurn) {
   const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title, "card-title");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
   const costDiv = createTextDiv(`Cost : ${cost}`);
@@ -122,7 +122,7 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
 const createGoldSmallDeal = function(actions, card, isMyTurn) {
   const { title, message, numberOfCoins, cost } = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title, "card-title");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
   const numberDiv = createTextDiv(`Coins : ${numberOfCoins}`);
   const costDiv = createTextDiv(`Cost : ${cost}`);
@@ -136,7 +136,7 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
 const createCard = function(card) {
   const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = getCardDiv("smallDeal");
-  const titleDiv = createTextDiv(title, "card-title");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
   const symbolDiv = createTextDiv(`Company Name : ${symbol}`);
   const rangeDiv = createTextDiv(`Range : ${historicTradingRange}`);
