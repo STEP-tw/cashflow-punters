@@ -5,7 +5,6 @@ const {
   calculateLoanToTake,
   randomNum
 } = require("../utils/utils.js");
-
 const _ = require("lodash");
 const Auction = require("./auction");
 const ActivityLog = require("./activityLog");
@@ -21,7 +20,7 @@ class Game {
     this.financialStatement;
     this.activeCard;
     this.currentAuction = { present: false };
-    this.activityLog;
+    this.activityLog = new ActivityLog();
   }
 
   addPlayer(player) {
@@ -43,7 +42,6 @@ class Game {
   }
 
   initializeGame() {
-    this.activityLog = new ActivityLog();
     this.players.map(this.setProfession, this);
     this.currentPlayer = this.players[0];
     this.activityLog.logGameStart();
@@ -381,7 +379,7 @@ class Game {
 
   rollDice(numberOfDice) {
     const oldSpaceNo = this.currentPlayer.currentSpace;
-    const diceValues = this.currentPlayer.rollDice(numberOfDice);
+    const diceValues = this.currentPlayer.rollDiceAndMove(numberOfDice);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
     this.activityLog.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
@@ -458,7 +456,7 @@ class Game {
   }
 
   rollDiceForSplitReverse(symbol) {
-    const diceValue = randomNum(6);
+    const diceValue = this.currentPlayer.rollDie();
     if (diceValue < 4) {
       this.doublePlayersShares(symbol);
       return [diceValue];

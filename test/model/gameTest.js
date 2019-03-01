@@ -8,6 +8,11 @@ describe("handleSpace", function() {
   let game, player1;
   beforeEach(() => {
     player1 = new Player("player1");
+    player1.assets = {
+      shares: {
+        GRO4US: { symbol: "GRO4US", numberOfShares: 10 }
+      }
+    };
     player1.setTurn(1);
     const professionCards = [
       {
@@ -97,6 +102,55 @@ describe("handleSpace", function() {
     };
 
     game.board.getPayDaySpaces.onFirstCall().returns([6, 14, 22]);
+  });
+
+  describe("rollDiceForSplitReverse", function() {
+    it("should split shares if dice value is more than 3.", function() {
+      player1.rollDie = sinon.stub();
+      player1.rollDie.onFirstCall().returns(5);
+      game.addPlayer(player1);
+      game.setCurrentPlayer(player1);
+      game.rollDiceForSplitReverse("GRO4US", 3);
+      expect(player1.assets.shares["GRO4US"].numberOfShares).is.equal(5);
+    });
+
+    it("should split shares if dice value is more than 3.", function() {
+      player1.rollDie = sinon.stub();
+      player1.rollDie.onFirstCall().returns(5);
+      game.addPlayer(player1);
+      game.setCurrentPlayer(player1);
+      game.rollDiceForSplitReverse("GRO4US", 3);
+      expect(game.activityLog.activityLog[0])
+        .has.property("playerName")
+        .equal("player1");
+      expect(game.activityLog.activityLog[0])
+        .has.property("msg")
+        .equal("'s shares of GRO4US got halved");
+    });
+
+    it("should doulbe shares if dice value is less than 4.", function() {
+      player1.rollDie = sinon.stub();
+      player1.rollDie.onFirstCall().returns(1);
+      game.addPlayer(player1);
+      game.setCurrentPlayer(player1);
+      game.rollDiceForSplitReverse("GRO4US", 3);
+      expect(game.activityLog.activityLog[0])
+        .has.property("playerName")
+        .equal("player1");
+      expect(game.activityLog.activityLog[0])
+        .has.property("msg")
+        .equal("'s shares of GRO4US got doubled");
+    });
+
+
+    it("should double shares if dice value is less than 4.", function() {
+      player1.rollDie = sinon.stub();
+      player1.rollDie.onFirstCall().returns(2);
+      game.addPlayer(player1);
+      game.setCurrentPlayer(player1);
+      game.rollDiceForSplitReverse("GRO4US", 3);
+      expect(player1.assets.shares["GRO4US"].numberOfShares).is.equal(20);
+    });
   });
 
   describe("addPlayer", function() {

@@ -232,14 +232,14 @@ describe("Player", function() {
 
   describe("rollDice", function() {
     it("should roll one dice and return the value on dice", function() {
-      expect(player.rollDice())
+      expect(player.rollDiceAndMove())
         .to.be.an("Array")
         .of.length(1);
       expect(player.rolledDice).to.equals(true);
     });
 
     it("should roll two dice and return the value on dice", function() {
-      expect(player.rollDice(2))
+      expect(player.rollDiceAndMove(2))
         .to.be.an("Array")
         .of.length(2);
       expect(player.rolledDice).to.equals(true);

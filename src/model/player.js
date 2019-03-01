@@ -2,6 +2,24 @@ const { getNextNum, add, randomNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
 const { CHARITY_MSG } = require("../constant");
 
+class Dice {
+  constructor() {
+    this.diceValues = [];
+  }
+
+  roll(numberOfDice) {
+    const diceValues = new Array(numberOfDice).fill(6).map(randomNum);
+    this.diceValues = diceValues;
+    return diceValues;
+  }
+
+  total() {
+    return this.diceValues.reduce(
+      (total, oneDiceValue) => total + oneDiceValue
+    );
+  }
+}
+
 class Player extends FinancialStatement {
   constructor(name) {
     super();
@@ -18,6 +36,7 @@ class Player extends FinancialStatement {
     this.bankruptcy = false;
     this.removed = false;
     this.isTurnComplete = true;
+    this.dice = new Dice();
   }
 
   setTurn(turn) {
@@ -104,12 +123,16 @@ class Player extends FinancialStatement {
     this.charityTurns = this.charityTurns && this.charityTurns - 1;
   }
 
-  rollDice(numberOfDice = 1) {
-    const diceValues = new Array(numberOfDice).fill(6).map(randomNum);
-    this.move(diceValues.reduce(add));
+  rollDiceAndMove(numberOfDice) {
+    const diceValues = this.rollDie(numberOfDice);
+    this.move(this.dice.total());
     this.rolledDice = true;
     this.reduceCharityTurns();
     return diceValues;
+  }
+
+  rollDie(numberOfDice = 1) {
+    return this.dice.roll(numberOfDice);
   }
 
   hasCharityTurns() {
@@ -133,7 +156,7 @@ class Player extends FinancialStatement {
     if (this.ledgerBalance < cost) return false;
     this.deductLedgerBalance(cost);
     this.addGoldCoins(+numberOfCoins);
-    this.addCreditEvent(cost , `bought ${numberOfCoins} Gold Coins`);
+    this.addCreditEvent(cost, `bought ${numberOfCoins} Gold Coins`);
     this.setNotification(`You bought ${numberOfCoins} Gold Coins for $${cost}`);
     return true;
   }
@@ -156,7 +179,9 @@ class Player extends FinancialStatement {
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
     this.assets.shares[symbol] = { numberOfShares, currentPrice };
-    this.setNotification(`You bought ${numberOfShares} shares of ${symbol} for $${price}`);
+    this.setNotification(
+      `You bought ${numberOfShares} shares of ${symbol} for $${price}`
+    );
   }
 
   sellShares(card, numberOfShares) {
@@ -167,7 +192,9 @@ class Player extends FinancialStatement {
     this.assets.shares[symbol].numberOfShares -= numberOfShares;
     const shareOfCompany = this.assets.shares[symbol].numberOfShares;
     if (shareOfCompany == 0) delete this.assets.shares[symbol];
-    this.setNotification(`You sold ${numberOfShares} shares of ${symbol} for $${price}`);
+    this.setNotification(
+      `You sold ${numberOfShares} shares of ${symbol} for $${price}`
+    );
   }
 
   isCapableToPay(amount) {

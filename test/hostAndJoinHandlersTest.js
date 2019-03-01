@@ -56,6 +56,9 @@ describe("hostGame", function() {
           notification: "",
           childrenCount: 0,
           isTurnComplete: true,
+          dice: {
+            diceValues: []
+          },
           notification: "Welcome to CashFlow",
           downSizedForTurns: 0,
           name: "player",
@@ -142,6 +145,9 @@ describe("joinGame", function() {
           charityTurns: 0,
           notification: "",
           name: "player",
+          dice: {
+            diceValues: []
+          },
           isTurnComplete: true,
           charityTurns: 0,
           downSizedForTurns: 0,
