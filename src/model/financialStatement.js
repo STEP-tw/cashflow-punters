@@ -15,7 +15,7 @@ class FinancialStatement extends CashLedger {
     this.expenses;
     this.liabilities;
     this.assets;
-		this.perChildExpense;
+    this.perChildExpense;
   }
 
   updateTotalIncome() {

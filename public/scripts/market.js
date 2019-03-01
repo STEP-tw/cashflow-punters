@@ -130,8 +130,10 @@ const rollDiceForSplitReverse = function(symbol) {
 };
 
 const enableDiceForMarket = function(symbol) {
-  const diceBlock = getElementById("dice1");
-  diceBlock.onclick = rollDiceForSplitReverse.bind(null, symbol);
+  const dice1 = getElementById("dice1");
+  dice1.onclick = rollDiceForSplitReverse.bind(null, symbol);
+  const dice2 = getElementById("dice2");
+  dice2.style.display = "none";
 };
 
 const handleShares = function(player, symbol, { hasShares }) {
