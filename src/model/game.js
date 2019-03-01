@@ -346,8 +346,8 @@ class Game {
 
   soldAsset(playerName) {
     const player = this.getPlayerByName(playerName);
-    let AllAssets = player.assets.realEstates;
-    AllAssets.forEach(asset => {
+    let allAssets = player.assets.realEstates;
+    allAssets.forEach(asset => {
       const amount = player.getDownPayment(asset);
       const expenseAmount = amount / 10;
       const debtDetails = {
@@ -358,13 +358,11 @@ class Game {
       };
       this.payDebt(playerName, debtDetails);
       if (player.cashflow > 0) {
-        let msg = "You are out of bankruptcy";
-        player.notification = msg;
+        player.setNotification("You are out of bankruptcy");
         return;
       }
     });
-    let msg = "You are bankrupted";
-    player.notification = msg;
+    player.setNotification("You are bankrupted");
     this.removePlayer(player, " is out of the game because of bankruptcy");
     this.nextPlayer();
     return;
