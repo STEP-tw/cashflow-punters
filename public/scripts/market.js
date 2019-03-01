@@ -103,7 +103,7 @@ const handleGoldCoin = function(player, card) {
 };
 
 const handleRealEstate = function(player, { relatedRealEstates }) {
-  const playerRealEstates = player.liabilities.realEstate;
+  const playerRealEstates = player.liabilities.realEstates;
   const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
   const cardDiv = getElementById("card");
   const displayCommonEstates = displayEstates.bind(null, commonEstates);
@@ -130,8 +130,10 @@ const rollDiceForSplitReverse = function(symbol) {
 };
 
 const enableDiceForMarket = function(symbol) {
-  const diceBlock = getElementById("dice1");
-  diceBlock.onclick = rollDiceForSplitReverse.bind(null, symbol);
+  const dice1 = getElementById("dice1");
+  dice1.onclick = rollDiceForSplitReverse.bind(null, symbol);
+  const dice2 = getElementById("dice2");
+  dice2.style.display = "none";
 };
 
 const handleShares = function(player, symbol, { hasShares }) {
@@ -157,7 +159,8 @@ const handleMarketCard = function(player, card) {
   const marketHandlers = {
     realEstate: handleRealEstate,
     goldCoin: handleGoldCoin,
-    splitOrReverse: handleSplitReverse
+    splitOrReverse: handleSplitReverse,
+    expense: () => {}
   };
   marketHandlers[relatedTo](player, card);
 };

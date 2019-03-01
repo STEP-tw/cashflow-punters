@@ -133,8 +133,9 @@ class Game {
   handleExpenseCard(cause, expenseAmount) {
     const player = this.currentPlayer;
     player.deductLedgerBalance(expenseAmount);
+    player.addDebitEvent(expenseAmount, "doodad");
     if (player.isLedgerBalanceNegative()) {
-      makeLedgerBalancePositive(player);
+      this.makeLedgerBalancePositive(player);
     }
     this.activityLog.logExpense(player.name, expenseAmount, cause);
     player.setNotification(`$${expenseAmount} deducted for ${cause}`);

@@ -41,7 +41,7 @@ const startNewGame = function() {
 };
 
 const checkPlayersCount = function({ players, isHost }) {
-  if (players.length >= 1 && isHost) {
+  if (players.length >= 2 && isHost) {
     const buttonSpace = getElementById("start_button_space");
     const startButton = createButton("Start Game", "button", "", "button");
     startButton.onclick = startNewGame;
