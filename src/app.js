@@ -37,7 +37,6 @@ const {
   provideCommonEstates,
   completeTurn,
   sellGoldCoins,
-  sellAssets,
   handleAuction,
   handleBid
 } = require("./gameHandlers");
@@ -80,7 +79,6 @@ app.post("/hostgame", hostGame);
 app.post("/rolldice", rollDice);
 app.post("/takeloan", grantLoan);
 app.post("/sellgoldcoins", sellGoldCoins);
-app.post("/sellAssets", sellAssets);
 app.post("/hasshares", hasShares);
 app.post("/rolldiceforsplitreverse", rollDiceForSplitReverse);
 app.post("/handleauction", handleAuction);

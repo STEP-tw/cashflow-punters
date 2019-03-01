@@ -82,17 +82,8 @@ const payDebt = function (req, res) {
   res.send(JSON.stringify(player));
 };
 
-const sellAssets = function (req, res) {
-  const { playerName } = req.cookies;
-  const assetNames = req.body.selectedAsset;
-  const game = req.game;
-  game.soldAsset(playerName, assetNames);
-  const player = game.getPlayerByName(playerName);
-  res.send(JSON.stringify(player));
-};
-
-const provideLiabilities = function (req, res) {
-  const { playerName } = req.cookies;
+const provideLiabilities = function(req, res) {
+  const {playerName} = req.cookies;
   const game = req.game;
   const player = game.getPlayerByName(playerName);
   res.send(JSON.stringify(player));
@@ -292,7 +283,6 @@ module.exports = {
   sellEstate,
   provideCommonEstates,
   sellGoldCoins,
-  sellAssets,
   hasShares,
   rollDiceForSplitReverse,
   handleAuction,

@@ -293,42 +293,6 @@ describe("payDebt", function() {
   });
 });
 
-describe("sellAssets", function() {
-  it("should deduct the amount from ledgerBalance and return the player", function() {
-    const req = {};
-    const res = {};
-    req.cookies = { playerName: "player1" };
-    req.body = {
-      selectedAsset: ["BR/2", "BR/3"]
-    };
-
-    req.game = {
-      getPlayerByName: sinon.stub(),
-      soldAsset: sinon.spy()
-    };
-    res.content = "";
-    res.send = function(data) {
-      this.content = data;
-    };
-    const player = {
-      name: "player",
-      profession: "driver"
-    };
-
-    const expectedPlayer = JSON.stringify({
-      name: "player",
-      profession: "driver"
-    });
-    req.game.getPlayerByName.onFirstCall().returns(player);
-
-    sellAssets(req, res);
-
-    sinon.assert.calledOnce(req.game.getPlayerByName);
-    sinon.assert.calledOnce(req.game.soldAsset);
-    expect(res.content).to.deep.equals(expectedPlayer);
-  });
-});
-
 describe("acceptSmallDeal", function() {
   const req = {},
     res = {};

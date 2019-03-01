@@ -132,7 +132,7 @@ class FinancialStatement extends CashLedger {
   sellEstate(estate, marketCard) {
     const profit = this.calculateProfit(estate, marketCard);
     this.addToLedgerBalance(profit);
-    this.liabilities.realEstate = this.liabilities.realEstate.filter(
+    this.liabilities.realEstates = this.liabilities.realEstates.filter(
       realEstate => !isEqual(realEstate, estate)
     );
 
@@ -163,9 +163,13 @@ class FinancialStatement extends CashLedger {
   }
 
   removeRealState(asset) {
-    const assets = this.assets.realEstates;
-    let indexNo = assets.indexOf(asset);
-    assets.splice(indexNo, 1);
+    const incomeRealEstats = this.income.realEstates;
+    const realEstateLiability = this.liabilities.realEstates;
+    const realEstateAssets = this.assets.realEstates;
+    const indexNo = incomeRealEstats.indexOf(asset);
+    incomeRealEstats.splice(indexNo, 1);
+    realEstateLiability.splice(indexNo, 1);
+    realEstateAssets.splice(indexNo, 1);
   }
 
   getDownPayment(asset) {

@@ -181,7 +181,7 @@ class Game {
 
   getCommonEstates(name) {
     const player = this.getPlayerByName(name);
-    const playerRealEstates = player.liabilities.realEstate;
+    const playerRealEstates = player.liabilities.realEstates;
     const marketRealEstates = this.activeCard.relatedRealEstates;
     return _.intersection(playerRealEstates, marketRealEstates);
   }
