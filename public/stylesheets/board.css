@@ -583,6 +583,7 @@ button:hover {
 }
 
 .gamePiece {
+  z-index: 1;
   height: 20%;
   width: 20%;
   border: black 1px solid;
