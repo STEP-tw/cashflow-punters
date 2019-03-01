@@ -1,4 +1,5 @@
 <html>
+<<<<<<< HEAD
 
   <head>
     <script src="/professions.js"></script>
@@ -376,9 +377,352 @@
           </div>
 
         </div>
+=======
 
-      </div>
+<head>
+	<script src="/finanacialstatement.js"></script>
+	<script src="/professions.js"></script>
+	<script src="/auction.js"></script>
+	<script src="/board.js"></script>
+	<script src="/deals.js"></script>
+	<link rel="stylesheet" href="/professions.css" />
+	<script src="/utils.js"></script>
+	<script src="/manageDebts.js"></script>
+	<script src="/market.js"></script>
+	<link rel="stylesheet" href="/board.css" />
+</head>
 
+<body id="body">
+	<main class="round_border">
+		<div hidden id="0">
+			<div id="gamePiece1" class="gamePiece player1 "></div>
+			<div id="gamePiece2" class="gamePiece player2 "></div>
+			<div id="gamePiece3" class="gamePiece player3 "></div>
+			<div id="gamePiece4" class="gamePiece player4 "></div>
+			<div id="gamePiece5" class="gamePiece player5 "></div>
+			<div id="gamePiece6" class="gamePiece player6 "></div>
+		</div>
+		<div class="horizontal_spaces">
+			<div class="corner_spaces horizontal_space space_background deals " id="1"></div>
+			<div class="horizontal_first_space  horizontal_space space_background doodad" id="2"></div>
+			<div class="horizontal_space space_background deals" id="3"></div>
+			<div class="horizontal_space space_background charity" id="4"></div>
+			<div class="horizontal_space space_background deals" id="5"></div>
+			<div class="horizontal_space space_background payday" id="6"></div>
+			<div class="horizontal_space space_background deals" id="7"></div>
+			<div class="horizontal_space corner_spaces space_background market" id="8"></div>
+		</div>
+		<div class="middle_flex">
+			<div class="vertical_spaces">
+				<div class="vertical_first_space vertical_space space_background market" id="24"></div>
+				<div class="vertical_space space_background deals" id="23"></div>
+				<div class="vertical_space space_background payday" id="22"></div>
+				<div class="vertical_space space_background deals" id="21"></div>
+			</div>
+			<div class="game_center round_border">
+				<div class="left_part">
+					<div class="financial_details">
+						<div class="player_details">
+							<h4>
+								Name :
+								<span id="name">PlayerName</span>
+							</h4>
+							<h4>
+								Profession :
+								<span id="Profession">prof</span>
+							</h4>
+							<h4>
+								Ledger Balance :
+								<span id="ledger-balance">$0</span>
+							</h4>
+						</div>
+						<div class="basic_fs">
+							<p>$ <span id="income">Income</span></p>
+							<p>$ <span id="passiveIn">passiveIn</span></p>
+							<p>$ <span id="totalIn">totalIn</span></p>
+							<p>$ <span id="expenses">expenses</span></p>
+							<p>$ <span id="cashflow">cashflow</span></p>
+						</div>
+						<div class="open-player-details">
+							<div class="iconButtonDiv">
+								<button id="fsBtn" class="iconBtn" onclick="showOverlay('financial_statement')"></button>
+							</div>
+							<div class="iconButtonDiv">
+								<button id="ledgerBtn" class="iconBtn" onclick="showOverlay('cash_ledger')"></button>
+							</div>
+							<div class="iconButtonDiv">
+								<button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
+							</div>
+						</div>
+						<div id="notification-div" class="notifications"></div>
+					</div>
+
+				</div>
+				<div class="middle_part">
+					<div id="dice_block" class="dice_block">
+						<div id="num_of_dice" class="overlay_box">
+							<p>
+								How many dice you want to use?
+							</p>
+							<button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
+								One
+							</button>
+							<button id="two_dice_button" style="height: unset" onclick="
+                      showOverlay('dice2');
+                      hideOverlay('num_of_dice')">
+								Two
+							</button>
+						</div>
+						<div id="dice1" class="dice">&#x2685;</div>
+						<div id="dice2" class="dice"></div>
+					</div>
+					<div id="cardDisplay" class="cardDisplay">
+						<div id="card-overlay" class="card-overlay"></div>
+						<div id="askCharity" class="cardDisplayPopup">
+							<h2>Do Charity?</h2>
+							<p>if yes 10% of Total income will be deducted</p>
+							<div class="buttons-div">
+								<button id="acceptCharity">Yes</button>
+								<button id="declineCharity">No</button>
+							</div>
+						</div>
+						<div id="select-deal" class="cardDisplayPopup">
+							<h2>Select Deal</h2>
+							<div class="buttons-div">
+								<button onclick="selectSmallDeal()">Small Deal</button>
+								<button onclick="selectBigDeal()">Big Deal</button>
+							</div>
+						</div>
+						<div id="utilityPopup" class="cardDisplayPopup">
+							<button class="close" onclick=" hideOverlay('utilityPopup');
+                  closeOverlay('card-overlay');">
+								&times;
+							</button>
+							<div class="buttons_div"></div>
+						</div>
+						<div id="card" class="plain-card"></div>
+						<div id="notification" class="notification"></div>
+					</div>
+				</div>
+				<div class="right_part">
+					<div class="activity_log" id="activityLog"></div>
+					<div></div>
+				</div>
+			</div>
+			<div class="vertical_spaces">
+				<div class="vertical_first_space vertical_space space_background deals" id="9"></div>
+				<div class="vertical_space space_background doodad" id="10"></div>
+				<div class="vertical_space space_background deals" id="11"></div>
+				<div class="vertical_space space_background downsize" id="12"></div>
+			</div>
+		</div>
+		<div class=" horizontal_spaces bottom_flex">
+			<div class="horizontal_space corner_spaces space_background baby" id="20"></div>
+			<div class="horizontal_first_space horizontal_space space_background deals" id="19"></div>
+			<div class="horizontal_space space_background doodad" id="18"></div>
+			<div class="horizontal_space space_background deals" id="17"></div>
+			<div class="horizontal_space space_background market" id="16"></div>
+			<div class="horizontal_space space_background deals" id="15"></div>
+			<div class="horizontal_space space_background payday" id="14"></div>
+			<div class="horizontal_space corner_spaces space_background deals" id="13"></div>
+		</div>
+
+		<div class="overlay-fs fs-body" id="financial_statement">
+			<div style="display:flex; flex-direction:column; background-color: whitesmoke;">
+				<div class="title">
+					<div>INCOME STATEMENT</div>
+					<button class="close-fs" onclick="hideOverlay('financial_statement')">
+						&times;
+					</button>
+				</div>
+				<div style="overflow:scroll; height:100%;">
+					<div style="display:flex; flex-direction: row; justify-content: space-around;
+									width: 900px; height: 100%; background-color: whitesmoke;">
+
+						<div style="display:flex; flex-direction: column">
+							<div>
+								<h2 class="sub-header">Income</h2>
+								<table>
+									<tr>
+										<th style="width:300px;">Description</th>
+										<th style="width:100px;">Cash Flow</th>
+									</tr>
+									<tr>
+										<td>Salary:</td>
+										<td id="salary"></td>
+									</tr>
+									<tr>
+										<td>Real Estate/Business:</td>
+										<td></td>
+									</tr>
+									<tbody id="RealEstate-cashflow" style="height: 8em; overflow: scroll;">
+									</tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</div>
+							<div>
+								<h2 class="sub-header">Expenses</h2>
+								<table>
+									<tr>
+										<td>Taxes:</td>
+										<td id="taxes"></td>
+									</tr>
+									<tr>
+										<td>Home Mortage Payment:</td>
+										<td id="home-mortage-payment"></td>
+									</tr>
+									<tr>
+										<td>School Loan Payment:</td>
+										<td id="school-loan-payment"></td>
+									</tr>
+									<tr>
+										<td>Car Loan Payment:</td>
+										<td id="car-loan-payment"></td>
+									</tr>
+									<tr>
+										<td>Credit Card Payment:</td>
+										<td id="credit-card-payment"></td>
+									</tr>
+									<tr>
+										<td>Other Expenses:</td>
+										<td id="other-expenses"></td>
+									</tr>
+									<tr>
+										<td>Bank Loan Payment: <span id="bank-loan-payment"></span><span class="extra-info">(10% of Bank
+												Loan
+												Total)</span></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Per Child Expense:
+											<span class="number" id="child-count"></span> x 200 <span class="extra-info">(# of
+												Children):</span>
+											<span id="total-child-expense"></span>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div>
+
+								<h2 class="sub-header">Assests</h2>
+								<table>
+									<tr>
+										<td>Savings:</td>
+										<td id="savings"></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Precious Metals, Etc.:</td>
+										<td id="gold-coins">Gold Coins</td>
+										<td id="gold-coin-number"></td>
+									</tr>
+									<tr>
+										<td>Stocks/Funds:</td>
+										<td># of Shares:</td>
+										<td>Cost/Share:</td>
+									</tr>
+									<tbody id="stocks-funds" style="height:4em; overflow:scroll;">
+									</tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Real Estate/Business:</th>
+										<td>Down Payment:</th>
+										<td>Cost:</td>
+									</tr>
+									<tbody id="RealEstate-downpayment" style="height:8em; overflow:scroll;">
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div style="display:flex; flex-direction: column">
+							<div style="margin:1%;">
+								<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; "><span class="heading"> Name :
+									</span><span id="fs-name" style="padding-left: 2%;"></span>
+								</h3>
+								<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading">
+										Profession
+										: </span><span id="fs-profession" style="padding-left: 2%;"></span></h3>
+								<h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"><span class="heading"> Dream :
+										<span id="dream"></span> </span>
+								</h3>
+							</div>
+							<div style="border:3px solid rgb(40, 38, 38); padding:3%;">
+								<p class="block" id="fs-income"> $ Income </p>
+								<p class="operator">+</p>
+								<p class="block" id="passive-income"> $ passive Income</p>
+								<p class="extra-info">(Cash Flow from Interest/Dividends and Real Estate/Business)</p>
+								<p class="operator">=</p>
+								<p class="block" id="total-income"> $ total Income </p>
+								<p class="operator">-</p>
+								<p class="block" id="fs-expenses"> $ expenses </p>
+								<p class="operator">=</p>
+								<p class="block" id="fs-cashflow"> $ cashflow </p>
+								<p class="extra-info">(Monthly Cash Flow)</p>
+							</div>
+							<div style="height: 200px;">
+								<h2 class="sub-header">Liabilities</h2>
+								<table>
+									<tr>
+										<td>Home Mortage:</td>
+										<td id="home-mortage"></td>
+									</tr>
+									<tr>
+										<td>School Loans:</td>
+										<td id="school-loans"></td>
+									</tr>
+									<tr>
+										<td>Car Loans:</td>
+										<td id="car-loans"></td>
+									</tr>
+									<tr>
+										<td>Credit Card Debt:</td>
+										<td id="credit-card-debt"></td>
+									</tr>
+									<tr>
+										<td>Bank Loan</td>
+										<td id="bank-loan"></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+									<td>Real Estate/Business:</td>
+									<td>Mortage/Liability:</td>
+									<tbody id="RealEstate-mortage" style="height:8em; overflow:scroll;">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+>>>>>>> [#35] Annapurna/Sapana - changed financial statement css.
+
+			</div>
+
+		</div>
+
+		<div class="overlay" id="cash_ledger">
+			<button class="close" onclick="hideOverlay('cash_ledger')">
+				&times;
+			</button>
+			<header>
+				Cash ledger
+			</header>
+			<div id="cash-ledger-entries" class="cash-ledger-entries"></div>
+		</div>
+	</main>
+	<div id="container" class="container"></div>
+
+<<<<<<< HEAD
       <!-- <div class="overlay" id="cash_ledger">
         <button class="close" onclick="hideOverlay('cash_ledger')">
           &times;
@@ -418,29 +762,60 @@
 
     </main>
     <div id="container" class="container"></div>
+=======
+	<div id="professions" class="professions-container">
+		<div class="popup-bg">
+			<div class="professions-heading">Here is Everyone's role in the game!</div>
+			<div id="players-info" class="players-info"></div>
+			<button class="continue-button" onclick="createFinancialStatement()">
+				continue
+			</button>
+		</div>
+	</div>
+>>>>>>> [#35] Annapurna/Sapana - changed financial statement css.
 
-    <div id="professions" class="professions-container">
-      <div class="popup-bg">
-        <div class="professions-heading">Here is Everyone's role in the game!</div>
-        <div id="players-info" class="players-info"></div>
-        <button class="continue-button" onclick="createFinancialStatement()">
-          continue
-        </button>
-      </div>
-    </div>
+	<div id="manage-debt-form" class="manage-debt-form">
+		<div id="manage-debt-form-msg-Box"></div>
+	</div>
+	<div id="market-card-div" class="market-card-div"></div>
+	<div id="low-balance" class="popup-background">
+		<div class="top-popup">
+			You don't have enough balance
+			<button onclick="closeOverlay('low-balance')">OK</button>
+		</div>
+	</div>
+	<div id="share-card" class="share-popup"></div>
 
-    <div id="manage-debt-form" class="manage-debt-form">
-      <div id="manage-debt-form-msg-Box"></div>
-    </div>
-    <div id="market-card-div" class="market-card-div"></div>
-    <div id="low-balance" class="popup-background">
-      <div class="top-popup">
-        You don't have enough balance
-        <button onclick="closeOverlay('low-balance')">OK</button>
-      </div>
-    </div>
-    <div id="share-card" class="share-popup"></div>
+	<div id="bankruptcyNotification" class="manage-debt-form">
+		<div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
+		<div id="Real-Estate"></div>
+		<button onclick="sellAsset()">Sell</button>
+	</div>
+	<div id="bankruptedMsg" class="manage-debt-form">
+		<button class="close" onclick="closeOverlay('bankruptedMsg')">
+			&times;
+		</button>
+		You are bankrupted. So that you can't continue game!! For more details see
+		financial details
+	</div>
+	<div id="auction-div" class="auction">
+		<div id="bidder" class="bidding-message">Current Bid
+		</div>
+		<div id="bid-price" class="bidding-price">100</div>
+		<input type="text" placeholder="Enter number of Shares" id="bid-value">
+		<button id="bid" onclick="bid()">bid</button>
+		<button id="pass-bid" onclick="pass()">pass</button>
+		<div id="bid-notification" class="bidding-notification">Bidding for current card</div>
+	</div>
+	<div id="auction-form" class="auction">
+		<div><label>Current-Bid: </label><span id="current-bid"></span></div>
+		<div><label>Current-Bidder: </label><span id="current-bidder"></span></div>
+		<input type="number" id="auction-base-price" placeholder="Enter base price">
+		<button id="submit-base-price">Submit</button>
+	</div>
+</body>
 
+<<<<<<< HEAD
     <div id="bankruptcyNotification" class="manage-debt-form">
       <div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
       <div id="Real-Estate"></div>
@@ -470,4 +845,6 @@
     </div>
   </body>
 
+=======
+>>>>>>> [#35] Annapurna/Sapana - changed financial statement css.
 </html>
