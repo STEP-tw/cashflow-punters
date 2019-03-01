@@ -75,7 +75,7 @@ class Game {
   }
 
   isPlayersTurnCompleted() {
-    this.players.forEach(player => {});
+    this.players.forEach(player => { });
     return this.players.every(player => player.isTurnComplete);
   }
 
@@ -492,8 +492,8 @@ class Game {
 
   closeAuction() {
     this.currentAuction.data.sellDeal();
-    this.addActivity(`${this.currentPlayer.name} has closed the auction.`);
-    this.currentAuction.present = false;
+    this.activityLog.addActivity(`${this.currentPlayer.name} has closed the auction.`);
+    this.currentAuction = { present: false };
     this.nextPlayer();
   }
 }
