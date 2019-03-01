@@ -57,6 +57,7 @@ button:hover {
 
 .horizontal_space {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 12.5%;
@@ -104,6 +105,9 @@ button:hover {
   position: absolute;
   top: 16.6%;
   left: 11.8%;
+
+  z-index: 1;
+
   display: flex;
   padding: 0.5%;
   background-image: url("/gamebackground.jpg");
@@ -117,6 +121,7 @@ button:hover {
 
 .vertical_space {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -131,43 +136,67 @@ button:hover {
 }
 
 .space_background {
+  position: absolute;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 }
 
 .deals {
   background-color: #82c255;
-	background-image: url("/deals.png");
+}
+
+.deals-img {
+  background-image: url("/deals.png");
 }
 
 .baby {
   background-color: #631c7b;
+}
+
+.baby-img {
   background-image: url("/baby.png");
 }
 
 .downsize {
   background-color: #631c7b;
+}
+
+.downsize-img {
   background-image: url("/downsize.png");
 }
 
 .market {
   background-color: #5583d6;
+}
+
+.market-img {
   background-image: url("/market.png");
 }
 
 .charity {
   background-color: #631c7b;
+}
+
+.charity-img {
   background-image: url("/charity.png");
 }
 
 .doodad {
   background-color: #d03620;
+}
+
+.doodad-img {
   background-image: url("/doodad.png");
 }
 
 .payday {
   background-color: #e57738;
+}
+
+.payday-img {
   background-image: url("/payday.png");
 }
 
@@ -505,6 +534,9 @@ button:hover {
   position: absolute;
   top: 0px;
   left: 0px;
+
+  z-index: 1;
+
   height: 100%;
   width: 100%;
   display: flex;
@@ -570,7 +602,7 @@ button:hover {
 
 .statements {
   height: 90%;
-  width:700px;
+  width: 700px;
   display: flex;
   background-color: lightgray;
   z-index: 1;
@@ -848,8 +880,8 @@ th {
 .extra-info {
   font-size: 0.8rem;
   font-weight: lighter;
-	text-align: center;
-	width: 90%;
+  text-align: center;
+  width: 90%;
 }
 
 .operator {
@@ -927,7 +959,7 @@ basic_fs_heading {
   flex-direction: column;
   background-color: whitesmoke;
   text-align: left;
-  overflow:scroll
+  overflow: scroll;
 }
 
 thead {
@@ -972,8 +1004,6 @@ thead {
   flex-direction: row;
 }
 
-
-
 .tableData {
-	font-weight: lighter;
+  font-weight: lighter;
 }
