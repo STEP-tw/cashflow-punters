@@ -103,7 +103,7 @@ const handleGoldCoin = function(player, card) {
 };
 
 const handleRealEstate = function(player, { relatedRealEstates }) {
-  const playerRealEstates = player.liabilities.realEstate;
+  const playerRealEstates = player.liabilities.realEstates;
   const commonEstates = getCommon(relatedRealEstates, playerRealEstates);
   const cardDiv = getElementById("card");
   const displayCommonEstates = displayEstates.bind(null, commonEstates);
@@ -157,7 +157,8 @@ const handleMarketCard = function(player, card) {
   const marketHandlers = {
     realEstate: handleRealEstate,
     goldCoin: handleGoldCoin,
-    splitOrReverse: handleSplitReverse
+    splitOrReverse: handleSplitReverse,
+    expense: () => {}
   };
   marketHandlers[relatedTo](player, card);
 };
