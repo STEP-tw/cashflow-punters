@@ -374,11 +374,10 @@ button:hover {
 }
 
 .basic_fs > p {
-  width: 60%;
+  width: 90%;
   height: 13%;
   padding: 1%;
   margin: 0%;
-  border: #cdc8b6 1px solid;
   line-height: 2;
 }
 
