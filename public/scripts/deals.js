@@ -224,8 +224,8 @@ const showOptions = function(isAbleToSell, shareCost) {
 const showBuyAndSellOptions = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
-  const buttons = createElement("div", "buttons-container");
-  buttons.classList.add("buttons-div");
+  const buttons = getElementById("buttons-container");
+  buttons.style.display = "flex";
   const accept = createAcceptButton(
     showOptions.bind(null, true, card.currentPrice)
   );
@@ -237,8 +237,8 @@ const showBuyAndSellOptions = function(card) {
 const showBuyOption = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
-  const buttons = createElement("div", "buttons-container");
-  buttons.classList.add("buttons-div");
+  const buttons = getElementById("buttons-container");
+  buttons.style.display = "flex";
   const accept = createAcceptButton(
     showOptions.bind(null, false, card.currentPrice)
   );
@@ -250,8 +250,8 @@ const showBuyOption = function(card) {
 const showSellOption = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = createCard(card);
-  const buttons = createElement("div", "buttons-container");
-  buttons.classList.add("buttons-div");
+  const buttons = getElementById("buttons-container");
+  buttons.style.display = "flex";
   const sell = createShareSellButton();
   const pass = createButton("Pass", "button_div", "pass", "button", passDeal);
   appendChildren(buttons, [sell, pass]);
