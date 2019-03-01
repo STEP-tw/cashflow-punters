@@ -328,7 +328,7 @@ class Game {
     player.updateFinancialStatement();
     const activityMessage = ` took loan of $${loanAmount}`;
     player.addCreditEvent(loanAmount, "took loan");
-    this.activityLog.addActivity(activityMessage, playerName);
+    this.activityLog.logLoanTaken(loanAmount, playerName);
     player.setNotification("You" + activityMessage);
   }
 
@@ -340,7 +340,7 @@ class Game {
     player.updateFinancialStatement();
     player.addDebitEvent(liabilityPrice, `paid loan for ${liability}`);
     const activityMessage = ` paid debt $${liabilityPrice} for liability - ${liability}`;
-    this.activityLog.addActivity(activityMessage, playerName);
+    this.activityLog.logDebtPaid(liabilityPrice, liability, playerName);
     player.setNotification("you" + activityMessage);
   }
 

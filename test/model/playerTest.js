@@ -169,8 +169,8 @@ describe("Player", function() {
     });
   });
 
- describe("buyGoldCoins", function() {
-    it("should add gold cooins in assets and deduct money form cash ledger", function() {
+  describe("buyGoldCoins", function() {
+    it("should add gold coins in assets and deduct money form cash ledger", function() {
       const card = {
         cost: 1000,
         numberOfCoins: 5
@@ -182,6 +182,20 @@ describe("Player", function() {
       expect(player.assets.goldCoins).to.equal(5);
       expect(player.entries).to.have.length(2);
       expect(actualOutput).to.equal(true);
+    });
+
+    it("should return false if palyer dont have enough money to buy gold coins", function() {
+      const card = {
+        cost: 1000,
+        numberOfCoins: 5
+      };
+      player.ledgerBalance = 500;
+      const actualOutput = player.buyGoldCoins(card);
+
+      expect(player.ledgerBalance).to.equal(500);
+      expect(player.assets.goldCoins).to.equal(0);
+      expect(player.entries).to.have.length(1);
+      expect(actualOutput).to.equal(false);
     });
   });
 
@@ -266,6 +280,108 @@ describe("Player", function() {
       player.removeCharityEffect();
 
       expect(player.charityTurns).to.equals(0);
+    });
+  });
+
+  describe("addRealEstate", function() {
+    it("should add the given real estate to the liabilities and assets of player and return true", function() {
+      const card = {
+        downPayment: 2000,
+        type: "2Br/1Ba",
+        cost: 27000,
+        cashflow: 100,
+        mortgage: 25000,
+        title: "House For Sale - 2Br/1Ba"
+      };
+      player.ledgerBalance = 3000;
+
+      expect(player.addRealEstate(card)).to.equals(true);
+      expect(player.liabilities.realEstates)
+        .to.be.an("Array")
+        .of.length(1);
+    });
+
+    it("should return false if player dont have enough money to buy the real estate", function() {
+      const card = {
+        downPayment: 2000,
+        type: "2Br/1Ba",
+        cost: 27000,
+        cashflow: 100,
+        mortgage: 25000,
+        title: "House For Sale - 2Br/1Ba"
+      };
+
+      expect(player.addRealEstate(card)).to.equals(false);
+      expect(player.liabilities.realEstates)
+        .to.be.an("Array")
+        .of.length(0);
+    });
+  });
+
+  describe("isBankrupted", function() {
+    it("should return false if player is not bankrupted", function() {
+      expect(player.isBankrupted()).to.equals(false);
+    });
+
+    it("should return true if isBAnkruptcy and no real estate is left with player", function() {
+      const card = {
+        downPayment: 2000,
+        type: "2Br/1Ba",
+        cost: 27000,
+        cashflow: 100,
+        mortgage: 25000,
+        title: "House For Sale - 2Br/1Ba"
+      };
+      player.ledgerBalance = 3000;
+      player.addRealEstate(card);
+
+      player.ledgerBalance = -10;
+      player.cashflow = -10;
+      expect(player.isBankrupted()).to.equals(false);
+    });
+
+    it("should return true if isBAnkruptcy and no real estate is left with player", function() {
+      player.ledgerBalance = -10;
+      player.cashflow = -10;
+      expect(player.isBankrupted()).to.equals(true);
+    });
+  });
+
+  describe("sellShares", function() {
+    it("should sell the given amount of shares at current price and add that amount to Ledger Balance", function() {
+      const card = {
+        symbol: "OK4U",
+        currentPrice: 40
+      };
+      player.assets.shares = { OK4U: { numberOfShares: 10, currentPrice: 5 } };
+      player.sellShares(card, 5);
+
+      expect(player.assets.shares)
+        .to.have.property("OK4U")
+        .to.have.property("numberOfShares")
+        .to.equals(5);
+      expect(player.ledgerBalance).to.equals(1800);
+    });
+
+    it("should delete the symbol key from shares if all the shares of that symbol are sold", function() {
+      const card = {
+        symbol: "OK4U",
+        currentPrice: 40
+      };
+      player.assets.shares = { OK4U: { numberOfShares: 10, currentPrice: 5 } };
+      player.sellShares(card, 10);
+
+      expect(player.assets.shares).to.not.have.property("OK4U");
+      expect(player.ledgerBalance).to.equals(2000);
+    });
+  });
+
+  describe("reduceCharityTurns", function() {
+    it("should deduct the charity turns of player by 1", function() {
+      player.charityTurns = 3;
+      player.reduceCharityTurns();
+
+      expect(player.charityTurns).to.equals(2);
     });
   });
 });

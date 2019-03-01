@@ -36,6 +36,16 @@ class ActivityLog {
     const msg = `$${expenseAmount} deducted from ${playerName} for ${expense}`;
     this.addActivity(msg);
   }
+
+  logLoanTaken(amount, player) {
+    const msg = ` took loan of ${amount}`;
+    this.addActivity(msg, player);
+  }
+
+  logDebtPaid(amount, liability, playerName) {
+    const msg = ` paid debt $${amount} for liability - ${liability}`;
+    this.addActivity(msg, playerName);
+  }
 }
 
 module.exports = ActivityLog;
