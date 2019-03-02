@@ -465,8 +465,10 @@ button:hover {
   width: 750px;
   height: 100%;
   display: flex;
-  padding: 2%;
+  padding: 0 2%;
+  z-index: 10;
   visibility: hidden;
+  background: whitesmoke;
 }
 
 .overlay > header {
@@ -479,7 +481,7 @@ button:hover {
 
 #cash_ledger {
   background: whitesmoke;
-  z-index: 5;
+  width: 100%;
 }
 
 .close {
@@ -591,9 +593,10 @@ button:hover {
 
 .statements {
   height: 90%;
-  width: 700px;
+  width: fit-content;
   display: flex;
-  background-color: lightgray;
+  flex-direction: column;
+  background-color: whitesmoke;
   z-index: 1;
 }
 
@@ -784,25 +787,6 @@ button:hover {
   padding: 2% 4%;
 }
 
-.share-popup {
-  height: 250px;
-  width: 300px;
-
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-
-  position: fixed;
-  top: 36%;
-  left: 42%;
-
-  background-color: whitesmoke;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
 /* ----------------------financial Statement ------------------------------ */
 
 .sub-header {
@@ -894,7 +878,6 @@ basic_fs_heading {
 }
 
 .title {
-  width: 875px;
   display: flex;
   justify-content: space-between;
   background-color: whitesmoke;
@@ -905,21 +888,24 @@ basic_fs_heading {
 }
 
 .close-fs {
-  font-size: 20px;
+  font-size: 16px;
   background-color: rgb(53, 52, 52);
   color: whitesmoke;
-  padding: 0.5% 1%;
+  padding: 0.2% 1%;
   border-radius: 50%;
   outline: none;
+  float: right;
+  margin: 1%;
 }
-
 .overlay-fs {
   z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
+  width: 65%;
   visibility: hidden;
+  background-color: whitesmoke;
 }
 
 .auction {
@@ -944,8 +930,8 @@ basic_fs_heading {
 
 .cash-ledger {
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 676px;
+  height: 98%;
   flex-direction: column;
   background-color: whitesmoke;
   text-align: left;
@@ -1001,4 +987,29 @@ thead {
 #card-title {
   font-weight: 600;
   font-size: large;
+}
+
+.popup-overlay {
+  position: absolute;
+    top: 35%;
+    left: 35%;
+    height: 45%;
+    visibility: hidden;
+    width: 30%;
+    background-color: rgba(10, 10, 10, 0.7);
+    z-index: 2;
+}
+
+.share-popup {
+  height: 80%;
+    width: 60%;
+    margin: 6% 20%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    position: relative;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 10px;
 }

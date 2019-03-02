@@ -151,6 +151,7 @@ const createCard = function(card) {
 };
 
 const buyShares = function() {
+  hideOverlay("share-background");
   const numberOfShares = getElementById("share-count").value;
   fetch("/buyshares", {
     method: "POST",
@@ -166,6 +167,7 @@ const buyShares = function() {
 };
 
 const sellShares = function() {
+  hideOverlay("share-background");
   const numberOfShares = getElementById("share-count").value;
   fetch("/sellshares", {
     method: "POST",
@@ -181,6 +183,7 @@ const sellShares = function() {
 };
 
 const shareForm = function(func, id, value, shareCost) {
+  showOverlay("share-background");
   const form = getElementById("share-card");
   form.style.display = "flex";
   const input = createInput(
@@ -201,7 +204,7 @@ const shareForm = function(func, id, value, shareCost) {
   priceVal.id = "shares-price";
   priceVal.innerText = "0";
   priceDiv.appendChild(priceVal);
-  closeButton.onclick = closeOverlay.bind(null, "share-card");
+  closeButton.onclick = hideOverlay.bind(null, "share-background");
   appendChildren(form, [closeButton, input, priceDiv, submit, msgDiv]);
 };
 

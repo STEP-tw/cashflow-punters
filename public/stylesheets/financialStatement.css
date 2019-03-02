@@ -111,10 +111,8 @@ basic_fs_heading {
 }
 
 .title {
-  width: 875px;
   display: flex;
   justify-content: space-between;
-  background-color: whitesmoke;
   font-size: 1.5em;
   font-weight: lighter;
   padding-left: 1.1em;

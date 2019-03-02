@@ -39,7 +39,7 @@ const updateStatementBoard = function(player) {
   return player;
 };
 
-const createFinancialStatement = function () {
+const createFinancialStatement = function() {
   closeOverlay("professions");
   const top = createElement("div");
   const leftSection = createElement("section");
