@@ -12,33 +12,33 @@ const {
 } = require("./hostAndJoinHandlers");
 const {
   getGame,
-  hasShares,
-  buyShares,
   payDebt,
   rollDice,
+  hasShares,
+  buyShares,
   startGame,
   grantLoan,
+  handleBid,
   hasCharity,
   sellEstate,
+  sellShares,
+  completeTurn,
+  handleAuction,
+  sellGoldCoins,
   selectBigDeal,
   acceptBigDeal,
   acceptCharity,
   rejectBigDeal,
+  isSharePresent,
   declineCharity,
   acceptSmallDeal,
   rejectSmallDeal,
   selectSmallDeal,
   isAbleToDoCharity,
   provideLiabilities,
-  getPlayersFinancialStatement,
-  rollDiceForSplitReverse,
-  isSharePresent,
-  sellShares,
   provideCommonEstates,
-  completeTurn,
-  sellGoldCoins,
-  handleAuction,
-  handleBid
+  rollDiceForSplitReverse,
+  getPlayersFinancialStatement
 } = require("./gameHandlers");
 
 app.games = {};
@@ -53,12 +53,13 @@ app.get("/", renderHomePage);
 app.get("/getgame", getGame);
 app.get("/startgame", startGame);
 app.get("/hascharity", hasCharity);
+app.get("/completeturn", completeTurn);
 app.get("/gamelobby", provideGameLobby);
 app.get("/selectBigDeal", selectBigDeal);
 app.get("/acceptCharity", acceptCharity);
-app.get("/completeturn", completeTurn);
 app.get("/acceptBigDeal", acceptBigDeal);
 app.get("/declineBigDeal", rejectBigDeal);
+app.get("/issharepresent", isSharePresent);
 app.get("/declineCharity", declineCharity);
 app.get("/liabilities", provideLiabilities);
 app.get("/selectSmallDeal", selectSmallDeal);
@@ -67,22 +68,21 @@ app.get("/declineSmallDeal", rejectSmallDeal);
 app.get("/commonestates", provideCommonEstates);
 app.get("/isabletodocharity", isAbleToDoCharity);
 app.get("/financialStatement", getPlayersFinancialStatement);
-app.get("/issharepresent", isSharePresent);
 
-app.post("/buyshares", buyShares);
-app.post("/sellshares", sellShares);
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);
-app.post("/sellestate", sellEstate);
-app.post("/joingame", joinGame);
 app.post("/hostgame", hostGame);
+app.post("/joingame", joinGame);
 app.post("/rolldice", rollDice);
 app.post("/takeloan", grantLoan);
-app.post("/sellgoldcoins", sellGoldCoins);
-app.post("/hasshares", hasShares);
-app.post("/rolldiceforsplitreverse", rollDiceForSplitReverse);
-app.post("/handleauction", handleAuction);
+app.post("/buyshares", buyShares);
 app.post("/handlebid", handleBid);
+app.post("/hasshares", hasShares);
+app.post("/sellshares", sellShares);
+app.post("/sellestate", sellEstate);
+app.post("/sellgoldcoins", sellGoldCoins);
+app.post("/handleauction", handleAuction);
+app.post("/rolldiceforsplitreverse", rollDiceForSplitReverse);
 
 app.use(express.static("public/"));
 app.use(express.static("public/pages"));

@@ -1,24 +1,7 @@
-const { getNextNum, add, randomNum } = require("../utils/utils.js");
+const { getNextNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
 const { CHARITY_MSG } = require("../constant");
-
-class Dice {
-  constructor() {
-    this.diceValues = [];
-  }
-
-  roll(numberOfDice) {
-    const diceValues = new Array(numberOfDice).fill(6).map(randomNum);
-    this.diceValues = diceValues;
-    return diceValues;
-  }
-
-  total() {
-    return this.diceValues.reduce(
-      (total, oneDiceValue) => total + oneDiceValue
-    );
-  }
-}
+const Dice = require("./dice");
 
 class Player extends FinancialStatement {
   constructor(name) {

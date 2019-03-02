@@ -2,8 +2,7 @@ const {
   getNextNum,
   isBetween,
   add,
-  calculateLoanToTake,
-  randomNum
+  calculateLoanToTake
 } = require("../utils/utils.js");
 const _ = require("lodash");
 const Auction = require("./auction");
@@ -73,7 +72,7 @@ class Game {
   }
 
   isPlayersTurnCompleted() {
-    this.players.forEach(player => { });
+    this.players.forEach(player => {});
     return this.players.every(player => player.isTurnComplete);
   }
 
@@ -489,7 +488,9 @@ class Game {
 
   closeAuction() {
     this.currentAuction.data.sellDeal();
-    this.activityLog.addActivity(`${this.currentPlayer.name} has closed the auction.`);
+    this.activityLog.addActivity(
+      `${this.currentPlayer.name} has closed the auction.`
+    );
     this.currentAuction = { present: false };
     this.nextPlayer();
   }
