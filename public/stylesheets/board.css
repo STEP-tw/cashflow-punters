@@ -843,7 +843,7 @@ table {
 }
 
 td {
-  border-bottom: solid 1px #BECBD2;
+  border-bottom: solid 1px grey;
   text-align: left;
   font-weight: bold;
   color: #3a4b53;
