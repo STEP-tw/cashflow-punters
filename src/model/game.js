@@ -407,7 +407,8 @@ class Game {
 
   sellShares(playerName, numberOfShares) {
     this.activityLog.addActivity(
-      ` has sold ${numberOfShares} shares ${this.activeCard.data.symbol}`
+      ` has sold ${numberOfShares} shares ${this.activeCard.data.symbol}`,
+      playerName
     );
     this.getPlayerByName(playerName).sellShares(
       this.activeCard.data,
