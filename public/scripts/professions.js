@@ -8,7 +8,7 @@ const gamePiece = {
 };
 
 const createParagraph = function(text, classname) {
-  const paragraph = document.createElement("div");
+  const paragraph = document.createElement("p");
   paragraph.innerText = text;
   paragraph.className = classname;
   return paragraph;
