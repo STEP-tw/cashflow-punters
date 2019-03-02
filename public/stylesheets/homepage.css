@@ -30,8 +30,8 @@ input {
 }
 
 .game-options-field {
-  width: 40%;
-  height: 80%;
+  width: 38%;
+  height: 57%;
   border-radius: 5%;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ input {
 
 .game-options {
   width: 50%;
-  height: 10%;
+  height: 15%;
   border-radius: 50vmax;
   margin: 10px;
   font-size: 23px;
