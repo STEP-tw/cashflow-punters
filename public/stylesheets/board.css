@@ -786,25 +786,6 @@ button:hover {
   padding: 2% 4%;
 }
 
-.share-popup {
-  height: 250px;
-  width: 300px;
-
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-
-  position: fixed;
-  top: 36%;
-  left: 42%;
-
-  background-color: whitesmoke;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
 /* ----------------------financial Statement ------------------------------ */
 
 .sub-header {
@@ -1005,4 +986,29 @@ thead {
 #card-title {
   font-weight: 600;
   font-size: large;
+}
+
+.popup-overlay {
+  position: absolute;
+    top: 35%;
+    left: 35%;
+    height: 45%;
+    visibility: hidden;
+    width: 30%;
+    background-color: rgba(10, 10, 10, 0.7);
+    z-index: 2;
+}
+
+.share-popup {
+  height: 80%;
+    width: 60%;
+    margin: 6% 20%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    position: relative;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 10px;
 }
