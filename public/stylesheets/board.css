@@ -1014,3 +1014,18 @@ thead {
     border: 1px solid black;
     border-radius: 10px;
 }
+
+.textField {
+	width: 90%;
+
+	border: none;
+	border-bottom: 1px solid rgb(178, 180, 182);
+
+	font-size: 20px;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: center;
+
+	color: grey;
+	background: transparent;
+}

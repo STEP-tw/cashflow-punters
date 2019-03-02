@@ -33,7 +33,7 @@ const appendOptions = function(parent, option) {
 const displayLoanForm = function() {
   const form = getElementById("manage-debt-form");
   const input = createInput("amount", "Enter amount", "number", "debt-input");
-  input.className = "debt-input";
+  input.classList.add("textField");
   const loanButton = createButton("Take Loan", "form-button");
   const closeButton = createButton("&times;", "close");
   const message = "Enter amount in Multiples of 1000";

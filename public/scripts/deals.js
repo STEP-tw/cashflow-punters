@@ -190,9 +190,10 @@ const shareForm = function(func, id, value, shareCost) {
     "amount",
     "Enter No of Shares",
     "number",
-    "share-count"
+    "share-count",
+    "debt-input"
   );
-  input.className = "debt-input";
+  input.classList.add("textField");
   const submit = createButton(value, "form-button", id, "", func);
   const closeButton = createButton("&times;", "close");
   const message = "Enter no of shares you want to " + id;
