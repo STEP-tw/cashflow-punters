@@ -108,10 +108,10 @@ class Player extends FinancialStatement {
 
   rollDiceAndMove(numberOfDice) {
     const diceValues = this.rollDie(numberOfDice);
-    this.move(1 || this.dice.total());
+    this.move(this.dice.total());
     this.rolledDice = true;
     this.reduceCharityTurns();
-    return [1] || diceValues;
+    return diceValues;
   }
 
   rollDie(numberOfDice = 1) {
