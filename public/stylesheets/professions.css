@@ -14,6 +14,10 @@
   align-items: stretch;
 }
 
+p {
+  padding-left: 4%;
+}
+
 .profession-sub-header {
   font-size: 30px;
   font-family: inherit;
@@ -24,11 +28,12 @@
   width: 20%;
   height: 60%;
   border-radius: 5%;
+  line-height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 4%;
-  align-items: flex-start;
+  padding-left: auto;
+  align-items: center;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
   background-color: rgb(242, 248, 252);
 }
