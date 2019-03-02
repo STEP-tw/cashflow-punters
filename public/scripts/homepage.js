@@ -1,7 +1,7 @@
 const displayHostTemplate = function() {
   const optionsField = getElementById("gameOptionsField");
-  const hostingForm = createForm("/hostgame", "POST");
-  const nameInput = createInput("playerName", "Enter Name", "text");
+  const hostingForm = createForm("/hostgame", "POST", "host-join-form");
+  const nameInput = createInput("playerName", "Enter Name", "text", "none", "textField");
   nameInput.required = true;
   const hostButton = createButton("HOST", "button");
   appendChildren(optionsField, [hostingForm]);
@@ -52,19 +52,23 @@ const canJoin = function() {
 };
 
 const displayJoinTemplate = function() {
-  const optionsField = document.getElementById("gameOptionsField");
-  const gameIdInput = createInput("gameId", "Enter GameID", "text", "game_id");
-  const nameInput = createInput("playerName", "Enter Name", "text", "name");
-  const joinButton = createButton("JOIN", "game-options");
+	const optionsField = document.getElementById("gameOptionsField");
+	const joinForm = createElement('div');
+	joinForm.className = "host-join-form";
+  const gameIdInput = createInput("gameId", "Enter GameID", "text" ,"game_id", "textField");
+  const nameInput = createInput("playerName", "Enter Name", "text", "name", "textField");
+  const joinButton = createButton("JOIN", "button");
   const messageDiv = createElement("div");
-  messageDiv.id = "messageDiv";
+	messageDiv.id = "messageDiv";
+	// optionsField.className = "host-join-form";
   joinButton.onclick = canJoin;
-  appendChildren(optionsField, [
+  appendChildren(joinForm, [
     nameInput,
     gameIdInput,
     joinButton,
     messageDiv
-  ]);
+	]);
+	appendChildren(optionsField, [joinForm]);
 };
 
 window.onload = () => {

@@ -33,18 +33,20 @@ const createPara = function(values) {
   return a;
 };
 
-const createForm = function(action, method) {
+const createForm = function(action, method, className) {
   const form = createElement("form");
   form.action = action;
-  form.method = method;
+	form.method = method;
+	form.className = className;
   return form;
 };
 
-const createInput = function(name, placeholder, type, id) {
+const createInput = function(name, placeholder, type, id, className) {
   const input = createElement("input", id);
   input.placeholder = placeholder;
   input.name = name;
-  input.type = type;
+	input.type = type;
+	input.className = className;
   return input;
 };
 

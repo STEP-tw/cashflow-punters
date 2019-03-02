@@ -1,15 +1,18 @@
 header {
-  font-size: 60px;
+  font-size: 70px;
   height: 20%;
   text-align: center;
-  font-family: "Lobster", cursive;
-  color: rgb(85, 46, 85);
+	font-family: "Lobster", cursive;
+	color: #4D636F;
+	text-shadow: 4px 3px #BECBD2;
 }
 
 .sub-header {
   font-size: 30px;
-  font-family: "Coiny", cursive;
-  color: rgb(100, 96, 96);
+	font-family: "Coiny", cursive;
+	font-weight: bold;
+	color: #7D97A5;
+	text-shadow: 1px 1px #BECBD2;
 }
 
 main {
@@ -33,7 +36,8 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+	align-items: center;
+	background-color: #DFE5E8;
 }
 
 .game-options {
@@ -41,7 +45,7 @@ input {
   height: 10%;
   border-radius: 50vmax;
   margin: 10px;
-  font-size: 20px;
+  font-size: 23px;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
   outline: none;
   font-weight: 400;
@@ -50,16 +54,21 @@ input {
 }
 
 .button {
-  width: 50%;
-  height: 30%;
-  border-radius: 50vmax;
-  margin: 10px;
-  font-size: 18px;
-  outline: none;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-  font-weight: 400;
-  color: rgb(82, 79, 79);
-  background-color: whitesmoke;
+	width: 90%;
+	height: 40px;
+	margin-top: 50px;
+
+	color: whitesmoke;
+	background: #607D8B;
+
+	border-radius: 20px;
+	border: none;
+
+	font-size: 18px;
+	font-family: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+	outline: none;
 }
 
 .player-name {
@@ -68,4 +77,49 @@ input {
   border-radius: 25%;
   margin: 10px;
   font-size: 20px;
+}
+
+.host-join-form {
+	display: flex;
+	flex-direction: column;
+
+	width: 50%;
+	height: 50%;
+	text-align: center;
+	padding: 8%;
+
+	box-shadow: 0px 0px 23px -2px rgba(102,97,102,0.52);
+	border-radius: 20px;
+	box-sizing: border-box;
+	background-color: whitesmoke;
+}
+
+.textField {
+	width: 90%;
+
+	border: none;
+	border-bottom: 1px solid rgb(178, 180, 182);
+
+	font-size: 20px;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: center;
+
+	color: grey;
+	background: transparent;
+}
+
+.textField::placeholder {
+	color: rgb(168, 172, 175);
+	font-family: 'Open Sans', sans-serif;
+	font-weight: lighter;
+}
+
+.textField:focus {
+	outline: none;
+	border-bottom: 1px solid #607D8B;
+}
+
+.textField:hover {
+	border-bottom: 1px solid #607D8B;
 }
