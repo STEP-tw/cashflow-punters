@@ -1,4 +1,4 @@
-const { randomNum } = require("../utils/utils");
+const { add, randomNum } = require("../utils/utils");
 
 class Dice {
   constructor() {
@@ -12,9 +12,7 @@ class Dice {
   }
 
   total() {
-    return this.diceValues.reduce(
-      (total, oneDiceValue) => total + oneDiceValue
-    );
+    return this.diceValues.reduce(add);
   }
 }
 
