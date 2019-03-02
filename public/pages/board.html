@@ -108,14 +108,14 @@
                   <button
                     id="fsBtn"
                     class="iconBtn"
-                    onclick="showOverlay('financial_statement')"
+                    onclick="showOverlay('fs_overlay')"
                   ></button>
                 </div>
                 <div class="iconButtonDiv">
                   <button
                     id="ledgerBtn"
                     class="iconBtn"
-                    onclick="showOverlay('cash_ledger')"
+                    onclick="showOverlay('cash-ledger-overlay')"
                   ></button>
                 </div>
                 <div class="iconButtonDiv">
@@ -240,18 +240,19 @@
         </div>
       </div>
 
-      <div class="overlay-fs fs-body" id="financial_statement">
-        <div
+      <div class="overlay-fs fs-body" id="fs_overlay">
+          <button
+          class="close-fs"
+          onclick="hideOverlay('fs_overlay')"
+        >
+          &times;
+        </button>
+        <div id="financial_statement"
           style="display:flex; flex-direction:column; background-color: whitesmoke;"
         >
           <div class="title">
             <div>INCOME STATEMENT</div>
-            <button
-              class="close-fs"
-              onclick="hideOverlay('financial_statement')"
-            >
-              &times;
-            </button>
+           
           </div>
           <div style="overflow:scroll; height:100%;">
             <div
@@ -449,15 +450,12 @@
         </div>
       </div>
 
-      <div class="overlay" id="cash_ledger">
-        <div>
-          <button class="close" onclick="hideOverlay('cash_ledger')">
-            ×
-          </button>
-          <header>
+      <div class="overlay" id="cash-ledger-overlay">
+          <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
+              ×
+            </button>
+          <div id="cash_ledger">
             Cash ledger
-          </header>
-          <div class="statements">
             <table class="cash-ledger">
               <thead>
                 <tr class="row-content">
@@ -470,7 +468,6 @@
               <tbody id="cash-ledger-content"></tbody>
             </table>
           </div>
-        </div>
       </div>
       <div id="container" class="container"></div>
 
