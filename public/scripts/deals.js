@@ -151,7 +151,6 @@ const createCard = function(card) {
 };
 
 const buyShares = function() {
-  hideOverlay("share-background");
   const numberOfShares = getElementById("share-count").value;
   fetch("/buyshares", {
     method: "POST",
@@ -162,12 +161,12 @@ const buyShares = function() {
     .then(({ isCapable }) => {
       if (!isCapable) return showNotEnoughBalance();
       closeOverlay("share-card");
+      hideOverlay("share-background");
       closeOverlay("buttons-container");
     });
 };
 
 const sellShares = function() {
-  hideOverlay("share-background");
   const numberOfShares = getElementById("share-count").value;
   fetch("/sellshares", {
     method: "POST",
@@ -178,6 +177,7 @@ const sellShares = function() {
     .then(({ isCapable }) => {
       if (!isCapable) return showInvalidShareCount();
       closeOverlay("share-card");
+      hideOverlay("share-background");
       closeOverlay("buttons-container");
     });
 };
