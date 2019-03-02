@@ -657,6 +657,23 @@ button:hover {
   border-radius: 10px;
 }
 
+.bankruptcy-form {
+  height: 269px;
+  width: 465px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  position: fixed;
+  top: 42%;
+  left: 36%;
+  visibility: hidden;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
 .market-card-div {
   height: 250px;
   width: 300px;
@@ -1026,6 +1043,9 @@ thead {
   border-radius: 10px;
 }
 
+.bankruptedMsg{
+  margin: 5px;
+}
 .textField {
   width: 90%;
 

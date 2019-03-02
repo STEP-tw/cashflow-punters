@@ -236,18 +236,14 @@ class Game {
         this.currentPlayer,
         " is out of the game because of bankruptcy"
       );
-      this.nextPlayer();
       return;
     }
+    
     if (this.currentPlayer.isBankruptcy()) {
       this.soldAsset(this.currentPlayer.name);
-      this.currentPlayer.bankruptcy = true;
-      this.activityLog.addActivity(
-        " is in bankruptcy situation",
-        this.currentPlayer.name
-      );
-      return;
+      if(this.currentPlayer.removed) return;
     }
+
     const paydayAmount = this.currentPlayer.addPayday();
     this.currentPlayer.setNotification(
       `You got Payday.${paydayAmount} added to your Savings`
@@ -267,7 +263,11 @@ class Game {
     };
     const currentPlayer = this.currentPlayer;
     this.handleCrossedPayDay(oldSpaceNo);
-
+    if(currentPlayer.removed){
+      this.nextPlayer()
+      return;
+      
+    }
     const currentSpaceType = this.board.getSpaceType(
       currentPlayer.currentSpace
     );
@@ -294,17 +294,11 @@ class Game {
             this.currentPlayer,
             " is out of the game because of bankruptcy"
           );
-          this.nextPlayer();
           return;
         }
         if (this.currentPlayer.isBankruptcy()) {
           this.soldAsset(this.currentPlayer.name);
-          this.currentPlayer.bankruptcy = true;
-          this.activityLog.addActivity(
-            " is in bankruptcy situation",
-            this.currentPlayer.name
-          );
-          return;
+          if(this.currentPlayer.removed) return;
         }
         this.activityLog.addActivity(
           " crossed payday",
@@ -362,7 +356,6 @@ class Game {
     });
     player.setNotification("You are bankrupted");
     this.removePlayer(player, " is out of the game because of bankruptcy");
-    this.nextPlayer();
     return;
   }
 

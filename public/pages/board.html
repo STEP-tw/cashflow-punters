@@ -505,17 +505,14 @@
       <div id="share-background" class="popup-overlay">
         <div id="share-card" class="share-popup"></div>
 
-      <div id="bankruptcyNotification" class="manage-debt-form">
-        <div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
-        <div id="Real-Estate"></div>
-        <button onclick="sellAsset()">Sell</button>
-      </div>
-      <div id="bankruptedMsg" class="manage-debt-form">
+      <div id="bankruptedMsg" class="bankruptcy-form">
         <button class="close" onclick="closeOverlay('bankruptedMsg')">
           &times;
-        </button>
+				</button>
+				<div class = "bankruptedMsg">
         You are bankrupted. So that you can't continue game!! For more details
-        see financial details
+				see financial details.
+			</div>
       </div>
       <div id="auction-div" class="auction">
         <div id="bidder" class="bidding-message">Current Bid</div>
