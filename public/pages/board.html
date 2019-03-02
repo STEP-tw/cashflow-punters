@@ -12,7 +12,6 @@
     <script src="/market.js"></script>
     <link rel="stylesheet" href="/board.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
       href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"
@@ -250,7 +249,7 @@
         </div>
       </div>
 
-      <div class="overlay-fs fs-body" id="fs_overlay">
+      <div class="overlay-fs fs-body" id="fs_overlay" style="color:#303E45;">
           <button
           class="close-fs"
           onclick="hideOverlay('fs_overlay')"
@@ -261,7 +260,7 @@
           style="display:flex; flex-direction:column; background-color: whitesmoke;"
         >
           <div class="title">
-            <div>INCOME STATEMENT</div>
+            <div style="color: #4D636F;">INCOME STATEMENT</div>
            
           </div>
           <div style="overflow:scroll; height:100%;">
@@ -404,7 +403,7 @@
                     </span>
                   </h3>
                 </div>
-                <div style="border:3px solid rgb(40, 38, 38); padding:3%;">
+                <div style="border:3px solid #9EB1BB; padding:3%; color:#303E45;">
                   <p class="block" id="fs-income">$ Income</p>
                   <p class="operator">+</p>
                   <p class="block" id="passive-income">$ passive Income</p>
@@ -484,7 +483,7 @@
       <div id="professions" class="professions-container">
         <div class="popup-bg">
           <div class="professions-heading">
-            Here is Everyone's role in the game!
+          
           </div>
           <div id="players-info" class="players-info"></div>
           <button class="continue-button" onclick="createFinancialStatement()">
