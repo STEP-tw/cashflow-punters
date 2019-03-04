@@ -8,11 +8,20 @@ const startGame = function(req, res) {
 const getGame = function(req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
-  const { currentPlayer } = game;
-  if (currentPlayer.isDownSized()) {
-    game.skipTurn();
+  if (!req.game) {
+    console.log("Requested game is not present");
+    return;
   }
+
   game.requester = game.getPlayerByName(playerName);
+
+  if (!req.game.currentPlayer) {
+    console.log("All players bankrupted");
+    game.isMyTurn = false;
+    res.send(JSON.stringify(game));
+    return;
+  }
+
   game.isMyTurn = game.isCurrentPlayer(playerName);
   res.send(JSON.stringify(game));
 };

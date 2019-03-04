@@ -318,35 +318,6 @@ describe("Player", function() {
     });
   });
 
-  describe("isBankrupted", function() {
-    it("should return false if player is not bankrupted", function() {
-      expect(player.isBankrupted()).to.equals(false);
-    });
-
-    it("should return true if isBAnkruptcy and no real estate is left with player", function() {
-      const card = {
-        downPayment: 2000,
-        type: "2Br/1Ba",
-        cost: 27000,
-        cashflow: 100,
-        mortgage: 25000,
-        title: "House For Sale - 2Br/1Ba"
-      };
-      player.ledgerBalance = 3000;
-      player.addRealEstate(card);
-
-      player.ledgerBalance = -10;
-      player.cashflow = -10;
-      expect(player.isBankrupted()).to.equals(false);
-    });
-
-    it("should return true if isBAnkruptcy and no real estate is left with player", function() {
-      player.ledgerBalance = -10;
-      player.cashflow = -10;
-      expect(player.isBankrupted()).to.equals(true);
-    });
-  });
-
   describe("sellShares", function() {
     it("should sell the given amount of shares at current price and add that amount to Ledger Balance", function() {
       const card = {

@@ -28,16 +28,7 @@ class Player extends FinancialStatement {
   }
 
   isBankruptcy() {
-    return this.cashflow < 0 && this.ledgerBalance + this.cashflow < 0;
-  }
-
-  isBankrupted() {
-    if (this.isBankruptcy()) {
-      if (this.assets.realEstates.length == 0) {
-        return true;
-      }
-    }
-    return false;
+    return this.cashflow < 0 && this.ledgerBalance < -this.cashflow;
   }
 
   removeCharityEffect() {

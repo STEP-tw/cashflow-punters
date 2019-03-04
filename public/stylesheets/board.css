@@ -492,9 +492,9 @@ button:hover {
 .close {
   position: absolute;
   right: 2%;
-  top: 1%;
+  top: 3%;
   margin: 0;
-  padding: 0.5% 1%;
+  padding: 1px 5px;
   border-radius: 50%;
 }
 
@@ -658,8 +658,8 @@ button:hover {
 }
 
 .bankruptcy-form {
-  height: 269px;
-  width: 465px;
+  height: 26%;
+  width: 24%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -667,8 +667,11 @@ button:hover {
   z-index: 3;
   position: fixed;
   top: 42%;
-  left: 36%;
+  left: 38%;
+  padding: 3%;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
   visibility: hidden;
+  color: #9f2525;
   background-color: whitesmoke;
   border: 1px solid black;
   border-radius: 10px;
@@ -1043,7 +1046,7 @@ thead {
   border-radius: 10px;
 }
 
-.bankruptedMsg{
+.bankruptedMsg {
   margin: 5px;
 }
 .textField {

@@ -49,6 +49,7 @@ class FinancialStatement extends CashLedger {
     this.assets.shares = {};
     this.liabilities = profession.liabilities;
     this.liabilities.realEstates = [];
+    this.liabilities["Bank Loan"] = 0;
     this.updateFinancialStatement();
     this.ledgerBalance = this.cashflow + profession.assets.savings;
     const initialAmount = this.cashflow + profession.assets.savings;

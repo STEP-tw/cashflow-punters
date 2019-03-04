@@ -21,6 +21,7 @@ class Game {
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
+    this.removedPlayersCount = 0;
   }
 
   addPlayer(player) {
@@ -93,14 +94,26 @@ class Game {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
-    if (this.currentPlayer.removed || this.isFasttrackPlayer()) {
+    if (this.isFasttrackPlayer()) {
       this.nextPlayer();
+      this.activityLog.logTurn(this.currentPlayer.name);
+      return;
     }
     if (this.currentPlayer.hasEscape()) {
       this.notifyEscaping();
+    }
+    if (this.currentPlayer.removed) {
+      if (this.players.length == this.removedPlayersCount) {
+        this.currentPlayer = null;
+        this.activityLog.addActivity("All players are bankrupted");
+        return;
+      }
       this.nextPlayer();
     }
     this.activityLog.logTurn(this.currentPlayer.name);
+    if (this.currentPlayer.isDownSized()) {
+      this.skipTurn();
+    }
   }
 
   handleSmallDeal() {
@@ -240,24 +253,16 @@ class Game {
   removePlayer(player, msg) {
     this.activityLog.addActivity(msg, player.name);
     player.removed = true;
+    this.removedPlayersCount++;
   }
 
   handlePayday() {
-    if (this.currentPlayer.isBankrupted()) {
-      this.currentPlayer.bankrupt = true;
-      this.currentPlayer.setNotification(
-        "You are bankrupted. You can't continue the game!"
-      );
-      this.removePlayer(
-        this.currentPlayer,
-        " is out of the game because of bankruptcy"
-      );
-      return;
-    }
-    
     if (this.currentPlayer.isBankruptcy()) {
-      this.soldAsset(this.currentPlayer.name);
-      if(this.currentPlayer.removed) return;
+      const outOfBankruptcy = this.handleBankruptcy(this.currentPlayer);
+      if (!outOfBankruptcy) {
+        this.nextPlayer();
+        return true;
+      }
     }
 
     const paydayAmount = this.currentPlayer.addPayday();
@@ -265,6 +270,7 @@ class Game {
       `You got Payday.${paydayAmount} added to your Savings`
     );
     this.nextPlayer();
+    return false;
   }
 
   handleSpace(oldSpaceNo) {
@@ -278,11 +284,10 @@ class Game {
       payday: this.handlePayday.bind(this)
     };
     const currentPlayer = this.currentPlayer;
-    this.handleCrossedPayDay(oldSpaceNo);
-    if(currentPlayer.removed){
-      this.nextPlayer()
-      return;
-      
+    const isBankrupted = this.handleCrossedPayDay(oldSpaceNo);
+    if (isBankrupted) {
+      this.nextPlayer();
+      return isBankrupted;
     }
     const currentSpaceType = this.board.getSpaceType(
       currentPlayer.currentSpace
@@ -291,30 +296,51 @@ class Game {
       ` landed on ${currentSpaceType}`,
       currentPlayer.name
     );
-    handlers[currentSpaceType]();
+    return handlers[currentSpaceType]();
+  }
+
+  sellAssetToBank(player, asset) {
+    const amount = player.getDownPayment(asset);
+    const expenseAmount = amount / 10;
+    const debtDetails = {
+      liability: "Bank Loan",
+      liabilityPrice: amount,
+      expense: "Bank Loan Payment",
+      expenseAmount
+    };
+    this.payDebt(player.name, debtDetails);
+  }
+
+  handleBankruptcy(player) {
+    let allAssets = player.assets.realEstates;
+    let outOfBankruptcy = false;
+    allAssets.forEach(asset => {
+      if (player.cashflow < 0) {
+        this.sellAssetToBank(player, asset);
+        return;
+      }
+      outOfBankruptcy = true;
+    });
+    if (outOfBankruptcy) {
+      player.setNotification("You are out of bankruptcy");
+      return outOfBankruptcy;
+    }
+    player.setNotification("You are bankrupted");
+    this.removePlayer(player, " is out of the game because of bankruptcy");
+    return outOfBankruptcy;
   }
 
   handleCrossedPayDay(oldSpaceNo) {
     const paydaySpaces = this.board.getPayDaySpaces();
+    let outOfBankruptcy = true;
     const crossedPaydays = paydaySpaces.filter(paydaySpace =>
       isBetween(oldSpaceNo, this.currentPlayer.currentSpace, paydaySpace)
     );
     if (crossedPaydays.length > 0) {
       crossedPaydays.forEach(() => {
-        if (this.currentPlayer.isBankrupted()) {
-          this.currentPlayer.bankrupt = true;
-          this.currentPlayer.setNotification(
-            "You are bankrupted. You can't continue the game!"
-          );
-          this.removePlayer(
-            this.currentPlayer,
-            " is out of the game because of bankruptcy"
-          );
-          return;
-        }
         if (this.currentPlayer.isBankruptcy()) {
-          this.soldAsset(this.currentPlayer.name);
-          if(this.currentPlayer.removed) return;
+          outOfBankruptcy = this.handleBankruptcy(this.currentPlayer);
+          if (!outOfBankruptcy) return;
         }
         this.activityLog.addActivity(
           " crossed payday",
@@ -325,6 +351,7 @@ class Game {
           `You got Payday.${paydayAmount} added to your Savings`
         );
       });
+      return !outOfBankruptcy;
     }
   }
 
@@ -352,29 +379,6 @@ class Game {
     player.setNotification("you" + activityMessage);
   }
 
-  soldAsset(playerName) {
-    const player = this.getPlayerByName(playerName);
-    let allAssets = player.assets.realEstates;
-    allAssets.forEach(asset => {
-      const amount = player.getDownPayment(asset);
-      const expenseAmount = amount / 10;
-      const debtDetails = {
-        liability: "Bank Loan",
-        liabilityPrice: amount,
-        expense: "Bank Loan Payment",
-        expenseAmount
-      };
-      this.payDebt(playerName, debtDetails);
-      if (player.cashflow > 0) {
-        player.setNotification("You are out of bankruptcy");
-        return;
-      }
-    });
-    player.setNotification("You are bankrupted");
-    this.removePlayer(player, " is out of the game because of bankruptcy");
-    return;
-  }
-
   acceptCharity() {
     this.currentPlayer.addCharityTurn();
     this.activeCard = "";
@@ -392,12 +396,8 @@ class Game {
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
     this.activityLog.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
-    this.handleSpace(oldSpaceNo);
-    if(this.currentPlayer.removed){
-      this.nextPlayer()
-      return
-    }
-    return { diceValues, spaceType };
+    const isBankrupted = this.handleSpace(oldSpaceNo);
+    return { diceValues, spaceType, isBankrupted };
   }
 
   hasCharityTurns() {
