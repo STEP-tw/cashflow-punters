@@ -377,6 +377,10 @@ class Game {
     this.activityLog.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
     this.handleSpace(oldSpaceNo);
+    if(this.currentPlayer.removed){
+      this.nextPlayer()
+      return
+    }
     return { diceValues, spaceType };
   }
 
