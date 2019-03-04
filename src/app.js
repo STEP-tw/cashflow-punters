@@ -29,6 +29,7 @@ const {
   acceptBigDeal,
   acceptCharity,
   rejectBigDeal,
+  addToFastTrack,
   isSharePresent,
   declineCharity,
   acceptSmallDeal,
@@ -63,6 +64,7 @@ app.get("/issharepresent", isSharePresent);
 app.get("/declineCharity", declineCharity);
 app.get("/liabilities", provideLiabilities);
 app.get("/selectSmallDeal", selectSmallDeal);
+app.get("/addtofasttrack", addToFastTrack);
 app.get("/acceptSmallDeal", acceptSmallDeal);
 app.get("/declineSmallDeal", rejectSmallDeal);
 app.get("/commonestates", provideCommonEstates);

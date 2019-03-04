@@ -264,6 +264,15 @@ const handleAuction = function(req, res) {
   closeAuction(req, res);
 };
 
+const addToFastTrack = function(req, res) {
+  const game = req.game;
+  const { playerName } = req.cookies;
+  console.log(game.getPlayerByName(playerName).notifyEscape);
+  game.addToFasttrack(playerName);
+  console.log(game.getPlayerByName(playerName).notifyEscape);
+  res.end();
+};
+
 module.exports = {
   getGame,
   startGame,
@@ -292,5 +301,6 @@ module.exports = {
   hasShares,
   rollDiceForSplitReverse,
   handleAuction,
+  addToFastTrack,
   handleBid
 };

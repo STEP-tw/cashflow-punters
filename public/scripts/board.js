@@ -233,6 +233,9 @@ const displayOutOfGameMsg = function() {
 
 const polling = function(game) {
   let { players, requester } = game;
+  if (requester.notifyEscape) {
+    notifyEscape();
+  }
   if (requester.removed) {
     displayOutOfGameMsg();
   }

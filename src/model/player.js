@@ -19,6 +19,7 @@ class Player extends FinancialStatement {
     this.bankruptcy = false;
     this.removed = false;
     this.isTurnComplete = true;
+    this.notifyEscape = false;
     this.dice = new Dice();
   }
 

@@ -46,6 +46,11 @@ class ActivityLog {
     const msg = ` paid debt $${amount} for liability - ${liability}`;
     this.addActivity(msg, playerName);
   }
+
+  logEscape(playerName, rank) {
+    const msg = ` has escaped from rat race with rank ${rank}`;
+    this.addActivity(msg, playerName);
+  }
 }
 
 module.exports = ActivityLog;

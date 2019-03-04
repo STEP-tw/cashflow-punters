@@ -10,6 +10,7 @@
     <script src="/utils.js"></script>
     <script src="/manageDebts.js"></script>
     <script src="/market.js"></script>
+    <script src="/notifyEscape.js"></script>
     <link rel="stylesheet" href="/board.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -504,6 +505,13 @@
       </div>
       <div id="share-background" class="popup-overlay">
         <div id="share-card" class="share-popup"></div>
+      </div>
+
+    <div id="notify-escape" class="manage-debt-form">
+      <div style="font-size:30px; text-align: center;">Congrats!!</div>
+      <div style="text-align: center; font-size: 20px;">You have escaped from Rat race. Now you can enter in FastTrack</div>
+      <button onclick="addToFastTrack()" style="height: 30px; width: 40px;">Ok</button>
+    </div>  
 
       <div id="bankruptedMsg" class="bankruptcy-form">
         <button class="close" onclick="closeOverlay('bankruptedMsg')">

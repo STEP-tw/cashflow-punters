@@ -196,6 +196,10 @@ class FinancialStatement extends CashLedger {
     this.setNotification(`Your ${symbol} shares got doubled.`);
     shares.numberOfShares = numberOfShares * 2;
   }
+
+  hasEscape() {
+    return this.passiveIncome >= this.totalExpense;
+  }
 }
 
 module.exports = FinancialStatement;

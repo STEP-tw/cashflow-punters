@@ -20,6 +20,7 @@ class Game {
     this.activeCard;
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
+    this.fasttrackPlayers = [];
   }
 
   addPlayer(player) {
@@ -72,8 +73,19 @@ class Game {
   }
 
   isPlayersTurnCompleted() {
-    this.players.forEach(player => {});
     return this.players.every(player => player.isTurnComplete);
+  }
+
+  isFasttrackPlayer() {
+    return this.fasttrackPlayers.includes(this.currentPlayer);
+  }
+
+  notifyEscaping() {
+    const playerName = this.currentPlayer.name;
+    const rank = this.fasttrackPlayers.length + 1;
+    this.activityLog.logEscape(playerName, rank);
+    this.currentPlayer.notifyEscape = true;
+    return;
   }
 
   nextPlayer() {
@@ -81,7 +93,11 @@ class Game {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
-    if (this.currentPlayer.removed) {
+    if (this.currentPlayer.removed || this.isFasttrackPlayer()) {
+      this.nextPlayer();
+    }
+    if (this.currentPlayer.hasEscape()) {
+      this.notifyEscaping();
       this.nextPlayer();
     }
     this.activityLog.logTurn(this.currentPlayer.name);
@@ -491,6 +507,12 @@ class Game {
     );
     this.currentAuction = { present: false };
     this.nextPlayer();
+  }
+
+  addToFasttrack(playerName) {
+    const player = this.getPlayerByName(playerName);
+    player.notifyEscape = false;
+    this.fasttrackPlayers.push(player);
   }
 }
 
