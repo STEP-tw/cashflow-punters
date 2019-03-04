@@ -362,7 +362,7 @@
       "title": "Mutual Fund - GRO4US Fund",
       "message": "Weak earnings report leads to weak price of mutual fund.",
       "relatedTo": "shares",
-      "symbol": "GOR4US",
+      "symbol": "GRO4US",
       "currentPrice": 5,
       "historicTradingRange": "20-30"
     },
@@ -1126,7 +1126,7 @@
     },
     {
       "title": "Stock - GRO4US Fund",
-      "message": "The market is in flux and there will be monumental market swings over the next few months. How will mutual funds fair in this time of change?C  Cardholder rolls 1 die : Die = 1-3, STOCK SPlITS! Everyone who owns OGRO4US Doubles their number of shares. Die = 4-6, STOCK REVERSE SPLITS! Everyone who owns GRO4US loses half their shares.",
+      "message": "The market is in flux and there will be monumental market swings over the next few months. How will mutual funds fair in this time of change? Cardholder rolls 1 die : Die = 1-3, STOCK SPlITS! Everyone who owns GRO4US Doubles their number of shares. Die = 4-6, STOCK REVERSE SPLITS! Everyone who owns GRO4US loses half their shares.",
       "type": "compulsory",
       "relatedTo": "splitOrReverse",
       "applicableTo": "everyone",
