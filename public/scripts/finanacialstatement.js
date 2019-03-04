@@ -98,7 +98,7 @@ const setLiabilities = function (player) {
   setInnerText("school-loans", player.liabilities["School Loan"]);
   setInnerText("car-loans", player.liabilities["Car Loan"]);
   setInnerText("credit-card-debt", player.liabilities["Credit Card"]);
-  setInnerText("bank-loan", player.liabilities["Bank Loan"]);
+  setInnerText("bank-loan", player.liabilities["Bank Loan"] || 0);
   let realEstates = player.liabilities.realEstates;
   updateRealEstateLiabilities(realEstates);
 };
