@@ -53,6 +53,7 @@ describe("hostGame", function() {
           bankrupt: false,
           bankruptcy: false,
           charityTurns: 0,
+          notifyEscape: false,
           notification: "",
           childrenCount: 0,
           isTurnComplete: true,
@@ -143,6 +144,7 @@ describe("joinGame", function() {
           bankrupt: false,
           bankruptcy: false,
           charityTurns: 0,
+          notifyEscape: false,
           notification: "",
           name: "player",
           dice: {
