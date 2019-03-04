@@ -56,7 +56,7 @@ const createRow = data => {
   const title = createElement("td");
   title.innerText = data.type;
   const price = createElement("td");
-  price.innerText = data.cost;
+  price.innerText = data.mortgage;
   const button = createElement("td");
   const sellButton = createElement("button");
   sellButton.innerText = "Sell";
