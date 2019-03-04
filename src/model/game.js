@@ -330,6 +330,13 @@ class Game {
     return outOfBankruptcy;
   }
 
+  hasCrossedPayDay(oldSpaceNo) {
+    const paydaySpaces = this.board.getPayDaySpaces();
+    return paydaySpaces.some(paydaySpace =>
+      isBetween(oldSpaceNo, this.currentPlayer.currentSpace, paydaySpace)
+    );
+  }
+
   handleCrossedPayDay(oldSpaceNo) {
     const paydaySpaces = this.board.getPayDaySpaces();
     let outOfBankruptcy = true;
@@ -390,6 +397,14 @@ class Game {
     this.activeCard = "";
   }
 
+  isEligibleForMLM(oldSpaceNo, spaceType) {
+    const player = this.currentPlayer;
+    const hasMLM = player.hasMLM;
+    const gotPayDay =
+      this.hasCrossedPayDay(oldSpaceNo) || spaceType == "payday";
+    return hasMLM && gotPayDay;
+  }
+
   rollDice(numberOfDice) {
     const oldSpaceNo = this.currentPlayer.currentSpace;
     const diceValues = this.currentPlayer.rollDiceAndMove(numberOfDice);
@@ -397,7 +412,13 @@ class Game {
     this.activityLog.addActivity(rolledDieMsg, this.currentPlayer.name);
     const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
     const isBankrupted = this.handleSpace(oldSpaceNo);
-    return { diceValues, spaceType, isBankrupted };
+    const isEligibleForMLM = this.isEligibleForMLM(oldSpaceNo, spaceType);
+    if (!isEligibleForMLM) this.handleSpace(oldSpaceNo);
+    if (this.currentPlayer.removed) {
+      this.nextPlayer();
+      return;
+    }
+    return { diceValues, spaceType, isEligibleForMLM, isBankrupted };
   }
 
   hasCharityTurns() {
@@ -513,6 +534,15 @@ class Game {
     const player = this.getPlayerByName(playerName);
     player.notifyEscape = false;
     this.fasttrackPlayers.push(player);
+  }
+
+  rollDiceForMLM() {
+    const player = this.currentPlayer;
+    const { gotMLM, diceValue } = player.rollDiceForMLM();
+    if (gotMLM) this.activityLog.addActivity("got $500 for MLM", player.name);
+    this.handleSpace(player.oldSpaceNo);
+    const spaceType = this.getSpaceType(player.currentSpace);
+    return { spaceType, diceValue };
   }
 }
 

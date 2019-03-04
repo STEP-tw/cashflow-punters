@@ -21,6 +21,8 @@ class Player extends FinancialStatement {
     this.isTurnComplete = true;
     this.notifyEscape = false;
     this.dice = new Dice();
+    this.hasMLM = false;
+    this.MLMProfit = 0;
   }
 
   setTurn(turn) {
@@ -99,6 +101,7 @@ class Player extends FinancialStatement {
   }
 
   rollDiceAndMove(numberOfDice) {
+    this.oldSpaceNo = this.currentSpace;
     const diceValues = this.rollDie(numberOfDice);
     this.move(this.dice.total());
     this.rolledDice = true;
@@ -186,6 +189,34 @@ class Player extends FinancialStatement {
 
   holdTurn() {
     this.isTurnComplete = false;
+  }
+
+  addMLM(card) {
+    const { cost } = card;
+    this.hasMLM = true;
+    this.MLMProfit = cost;
+    this.deductLedgerBalance(cost);
+    this.setNotification("You bought MLM card");
+    this.addDebitEvent(cost, "bought MLM card");
+    return true;
+  }
+
+  addMLMProfit() {
+    const profit = this.MLMProfit;
+    this.addToLedgerBalance(profit);
+    this.addCreditEvent(profit, "got MLM profit");
+    this.setNotification(`You got $${profit} as MLM profit `);
+  }
+
+  rollDiceForMLM() {
+    this.rollDie();
+    const diceValue = this.dice.total();
+    if (diceValue < 4) {
+      this.addMLMProfit();
+      return { gotMLM: true, diceValue };
+    }
+    this.setNotification("you didn't get MLM profit");
+    return { gotMLM: false, diceValue };
   }
 }
 

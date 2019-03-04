@@ -39,7 +39,8 @@ const {
   provideLiabilities,
   provideCommonEstates,
   rollDiceForSplitReverse,
-  getPlayersFinancialStatement
+  getPlayersFinancialStatement,
+  rollDiceForMLM
 } = require("./gameHandlers");
 
 app.games = {};
@@ -70,6 +71,7 @@ app.get("/declineSmallDeal", rejectSmallDeal);
 app.get("/commonestates", provideCommonEstates);
 app.get("/isabletodocharity", isAbleToDoCharity);
 app.get("/financialStatement", getPlayersFinancialStatement);
+app.get("/rolldiceformlm", rollDiceForMLM);
 
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);

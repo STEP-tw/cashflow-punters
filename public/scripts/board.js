@@ -199,16 +199,41 @@ const rollDice = function(numberOfDice) {
       body: JSON.stringify({ numberOfDice })
     })
       .then(res => res.json())
-      .then(({ diceValues, spaceType, isBankrupted }) => {
+      .then(({ diceValues, spaceType, isBankrupted, isEligibleForMLM }) => {
         clearInterval(diceAnimationInterval);
         if (isBankrupted) {
           disableDice();
           return displayOutOfGameMsg();
         }
         showDice(diceValues);
+        if (isEligibleForMLM) return rollDiceForMLM();
         spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       });
   }, 900);
+};
+
+const rollDiceForMLM = function() {
+  const dice = getElementById("dice1");
+  dice.onclick = handleMLM;
+};
+
+const handleMLM = function() {
+  const diceBlock = getElementById("dice_block");
+  diceBlock.onclick = null;
+  const spacesHandlers = {
+    charity: handleCharity,
+    deal: handleDeal
+  };
+  const diceAnimationInterval = setInterval(() => {
+    showRandomDiceFace();
+  }, 150);
+  fetch("/rolldiceformlm")
+    .then(res => res.json())
+    .then(({ diceValue, spaceType }) => {
+      clearInterval(diceAnimationInterval);
+      showDice([diceValue]);
+      spacesHandlers[spaceType] && spacesHandlers[spaceType]();
+    });
 };
 
 const rollOneDice = function() {

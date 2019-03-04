@@ -270,12 +270,27 @@ const handleSharesSmallDeal = function(card, isMyTurn) {
     });
 };
 
+const createMLMCard = function(actions, card, isMyTurn) {
+  const { title, message, cost } = card;
+  const cardDisplayDiv = getElementById("cardDisplay");
+  const cardDiv = getCardDiv("smallDeal");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
+  const messageDiv = createTextDiv(message, "card-message");
+  const costDiv = createTextDiv(`Cost : ${cost}`);
+  const bottomDiv = createElement("div");
+  bottomDiv.classList.add("card-bottom");
+  appendChildren(bottomDiv, [costDiv]);
+  appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
+  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
+};
+
 const getSmallDealHandler = function(card, isMyTurn) {
   const smallDealactions = [acceptSmallDeal, declineSmallDeal, createAuction];
   const dealCardTypes = {
     shares: handleSharesSmallDeal,
     goldCoins: createGoldSmallDeal.bind(null, smallDealactions),
-    realEstate: createRealEstateDealCard.bind(null, smallDealactions)
+    realEstate: createRealEstateDealCard.bind(null, smallDealactions),
+    MLM: createMLMCard.bind(null, smallDealactions)
   };
   return (
     dealCardTypes[card.data.relatedTo] &&

@@ -55,6 +55,7 @@ describe("hostGame", function() {
           charityTurns: 0,
           notifyEscape: false,
           notification: "",
+          MLMProfit: 0,
           childrenCount: 0,
           isTurnComplete: true,
           dice: {
@@ -64,6 +65,7 @@ describe("hostGame", function() {
           downSizedForTurns: 0,
           name: "player",
           entries: [],
+          hasMLM: false,
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,
@@ -146,6 +148,7 @@ describe("joinGame", function() {
           charityTurns: 0,
           notifyEscape: false,
           notification: "",
+          MLMProfit: 0,
           name: "player",
           dice: {
             diceValues: []
@@ -156,6 +159,7 @@ describe("joinGame", function() {
           isTurnComplete: true,
           entries: [],
           childrenCount: 0,
+          hasMLM: false,
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,

@@ -105,18 +105,22 @@ const isAbleToDoCharity = function(req, res) {
 };
 
 const acceptSmallDeal = function(req, res) {
-  const { activeCard } = req.game;
+  const game = req.game;
+  const { activeCard } = game;
   let isSuccessful = true;
   if (activeCard.data.relatedTo == "realEstate") {
-    isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
+    isSuccessful = game.currentPlayer.addRealEstate(activeCard.data);
   }
   if (activeCard.data.relatedTo == "goldCoins") {
-    isSuccessful = req.game.currentPlayer.buyGoldCoins(activeCard.data);
+    isSuccessful = game.currentPlayer.buyGoldCoins(activeCard.data);
+  }
+  if (activeCard.data.relatedTo == "MLM") {
+    isSuccessful = game.currentPlayer.addMLM(activeCard.data);
   }
   if (!isSuccessful) return res.json({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
-  req.game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
-  req.game.nextPlayer();
+  game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
+  game.nextPlayer();
   res.json({ isSuccessful });
 };
 
@@ -282,6 +286,12 @@ const addToFastTrack = function(req, res) {
   res.end();
 };
 
+const rollDiceForMLM = function(req, res) {
+  const game = req.game;
+  const data = game.rollDiceForMLM();
+  res.json(data);
+};
+
 module.exports = {
   getGame,
   startGame,
@@ -311,5 +321,6 @@ module.exports = {
   rollDiceForSplitReverse,
   handleAuction,
   addToFastTrack,
-  handleBid
+  handleBid,
+  rollDiceForMLM
 };
