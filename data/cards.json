@@ -328,13 +328,13 @@
   "smallDeals": [
     {
       "title": "Multi-Level Marketing Buy-In",
-      "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die:\n Die = 1-3, No returns this month, but keep trying.\n Die = 4-6, Your sweat equity paid off! Collect $500.",
+      "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die: Die = 1-3, No returns this month, but keep trying. Die = 4-6, Your sweat equity paid off! Collect $500.",
       "cost":500,
       "relatedTo":"MLM"
     },
     {
       "title": "Multi-Level Marketing Buy-In",
-      "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die:\n Die = 1-3, No returns this month, but keep trying.\n Die = 4-6, Your sweat equity paid off! Collect $500.",
+      "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die: Die = 1-3, No returns this month, but keep trying. Die = 4-6, Your sweat equity paid off! Collect $500.",
       "cost":500,
       "relatedTo":"MLM"
     },
