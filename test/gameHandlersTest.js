@@ -298,11 +298,12 @@ describe("acceptSmallDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0 }
+      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0, drawnBy:"player1" },
+      getPlayerByName:()=>{}
     };
     req.game.players = { length: 0 };
     req.game.activityLog = { addActivity: sinon.spy() };
-    req.cookies = { playerName: "" };
+    req.cookies = { playerName: "player1" };
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
     res.json = sinon.spy();

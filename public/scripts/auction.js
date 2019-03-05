@@ -82,3 +82,20 @@ const createAuction = function () {
   const sellCard = getElementById("submit-base-price");
   sellCard.onclick = heldAuction.bind(null, true);
 };
+
+const showPurchasedCard = function (card) {
+  const { playerName } = parseCookie();
+  const { type, drawnBy } = card;
+  if (drawnBy != playerName) return;
+  const { relatedTo } = card.data;
+  if (relatedTo != "goldCoins" && relatedTo != "realEstate" && type != "bigDeal") return;
+  const buttonsDiv = getElementById("card-button-container");
+  const handlers = {};
+  handlers.smallDeal = [acceptSmallDeal, declineSmallDeal, createAuction];
+  handlers.bigDeal = [acceptBigDeal, declineBigDeal, createAuction];
+  if (buttonsDiv == undefined || buttonsDiv.display == "none") {
+    const cardDisplayDiv = getElementById("cardDisplay");
+    const buttons = createCardButtons(handlers[type]);
+    cardDisplayDiv.appendChild(buttons);
+  }
+}

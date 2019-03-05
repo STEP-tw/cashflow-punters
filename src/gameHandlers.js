@@ -104,23 +104,24 @@ const isAbleToDoCharity = function(req, res) {
   res.send(JSON.stringify({ isAble }));
 };
 
-const acceptSmallDeal = function(req, res) {
-  const game = req.game;
-  const { activeCard } = game;
+const acceptSmallDeal = function (req, res) {
+  const { activeCard } = req.game;
+  const { playerName } = req.cookies;
+  const player = req.game.getPlayerByName(playerName);
   let isSuccessful = true;
+  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful});
   if (activeCard.data.relatedTo == "realEstate") {
-    isSuccessful = game.currentPlayer.addRealEstate(activeCard.data);
+    isSuccessful = player.addRealEstate(activeCard.data);
   }
   if (activeCard.data.relatedTo == "goldCoins") {
-    isSuccessful = game.currentPlayer.buyGoldCoins(activeCard.data);
+    isSuccessful = player.buyGoldCoins(activeCard.data);
   }
   if (activeCard.data.relatedTo == "MLM") {
-    isSuccessful = game.currentPlayer.addMLM(activeCard.data);
+    isSuccessful = player.addMLM(activeCard.data);
   }
   if (!isSuccessful) return res.json({ isSuccessful });
-  let requestedPlayer = req.cookies["playerName"];
-  game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
-  game.nextPlayer();
+  req.game.activityLog.addActivity(`${playerName} has accepted the deal`);
+  req.game.nextPlayer();
   res.json({ isSuccessful });
 };
 
@@ -131,9 +132,12 @@ const rejectSmallDeal = function(req, res) {
   res.end();
 };
 
-const acceptBigDeal = function(req, res) {
+const acceptBigDeal = function (req, res) {
+  const { playerName } = req.cookies;
   const { activeCard } = req.game;
-  const isSuccessful = req.game.currentPlayer.addRealEstate(activeCard.data);
+  if (playerName != activeCard.drawnBy) return res.send({ isSuccessful: true });
+  const player = req.game.getPlayerByName(playerName);
+  const isSuccessful = player.addRealEstate(activeCard.data);
   if (!isSuccessful) return res.send({ isSuccessful });
   let requestedPlayer = req.cookies["playerName"];
   req.game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);

@@ -33,7 +33,7 @@ const acceptBigDeal = function(event) {
     .then(({ isSuccessful }) => {
       if (isSuccessful) {
         let parent = event.target.parentElement;
-        parent.style.visibility = "hidden";
+        parent.style.display = "none";
         return;
       }
       openOverlay("low-balance");
@@ -42,7 +42,7 @@ const acceptBigDeal = function(event) {
 
 const declineBigDeal = function() {
   let parent = event.target.parentElement;
-  parent.style.visibility = "hidden";
+  parent.style.display = "none";
   fetch("/declineBigDeal");
 };
 
@@ -90,8 +90,10 @@ const showInvalidShareCount = function() {
 };
 
 const createCardButtons = function(actions) {
-  const buttons = createElement("div");
+  let buttons = getElementById("card-button-container");
+  if(buttons == undefined) buttons = createElement("div");
   buttons.classList.add("buttons-div");
+  buttons.style.display = 'flex';
   buttons.id = "card-button-container";
   const accept = createAcceptButton(actions[0]);
   const decline = createDeclineButton(actions[1]);

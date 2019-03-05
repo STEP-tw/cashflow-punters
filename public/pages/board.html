@@ -1,4 +1,5 @@
 <html>
+
   <head>
     <script src="/finanacialstatement.js"></script>
     <script src="/cashledger.js"></script>
@@ -13,10 +14,7 @@
     <script src="/notifyEscape.js"></script>
     <link rel="stylesheet" href="/board.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"
-    />
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
   </head>
 
   <body id="body">
@@ -33,10 +31,7 @@
         <div class="corner_spaces horizontal_space deals w3-theme" id="1">
           <div class="space_background deals-img"></div>
         </div>
-        <div
-          class="horizontal_first_space  horizontal_space doodad w3-theme-l1"
-          id="2"
-        >
+        <div class="horizontal_first_space  horizontal_space doodad w3-theme-l1" id="2">
           <div class="space_background doodad-img"></div>
         </div>
         <div class="horizontal_space  deals w3-theme" id="3">
@@ -60,10 +55,7 @@
       </div>
       <div class="middle_flex">
         <div class="vertical_spaces">
-          <div
-            class="vertical_first_space vertical_space market w3-theme-l2"
-            id="24"
-          >
+          <div class="vertical_first_space vertical_space market w3-theme-l2" id="24">
             <div class="space_background market-img"></div>
           </div>
           <div class="vertical_space  deals w3-theme" id="23">
@@ -83,7 +75,7 @@
                 <tr>
                   <td>Name :</td>
                   <td><span id="name">PlayerName</span></td>
-                </tr> 
+                </tr>
                 <tr>
                   <td>Profession :</td>
                   <td><span id="Profession">prof</span></td>
@@ -112,28 +104,16 @@
                   <td>Ledger Balance :</td>
                   <td><span id="ledger-balance">$0</span></td>
                 </tr>
-                  </table>
+              </table>
               <div class="open-player-details">
                 <div class="iconButtonDiv">
-                  <button
-                    id="fsBtn"
-                    class="iconBtn"
-                    onclick="showOverlay('fs_overlay')"
-                  ></button>
+                  <button id="fsBtn" class="iconBtn" onclick="showOverlay('fs_overlay')"></button>
                 </div>
                 <div class="iconButtonDiv">
-                  <button
-                    id="ledgerBtn"
-                    class="iconBtn"
-                    onclick="showOverlay('cash-ledger-overlay')"
-                  ></button>
+                  <button id="ledgerBtn" class="iconBtn" onclick="showOverlay('cash-ledger-overlay')"></button>
                 </div>
                 <div class="iconButtonDiv">
-                  <button
-                    id="bankBtn"
-                    class="iconBtn"
-                    onclick="showBankForm()"
-                  ></button>
+                  <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
                 </div>
               </div>
               <div id="notification-div" class="notifications"></div>
@@ -145,20 +125,12 @@
                 <p>
                   How many dice you want to use?
                 </p>
-                <button
-                  id="one_dice_button"
-                  style="height: unset"
-                  onclick="hideOverlay('num_of_dice')"
-                >
+                <button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
                   One
                 </button>
-                <button
-                  id="two_dice_button"
-                  style="height: unset"
-                  onclick="
+                <button id="two_dice_button" style="height: unset" onclick="
                       showOverlay('dice2');
-                      hideOverlay('num_of_dice')"
-                >
+                      hideOverlay('num_of_dice')">
                   Two
                 </button>
               </div>
@@ -183,11 +155,8 @@
                 </div>
               </div>
               <div id="utilityPopup" class="cardDisplayPopup">
-                <button
-                  class="close"
-                  onclick=" hideOverlay('utilityPopup');
-                  closeOverlay('card-overlay');"
-                >
+                <button class="close" onclick=" hideOverlay('utilityPopup');
+                  closeOverlay('card-overlay');">
                   &times;
                 </button>
                 <div class="buttons_div"></div>
@@ -203,10 +172,7 @@
           </div>
         </div>
         <div class="vertical_spaces">
-          <div
-            class="vertical_first_space vertical_space  deals w3-theme"
-            id="9"
-          >
+          <div class="vertical_first_space vertical_space  deals w3-theme" id="9">
             <div class="space_background deals-img"></div>
           </div>
           <div class="vertical_space doodad w3-theme-l1" id="10">
@@ -224,10 +190,7 @@
         <div class="horizontal_space corner_spaces baby w3-theme-d1" id="20">
           <div class="space_background baby-img"></div>
         </div>
-        <div
-          class="horizontal_first_space horizontal_space  deals w3-theme"
-          id="19"
-        >
+        <div class="horizontal_first_space horizontal_space  deals w3-theme" id="19">
           <div class="space_background deals-img"></div>
         </div>
         <div class="horizontal_space doodad w3-theme-l1" id="18">
@@ -251,24 +214,17 @@
       </div>
 
       <div class="overlay-fs fs-body" id="fs_overlay" style="color:#303E45;">
-          <button
-          class="close-fs"
-          onclick="hideOverlay('fs_overlay')"
-        >
+        <button class="close-fs" onclick="hideOverlay('fs_overlay')">
           &times;
         </button>
-        <div id="financial_statement"
-          style="display:flex; flex-direction:column; background-color: whitesmoke;"
-        >
+        <div id="financial_statement" style="display:flex; flex-direction:column; background-color: whitesmoke;">
           <div class="title">
             <div style="color: #4D636F;">INCOME STATEMENT</div>
-           
+
           </div>
           <div style="overflow:scroll; height:100%;">
-            <div
-              style="display:flex; flex-direction: row; justify-content: space-around;
-									width: 900px; height: 100%; background-color: whitesmoke;"
-            >
+            <div style="display:flex; flex-direction: row; justify-content: space-around;
+									width: 900px; height: 100%; background-color: whitesmoke;">
               <div style="display:flex; flex-direction: column">
                 <div>
                   <h2 class="sub-header">Income</h2>
@@ -285,10 +241,7 @@
                       <td>Real Estate/Business:</td>
                       <td></td>
                     </tr>
-                    <tbody
-                      id="RealEstate-cashflow"
-                      style="height: 8em; overflow: scroll;"
-                    ></tbody>
+                    <tbody id="RealEstate-cashflow" style="height: 8em; overflow: scroll;"></tbody>
                     <tr>
                       <td></td>
                       <td></td>
@@ -325,10 +278,8 @@
                     </tr>
                     <tr>
                       <td>
-                        Bank Loan Payment: <span id="bank-loan-payment"></span
-                        ><span class="extra-info"
-                          >(10% of Bank Loan Total)</span
-                        >
+                        Bank Loan Payment: <span id="bank-loan-payment"></span><span class="extra-info">(10% of Bank
+                          Loan Total)</span>
                       </td>
                       <td></td>
                     </tr>
@@ -360,10 +311,7 @@
                       <td># of Shares:</td>
                       <td>Cost/Share:</td>
                     </tr>
-                    <tbody
-                      id="stocks-funds"
-                      style="height:4em; overflow:scroll;"
-                    ></tbody>
+                    <tbody id="stocks-funds" style="height:4em; overflow:scroll;"></tbody>
                     <tr>
                       <td></td>
                       <td></td>
@@ -374,31 +322,21 @@
                       <td>Down Payment:</td>
                       <td>Cost:</td>
                     </tr>
-                    <tbody
-                      id="RealEstate-downpayment"
-                      style="height:8em; overflow:scroll;"
-                    ></tbody>
+                    <tbody id="RealEstate-downpayment" style="height:8em; overflow:scroll;"></tbody>
                   </table>
                 </div>
               </div>
 
               <div style="display:flex; flex-direction: column">
                 <div style="margin:1%;">
-                  <h3
-                    style="border-bottom:1px solid grey; border-bottom-left-radius:20%; "
-                  >
-                    <span class="heading"> Name : </span
-                    ><span id="fs-name" style="padding-left: 2%;"></span>
+                  <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; ">
+                    <span class="heading"> Name : </span><span id="fs-name" style="padding-left: 2%;"></span>
                   </h3>
-                  <h3
-                    style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"
-                  >
-                    <span class="heading"> Profession : </span
-                    ><span id="fs-profession" style="padding-left: 2%;"></span>
+                  <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
+                    <span class="heading"> Profession : </span><span id="fs-profession"
+                      style="padding-left: 2%;"></span>
                   </h3>
-                  <h3
-                    style="border-bottom:1px solid grey; border-bottom-left-radius:20%;"
-                  >
+                  <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
                     <span class="heading">
                       Dream : <span id="dream"></span>
                     </span>
@@ -448,10 +386,7 @@
                     </tr>
                     <td>Real Estate/Business:</td>
                     <td>Mortage/Liability:</td>
-                    <tbody
-                      id="RealEstate-mortage"
-                      style="height:8em; overflow:scroll;"
-                    ></tbody>
+                    <tbody id="RealEstate-mortage" style="height:8em; overflow:scroll;"></tbody>
                   </table>
                 </div>
               </div>
@@ -461,30 +396,30 @@
       </div>
 
       <div class="overlay" id="cash-ledger-overlay">
-          <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
-              ×
-            </button>
-          <div id="cash_ledger">
-            Cash ledger
-            <table class="cash-ledger">
-              <thead>
-                <tr class="row-content">
-                  <th class="time">Time</th>
-                  <th class="amount">Amount</th>
-                  <th class="balance">Balance</th>
-                  <th class="reason">Description</th>
-                </tr>
-              </thead>
-              <tbody id="cash-ledger-content"></tbody>
-            </table>
-          </div>
+        <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
+          ×
+        </button>
+        <div id="cash_ledger">
+          Cash ledger
+          <table class="cash-ledger">
+            <thead>
+              <tr class="row-content">
+                <th class="time">Time</th>
+                <th class="amount">Amount</th>
+                <th class="balance">Balance</th>
+                <th class="reason">Description</th>
+              </tr>
+            </thead>
+            <tbody id="cash-ledger-content"></tbody>
+          </table>
+        </div>
       </div>
       <div id="container" class="container"></div>
 
       <div id="professions" class="professions-container">
         <div class="popup-bg">
           <div class="professions-heading">
-          
+
           </div>
           <div id="players-info" class="players-info"></div>
           <button class="continue-button" onclick="createFinancialStatement()">
@@ -507,6 +442,12 @@
         <div id="share-card" class="share-popup"></div>
       </div>
 
+      <div id="bankruptcyNotification" class="manage-debt-form">
+        <div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
+        <div id="Real-Estate"></div>
+        <button onclick="sellAsset()">Sell</button>
+      </div>
+
     <div id="notify-escape" class="manage-debt-form">
       <div style="font-size:30px; text-align: center;">Congrats!!</div>
       <div style="text-align: center; font-size: 20px;">You have escaped from Rat race. Now you can enter in FastTrack</div>
@@ -525,11 +466,7 @@
       <div id="auction-div" class="auction">
         <div id="bidder" class="bidding-message">Current Bid</div>
         <div id="bid-price" class="bidding-price">100</div>
-        <input
-          type="text"
-          placeholder="Enter number of Shares"
-          id="bid-value"
-        />
+        <input type="text" placeholder="Enter number of Shares" id="bid-value" />
         <button id="bid" onclick="bid()">bid</button>
         <button id="pass-bid" onclick="pass()">pass</button>
         <div id="bid-notification" class="bidding-notification">
@@ -541,11 +478,7 @@
         <div>
           <label>Current-Bidder: </label><span id="current-bidder"></span>
         </div>
-        <input
-          type="number"
-          id="auction-base-price"
-          placeholder="Enter base price"
-        />
+        <input type="number" id="auction-base-price" placeholder="Enter base price" />
         <button id="submit-base-price">Submit</button>
       </div>
       <div class="overlay" id="cash_ledger">
@@ -573,4 +506,5 @@
       </div>
     </main>
   </body>
+
 </html>

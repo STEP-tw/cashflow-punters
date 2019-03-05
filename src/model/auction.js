@@ -27,7 +27,7 @@ class Auction {
 
   passBid(player) {
     this.bidders = this.bidders.filter(({name}) => name != player);
-    if (this.bidders.length == 0) return this.sellDeal();
+    if (this.bidders.length == 0) return true;
   }
 
   sellDeal() {
@@ -35,7 +35,6 @@ class Auction {
       this.bidder.deductLedgerBalance(this.currentBid);
       this.host.addToLedgerBalance(this.currentBid);
     }
-    return true;
   }
 }
 

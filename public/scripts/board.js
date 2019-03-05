@@ -270,8 +270,7 @@ const polling = function(game) {
   if (requester.notifyEscape) {
     notifyEscape();
   }
-
-  if (game.activeCard) {
+  if (game.activeCard.data) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   updateStatementBoard(requester);
@@ -367,6 +366,7 @@ const getGame = function() {
     .then(data => data.json())
     .then(game => {
       updateActivityLog(game.activityLog);
+      showPurchasedCard(game.activeCard);
       joinAuction(game);
       polling(game);
     });

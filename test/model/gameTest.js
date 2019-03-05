@@ -345,13 +345,6 @@ describe("handleSpace", function() {
         .to.have.property("data")
         .to.be.an("Object");
     });
-
-    it("should call next player", function() {
-      game.nextPlayer = sinon.spy();
-      game.handleMarketSpace();
-
-      sinon.assert.calledOnce(game.nextPlayer);
-    });
   });
 
   describe("handleMarketCard", function() {

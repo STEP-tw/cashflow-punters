@@ -17,7 +17,7 @@ class Game {
     this.players = [];
     this.hasStarted = false;
     this.financialStatement;
-    this.activeCard;
+    this.activeCard = {};
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
@@ -114,19 +114,25 @@ class Game {
     if (this.currentPlayer.isDownSized()) {
       this.skipTurn();
     }
+    if(!this.activeCard) this.activeCard.drawnBy = null;
+  }
+
+  setActiveCard(type, data) {
+    const drawnBy = this.currentPlayer.name;
+    this.activeCard = { type, data, drawnBy };
   }
 
   handleSmallDeal() {
     this.activityLog.logSelectedSmallDeal(this.currentPlayer.name);
     const smallDealCard = this.cardStore.smallDeals.drawCard();
-    this.activeCard = { type: "smallDeal", data: smallDealCard };
+    this.setActiveCard("smallDeal", smallDealCard);
     this.activeCard.dealDoneCount = 0;
   }
 
   handleBigDeal() {
     this.activityLog.logSelectedBigDeal(this.currentPlayer.name);
     const bigDealCard = this.cardStore.bigDeals.drawCard();
-    this.activeCard = { type: "bigDeal", data: bigDealCard };
+    this.setActiveCard("bigDeal", bigDealCard);
   }
 
   handleBabySpace() {
@@ -138,7 +144,7 @@ class Game {
 
   handleDoodadSpace() {
     const doodadCard = this.cardStore.doodads.drawCard();
-    this.activeCard = { type: "doodad", data: doodadCard };
+    this.setActiveCard("doodad", doodadCard);
     let { isChildExpense, expenseAmount } = doodadCard;
     if (isChildExpense && !this.currentPlayer.hasChild()) {
       expenseAmount = 0;
@@ -173,7 +179,7 @@ class Game {
   handleMarketSpace() {
     const marketCard = this.cardStore.market.drawCard();
 
-    this.activeCard = { type: "market", data: marketCard };
+    this.setActiveCard("market", marketCard);
     if (marketCard.relatedTo == "expense") {
       this.handleExpenseCard("property damage.", marketCard.cash);
       return;
@@ -516,18 +522,21 @@ class Game {
   passBid(playerName) {
     const isAuctionClosed = this.currentAuction.data.passBid(playerName);
     if (isAuctionClosed) {
-      this.currentAuction.present = false;
-      this.nextPlayer();
+      this.closeAuction();
     }
   }
 
   closeAuction() {
     this.currentAuction.data.sellDeal();
-    this.activityLog.addActivity(
-      `${this.currentPlayer.name} has closed the auction.`
-    );
+    this.activityLog.addActivity(`${this.currentPlayer.name} has closed the auction.`);
+    const { bidder, host} = this.currentAuction.data;
+    if(bidder.name == host.name){
+      this.nextPlayer();
+      this.currentAuction = { present: false };
+      return
+    }
+    this.activeCard.drawnBy = bidder.name;
     this.currentAuction = { present: false };
-    this.nextPlayer();
   }
 
   addToFasttrack(playerName) {
