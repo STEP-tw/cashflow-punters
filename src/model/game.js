@@ -544,6 +544,10 @@ class Game {
     const spaceType = this.getSpaceType(player.currentSpace);
     return { spaceType, diceValue };
   }
+
+  removePlayer(name) {
+    this.players = this.players.filter(player => player.name != name);
+  }
 }
 
 module.exports = Game;

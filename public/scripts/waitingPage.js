@@ -50,9 +50,14 @@ const checkPlayersCount = function({ players, isHost }) {
   }
 };
 
+const leaveGame = function() {
+  fetch("/leavegame")
+  .then(res => {window.location = "/"})
+}
+
 const insertButtons = function({ isHost }) {
   const buttonsSpace = getElementById("buttons_space");
-  let button = createButton("Leave Game", "button", "", "button");
+  let button = createButton("Leave Game", "button", "", "button", leaveGame);
   if (isHost) {
     button = createButton("Cancel Game", "button", "", "button");
   }

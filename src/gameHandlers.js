@@ -280,9 +280,7 @@ const handleAuction = function(req, res) {
 const addToFastTrack = function(req, res) {
   const game = req.game;
   const { playerName } = req.cookies;
-  console.log(game.getPlayerByName(playerName).notifyEscape);
   game.addToFasttrack(playerName);
-  console.log(game.getPlayerByName(playerName).notifyEscape);
   res.end();
 };
 
@@ -291,6 +289,15 @@ const rollDiceForMLM = function(req, res) {
   const data = game.rollDiceForMLM();
   res.json(data);
 };
+
+const removePlayer = function (req, res) {
+  const game = req.game;
+  const {playerName} = req.cookies;
+  game.removePlayer(playerName);
+  res.clearCookie('playerName');
+  res.clearCookie('gameId');
+  res.end();
+}
 
 module.exports = {
   getGame,
@@ -322,5 +329,6 @@ module.exports = {
   handleAuction,
   addToFastTrack,
   handleBid,
-  rollDiceForMLM
+  rollDiceForMLM,
+  removePlayer 
 };
