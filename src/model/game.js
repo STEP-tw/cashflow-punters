@@ -296,7 +296,7 @@ class Game {
       return isBankrupted;
     }
     const currentSpaceType = this.board.getSpaceType(
-      currentPlayer.currentSpace
+      this.currentPlayer.currentSpace
     );
     this.activityLog.addActivity(
       ` landed on ${currentSpaceType}`,
