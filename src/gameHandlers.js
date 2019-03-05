@@ -104,12 +104,12 @@ const isAbleToDoCharity = function(req, res) {
   res.send(JSON.stringify({ isAble }));
 };
 
-const acceptSmallDeal = function (req, res) {
+const acceptSmallDeal = function(req, res) {
   const { activeCard } = req.game;
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   let isSuccessful = true;
-  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful});
+  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful });
   if (activeCard.data.relatedTo == "realEstate") {
     isSuccessful = player.addRealEstate(activeCard.data);
   }
@@ -132,7 +132,7 @@ const rejectSmallDeal = function(req, res) {
   res.end();
 };
 
-const acceptBigDeal = function (req, res) {
+const acceptBigDeal = function(req, res) {
   const { playerName } = req.cookies;
   const { activeCard } = req.game;
   if (playerName != activeCard.drawnBy) return res.send({ isSuccessful: true });
@@ -231,7 +231,8 @@ const hasShares = function(req, res) {
   const game = req.game;
   const player = game.currentPlayer;
   const hasShares = game.hasAnyoneShares(symbol);
-  if (!hasShares) game.addActivity(`No one has shares of ${symbol}`);
+  if (!hasShares)
+    game.activityLog.addActivity(`No one has shares of ${symbol}`);
   if (hasShares) player.setNotification("Roll Dice for Split & reverse card");
   res.send(JSON.stringify({ hasShares }));
 };
@@ -294,14 +295,14 @@ const rollDiceForMLM = function(req, res) {
   res.json(data);
 };
 
-const removePlayer = function (req, res) {
+const removePlayer = function(req, res) {
   const game = req.game;
-  const {playerName} = req.cookies;
+  const { playerName } = req.cookies;
   game.removePlayer(playerName);
-  res.clearCookie('playerName');
-  res.clearCookie('gameId');
+  res.clearCookie("playerName");
+  res.clearCookie("gameId");
   res.end();
-}
+};
 
 module.exports = {
   getGame,
@@ -334,5 +335,5 @@ module.exports = {
   addToFastTrack,
   handleBid,
   rollDiceForMLM,
-  removePlayer 
+  removePlayer
 };

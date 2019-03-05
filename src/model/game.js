@@ -114,7 +114,7 @@ class Game {
     if (this.currentPlayer.isDownSized()) {
       this.skipTurn();
     }
-    if(!this.activeCard) this.activeCard.drawnBy = null;
+    if (!this.activeCard) this.activeCard.drawnBy = null;
   }
 
   setActiveCard(type, data) {
@@ -528,12 +528,14 @@ class Game {
 
   closeAuction() {
     this.currentAuction.data.sellDeal();
-    this.activityLog.addActivity(`${this.currentPlayer.name} has closed the auction.`);
-    const { bidder, host} = this.currentAuction.data;
-    if(bidder.name == host.name){
+    this.activityLog.addActivity(
+      `${this.currentPlayer.name} has closed the auction.`
+    );
+    const { bidder, host } = this.currentAuction.data;
+    if (bidder.name == host.name) {
       this.nextPlayer();
       this.currentAuction = { present: false };
-      return
+      return;
     }
     this.activeCard.drawnBy = bidder.name;
     this.currentAuction = { present: false };
