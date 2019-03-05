@@ -337,6 +337,7 @@ describe("handleSpace", function() {
   describe("handleMarketCard", function() {
     it("should draw a card ", function() {
       game.addPlayer(player1);
+      game.setCurrentPlayer(player1);
       game.initializeGame();
       game.handleMarketSpace();
 
@@ -345,7 +346,8 @@ describe("handleSpace", function() {
         .to.have.property("data")
         .to.be.an("Object");
     });
-  });
+
+   });
 
   describe("handleMarketCard", function() {
     it("should deduct expense amount from ledger balance if market card related to expense is drawn ", function() {
