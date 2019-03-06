@@ -50,6 +50,8 @@ describe("hostGame", function() {
       .to.be.an("Array")
       .to.deep.equals([
         {
+          MLMTurns: 0,
+          MLMCardsCount: 0,
           bankrupt: false,
           bankruptcy: false,
           charityTurns: 0,
@@ -144,7 +146,9 @@ describe("joinGame", function() {
       .to.have.property("players")
       .to.deep.equals([
         {
+          MLMCardsCount: 0,
           bankrupt: false,
+          MLMTurns: 0,
           bankruptcy: false,
           charityTurns: 0,
           notifyEscape: false,
