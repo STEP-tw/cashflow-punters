@@ -22,7 +22,7 @@ class Game {
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
-    this.removedPlayersCount = 0;
+    this.bankruptedPlayersCount = 0;
   }
 
   addPlayer(player) {
@@ -103,13 +103,14 @@ class Game {
     if (this.currentPlayer.hasEscape()) {
       this.notifyEscaping();
     }
-    if (this.currentPlayer.removed) {
-      if (this.players.length == this.removedPlayersCount) {
+    if (this.currentPlayer.bankrupted) {
+      if (this.players.length == this.bankruptedPlayersCount) {
         this.currentPlayer = null;
         this.activityLog.addActivity("All players are bankrupted");
         return;
       }
       this.nextPlayer();
+      return;
     }
     this.activityLog.logTurn(this.currentPlayer.name);
     if (this.currentPlayer.isDownSized()) {
@@ -262,10 +263,13 @@ class Game {
     this.nextPlayer();
   }
 
-  removePlayer(player, msg) {
-    this.activityLog.addActivity(msg, player.name);
-    player.removed = true;
-    this.removedPlayersCount++;
+  bankrupt(player, msg) {
+    this.activityLog.addActivity(
+      " is out of the game because of bankruptcy",
+      player.name
+    );
+    player.bankrupted = true;
+    this.bankruptedPlayersCount++;
   }
 
   handlePayday() {
@@ -337,8 +341,9 @@ class Game {
       player.setNotification("You are out of bankruptcy");
       return outOfBankruptcy;
     }
+    player.removeAllShares();
     player.setNotification("You are bankrupted");
-    this.removePlayer(player, " is out of the game because of bankruptcy");
+    this.bankrupt(player);
     return outOfBankruptcy;
   }
 
@@ -432,10 +437,6 @@ class Game {
     if (isEligibleForMLM) {
       player.setNotification("Roll dice for MLM.");
       this.activityLog.addActivity("rolling dice for MLM", player.name);
-    }
-    if (this.currentPlayer.removed) {
-      this.nextPlayer();
-      return;
     }
     return { diceValues, spaceType, isEligibleForMLM, isBankrupted };
   }

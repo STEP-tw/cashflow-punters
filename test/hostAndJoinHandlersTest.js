@@ -72,7 +72,7 @@ describe("hostGame", function() {
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,
-          removed: false,
+          bankrupted: false,
           turn: 1
         }
       ]);
@@ -170,7 +170,7 @@ describe("joinGame", function() {
           didUpdateSpace: false,
           currentSpace: 0,
           passiveIncome: 0,
-          removed: false
+          bankrupted: false
         }
       ]);
   });

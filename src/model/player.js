@@ -17,7 +17,7 @@ class Player extends FinancialStatement {
     this.downSizedForTurns = 0;
     this.bankrupt = false;
     this.bankruptcy = false;
-    this.removed = false;
+    this.bankrupted = false;
     this.isTurnComplete = true;
     this.notifyEscape = false;
     this.dice = new Dice();
@@ -237,6 +237,11 @@ class Player extends FinancialStatement {
     }
     this.setNotification("you didn't get MLM profit");
     return { gotMLM: false, diceValue, isMLMTurnLeft };
+  }
+
+  removeAllShares() {
+    this.assets.shares = {};
+    this.addCreditEvent(0, " sold all shares");
   }
 }
 
