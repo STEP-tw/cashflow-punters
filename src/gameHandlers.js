@@ -305,11 +305,11 @@ const removePlayer = function(req, res) {
 };
 
 const saveGame = function(req, res) {
-  fs.readFile("./data/saveGames.json", function(err, data) {
+  fs.readFile("./data/savedGames.json", function(err, data) {
     const savedGames = JSON.parse(data);
     const gameId = req.cookies["gameId"];
     savedGames[gameId] = req.game;
-    fs.writeFile("./data/saveGames.json", JSON.stringify(savedGames), () => 0);
+    fs.writeFile("./data/savedGames.json", JSON.stringify(savedGames), () => 0);
   });
   res.end();
 };
