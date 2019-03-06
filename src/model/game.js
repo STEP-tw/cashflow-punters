@@ -7,7 +7,7 @@ const {
 const _ = require("lodash");
 const Auction = require("./auction");
 const ActivityLog = require("./activityLog");
-const { ESCAPE_ERROR } = require('../constant');
+const { ESCAPE_ERROR } = require("../constant");
 
 class Game {
   constructor(cardStore, board, host) {
@@ -400,13 +400,13 @@ class Game {
 
   acceptCharity() {
     this.currentPlayer.addCharityTurn();
-    this.activeCard = "";
+    this.activeCard = { drawnBy: null, sell: null };
     this.activityLog.addActivity(" accepted charity", this.currentPlayer.name);
   }
 
   declineCharity() {
     this.activityLog.addActivity(" declined charity", this.currentPlayer.name);
-    this.activeCard = "";
+    this.activeCard = { drawnBy: null, sell: null };
   }
 
   isEligibleForMLM(oldSpaceNo, spaceType) {
@@ -524,8 +524,10 @@ class Game {
     const host = this.getPlayerByName(playerName);
     const bidders = this.players.filter(({ name }) => name != playerName);
     this.currentAuction.data = new Auction(host, price, bidders);
-    host.setNotification('You have created an auction for your current card.');
-    this.activityLog.addActivity(`${playerName} has created an auction for current card`);
+    host.setNotification("You have created an auction for your current card.");
+    this.activityLog.addActivity(
+      `${playerName} has created an auction for current card`
+    );
     return true;
   }
 
@@ -535,10 +537,9 @@ class Game {
   }
 
   passBid(playerName) {
-    const {
-      isAuctionClosed,
-      isAbleToPass
-    } = this.currentAuction.data.passBid(playerName);
+    const { isAuctionClosed, isAbleToPass } = this.currentAuction.data.passBid(
+      playerName
+    );
 
     if (isAuctionClosed) this.closeAuction();
 
