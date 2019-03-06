@@ -257,15 +257,19 @@ button:hover {
   width: 25%;
 
   cursor: pointer;
+  display: inherit;
 
-  background-color: white;
+  /* background-color: white;
 
   text-align: center;
   font-size: 100px;
   line-height: 0.9;
 
   border-radius: 8px;
-  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88); */
+}
+.dice-image{
+  height: 80px;
 }
 
 .dice > p {

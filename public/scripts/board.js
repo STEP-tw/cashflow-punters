@@ -133,21 +133,14 @@ const selectBigDeal = function() {
 };
 
 const displayDiceValue = function(diceValue, count) {
-  const diceFaces = {
-    1: "&#x2680",
-    2: "&#x2681",
-    3: "&#x2682",
-    4: "&#x2683",
-    5: "&#x2684",
-    6: "&#x2685"
-  };
   const diceDiv = getElementById("dice" + count);
-  diceDiv.innerHTML = diceFaces[diceValue];
+  diceDiv.src = `Dice-${diceValue}.png`;
   diceDiv.style.visibility = "visible";
   diceDiv.style.display = "block";
 };
 
 const showDice = function(diceValues) {
+  console.log(diceValues);
   let count = 1;
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
@@ -157,18 +150,18 @@ const showDice = function(diceValues) {
 
 const showRandomDiceFace = function() {
   const diceFaces = {
-    1: "&#x2680",
-    2: "&#x2681",
-    3: "&#x2682",
-    4: "&#x2683",
-    5: "&#x2684",
-    6: "&#x2685"
+    1: "/Dice-1.png",
+    2: "/Dice-2.png",
+    3: "/Dice-3.png",
+    4: "/Dice-4.png",
+    5: "/Dice-5.png",
+    6: "/Dice-6.png"
   };
   const dice1 = document.getElementById("dice1");
   const dice2 = document.getElementById("dice2");
   let randomFaceVal = Math.ceil(Math.random() * 6);
-  dice1.innerHTML = diceFaces[randomFaceVal];
-  dice2.innerHTML = diceFaces[randomFaceVal];
+  dice1.src = diceFaces[randomFaceVal];
+  dice2.src = diceFaces[randomFaceVal];
 };
 
 const disableDice = () => {
@@ -190,7 +183,7 @@ const rollDice = function(numberOfDice) {
 
   const diceAnimationInterval = setInterval(() => {
     showRandomDiceFace();
-  }, 150);
+  }, 100);
 
   setTimeout(() => {
     fetch("/rolldice", {
