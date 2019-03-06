@@ -7,6 +7,7 @@ const {
 const _ = require("lodash");
 const Auction = require("./auction");
 const ActivityLog = require("./activityLog");
+const { ESCAPE_ERROR } = require('../constant');
 
 class Game {
   constructor(cardStore, board, host) {
@@ -17,7 +18,7 @@ class Game {
     this.players = [];
     this.hasStarted = false;
     this.financialStatement;
-    this.activeCard = {};
+    this.activeCard = { drawnBy: null, soldTo: null };
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
@@ -114,12 +115,17 @@ class Game {
     if (this.currentPlayer.isDownSized()) {
       this.skipTurn();
     }
-    if (!this.activeCard) this.activeCard.drawnBy = null;
+    this.resetActiveCard();
   }
 
   setActiveCard(type, data) {
     const drawnBy = this.currentPlayer.name;
     this.activeCard = { type, data, drawnBy };
+  }
+
+  resetActiveCard() {
+    this.activeCard.drawnBy = null;
+    this.activeCard.soldTo = null;
   }
 
   handleSmallDeal() {
@@ -296,7 +302,7 @@ class Game {
       return isBankrupted;
     }
     const currentSpaceType = this.board.getSpaceType(
-      this.currentPlayer.currentSpace
+      currentPlayer.currentSpace
     );
     this.activityLog.addActivity(
       ` landed on ${currentSpaceType}`,
@@ -518,6 +524,8 @@ class Game {
     const host = this.getPlayerByName(playerName);
     const bidders = this.players.filter(({ name }) => name != playerName);
     this.currentAuction.data = new Auction(host, price, bidders);
+    host.setNotification('You have created an auction for your current card.');
+    this.activityLog.addActivity(`${playerName} has created an auction for current card`);
     return true;
   }
 
@@ -527,10 +535,14 @@ class Game {
   }
 
   passBid(playerName) {
-    const isAuctionClosed = this.currentAuction.data.passBid(playerName);
-    if (isAuctionClosed) {
-      this.closeAuction();
-    }
+    const {
+      isAuctionClosed,
+      isAbleToPass
+    } = this.currentAuction.data.passBid(playerName);
+
+    if (isAuctionClosed) this.closeAuction();
+
+    return { message: ESCAPE_ERROR, isAbleToPass };
   }
 
   closeAuction() {
@@ -544,7 +556,7 @@ class Game {
       this.currentAuction = { present: false };
       return;
     }
-    this.activeCard.drawnBy = bidder.name;
+    this.activeCard.soldTo = bidder.name;
     this.currentAuction = { present: false };
   }
 

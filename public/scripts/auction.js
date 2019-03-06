@@ -58,6 +58,12 @@ const joinAuction = function (game) {
   }
 };
 
+const closeAuction = function () {
+  setAuctionFeed("", "");
+  openOverlay("auction-base-price");
+  closeOverlay("auction-form");
+}
+
 const heldAuction = function (action) {
   const basePrice = action && getElementById("auction-base-price").value;
   fetch("/handleauction", {
@@ -67,7 +73,7 @@ const heldAuction = function (action) {
   })
     .then(res => res.json())
     .then(({ isAuction, basePrice, playerName }) => {
-      if (!isAuction) return closeOverlay('auction-form');
+      if (!isAuction) return closeAuction();
       closeOverlay("auction-base-price");
       setAuctionFeed(playerName, basePrice);
       const sellCard = getElementById("submit-base-price");
@@ -84,18 +90,13 @@ const createAuction = function () {
 };
 
 const showPurchasedCard = function (card) {
-  const { playerName } = parseCookie();
-  const { type, drawnBy } = card;
-  if (drawnBy != playerName) return;
+  const { type } = card;
   const { relatedTo } = card.data;
-  if (relatedTo != "goldCoins" && relatedTo != "realEstate" && type != "bigDeal") return;
-  const buttonsDiv = getElementById("card-button-container");
+  if ((type != "smallDeal" && type != "bigDeal") || relatedTo == "shares") return;
   const handlers = {};
   handlers.smallDeal = [acceptSmallDeal, declineSmallDeal, createAuction];
   handlers.bigDeal = [acceptBigDeal, declineBigDeal, createAuction];
-  if (buttonsDiv == undefined || buttonsDiv.display == "none") {
-    const cardDisplayDiv = getElementById("cardDisplay");
-    const buttons = createCardButtons(handlers[type]);
-    cardDisplayDiv.appendChild(buttons);
-  }
+  const cardDisplayDiv = getElementById("cardDisplay");
+  const buttons = createCardButtons(handlers[type]);
+  cardDisplayDiv.appendChild(buttons);
 }

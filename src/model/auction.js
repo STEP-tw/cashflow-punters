@@ -1,4 +1,4 @@
-const {NOT_ENOUGH_MONEY_TO_BID, LOW_BIDING_AMOUNT} = require("../constant.js");
+const { NOT_ENOUGH_MONEY_TO_BID, LOW_BIDING_AMOUNT } = require("../constant.js");
 
 class Auction {
   constructor(host, currentPrice, bidders) {
@@ -9,31 +9,38 @@ class Auction {
   }
 
   getBidder(playerName) {
-    return this.bidders.filter(({name}) => name == playerName)[0];
+    return this.bidders.filter(({ name }) => name == playerName)[0];
   }
 
   setCurrentBid(amount, player) {
     const bidder = this.getBidder(player);
     if (bidder.ledgerBalance < amount) {
-      return {ableToBid: false, message: NOT_ENOUGH_MONEY_TO_BID};
+      bidder.setNotification("You don't have enough money to raise bid.");
+      return { ableToBid: false, message: NOT_ENOUGH_MONEY_TO_BID };
     }
     if (this.currentBid < amount) {
       this.currentBid = amount;
       this.bidder = bidder;
-      return {ableToBid: true, message: "Bid of current active card"};
+      this.bidder.setNotification(`You have set the bid at ${amount}`);
+      return { ableToBid: true, message: "Bid of current active card" };
     }
-    return {ableToBid: false, message: LOW_BIDING_AMOUNT};
+    return { ableToBid: false, message: LOW_BIDING_AMOUNT };
   }
 
   passBid(player) {
-    this.bidders = this.bidders.filter(({name}) => name != player);
-    if (this.bidders.length == 0) return true;
+    if (player == this.bidder.name) return { isAbleToPass: false, isAuctionClosed: false };
+    this.bidders = this.bidders.filter(({ name }) => name != player);
+    if (this.bidders.length == 1) return { isAbleToPass: true, isAuctionClosed: true };
+    return { isAbleToPass: true, isAuctionClosed: false };
   }
 
   sellDeal() {
     if (this.bidder.name != this.host.name) {
+      this.bidder.setNotification('You have won the auction.');
       this.bidder.deductLedgerBalance(this.currentBid);
+      this.bidder.addDebitEvent(this.currentBid, ' purchased the deal in auction');
       this.host.addToLedgerBalance(this.currentBid);
+      this.host.addCreditEvent(this.currentBid, ' sold deal');
     }
   }
 }

@@ -33,12 +33,14 @@ const UNABLE_TO_DO_CHARITY_MSG =
 
 const NOT_ENOUGH_MONEY_TO_BID = "Sorry! you don't have enough money to bid.";
 
-const LOW_BIDING_AMOUNT = "Sorry! you have entered less money than current bid."
+const LOW_BIDING_AMOUNT = "Sorry! you have entered less money than current bid.";
+const ESCAPE_ERROR = "As a current bidder you can't drop out from the game.";
 
 module.exports = {
   gameSpaces,
   CHARITY_MSG,
   UNABLE_TO_DO_CHARITY_MSG,
   NOT_ENOUGH_MONEY_TO_BID,
-  LOW_BIDING_AMOUNT
+  LOW_BIDING_AMOUNT,
+  ESCAPE_ERROR
 };
