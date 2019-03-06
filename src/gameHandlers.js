@@ -9,14 +9,12 @@ const getGame = function(req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
   if (!req.game) {
-    console.log("Requested game is not present");
     return;
   }
 
   game.requester = game.getPlayerByName(playerName);
 
   if (!req.game.currentPlayer) {
-    console.log("All players bankrupted");
     game.isMyTurn = false;
     res.send(JSON.stringify(game));
     return;
@@ -292,7 +290,7 @@ const addToFastTrack = function(req, res) {
 const rollDiceForMLM = function(req, res) {
   const game = req.game;
   const data = game.rollDiceForMLM();
-  res.json(data);
+  res.send(JSON.stringify(data));
 };
 
 const removePlayer = function(req, res) {

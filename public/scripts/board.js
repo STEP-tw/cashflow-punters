@@ -211,7 +211,7 @@ const rollDiceForMLM = function() {
 };
 
 const handleMLM = function() {
-  const diceBlock = getElementById("dice_block");
+  const diceBlock = getElementById("dice1");
   diceBlock.onclick = null;
   const spacesHandlers = {
     charity: handleCharity,
@@ -222,9 +222,12 @@ const handleMLM = function() {
   }, 150);
   fetch("/rolldiceformlm")
     .then(res => res.json())
-    .then(({ diceValue, spaceType }) => {
+    .then(({ diceValue, spaceType, isMLMTurnLeft }) => {
       clearInterval(diceAnimationInterval);
       showDice([diceValue]);
+      if (isMLMTurnLeft) {
+        return rollDiceForMLM();
+      }
       spacesHandlers[spaceType] && spacesHandlers[spaceType]();
     });
 };

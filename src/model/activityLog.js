@@ -51,6 +51,14 @@ class ActivityLog {
     const msg = ` has escaped from rat race with rank ${rank}`;
     this.addActivity(msg, playerName);
   }
+
+  logMLM(gotMLM, playerName) {
+    if (gotMLM) {
+      this.addActivity(" got $500 for MLM", playerName);
+      return;
+    }
+    this.addActivity(" didn't get mlm", playerName);
+  }
 }
 
 module.exports = ActivityLog;

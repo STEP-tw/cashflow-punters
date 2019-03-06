@@ -412,14 +412,21 @@ class Game {
   }
 
   rollDice(numberOfDice) {
-    const oldSpaceNo = this.currentPlayer.currentSpace;
-    const diceValues = this.currentPlayer.rollDiceAndMove(numberOfDice);
+    const player = this.currentPlayer;
+    const oldSpaceNo = player.currentSpace;
+    const diceValues = player.rollDiceAndMove(numberOfDice);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
-    this.activityLog.addActivity(rolledDieMsg, this.currentPlayer.name);
-    const spaceType = this.board.getSpaceType(this.currentPlayer.currentSpace);
-    const isBankrupted = this.handleSpace(oldSpaceNo);
+    this.activityLog.addActivity(rolledDieMsg, player.name);
+    const spaceType = this.board.getSpaceType(player.currentSpace);
+    let isBankrupted = false;
     const isEligibleForMLM = this.isEligibleForMLM(oldSpaceNo, spaceType);
-    if (!isEligibleForMLM) this.handleSpace(oldSpaceNo);
+    if (!isEligibleForMLM) {
+      isBankrupted = this.handleSpace(oldSpaceNo);
+    }
+    if (isEligibleForMLM) {
+      player.setNotification("Roll dice for MLM.");
+      this.activityLog.addActivity("rolling dice for MLM", player.name);
+    }
     if (this.currentPlayer.removed) {
       this.nextPlayer();
       return;
@@ -549,11 +556,19 @@ class Game {
 
   rollDiceForMLM() {
     const player = this.currentPlayer;
-    const { gotMLM, diceValue } = player.rollDiceForMLM();
-    if (gotMLM) this.activityLog.addActivity("got $500 for MLM", player.name);
-    this.handleSpace(player.oldSpaceNo);
-    const spaceType = this.getSpaceType(player.currentSpace);
-    return { spaceType, diceValue };
+    const { gotMLM, diceValue, isMLMTurnLeft } = player.rollDiceForMLM();
+    this.activityLog.logMLM(gotMLM, player.name);
+    const spaceType = this.board.getSpaceType(player.currentSpace);
+    if (!isMLMTurnLeft) {
+      player.removeMLMTurn();
+      this.handleSpace(player.oldSpaceNo);
+      player.setNotification("Your MLM turn is over");
+    }
+    if (isMLMTurnLeft) {
+      player.setNotification("Roll dice again for MLM.");
+      this.activityLog.addActivity(" rolling dice again for MLM", player.name);
+    }
+    return { spaceType, diceValue, isMLMTurnLeft };
   }
 
   removePlayer(name) {
