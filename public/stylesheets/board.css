@@ -1067,3 +1067,25 @@ thead {
   color: grey;
   background: transparent;
 }
+
+.blinking {
+  animation: blinkingText 0.4s 1;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+}
