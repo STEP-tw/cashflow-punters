@@ -23,6 +23,7 @@ class Game {
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
     this.bankruptedPlayersCount = 0;
+    this.stableGameJson = JSON.stringify(this);
   }
 
   addPlayer(player) {
@@ -116,6 +117,7 @@ class Game {
     if (this.currentPlayer.isDownSized()) {
       this.skipTurn();
     }
+    this.stableGameJson = JSON.stringify(this);
     this.resetActiveCard();
   }
 

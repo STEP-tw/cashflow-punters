@@ -308,7 +308,7 @@ const saveGame = function(req, res) {
   fs.readFile("./data/savedGames.json", function(err, data) {
     const savedGames = JSON.parse(data);
     const gameId = req.cookies["gameId"];
-    savedGames[gameId] = req.game;
+    savedGames[gameId] = JSON.parse(req.game.stableGameJson);
     fs.writeFile("./data/savedGames.json", JSON.stringify(savedGames), () => 0);
   });
   res.end();
