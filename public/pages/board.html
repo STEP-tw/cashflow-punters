@@ -12,6 +12,7 @@
     <script src="/manageDebts.js"></script>
     <script src="/market.js"></script>
     <script src="/notifyEscape.js"></script>
+    <script src="/allPlayersInfo.js"></script>
     <link rel="stylesheet" href="/board.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
@@ -73,36 +74,38 @@
             <div class="financial_details">
               <table class="player_details">
                 <tr>
-                  <td>Name :</td>
-                  <td><span id="name" onclick="saveGame()">PlayerName</span></td>
+									<td style="border: none;"><span id="name" onclick="saveGame();">PlayerName</span></td>
+                </tr> 
+                <tr>
+                  <td><span id="Profession" style="font-weight: lighter;">prof</span></td>
+									<td>
+										<div class="progress-bar-div" id="progress-div">
+										<div class="current-progress" id="progress"></div>
+									</div></td>
                 </tr>
                 <tr>
-                  <td>Profession :</td>
-                  <td><span id="Profession">prof</span></td>
+                  <td class="basic_fs_heading" style="color: #57707D">Income :</td>
+                  <td class="basic-fs-value">$ <span id="income">Income</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading">Income :</td>
-                  <td><span id="income">Income</span></td>
+                  <td class="basic_fs_heading" style="color: #57707D">Passive Income :</td>
+                  <td class="basic-fs-value">$ <span id="passiveIn">passiveIn</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading">Passive Income :</td>
-                  <td><span id="passiveIn">passiveIn</span></td>
+                  <td class="basic_fs_heading" style="color: #57707D">Total Income :</td>
+                  <td class="basic-fs-value">$ <span id="totalIn">totalIn</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading">Total Income :</td>
-                  <td><span id="totalIn">totalIn</span></td>
+                  <td class="basic_fs_heading" style="color: #57707D">Total Expense :</td>
+                  <td class="basic-fs-value">$ <span id="expenses">expenses</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading">Total Expense :</td>
-                  <td><span id="expenses">expenses</span></td>
-                </tr>
-                <tr>
-                  <td class="basic_fs_heading">Monthly Cashflow :</td>
-                  <td><span id="cashflow">cashflow</span></td>
+                  <td class="basic_fs_heading" style="color: #57707D">Monthly Cashflow :</td>
+                  <td class="basic-fs-value">$ <span id="cashflow">cashflow</span></td>
                 </tr>
                 <tr>
                   <td>Ledger Balance :</td>
-                  <td><span id="ledger-balance">$0</span></td>
+                  <td style="font-weight: lighter;">$ <span id="ledger-balance">$0</span></td>
                 </tr>
               </table>
               <div class="open-player-details">
@@ -171,6 +174,12 @@
             </div>
           </div>
           <div class="right_part">
+						<div class="game-options">
+							<button>Leave Game</button>
+							<button>Save Game</button>
+						</div>
+						<div class="all-player-details" id="players-information">
+						</div>
             <div class="activity_log" id="activityLog"></div>
             <div></div>
           </div>

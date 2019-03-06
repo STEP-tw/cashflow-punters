@@ -7,10 +7,9 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
-  /* background-color: #f9f9f1; */
   font-weight: 400;
   font-family: "Roboto", sans-serif;
-  color: rgb(82, 79, 79);
+  color: #3A4B53;
   background-color: rgb(242, 248, 252);
 }
 
@@ -229,7 +228,7 @@ button:hover {
 }
 
 .right_part {
-  padding: 1%;
+	padding: 1%;
   width: 30%;
 }
 
@@ -286,16 +285,17 @@ button:hover {
   background-color: white;
   border-radius: 2vh;
   overflow-y: scroll;
-  height: 96%;
+  height: 30%;
   border-top-right-radius: 2vh;
-  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	padding: 3%;
 }
 
 .activity {
   position: relative;
   display: flex;
   padding-left: 2%;
-  border-bottom: dotted grey 1px;
+  border-bottom: dotted #DFE5E8 1px;
   margin: 5% 0 0 2%;
   width: 95%;
   height: fit-content;
@@ -338,15 +338,15 @@ button:hover {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  position: relative;
+	position: relative;
 }
 
 .doodad-card {
-  background-color: #f7e1de;
+  background-color: rgba(241, 248, 250, 1);
 }
 
 .market-card {
-  background-color: rgba(182, 218, 215, 0.7);
+  background-color: rgba(241, 248, 250, 1);
 }
 
 .card-title {
@@ -357,7 +357,7 @@ button:hover {
   border-radius: 9px;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
 
-  color: black;
+	color: #3A4B53;
 
   height: 70%;
   width: 90%;
@@ -371,7 +371,7 @@ button:hover {
 }
 
 .smallDeal {
-  background: rgba(207, 225, 193, 0.7);
+  background: rgba(250, 252, 248, 0.7);
 }
 
 .smallDeal > button {
@@ -458,12 +458,14 @@ button:hover {
 }
 
 .notifications {
-  border: #00000038 solid 1px;
+	border: #DFE5E8 solid 1px;
+	border-radius: 2vh;
   height: 20%;
-  padding: 0 1%;
+  padding: 0 3%;
   display: flex;
   flex-direction: column;
-  background-color: #ffffffd9;
+	background-color: #F5F7F8;
+	/* color: whitesmoke; */
 }
 
 .overlay {
@@ -543,7 +545,7 @@ button:hover {
 .player1 {
   height: 10%;
   width: 10%;
-  background-color: rgb(237, 158, 158);
+	background-color:rgb(237, 179, 138) ;
 }
 
 .player2 {
@@ -573,12 +575,12 @@ button:hover {
 .player6 {
   height: 10%;
   width: 10%;
-  background-color: rgb(237, 179, 138);
+  background-color: rgb(230, 192, 192);
 }
 
 .gamePiece {
   z-index: 1;
-  height: 5vh;
+  height: 6vh;
   width: 7vh;
   margin-bottom: 5%;
   margin-left: 5%;
@@ -867,10 +869,10 @@ table {
 }
 
 td {
-  border-bottom: solid 1px grey;
+  border-bottom: solid 1px #BECBD2;
   text-align: left;
   font-weight: bold;
-  color: #3a4b53;
+  color: #3A4B53;
   height: 2em;
 }
 
@@ -908,7 +910,7 @@ basic_fs_heading {
   text-align: center;
   line-height: 3;
   margin-right: 15px;
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .title {
@@ -1088,4 +1090,53 @@ thead {
   100% {
     color: #000;
   }
+}
+.all-player-details {
+	display: flex;
+	flex-direction: column;
+	height: 53%;
+	background-color: white;
+  border-radius: 2vh;
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	margin-bottom: 5%;
+	padding: 10% 5%;
+}
+ 
+.game-options {
+	display: flex;
+	align-items:flex-start;
+	justify-content: flex-end;
+  border-radius: 2vh;
+  height: 10%;
+	border-top-right-radius: 2vh;
+}
+
+.game-options > button {
+	margin: 0% 2%;
+	padding: 3% 3%;
+	border-radius: 1.7vh;
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+}
+
+.progress-bar-div {
+	width:100px;
+	height:10px;
+	border-radius: 50px;
+	border:3px solid #BECBD2;
+}
+
+.basic-fs-value {
+	color: #57707D;
+	font-weight: lighter;
+}
+
+.other-player-Btn {
+	width: 30px;
+	height:30px;
+}
+
+.current-progress {
+	height: 100%;
+	background-color: #607D8B;
+	border-radius: 50px;
 }

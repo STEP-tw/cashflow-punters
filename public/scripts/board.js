@@ -279,9 +279,10 @@ const polling = function(game) {
   if (game.activeCard.data) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
+	showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
   setFinancialStatement(requester);
-  setCashLedger(requester);
+	setCashLedger(requester);
   showNotification(requester.notification);
   players.forEach(updateGamePiece);
   if (game.isMyTurn) {
