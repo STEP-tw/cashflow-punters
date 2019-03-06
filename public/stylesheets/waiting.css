@@ -1,13 +1,13 @@
 header {
   font-size: 60px;
-  height: 30%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-	align-items: center;
+  align-items: center;
   font-family: "Lobster", cursive;
-	text-shadow: 4px 3px #BECBD2;
-	color: #4D636F;
+  text-shadow: 4px 3px #becbd2;
+  color: #4d636f;
 }
 
 main {
@@ -20,10 +20,10 @@ main {
 
 .sub-header {
   font-size: 30px;
-	font-family: "Coiny", cursive;
-	font-weight: bold;
-	color: #7D97A5;
-	text-shadow: 1px 1px #BECBD2;
+  font-family: "Coiny", cursive;
+  font-weight: bold;
+  color: #7d97a5;
+  text-shadow: 1px 1px #becbd2;
 }
 
 .box {
@@ -32,27 +32,27 @@ main {
   border-radius: 5%;
   display: flex;
   flex-direction: column;
-	align-items: center;
-	overflow: scroll;
+  align-items: center;
+  overflow: scroll;
 }
 
 .button {
-	width: 150px;
-	height: 40px;
-	margin-top: 50px;
+  width: 150px;
+  height: 40px;
+  margin-top: 50px;
 
-	color: whitesmoke;
-	background: #607D8B;
+  color: whitesmoke;
+  background: #607d8b;
 
-	border-radius: 20px;
-	border: none;
+  border-radius: 20px;
+  border: none;
 
-	font-size: 18px;
-	font-family: inherit;
-	font-weight: inherit;
-	cursor: pointer;
-	outline: none;
-	margin: 10px;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+  margin: 30px;
 }
 
 .options-field-row {
@@ -66,23 +66,56 @@ main {
 }
 
 .waiting-gif {
-  height: 70px;
+  height: 32px;
+  padding-bottom: 1%;
 }
 
-h3{
+h3 {
   margin-top: 0px;
 }
 
-ul{
-  width:40%;
+ul {
+  width: 40%;
   overflow: scroll;
 }
 
 li {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .buttons {
-	display: flex;
-	align-content: space-around;
+  display: flex;
+  align-content: space-around;
+}
+
+.players-field {
+  width: 30%;
+  height: 60%;
+  padding-bottom: 1%;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfe5e8;
+}
+
+.waiting-player-field {
+  display: flex;
+  flex-direction: column;
+
+  width: 70%;
+  height: 80%;
+  text-align: left;
+  padding: 8%;
+
+  box-shadow: 0px 0px 23px -2px rgba(102, 97, 102, 0.52);
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: whitesmoke;
+}
+
+.lobby-title {
+  font-weight: bold;
+  font-size: 23px;
 }

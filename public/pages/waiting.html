@@ -5,6 +5,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
     <link
+      rel="stylesheet"
+      href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"
+    />
+    <link
       href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto"
       rel="stylesheet"
     />
@@ -18,14 +22,18 @@
       <p class="sub-header">Get out of the Rat Race !</p>
     </header>
     <main>
-      <p style="font-weight: bold; font-size: 23px;">Game ID : <span id="gameId" style="font-weight:bolder">1234</span></p>
+      <p style="font-weight: bold; font-size: 23px;">
+        Game ID : <span id="gameId" style="font-weight:bolder">1234</span>
+      </p>
       <img class="waiting-gif" src="/waiting.gif" alt="waiting" />
-      <section class="box">
-				<p style="font-weight: bold; font-size:23px;">Players in lobby :</p>
-        <ul id="playersList"></ul>
-      </section>
-      <section class="buttons" id="buttons_space">
-        <a id="start_button_space"></a>
+      <section class="players-field w3-cotainer">
+        <p class="lobby-title">Players in lobby </p>
+        <section class="waiting-player-field">
+          <ul id="playersList"></ul>
+        </section>
+        <section class="buttons" id="buttons_space">
+          <a id="start_button_space"></a>
+        </section>
       </section>
     </main>
   </body>
