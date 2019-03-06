@@ -19,7 +19,7 @@ const {
   isSharePresent,
   buyShares,
   sellShares,
-  sellAssets
+  saveGame
 } = require("../src/gameHandlers");
 
 describe("getgame", function() {
@@ -298,8 +298,13 @@ describe("acceptSmallDeal", function() {
     res = {};
   beforeEach(() => {
     req.game = {
-      activeCard: { data: { relatedTo: "" }, dealDone: false, dealDoneCount: 0, drawnBy:"player1" },
-      getPlayerByName:()=>{}
+      activeCard: {
+        data: { relatedTo: "" },
+        dealDone: false,
+        dealDoneCount: 0,
+        drawnBy: "player1"
+      },
+      getPlayerByName: () => {}
     };
     req.game.players = { length: 0 };
     req.game.activityLog = { addActivity: sinon.spy() };
@@ -494,7 +499,7 @@ describe("sellShares", function() {
     req.game.sellShares = sinon.spy();
     res.json = sinon.spy();
   });
-  it("should return statement", function() {
+  it("should call res.json once", function() {
     sellShares(req, res);
     expect(res.json.calledOnce).to.be.true;
     expect(req.game.sellShares.calledOnce).to.be.true;

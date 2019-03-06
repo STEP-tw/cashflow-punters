@@ -1,4 +1,7 @@
-const { NOT_ENOUGH_MONEY_TO_BID, LOW_BIDING_AMOUNT } = require("../constant.js");
+const {
+  NOT_ENOUGH_MONEY_TO_BID,
+  LOW_BIDING_AMOUNT
+} = require("../constant.js");
 
 class Auction {
   constructor(host, currentPrice, bidders) {
@@ -28,19 +31,24 @@ class Auction {
   }
 
   passBid(player) {
-    if (player == this.bidder.name) return { isAbleToPass: false, isAuctionClosed: false };
+    if (player == this.bidder.name)
+      return { isAbleToPass: false, isAuctionClosed: false };
     this.bidders = this.bidders.filter(({ name }) => name != player);
-    if (this.bidders.length == 1) return { isAbleToPass: true, isAuctionClosed: true };
+    if (this.bidders.length == 1)
+      return { isAbleToPass: true, isAuctionClosed: true };
     return { isAbleToPass: true, isAuctionClosed: false };
   }
 
   sellDeal() {
     if (this.bidder.name != this.host.name) {
-      this.bidder.setNotification('You have won the auction.');
+      this.bidder.setNotification("You have won the auction.");
       this.bidder.deductLedgerBalance(this.currentBid);
-      this.bidder.addDebitEvent(this.currentBid, ' purchased the deal in auction');
+      this.bidder.addDebitEvent(
+        this.currentBid,
+        " purchased the deal in auction"
+      );
       this.host.addToLedgerBalance(this.currentBid);
-      this.host.addCreditEvent(this.currentBid, ' sold deal');
+      this.host.addCreditEvent(this.currentBid, " sold deal");
     }
   }
 }
