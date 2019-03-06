@@ -1,4 +1,5 @@
 const { UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
+const fs = require("fs");
 
 const startGame = function (req, res) {
   req.game.startGame();
@@ -303,6 +304,16 @@ const removePlayer = function(req, res) {
   res.end();
 };
 
+const saveGame = function(req, res) {
+  fs.readFile("./data/saveGames.json", function(err, data) {
+    const savedGames = JSON.parse(data);
+    const gameId = req.cookies["gameId"];
+    savedGames[gameId] = req.game;
+    fs.writeFile("./data/saveGames.json", JSON.stringify(savedGames), () => 0);
+  });
+  res.end();
+};
+
 module.exports = {
   getGame,
   startGame,
@@ -334,5 +345,6 @@ module.exports = {
   addToFastTrack,
   handleBid,
   rollDiceForMLM,
-  removePlayer
+  removePlayer,
+  saveGame
 };

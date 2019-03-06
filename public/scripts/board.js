@@ -389,6 +389,10 @@ const getGame = function() {
     });
 };
 
+const saveGame = function() {
+  fetch("/savegame");
+};
+
 const initialize = function() {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);

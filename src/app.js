@@ -14,6 +14,7 @@ const {
   getGame,
   payDebt,
   rollDice,
+  saveGame,
   hasShares,
   buyShares,
   startGame,
@@ -74,6 +75,7 @@ app.get("/isabletodocharity", isAbleToDoCharity);
 app.get("/financialStatement", getPlayersFinancialStatement);
 app.get("/rolldiceformlm", rollDiceForMLM);
 app.get("/leavegame", removePlayer);
+app.get("/savegame", saveGame);
 
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);
