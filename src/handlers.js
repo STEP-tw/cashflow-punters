@@ -1,4 +1,7 @@
 const renderHomePage = function(req, res) {
+  if (req.game) {
+    res.redirect("board.html");
+  }
   res.redirect("/homepage.html");
 };
 
