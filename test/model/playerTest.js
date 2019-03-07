@@ -2,6 +2,7 @@ const Player = require("../../src/model/player.js");
 const CashLedger = require("./../../src/model/cashLedger.js");
 const { expect } = require("chai");
 const _ = require("lodash");
+const sinon = require("sinon");
 
 describe("Player", function() {
   describe("move", () => {
@@ -354,5 +355,82 @@ describe("Player", function() {
 
       expect(player.charityTurns).to.equals(2);
     });
+  });
+});
+
+describe("rollDiceForMLM", function() {
+  it("should rollDice on MLM space", function() {
+    const player = new Player();
+    player.rollDice = sinon.spy();
+    player.dice.total = sinon.spy();
+    player.incrementMLMTurns = sinon.spy();
+    let MLM = player.rollDiceForMLM();
+    expect(MLM).to.eql({
+      diceValue: undefined,
+      gotMLM: false,
+      isMLMTurnLeft: false
+    });
+  });
+
+  it("should rollDice on MLM space", function() {
+    const player = new Player();
+    player.rollDice = sinon.spy();
+    player.dice.total = () => 2;
+    player.incrementMLMTurns = sinon.spy();
+    let MLM = player.rollDiceForMLM();
+    expect(MLM).to.eql({
+      diceValue: 2,
+      gotMLM: true,
+      isMLMTurnLeft: false
+    });
+  });
+});
+
+describe("returnMLMTurns", function() {
+  it("should return MLM turns", function() {
+    const player = new Player();
+    player.MLMTurns = 1;
+    player.removeMLMTurn();
+    expect(player.MLMTurns).to.equal(0);
+  });
+});
+
+describe("MLMTurnLeft", function() {
+  it("should return MLM turns", function() {
+    const player = new Player();
+    player.MLMTurns = 1;
+    player.isMLMTurnLeft();
+    expect(player.MLMTurns).to.equal(1);
+  });
+});
+
+describe("removeAllShares", function() {
+  it("should remove all shares of player", function() {
+    const player = new Player();
+    player.assets = {};
+    player.assets.shares = { OK4U: {} };
+    player.addCreditEvent = sinon.spy();
+    player.removeAllShares();
+    expect(player.assets.shares).to.eql({});
+  });
+});
+
+describe("addMLM", function() {
+  it("should add the MLM turns", function() {
+    const player = new Player();
+    player.hasMLM = false;
+    player.MLMProfit;
+    player.MLMCardsCount = 1;
+    player.addMLM({ cost: 100 });
+    expect(player.MLMCardsCount).to.equal(2);
+  });
+});
+
+describe("incrementMLMTurns", function() {
+  it("should increment MLM turns", function() {
+    const player = new Player();
+    player.MLMTurns = 2;
+    player.incrementMLMTurns();
+    expect(player.MLMTurns).to.equal(3);
   });
 });

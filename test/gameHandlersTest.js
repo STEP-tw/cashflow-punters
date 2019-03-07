@@ -19,6 +19,11 @@ const {
   isSharePresent,
   buyShares,
   sellShares,
+  removePlayer,
+  rollDiceForMLM,
+  handleAuction,
+  addToFastTrack,
+  handleBid,
   saveGame
 } = require("../src/gameHandlers");
 
@@ -505,3 +510,81 @@ describe("sellShares", function() {
     expect(req.game.sellShares.calledOnce).to.be.true;
   });
 });
+
+describe("removePlayer", function() {
+  it("should return statement", function() {
+    const req = {
+      cookies: { playerName: "anu" },
+      game: { removePlayer: sinon.spy() }
+    };
+    const res = { clearCookie: sinon.spy(), end: sinon.spy() };
+    removePlayer(req, res);
+    expect(res.end.calledOnce).to.be.true;
+  });
+});
+
+describe("rollDiceForMLM", function() {
+  it("should return statement", function() {
+    const req = {
+      cookies: { playerName: "anu" },
+      game: { rollDiceForMLM: sinon.spy() }
+    };
+    const res = { clearCookie: sinon.spy(), send: sinon.spy() };
+    rollDiceForMLM(req, res);
+    expect(res.send.calledOnce).to.be.true;
+  });
+});
+
+describe("handleAuction", function() {
+  it("should return statement", function() {
+    const req = {
+      body: { action: true },
+      cookies: { playerName: "anu" },
+      game: { handleAuction: sinon.spy(), createAuction: sinon.spy() }
+    };
+    const res = {
+      clearCookie: sinon.spy(),
+      send: sinon.spy(),
+      json: sinon.spy()
+    };
+    handleAuction(req, res);
+    expect(res.json.calledOnce).to.be.true;
+  });
+});
+
+describe("addToFastTrack", function() {
+  it("should return statement", function() {
+    const req = {
+      cookies: { playerName: "anu" },
+      game: { addToFasttrack: sinon.spy() }
+    };
+    const res = { clearCookie: sinon.spy(), end: sinon.spy() };
+    addToFastTrack(req, res);
+    expect(res.end.calledOnce).to.be.true;
+  });
+});
+
+describe("handleBid", function() {
+  it("should return statement", function() {
+    const req = {
+      body: { wantToBid: true },
+      cookies: { playerName: "anu" },
+      game: { currentAuction: { present: false } }
+    };
+    const res = { json: sinon.spy() };
+    handleBid(req, res);
+    expect(res.json.calledOnce).to.be.true;
+  });
+
+  it("should return statement", function() {
+    const req = {
+      body: { wantToBid: true },
+      cookies: { playerName: "anu" },
+      game: { currentAuction: { present: true }, handleBid: sinon.spy() }
+    };
+    const res = { json: sinon.spy() };
+    handleBid(req, res);
+    expect(res.json.calledOnce).to.be.true;
+  });
+});
+
