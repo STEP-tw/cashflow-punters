@@ -1,4 +1,5 @@
 const { rollDice } = require("../src/gameHandlers");
+const { renderHomePage } = require("../src/handlers");
 const chai = require("chai");
 const sinon = require("sinon");
 
@@ -43,5 +44,17 @@ describe("rollDice", function() {
     currentPlayer.name = "a";
     rollDice(req, res);
     chai.expect(req.game.activityLog.addActivity.calledOnce).to.be.false;
+  });
+});
+
+describe("renderHomePage", function() {
+  it("should render home page if game is already present", function() {
+    let req = { game: true };
+    let res = {
+      redirect: url => {
+        chai.expect(url).to.equal("board.html");
+      }
+    };
+    renderHomePage(req, res);
   });
 });

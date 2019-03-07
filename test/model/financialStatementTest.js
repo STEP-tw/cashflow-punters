@@ -1,5 +1,6 @@
 const FinancialStatement = require("../../src/model/financialStatement");
 const { expect } = require("chai");
+const sinon = require("sinon");
 
 describe("", function() {
   let financialStatement;
@@ -124,14 +125,79 @@ describe("", function() {
     });
   });
 
-
   describe("getDownpayment", function() {
     it("should return the down refundable amount", function() {
-    financialStatement.assets.realEstates = [{type:"BR/2",downPayment:5000,cost:50000},
-    {type:"BR/3",downPayment:4000,cost:50000},{type:"BR/4",downPayment:6000,cost:50000}]
-      expect(financialStatement.getDownPayment({type:"BR/2",downPayment:5000,cost:50000}))
-      .to.be.deep.equal(2500)
+      financialStatement.assets.realEstates = [
+        { type: "BR/2", downPayment: 5000, cost: 50000 },
+        { type: "BR/3", downPayment: 4000, cost: 50000 },
+        { type: "BR/4", downPayment: 6000, cost: 50000 }
+      ];
+      expect(
+        financialStatement.getDownPayment({
+          type: "BR/2",
+          downPayment: 5000,
+          cost: 50000
+        })
+      ).to.be.deep.equal(2500);
     });
   });
+});
 
+describe("sellGoldCoins", function() {
+  it("should sell the gold coins if player has coins to sell", function() {
+    const fs = new FinancialStatement();
+    fs.assets = { goldCoins: 5 };
+    fs.ledgerBalance = 100;
+    fs.setNotification = sinon.spy();
+    fs.sellGoldCoins(5, 100);
+    expect(fs.assets.goldCoins).to.equal(0);
+  });
+});
+
+describe("sellEstate", function() {
+  it("should sell the gold coins if player has coins to sell", function() {
+    const fs = new FinancialStatement();
+    fs.liabilities = { realEstates: [{}] };
+    fs.calculateProfit = sinon.spy();
+    fs.ledgerBalance = 100;
+    fs.setNotification = sinon.spy();
+    marketCard = { data: { cash: 100, percentage: null } };
+    const estate = { mortgage: 100, cost: 20000 };
+    fs.sellEstate(estate, marketCard);
+    expect(fs.liabilities.realEstates).to.eql([{}]);
+  });
+
+  it("should sell the gold coins if player has coins to sell", function() {
+    const fs = new FinancialStatement();
+    const marketCard = { data: { cash: 100, percentage: null } };
+    const estate = { mortgage: 100, cost: 20000 };
+    let profit = fs.calculateProfit(estate, marketCard);
+    expect(profit).to.equal(20000);
+  });
+
+  it("should sell the gold coins if player has coins to sell", function() {
+    const fs = new FinancialStatement();
+    const marketCard = { data: { cash: null, percentage: 10 } };
+    const estate = { mortgage: 100, cost: 20000 };
+    let profit = fs.calculateProfit(estate, marketCard);
+    expect(profit).to.equal(21900);
+  });
+});
+
+describe("hasShares", function() {
+  it("should return number of shares player has", function() {
+    const fs = new FinancialStatement();
+    fs.assets = { shares: { OK4U: {} } };
+    let shares = fs.hasShares("OK4U");
+    expect(shares).to.equal(true);
+  });
+});
+
+describe("hasShares", function() {
+  it("should return number of shares player has", function() {
+    const fs = new FinancialStatement();
+    fs.assets = { goldCoins: 4 };
+    let coins = fs.hasGoldCoins();
+    expect(coins).to.equal(true);
+  });
 });
