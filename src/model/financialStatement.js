@@ -124,7 +124,6 @@ class FinancialStatement extends CashLedger {
   calculateProfit(estate, marketCard) {
     const { cash, percentage } = marketCard.data;
     const { mortgage, cost } = estate;
-    console.log(mortgage, cost);
     if (cash) return cost + cash - mortgage;
     return (1 + percentage / 100) * cost - mortgage;
   }

@@ -3,6 +3,8 @@ const sinon = require("sinon");
 const Cards = require("../../src/model/cards");
 const Player = require("../../src/model/player");
 const { expect } = require("chai");
+const Board = require("../../src/model/board");
+const { gameSpaces } = require("../../src/constant");
 
 describe("handleSpace", function() {
   let game, player1;
@@ -94,8 +96,10 @@ describe("handleSpace", function() {
     const market = new Cards(marketCards);
     const smallDeals = new Cards(smallDealCards);
     const bigDeals = new Cards(bigDealCards);
+    const cardStore = { professions, doodads, market, smallDeals, bigDeals };
+    const board = new Board(gameSpaces);
 
-    game = new Game({ professions, doodads, market, smallDeals, bigDeals });
+    game = new Game(cardStore, board);
 
     game.board = {
       getPayDaySpaces: sinon.stub()
@@ -141,7 +145,6 @@ describe("handleSpace", function() {
         .has.property("msg")
         .equal("'s shares of GRO4US got doubled");
     });
-
 
     it("should double shares if dice value is less than 4.", function() {
       player1.rollDie = sinon.stub();
@@ -346,8 +349,7 @@ describe("handleSpace", function() {
         .to.have.property("data")
         .to.be.an("Object");
     });
-
-   });
+  });
 
   describe("handleMarketCard", function() {
     it("should deduct expense amount from ledger balance if market card related to expense is drawn ", function() {
@@ -552,6 +554,101 @@ describe("handleSpace", function() {
       };
 
       expect(game.isPlayerCapableToSell("player1", 50)).to.be.false;
+    });
+  });
+
+  describe("removePlayer", function() {
+    it("should remove the player form players array and add the activity into activity log", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+      game.removePlayer("player1");
+
+      expect(game.players)
+        .to.be.an("Array")
+        .of.length(0);
+    });
+  });
+
+  describe("rollDiceForMLM", function() {
+    it("should process the rolling dice of current player and return false when turn is not still over", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+      game.board.getSpaceType = sinon.stub();
+      game.board.getSpaceType.onFirstCall().returns("deal");
+      const player = game.players[0];
+      const MLMCard = { cost: 500 };
+      player.addMLM(MLMCard);
+      player.addMLM(MLMCard);
+
+      expect(game.rollDiceForMLM())
+        .to.be.an("Object")
+        .to.have.property("isMLMTurnLeft")
+        .to.equal(true);
+    });
+
+    it("should process the rolling dice of current player and return true when mlm turn is over", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+      game.handleSpace = sinon.spy();
+      game.board.getSpaceType = sinon.stub();
+      game.board.getSpaceType.onFirstCall().returns("deal");
+      const player = game.players[0];
+      const MLMCard = { cost: 500 };
+      player.addMLM(MLMCard);
+
+      expect(game.rollDiceForMLM())
+        .to.be.an("Object")
+        .to.have.property("isMLMTurnLeft")
+        .to.equal(false);
+      sinon.assert.calledOnce(game.handleSpace);
+    });
+  });
+
+  describe("rollDiceForMLM", function() {
+    it("should process the rolling dice of current player and return false when turn is not still over", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+
+      game.addToFasttrack("player1");
+
+      expect(game.players[0])
+        .to.have.property("notifyEscape")
+        .to.equal(false);
+
+      expect(game)
+        .to.have.property("fasttrackPlayers")
+        .to.have.length(1);
+    });
+  });
+
+  describe("hasCharityTurns", function() {
+    it("should call the player function hasCharityturns", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+      const player = game.players[0];
+      player.hasCharityTurns = sinon.spy();
+      game.hasCharityTurns();
+
+      sinon.assert.calledOnce(player.hasCharityTurns);
+    });
+  });
+
+  describe("rollDice", function() {
+    it("should roll dice of player and should check for bankruptcy and mlm", function() {
+      game.addPlayer(player1);
+      game.initializeGame();
+      game.board.getSpaceType = sinon.stub();
+      game.board.getSpaceType.onFirstCall().returns("deal");
+      const player = game.players[0];
+      player.rollDiceAndMove = sinon.stub();
+      player.rollDiceAndMove.onFirstCall().returns([1, 2]);
+      game.handleSpace = sinon.stub();
+      game.handleSpace.onFirstCall().returns(false);
+
+      expect(game.rollDice(1))
+        .to.be.an("Object")
+        .to.have.property("diceValues")
+        .to.deep.equals([1,2]);
     });
   });
 });

@@ -60,7 +60,6 @@ const displayJoinTemplate = function() {
   const joinButton = createButton("JOIN", "button");
   const messageDiv = createElement("div");
 	messageDiv.id = "messageDiv";
-	// optionsField.className = "host-join-form";
   joinButton.onclick = canJoin;
   appendChildren(joinForm, [
     nameInput,

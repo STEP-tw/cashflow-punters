@@ -230,7 +230,7 @@ describe("Player", function() {
     });
   });
 
-  describe("rollDice", function() {
+  describe("rollDiceAndMove", function() {
     it("should roll one dice and return the value on dice", function() {
       expect(player.rollDiceAndMove())
         .to.be.an("Array")
