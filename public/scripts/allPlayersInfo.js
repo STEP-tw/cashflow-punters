@@ -1,7 +1,7 @@
 const displayFinancialStament = function(player){
 	setFinancialStatement(player);
 	showOverlay('fs_overlay')
-}
+};
 
 const createFinancialStatmentOption = function(player){
 	const fsOption = createElement('td');
@@ -13,11 +13,17 @@ const createFinancialStatmentOption = function(player){
 	return fsOption;
 };
 
-const createCashLedgerOption = function(){
+const displayCashLedger = function(player) {
+	setCashLedger(player);
+	showOverlay('cash-ledger-overlay');
+};
+
+const createCashLedgerOption = function(player){
 	const ledgerOption = createElement('td');
 	const ledgerIcon = createElement('img');
 	ledgerIcon.src = "/images/ledger.png";
 	ledgerIcon.className = "other-player-Btn";
+	ledgerIcon.onclick = displayCashLedger.bind(null, player);
 	ledgerOption.appendChild(ledgerIcon);
 	return ledgerOption;
 };
@@ -47,7 +53,7 @@ const createInfoTable = function(players) {
 		playerInfo.appendChild(createName(player));
 		playerInfo.appendChild(createProgressBar(player));
 		playerInfo.appendChild(createFinancialStatmentOption(player));
-		playerInfo.appendChild(createCashLedgerOption());
+		playerInfo.appendChild(createCashLedgerOption(player));
 		table.appendChild(playerInfo);
 	});
 	return table;
