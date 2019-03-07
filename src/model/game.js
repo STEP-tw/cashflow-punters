@@ -46,7 +46,8 @@ class Game {
 
   initializeGame() {
     this.players.map(this.setProfession, this);
-    this.currentPlayer = this.players[0];
+		this.currentPlayer = this.players[0];
+		this.activityLog = new ActivityLog();
     this.activityLog.logGameStart();
     this.activityLog.logTurn(this.currentPlayer.name);
   }
@@ -588,7 +589,8 @@ class Game {
   }
 
   removePlayer(name) {
-    this.players = this.players.filter(player => player.name != name);
+		this.players = this.players.filter(player => player.name != name);
+		this.activityLog.addActivity(" left the game", name);
   }
 }
 
