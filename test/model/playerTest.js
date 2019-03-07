@@ -2,8 +2,6 @@ const Player = require("../../src/model/player.js");
 const CashLedger = require("./../../src/model/cashLedger.js");
 const sinon = require("sinon");
 const { expect } = require("chai");
-const _ = require("lodash");
-const sinon = require("sinon");
 
 describe("Player", function() {
   describe("move", () => {
