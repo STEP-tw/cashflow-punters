@@ -198,8 +198,17 @@ class FinancialStatement extends CashLedger {
   }
 
   hasEscape() {
-    return this.passiveIncome >= this.totalExpense;
-  }
+		let notification = "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to paid.";
+		if(this.passiveIncome >= this.totalExpense) {
+			if(this.liabilities["Bank Loan"] < this.ledgerBalance){
+				notification = "Congrats!! You are out of Rat race.";
+				this.setNotification(notification);
+				return true;
+			};
+			this.setNotification(notification);
+		};
+		return false;
+	}
 }
 
 module.exports = FinancialStatement;

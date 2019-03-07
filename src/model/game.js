@@ -90,7 +90,16 @@ class Game {
     this.activityLog.logEscape(playerName, rank);
     this.currentPlayer.notifyEscape = true;
     return;
-  }
+	}
+	
+	payBankLoan(player) {
+		const liability = "Bank Loan";
+		const liabilityPrice = player.liabilities[liability];
+		const expense = "Bank Loan Payment";
+		const expenseAmount = player.expenses[expense];
+		const debtDetails = {liability, liabilityPrice, expense, expenseAmount};
+		this.payDebt(player.name, debtDetails);
+	}
 
   nextPlayer() {
     this.currentPlayer.rolledDice = false;
@@ -103,6 +112,7 @@ class Game {
       return;
     }
     if (this.currentPlayer.hasEscape()) {
+			this.payBankLoan(this.currentPlayer);
       this.notifyEscaping();
     }
     if (this.currentPlayer.bankrupted) {
