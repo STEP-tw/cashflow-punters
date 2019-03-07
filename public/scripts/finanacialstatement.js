@@ -122,3 +122,12 @@ const setFinancialStatement = function (player) {
   updateStatementBoard(player);
   return player;
 };
+
+const showFinancialStatement = function() {
+	fetch("/requester")
+	.then(res => res.json())
+	.then(player => {
+		setFinancialStatement(player)		
+		showOverlay('fs_overlay');
+	})
+};

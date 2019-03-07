@@ -281,7 +281,6 @@ const polling = function(game) {
   }
 	showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
-  setFinancialStatement(requester);
 	setCashLedger(requester);
   showNotification(requester.notification);
   players.forEach(updateGamePiece);

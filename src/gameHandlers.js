@@ -314,6 +314,13 @@ const saveGame = function(req, res) {
   res.end();
 };
 
+const renderRequesterData = function(req, res) {
+	const { playerName } = req.cookies;
+	const game = req.game;
+	const requesterData = game.getPlayerByName(playerName);
+	res.send(JSON.stringify(requesterData));
+};
+
 module.exports = {
   getGame,
   startGame,
@@ -346,5 +353,6 @@ module.exports = {
   handleBid,
   rollDiceForMLM,
   removePlayer,
-  saveGame
+	saveGame,
+	renderRequesterData
 };

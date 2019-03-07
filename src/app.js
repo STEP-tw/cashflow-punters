@@ -42,7 +42,8 @@ const {
   rollDiceForSplitReverse,
   getPlayersFinancialStatement,
   rollDiceForMLM,
-  removePlayer
+	removePlayer,
+	renderRequesterData
 } = require("./gameHandlers");
 
 app.games = {};
@@ -76,6 +77,7 @@ app.get("/financialStatement", getPlayersFinancialStatement);
 app.get("/rolldiceformlm", rollDiceForMLM);
 app.get("/leavegame", removePlayer);
 app.get("/savegame", saveGame);
+app.get("/requester", renderRequesterData);
 
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);
