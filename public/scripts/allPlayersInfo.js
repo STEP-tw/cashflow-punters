@@ -1,8 +1,14 @@
-const createFinancialStatmentOption = function(){
+const displayFinancialStament = function(player){
+	setFinancialStatement(player);
+	showOverlay('fs_overlay')
+}
+
+const createFinancialStatmentOption = function(player){
 	const fsOption = createElement('td');
 	const fsIcon = createElement('img');
 	fsIcon.src = "/images/financialStatement.png";
 	fsIcon.className = "other-player-Btn";
+	fsIcon.onclick =	displayFinancialStament.bind(null, player);
 	fsOption.appendChild(fsIcon);
 	return fsOption;
 };
@@ -40,7 +46,7 @@ const createInfoTable = function(players) {
 		const playerInfo = createElement("tr");
 		playerInfo.appendChild(createName(player));
 		playerInfo.appendChild(createProgressBar(player));
-		playerInfo.appendChild(createFinancialStatmentOption());
+		playerInfo.appendChild(createFinancialStatmentOption(player));
 		playerInfo.appendChild(createCashLedgerOption());
 		table.appendChild(playerInfo);
 	});
