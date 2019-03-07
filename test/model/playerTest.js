@@ -1,5 +1,6 @@
 const Player = require("../../src/model/player.js");
 const CashLedger = require("./../../src/model/cashLedger.js");
+const sinon = require("sinon");
 const { expect } = require("chai");
 const _ = require("lodash");
 const sinon = require("sinon");
@@ -354,6 +355,75 @@ describe("Player", function() {
       player.reduceCharityTurns();
 
       expect(player.charityTurns).to.equals(2);
+    });
+  });
+
+  describe("removeAllShares", function() {
+    it("should remove all the player shares", function() {
+      player.assets.shares = { OK4U: { numberOfShares: 10, currentPrice: 10 } };
+      player.removeAllShares();
+
+      expect(player.assets.shares).to.deep.equals({});
+    });
+  });
+
+  describe("rollDiceForMLM", function() {
+    it("should add mlm profit if dice rolls from 1-3", function() {
+      player.rollDie = sinon.spy();
+      player.hasMLM = true;
+      player.MLMTurns = 0;
+      player.MLMCardsCount = 1;
+      player.MLMProfit = 500;
+      player.dice.total = sinon.stub();
+      player.dice.total.onFirstCall().returns(1);
+
+      player.rollDiceForMLM();
+
+      sinon.assert.calledOnce(player.rollDie);
+      expect(player.ledgerBalance).to.equal(2100);
+      expect(player.MLMTurns).to.equal(1);
+    });
+
+    it("should not add mlm profit if dice rolls from 4-6", function() {
+      player.rollDie = sinon.spy();
+      player.hasMLM = true;
+      player.MLMTurns = 0;
+      player.MLMCardsCount = 1;
+      player.MLMProfit = 500;
+      player.dice.total = sinon.stub();
+      player.dice.total.onFirstCall().returns(4);
+
+      player.rollDiceForMLM();
+
+      sinon.assert.calledOnce(player.rollDie);
+      expect(player.ledgerBalance).to.equal(1600);
+      expect(player.MLMTurns).to.equal(1);
+    });
+  });
+
+  describe("removeMLMTurns", function() {
+    it("should remove all mlm turns and set them to 0", function() {
+      player.MLMTurns = 2;
+
+      player.removeMLMTurn();
+
+      expect(player.MLMTurns).to.equal(0);
+    });
+  });
+
+  describe("addMLM", function() {
+    it("should add MLM to player and increase the MLM cards count by 1", function() {
+      const MLMCard = { cost: 500 };
+      player.addDebitEvent = sinon.spy();
+      player.setNotification = sinon.spy();
+
+      player.addMLM(MLMCard);
+      
+      expect(player.hasMLM).to.equal(true);
+      expect(player.MLMCardsCount).to.equal(1);
+      expect(player.ledgerBalance).to.equal(1100);
+      sinon.assert.calledOnce(player.addDebitEvent);
+      sinon.assert.calledOnce(player.setNotification);
     });
   });
 });

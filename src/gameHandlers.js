@@ -1,5 +1,4 @@
 const { UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
-const fs = require("fs");
 
 const startGame = function(req, res) {
   req.game.startGame();
@@ -305,6 +304,7 @@ const removePlayer = function(req, res) {
 };
 
 const saveGame = function(req, res) {
+  const fs = req.fs;
   fs.readFile("./data/savedGames.json", function(err, data) {
     const savedGames = JSON.parse(data);
     const gameId = req.cookies["gameId"];

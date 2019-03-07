@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
+const fs = require("fs");
 const { createGameId } = require("./utils/utils");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 const {
@@ -48,6 +49,7 @@ const {
 
 app.games = {};
 app.createGameId = createGameId;
+app.fs = fs;
 app.use(logRequest);
 app.use(cookieParser());
 app.use(getCurrentGame);

@@ -227,10 +227,7 @@ class Player extends FinancialStatement {
     this.rollDie();
     this.incrementMLMTurns();
     const isMLMTurnLeft = this.isMLMTurnLeft();
-    if (!isMLMTurnLeft) {
-    }
     const diceValue = this.dice.total();
-
     if (diceValue < 4) {
       this.addMLMProfit();
       return { gotMLM: true, diceValue, isMLMTurnLeft };
