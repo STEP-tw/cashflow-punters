@@ -127,7 +127,7 @@ const showFinancialStatement = function() {
 	fetch("/requester")
 	.then(res => res.json())
 	.then(player => {
-		setFinancialStatement(player)		
+		setFinancialStatement(player);	
 		showOverlay('fs_overlay');
-	})
+	});
 };

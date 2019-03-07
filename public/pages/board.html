@@ -113,7 +113,7 @@
                   <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
                 </div>
                 <div class="iconButtonDiv">
-                  <button id="ledgerBtn" class="iconBtn" onclick="showOverlay('cash-ledger-overlay')"></button>
+                  <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
                 </div>
                 <div class="iconButtonDiv">
                   <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
@@ -413,11 +413,12 @@
           ×
         </button>
         <div id="cash_ledger">
-          Cash ledger
+					Cash ledger
+					<div style="padding: 2% 0%;">Name: <span id="name-ledger"></span></div>
           <table class="cash-ledger">
-            <thead>
-              <tr class="row-content">
-                <th class="time">Time</th>
+						<thead>
+							<tr class="row-content">
+								<th class="time">Time</th>
                 <th class="amount">Amount</th>
                 <th class="balance">Balance</th>
                 <th class="reason">Description</th>
@@ -425,7 +426,7 @@
             </thead>
             <tbody id="cash-ledger-content"></tbody>
           </table>
-        </div>
+				</div>
       </div>
       <div id="container" class="container"></div>
 
