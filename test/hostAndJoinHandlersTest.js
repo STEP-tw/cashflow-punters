@@ -9,8 +9,8 @@ const {
   provideGameLobby
 } = require("../src/hostAndJoinHandlers");
 
-describe("hostGame", function() {
-  it("should redirect to url /waiting.html with statusCode 302", function(done) {
+describe("hostGame", function () {
+  it("should redirect to url /waiting.html with statusCode 302", function (done) {
     request(app)
       .post("/hostgame")
       .send("playerName=player")
@@ -20,7 +20,7 @@ describe("hostGame", function() {
   });
 });
 
-describe("hostGame", function() {
+describe("hostGame", function () {
   let req, res;
 
   beforeEach(() => {
@@ -28,10 +28,10 @@ describe("hostGame", function() {
     req.body = { playerName: "player" };
     res = {};
     res["Set-Cookie"] = "";
-    res.cookie = function(key, value) {
+    res.cookie = function (key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
     };
-    res.redirect = function(location) {
+    res.redirect = function (location) {
       res.Location = location;
     };
     res.app = {};
@@ -39,7 +39,7 @@ describe("hostGame", function() {
     res.app.createGameId = () => 1234;
   });
 
-  it("should create an instantce of gamein app.games", function() {
+  it("should create an instantce of gamein app.games", function () {
     hostGame(req, res);
     expect(res)
       .to.have.property("app")
@@ -77,13 +77,13 @@ describe("hostGame", function() {
         }
       ]);
   });
-  it("should set cookie as gameId and player name", function() {
+  it("should set cookie as gameId and player name", function () {
     hostGame(req, res);
     expect(res)
       .to.have.property("Set-Cookie")
       .to.equal("gameId=1234;playerName=player;");
   });
-  it("should rediect to /waiting.html", function() {
+  it("should rediect to /waiting.html", function () {
     hostGame(req, res);
     expect(res)
       .to.have.property("Location")
@@ -91,8 +91,8 @@ describe("hostGame", function() {
   });
 });
 
-describe("provideGameLobby", function() {
-  it("should send gameId and playerslist", function() {
+describe("provideGameLobby", function () {
+  it("should send gameId and playerslist", function () {
     const req = {};
     const res = {};
     req.game = {
@@ -102,7 +102,7 @@ describe("provideGameLobby", function() {
       host: "player1"
     };
     req.cookies = { gameId: "1234", playerName: "player2" };
-    res.send = function(response) {
+    res.send = function (response) {
       res.content = response;
     };
 
@@ -116,25 +116,31 @@ describe("provideGameLobby", function() {
   });
 });
 
-describe("joinGame", function() {
-  it("should add player in the game of given gameId", function() {
+describe("joinGame", function () {
+  it("should add player in the game of given gameId", function () {
     const req = {};
     const res = {};
-    req.body = { gameId: "1234", playerName: "player" };
+    req.body = { gameId: "1234", playerName: "player", action: "join" };
     res["Set-Cookie"] = "";
-    res.cookie = function(key, value) {
+    res.cookie = function (key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
     };
-    res.redirect = function(location) {
+    res.json = function (content) {
+      this.content = content;
+    }
+    res.redirect = function (location) {
       res.Location = location;
     };
     res.app = {};
+    res.app.savedGames = {};
     res.app.games = {
       "1234": {
         players: [],
-        addPlayer: function(player) {
+        addPlayer: function (player) {
           this.players.push(player);
-        }
+        },
+        isPlaceAvailable: () => true,
+        incJoinedPlayerCount: () => { }
       }
     };
     joinGame(req, res);
@@ -176,55 +182,54 @@ describe("joinGame", function() {
   });
 });
 
-describe("canJoin", function() {
+describe("canJoin", function () {
   const req = {};
   const res = {};
 
   beforeEach(() => {
     req.body = { gameId: "1234" };
     res["Set-Cookie"] = "";
-    res.cookie = function(key, value) {
+    res.cookie = function (key, value) {
       res["Set-Cookie"] = res["Set-Cookie"] + `${key}=${value};`;
     };
-    res.redirect = function(location) {
+    res.json = function (content) {
+      this.content = content;
+    }
+    res.redirect = function (location) {
       res.Location = location;
     };
     res.app = {};
+    res.app.savedGames = {};
     res.app.games = {
       "1234": {
-        players: [{ name: "player1" }, { name: "player2" }],
-        hasStarted: false,
-
-        isPlaceAvailable: function() {
+        players: [],
+        addPlayer: function (player) {
+          this.players.push(player);
+        },
+        isPlaceAvailable: function () {
           return this.players.length < 6;
-        }
+        },
+        incJoinedPlayerCount: () => { }
       }
     };
-    res.send = function(response) {
-      res.content = response;
-    };
+    
   });
 
-  it("should send an object in response with key isGameJoinable as true", function() {
-    canJoin(req, res);
-
-    expect(res)
-      .to.have.property("content")
-      .to.be.deep.equals('{"isGameJoinable":true}');
+  it("should send an object in response with key isGameJoinable as true", function () {
+    expect(canJoin(req, res))
+      .to.be.deep.equals({isAble:true});
   });
 
-  it("should send game not found error for non existing game id", function() {
+  it("should send game not found error for non existing game id", function () {
     req.body = { gameId: "456" };
-    canJoin(req, res);
 
-    expect(res)
-      .to.have.property("content")
+    expect(canJoin(req, res))
       .to.be.deep.equals(
-        '{"error":"Sorry! No Game with this Id..","isGameJoinable":false}'
+        {error:"Sorry! No Game with this Id..",isAble:false}
       );
   });
 
-  it("should send No place error if total number of players is 6", function() {
+  it("should send No place error if total number of players is 6", function () {
     const players = [
       { name: "player1" },
       { name: "player2" },
@@ -235,24 +240,17 @@ describe("canJoin", function() {
     ];
 
     res.app.games["1234"].players = players;
-    canJoin(req, res);
-
-    expect(res)
-      .to.have.property("content")
+    expect(canJoin(req, res))
       .to.be.deep.equals(
-        '{"error":"Sorry! No place available in the Game..","isGameJoinable":false}'
+        {error:"Sorry! No place available in the Game..",isAble:false}
       );
   });
 
-  it("should send No place error if total number of players is 6", function() {
+  it("should send No place error if total number of players is 6", function () {
     res.app.games["1234"].hasStarted = true;
-
-    canJoin(req, res);
-
-    expect(res)
-      .to.have.property("content")
+    expect(canJoin(req, res))
       .to.be.deep.equals(
-        '{"error":"Sorry! The Game has already started..","isGameJoinable":false}'
+        {error:"Sorry! The Game has already started..",isAble:false}
       );
   });
 });

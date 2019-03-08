@@ -17,13 +17,22 @@ class Game {
     this.currentPlayer;
     this.players = [];
     this.hasStarted = false;
-    this.financialStatement;
     this.activeCard = { drawnBy: null, soldTo: null };
     this.currentAuction = { present: false };
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
     this.bankruptedPlayersCount = 0;
-    this.stableGameJson = JSON.stringify(this);
+    this.stableGameJson = "";
+    this.joinedPlayerCount = 0;
+    this.hasLoaded = false;
+  }
+
+  incJoinedPlayerCount(){
+    this.joinedPlayerCount++;
+  }
+
+  resumeGame(){
+    this.hasStarted = true;
   }
 
   addPlayer(player) {
@@ -65,6 +74,10 @@ class Game {
 
   getPlayersCount() {
     return this.players.length;
+  }
+
+  setHasLoaded(){
+    this.hasLoaded = true;
   }
 
   startGame() {
@@ -128,8 +141,8 @@ class Game {
     if (this.currentPlayer.isDownSized()) {
       this.skipTurn();
     }
-    this.stableGameJson = JSON.stringify(this);
     this.resetActiveCard();
+    this.stableGameJson = JSON.stringify(this);
   }
 
   setActiveCard(type, data) {

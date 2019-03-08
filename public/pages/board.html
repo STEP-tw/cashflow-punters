@@ -1,7 +1,7 @@
 <html>
 
   <head>
-		<script src="/waitingPage.js"></script>
+    <script src="/waitingPage.js"></script>
     <script src="/finanacialstatement.js"></script>
     <script src="/cashledger.js"></script>
     <script src="/professions.js"></script>
@@ -75,14 +75,15 @@
             <div class="financial_details">
               <table class="player_details">
                 <tr>
-									<td style="border: none;"><span id="name" onclick="saveGame();">PlayerName</span></td>
-                </tr> 
+                  <td style="border: none;"><span id="name">PlayerName</span></td>
+                </tr>
                 <tr>
                   <td><span id="Profession" style="font-weight: lighter;">prof</span></td>
-									<td>
-										<div class="progress-bar-div" id="progress-div">
-										<div class="current-progress" id="progress"></div>
-									</div></td>
+                  <td>
+                    <div class="progress-bar-div" id="progress-div">
+                      <div class="current-progress" id="progress"></div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td class="basic_fs_heading" style="color: #57707D">Income :</td>
@@ -139,11 +140,11 @@
                 </button>
               </div>
               <div class="dice">
-              <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice">
-              <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice">
-              <!-- <div id="dice1" class="dice">&#x2685;</div> -->
-              <!-- <div id="dice2" class="dice"></div> -->
-            </div>
+                <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice">
+                <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice">
+                <!-- <div id="dice1" class="dice">&#x2685;</div> -->
+                <!-- <div id="dice2" class="dice"></div> -->
+              </div>
             </div>
             <div id="cardDisplay" class="cardDisplay">
               <div id="card-overlay" class="card-overlay"></div>
@@ -175,12 +176,12 @@
             </div>
           </div>
           <div class="right_part">
-						<div class="game-options">
-							<button onclick="leaveGame()">Leave Game</button>
-							<button>Save Game</button>
-						</div>
-						<div class="all-player-details" id="players-information">
-						</div>
+            <div class="game-options">
+              <button onclick="leaveGame()">Leave Game</button>
+              <button  onclick="saveGame();">Save Game</button>
+            </div>
+            <div class="all-player-details" id="players-information">
+            </div>
             <div class="activity_log" id="activityLog"></div>
             <div></div>
           </div>
@@ -414,12 +415,12 @@
           ×
         </button>
         <div id="cash_ledger">
-					Cash ledger
-					<div style="padding: 2% 0%;">Name: <span id="name-ledger"></span></div>
+          Cash ledger
+          <div style="padding: 2% 0%;">Name: <span id="name-ledger"></span></div>
           <table class="cash-ledger">
-						<thead>
-							<tr class="row-content">
-								<th class="time">Time</th>
+            <thead>
+              <tr class="row-content">
+                <th class="time">Time</th>
                 <th class="amount">Amount</th>
                 <th class="balance">Balance</th>
                 <th class="reason">Description</th>
@@ -427,7 +428,7 @@
             </thead>
             <tbody id="cash-ledger-content"></tbody>
           </table>
-				</div>
+        </div>
       </div>
       <div id="container" class="container"></div>
 
@@ -457,20 +458,21 @@
         <div id="share-card" class="share-popup"></div>
       </div>
 
-    <div id="notify-escape" class="notify-escape">
-      <div style="font-size:30px; text-align: center; font-weight: bold; color:#607D8B;">Congrats!!</div>
-      <div style="text-align: center; font-size: 20px;">You have escaped from Rat race. Now you can enter in FastTrack</div>
-      <button onclick="addToFastTrack()" style="height: 30px; width: 40px;">Ok</button>
-    </div>  
+      <div id="notify-escape" class="notify-escape">
+        <div style="font-size:30px; text-align: center; font-weight: bold; color:#607D8B;">Congrats!!</div>
+        <div style="text-align: center; font-size: 20px;">You have escaped from Rat race. Now you can enter in FastTrack
+        </div>
+        <button onclick="addToFastTrack()" style="height: 30px; width: 40px;">Ok</button>
+      </div>
 
       <div id="bankruptedMsg" class="bankruptcy-form">
         <button class="close" onclick="closeOverlay('bankruptedMsg')">
           &times;
-				</button>
-				<div class = "bankruptedMsg">
-        You are bankrupted. So that you can't continue game!! For more details
-				see financial details.
-			</div>
+        </button>
+        <div class="bankruptedMsg">
+          You are bankrupted. So that you can't continue game!! For more details
+          see financial details.
+        </div>
       </div>
       <div id="auction-div" class="auction">
         <div id="bidder" class="bidding-message">Current Bid</div>
@@ -487,7 +489,8 @@
         <div>
           <label style="font-weight:bold;">Current-Bidder: </label><span id="current-bidder"></span>
         </div>
-        <input type="number" id="auction-base-price" placeholder="Enter base price"style="width:200px; height:35px; font-size:15px;"/>
+        <input type="number" id="auction-base-price" placeholder="Enter base price"
+          style="width:200px; height:35px; font-size:15px;" />
         <button id="submit-base-price">Submit</button>
       </div>
       <div class="overlay" id="cash_ledger">
