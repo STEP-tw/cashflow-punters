@@ -239,7 +239,7 @@ const sellGoldCoins = function(req, res) {
   const { playerName } = req.cookies;
   const player = game.getPlayerByName(playerName);
   game.activityLog.addActivity(
-    ` sold ${numberOfCoins} at rate of ${cost}`,
+    ` sold ${numberOfCoins} gold coins at rate of ${cost}`,
     playerName
   );
   player.sellGoldCoins(numberOfCoins, cost);

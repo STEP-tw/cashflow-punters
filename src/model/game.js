@@ -390,7 +390,7 @@ class Game {
         );
         const paydayAmount = this.currentPlayer.addPayday();
         this.currentPlayer.setNotification(
-          `You got Payday.${paydayAmount} added to your Savings`
+          `You got Payday.$${paydayAmount} added to your Savings`
         );
       });
       return !outOfBankruptcy;
@@ -470,10 +470,12 @@ class Game {
   }
 
   buyShares(numberOfShares) {
+    const player = this.currentPlayer;
     this.activityLog.addActivity(
-      ` has bought ${numberOfShares} shares ${this.activeCard.data.symbol}`
+      ` has bought ${numberOfShares} shares ${this.activeCard.data.symbol}`,
+      player
     );
-    this.currentPlayer.buyShares(this.activeCard.data, numberOfShares);
+    player.buyShares(this.activeCard.data, numberOfShares);
     this.nextPlayer();
   }
 
