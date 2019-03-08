@@ -56,13 +56,24 @@ const leaveGame = function() {
   });
 };
 
+const cancelGame = function() {
+  fetch("/cancelgame");
+};
+
 const insertButtons = function({ isHost }) {
   const buttonsSpace = getElementById("buttons_space");
   let button = createButton("Leave Game", "button", "", "button", leaveGame);
   if (isHost) {
-    button = createButton("Cancel Game", "button", "", "button");
+    button = createButton("Cancel Game", "button", "", "button", cancelGame);
   }
   buttonsSpace.appendChild(button);
+};
+
+const isGamePresent = function(game) {
+  if (!game.isGamePresent) {
+    window.location = "/";
+  }
+  return game;
 };
 
 window.onload = () => {
@@ -75,6 +86,7 @@ window.onload = () => {
   setInterval(() => {
     fetch("/gamelobby")
       .then(res => res.json())
+      .then(isGamePresent)
       .then(displayLobby)
       .then(goToGame)
       .then(checkPlayersCount);

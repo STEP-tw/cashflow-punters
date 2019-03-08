@@ -296,7 +296,7 @@ const rollDiceForMLM = function(req, res) {
 const removePlayer = function(req, res) {
   const game = req.game;
   const { playerName } = req.cookies;
-	game.removePlayer(playerName);
+  game.removePlayer(playerName);
   res.clearCookie("playerName");
   res.clearCookie("gameId");
   res.end();
@@ -314,10 +314,10 @@ const saveGame = function(req, res) {
 };
 
 const renderRequesterData = function(req, res) {
-	const { playerName } = req.cookies;
-	const game = req.game;
-	const requesterData = game.getPlayerByName(playerName);
-	res.send(JSON.stringify(requesterData));
+  const { playerName } = req.cookies;
+  const game = req.game;
+  const requesterData = game.getPlayerByName(playerName);
+  res.send(JSON.stringify(requesterData));
 };
 
 module.exports = {
@@ -352,6 +352,6 @@ module.exports = {
   handleBid,
   rollDiceForMLM,
   removePlayer,
-	saveGame,
-	renderRequesterData
+  saveGame,
+  renderRequesterData
 };

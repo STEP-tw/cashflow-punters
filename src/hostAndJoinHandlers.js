@@ -29,11 +29,14 @@ const hostGame = function(req, res) {
 };
 
 const provideGameLobby = function(req, res) {
+  if (req.game == undefined) return res.json({ isGamePresent: false });
   const players = req.game.getPlayerNames();
   const { gameId, playerName } = req.cookies;
   const isHost = req.game.host == playerName;
   const hasStarted = req.game.hasStarted;
-  res.send(JSON.stringify({ players, gameId, isHost, hasStarted }));
+  res.send(
+    JSON.stringify({ players, gameId, isHost, hasStarted, isGamePresent: true })
+  );
 };
 
 const joinGame = function(req, res) {
@@ -82,9 +85,18 @@ const canJoin = function(req, res) {
   res.send(JSON.stringify({ isGameJoinable: true }));
 };
 
+const cancelGame = function(req, res) {
+  const { gameId } = req.cookies;
+  delete res.app.games[gameId];
+  res.clearCookie("playerName");
+  res.clearCookie("gameId");
+  res.end();
+};
+
 module.exports = {
   canJoin,
   hostGame,
   joinGame,
+  cancelGame,
   provideGameLobby
 };

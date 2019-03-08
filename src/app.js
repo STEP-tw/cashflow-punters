@@ -9,6 +9,7 @@ const {
   canJoin,
   hostGame,
   joinGame,
+  cancelGame,
   provideGameLobby
 } = require("./hostAndJoinHandlers");
 const {
@@ -43,8 +44,8 @@ const {
   rollDiceForSplitReverse,
   getPlayersFinancialStatement,
   rollDiceForMLM,
-	removePlayer,
-	renderRequesterData
+  removePlayer,
+  renderRequesterData
 } = require("./gameHandlers");
 
 app.games = {};
@@ -80,6 +81,7 @@ app.get("/rolldiceformlm", rollDiceForMLM);
 app.get("/leavegame", removePlayer);
 app.get("/savegame", saveGame);
 app.get("/requester", renderRequesterData);
+app.get("/cancelgame", cancelGame);
 
 app.post("/paydebt", payDebt);
 app.post("/canjoin", canJoin);
