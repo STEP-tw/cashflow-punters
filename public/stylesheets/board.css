@@ -644,42 +644,64 @@ button:hover {
 }
 
 .manage-debt-form {
-  height: 250px;
-  width: 300px;
+  height: 270px;
+  width: 400px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding:20px;
   align-items: center;
   z-index: 3;
 
   position: fixed;
-  top: 36%;
-  left: 42%;
-
+  top: 37%;
+	left: 36%;
+	
   visibility: hidden;
-  background-color: whitesmoke;
-  border: 1px solid black;
-  border-radius: 10px;
+	background-color: white;
+	border: 3px solid #BECBD2;
+	border-radius: 10px;
+}
+
+.notify-escape {
+  height: 265px;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding:20px;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 37%;
+	left: 36%;
+	
+  visibility: hidden;
+  background-color: white;
+  border: 3px solid #BECBD2;
+	border-radius: 20px;
 }
 
 .bankruptcy-form {
-  height: 26%;
-  width: 24%;
+  height: 35%;
+  width: 28%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 3;
   position: fixed;
-  top: 42%;
-  left: 38%;
+  top: 37%;
+  left: 36%;
   padding: 3%;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
   visibility: hidden;
-  color: #9f2525;
-  background-color: whitesmoke;
-  border: 1px solid black;
+  color: #a22a2a;
+  font-size: 20px;
+  background-color: white;
   border-radius: 10px;
 }
 
@@ -705,8 +727,9 @@ button:hover {
 
 .debt-input {
   margin: 10px 0px;
-  width: 70%;
-  height: 10%;
+  width: 200px;
+	height: 35px;
+	font-size: 15px;
 }
 
 .notification {
@@ -736,8 +759,9 @@ button:hover {
 }
 
 .select-tag {
-  width: 150px;
-  height: 20px;
+  width: 200px;
+	height: 35px;
+	font-size: 15px;
 }
 
 .cash-ledger-entries {
@@ -945,21 +969,23 @@ basic_fs_heading {
 }
 
 .auction {
-  height: 250px;
-  width: 300px;
+	height: 270px;
+  width: 400px;
 
-  display: none;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: baseline;
+  padding: 40px;
   z-index: 3;
 
   position: fixed;
-  top: 40%;
-  left: 66%;
-
-  background-color: whitesmoke;
-  border: 1px solid black;
+  top: 37%;
+	left: 36%;
+	
+  display: none;
+	background-color: white;
+	border: 3px solid #BECBD2;
   border-radius: 10px;
   box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
 }

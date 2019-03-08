@@ -457,14 +457,8 @@
         <div id="share-card" class="share-popup"></div>
       </div>
 
-      <div id="bankruptcyNotification" class="manage-debt-form">
-        <div id="bankruptcyMsg">You are bankrupt. Please sell assets</div>
-        <div id="Real-Estate"></div>
-        <button onclick="sellAsset()">Sell</button>
-      </div>
-
-    <div id="notify-escape" class="manage-debt-form">
-      <div style="font-size:30px; text-align: center;">Congrats!!</div>
+    <div id="notify-escape" class="notify-escape">
+      <div style="font-size:30px; text-align: center; font-weight: bold; color:#607D8B;">Congrats!!</div>
       <div style="text-align: center; font-size: 20px;">You have escaped from Rat race. Now you can enter in FastTrack</div>
       <button onclick="addToFastTrack()" style="height: 30px; width: 40px;">Ok</button>
     </div>  
@@ -489,11 +483,11 @@
         </div>
       </div>
       <div id="auction-form" class="auction">
-        <div><label>Current-Bid: </label><span id="current-bid"></span></div>
+        <div><label style="font-weight:bold;">Current-Bid: </label><span id="current-bid"></span></div>
         <div>
-          <label>Current-Bidder: </label><span id="current-bidder"></span>
+          <label style="font-weight:bold;">Current-Bidder: </label><span id="current-bidder"></span>
         </div>
-        <input type="number" id="auction-base-price" placeholder="Enter base price" />
+        <input type="number" id="auction-base-price" placeholder="Enter base price"style="width:200px; height:35px; font-size:15px;"/>
         <button id="submit-base-price">Submit</button>
       </div>
       <div class="overlay" id="cash_ledger">
