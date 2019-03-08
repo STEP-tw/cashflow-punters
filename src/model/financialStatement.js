@@ -70,24 +70,6 @@ class FinancialStatement extends CashLedger {
     return this.cashflow;
   }
 
-  addAsset(title, type, downPayment, cost) {
-    this.assets.realEstates.push({ title, type, downPayment, cost });
-  }
-
-  addLiability(liability, amount) {
-    if (this.liabilities[liability]) {
-      this.liabilities[liability] += amount;
-      this.addToLedgerBalance(amount);
-      return;
-    }
-    this.liabilities[liability] = amount;
-    this.addToLedgerBalance(amount);
-  }
-
-  addRealEstateLiability(title, type, mortgage, cost) {
-    this.liabilities.realEstates.push({ title, type, mortgage, cost });
-  }
-
   addExpense(expense, amount) {
     if (this.expenses[expense]) {
       this.expenses[expense] += amount;
@@ -101,11 +83,61 @@ class FinancialStatement extends CashLedger {
     this.assets.goldCoins += count;
   }
 
-  addIncomeRealEstate(title, type, cashflow) {
-    this.income.realEstates.push({ title, type, cashflow });
-    this.passiveIncome += cashflow;
+  addAsset(card) {
+    this.assets.realEstates.push(card);
+  }
+
+  removeAsset(estate) {
+    const assets = this.assets;
+    assets.realEstates = assets.realEstates.filter(
+      realEstate => !isEqual(realEstate, estate)
+    );
+  }
+
+  removeRealEstateLiability(estate) {
+    const liabilities = this.liabilities;
+    liabilities.realEstates = liabilities.realEstates.filter(
+      realEstate => !isEqual(realEstate, estate)
+    );
+  }
+
+  removeIncomeRealEstate(estate) {
+    const income = this.income;
+    income.realEstates = income.realEstates.filter(
+      realEstate => !isEqual(realEstate, estate)
+    );
+  }
+
+  addLiability(liability, amount) {
+    if (this.liabilities[liability]) {
+      this.liabilities[liability] += amount;
+      this.addToLedgerBalance(amount);
+      return;
+    }
+    this.liabilities[liability] = amount;
+    this.addToLedgerBalance(amount);
+  }
+
+  addRealEstateLiability(card) {
+    this.liabilities.realEstates.push({ card });
+  }
+
+  addIncomeRealEstate(card) {
+    this.income.realEstates.push(card);
+    this.passiveIncome += card.cashflow;
     this.updateTotalIncome();
     this.updateCashFlow();
+  }
+
+  sellEstate(estate, marketCard) {
+    const profit = this.calculateProfit(estate, marketCard);
+    this.addToLedgerBalance(profit);
+    this.removeRealEstateLiability(estate);
+    this.removeAsset(estate);
+    this.removeIncomeRealEstate(estate);
+
+    this.addCreditEvent(profit, " sold Real Estate");
+    return estate.mortgage + profit;
   }
 
   removeLiability(liability, amount) {
@@ -126,17 +158,6 @@ class FinancialStatement extends CashLedger {
     const { mortgage, cost } = estate;
     if (cash) return cost + cash - mortgage;
     return (1 + percentage / 100) * cost - mortgage;
-  }
-
-  sellEstate(estate, marketCard) {
-    const profit = this.calculateProfit(estate, marketCard);
-    this.addToLedgerBalance(profit);
-    this.liabilities.realEstates = this.liabilities.realEstates.filter(
-      realEstate => !isEqual(realEstate, estate)
-    );
-
-    this.addCreditEvent(profit, " sold Real Estate");
-    return estate.mortgage + profit;
   }
 
   getRealEstatesType() {

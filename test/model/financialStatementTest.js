@@ -158,6 +158,8 @@ describe("sellEstate", function() {
   it("should sell the gold coins if player has coins to sell", function() {
     const fs = new FinancialStatement();
     fs.liabilities = { realEstates: [{}] };
+    fs.assets = { realEstates: [{}] };
+    fs.income = { realEstates: [{}] };
     fs.calculateProfit = sinon.spy();
     fs.ledgerBalance = 100;
     fs.setNotification = sinon.spy();
