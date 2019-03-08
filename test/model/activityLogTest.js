@@ -28,6 +28,6 @@ describe("activityLog", function() {
     const log = new ActiviyLog();
     log.logMLM(false, "anu");
     chai.expect(log.activityLog[0].playerName).to.equal("anu");
-    chai.expect(log.activityLog[0].msg).to.equal(" didn't get mlm");
+    chai.expect(log.activityLog[0].msg).to.equal(" didn't get MLM");
   });
 });

@@ -57,7 +57,7 @@ class ActivityLog {
       this.addActivity(" got $500 for MLM", playerName);
       return;
     }
-    this.addActivity(" didn't get mlm", playerName);
+    this.addActivity(" didn't get MLM", playerName);
   }
 }
 

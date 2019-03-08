@@ -136,7 +136,7 @@ class Player extends FinancialStatement {
     if (this.ledgerBalance < cost) return false;
     this.deductLedgerBalance(cost);
     this.addGoldCoins(+numberOfCoins);
-    this.addCreditEvent(cost, `bought ${numberOfCoins} Gold Coins`);
+    this.addDebitEvent(cost, `bought ${numberOfCoins} Gold Coins`);
     this.setNotification(`You bought ${numberOfCoins} Gold Coins for $${cost}`);
     return true;
   }
