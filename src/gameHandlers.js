@@ -229,8 +229,7 @@ const hasShares = function(req, res) {
   const game = req.game;
   const player = game.currentPlayer;
   const hasShares = game.hasAnyoneShares(symbol);
-  if (!hasShares)
-    game.activityLog.addActivity(`No one has shares of ${symbol}`);
+  
   if (hasShares) player.setNotification("Roll Dice for Split & reverse card");
   res.send(JSON.stringify({ hasShares }));
 };
