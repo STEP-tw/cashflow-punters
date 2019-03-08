@@ -3,9 +3,13 @@ const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
 const Board = require("./model/board");
-const { gameSpaces, NOT_A_PLAYER_TO_LOAD, NOT_A_PLAYER } = require("./constant");
+const {
+  gameSpaces,
+  NOT_A_PLAYER_TO_LOAD,
+  NOT_A_PLAYER
+} = require("./constant");
 
-const initializeGame = function (host) {
+const initializeGame = function(host) {
   const bigDeals = new Cards(cards.bigDeals);
   const smallDeals = new Cards(cards.smallDeals);
   const market = new Cards(cards.market);
@@ -16,7 +20,7 @@ const initializeGame = function (host) {
   return new Game(cardsStore, board, host);
 };
 
-const hostGame = function (req, res) {
+const hostGame = function(req, res) {
   const { playerName } = req.body;
   const game = initializeGame(playerName);
   const player = new Player(playerName);
@@ -29,7 +33,7 @@ const hostGame = function (req, res) {
   res.redirect("/waiting.html");
 };
 
-const provideGameLobby = function (req, res) {
+const provideGameLobby = function(req, res) {
   if (req.game == undefined) return res.json({ isGamePresent: false });
   const players = req.game.getPlayerNames();
   const { gameId, playerName } = req.cookies;
@@ -40,7 +44,7 @@ const provideGameLobby = function (req, res) {
   );
 };
 
-const joinGame = function (req, res) {
+const joinGame = function(req, res) {
   const { gameId, playerName, action } = req.body;
   const validator = { join: canJoin, load: canLoad };
   const reqData = validator[action](req, res);
@@ -57,41 +61,41 @@ const joinGame = function (req, res) {
   res.json({ isAble: true, url: "/waiting.html" });
 };
 
-const doesGameExist = function (allGames, gameId) {
+const doesGameExist = function(allGames, gameId) {
   return Object.keys(allGames).includes(gameId);
 };
 
-const sendGameNotFound = function () {
+const sendGameNotFound = function() {
   const error = "Sorry! No Game with this Id..";
   const isAble = false;
   return { error, isAble };
 };
 
-const sendGameStarted = function () {
+const sendGameStarted = function() {
   const error = "Sorry! The Game has already started..";
   const isAble = false;
   return { error, isAble };
 };
 
-const sendPlaceNotAvailable = function () {
+const sendPlaceNotAvailable = function() {
   const error = "Sorry! No place available in the Game..";
   const isAble = false;
   return { error, isAble };
 };
 
-const sendCannotJoinError = function () {
+const sendCannotJoinError = function() {
   return { isAble: false, error: NOT_A_PLAYER };
-}
+};
 
-const isAbleToJoinSavedGame = function (req, res) {
+const isAbleToJoinSavedGame = function(req, res) {
   const { gameId, playerName } = req.body;
   const allGames = res.app.games;
   const game = allGames[gameId];
   if (!isPlayerPresent(game, playerName)) return sendCannotJoinError();
   return { isAble: true, loaded: true };
-}
+};
 
-const canJoin = function (req, res) {
+const canJoin = function(req, res) {
   const { gameId } = req.body;
   const allGames = res.app.games;
   const savedGames = res.app.savedGames;
@@ -107,7 +111,7 @@ const canJoin = function (req, res) {
   return { isAble: true };
 };
 
-const cancelGame = function (req, res) {
+const cancelGame = function(req, res) {
   const { gameId } = req.cookies;
   delete res.app.games[gameId];
   res.clearCookie("playerName");
@@ -115,22 +119,23 @@ const cancelGame = function (req, res) {
   res.end();
 };
 
-const isPlayerPresent = function (game, playerName) {
+const isPlayerPresent = function(game, playerName) {
   return game.players.some(({ name }) => playerName == name);
-}
+};
 
-const sendCannotLoadError = function () {
+const sendCannotLoadError = function() {
   return { isAble: false, error: NOT_A_PLAYER_TO_LOAD };
-}
+};
 
-const canLoad = function (req, res) {
+const canLoad = function(req, res) {
   const { gameId, playerName } = req.body;
   const savedGames = res.app.savedGames;
   if (!doesGameExist(savedGames, gameId)) return sendGameNotFound(res);
-  if (!isPlayerPresent(savedGames[gameId], playerName)) return sendCannotLoadError();
+  if (!isPlayerPresent(savedGames[gameId], playerName))
+    return sendCannotLoadError();
   res.app.games[gameId] = savedGames[gameId];
   return { isAble: true, loaded: true };
-}
+};
 
 module.exports = {
   canJoin,

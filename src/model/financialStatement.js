@@ -119,7 +119,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addRealEstateLiability(card) {
-    this.liabilities.realEstates.push({ card });
+    this.liabilities.realEstates.push(card);
   }
 
   addIncomeRealEstate(card) {
