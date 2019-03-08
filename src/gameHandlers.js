@@ -200,8 +200,11 @@ const sellEstate = function(req, res) {
   const marketCard = game.activeCard;
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
-  const profit = player.sellEstate(estate, marketCard);
-  game.activityLog.addActivity(` sold Real Estate for $${profit} `, playerName);
+  const selllingPrice = player.sellEstate(estate, marketCard);
+  game.activityLog.addActivity(
+    ` sold Real Estate for $${selllingPrice} `,
+    playerName
+  );
   res.end();
 };
 
@@ -229,7 +232,7 @@ const hasShares = function(req, res) {
   const game = req.game;
   const player = game.currentPlayer;
   const hasShares = game.hasAnyoneShares(symbol);
-  
+
   if (hasShares) player.setNotification("Roll Dice for Split & reverse card");
   res.send(JSON.stringify({ hasShares }));
 };

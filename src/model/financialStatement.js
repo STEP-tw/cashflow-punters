@@ -84,8 +84,8 @@ class FinancialStatement extends CashLedger {
     this.addToLedgerBalance(amount);
   }
 
-  addRealEstateLiability(title, type, mortgage) {
-    this.liabilities.realEstates.push({ title, type, mortgage });
+  addRealEstateLiability(title, type, mortgage, cost) {
+    this.liabilities.realEstates.push({ title, type, mortgage, cost });
   }
 
   addExpense(expense, amount) {
@@ -136,7 +136,7 @@ class FinancialStatement extends CashLedger {
     );
 
     this.addCreditEvent(profit, " sold Real Estate");
-    return profit;
+    return estate.mortgage + profit;
   }
 
   getRealEstatesType() {
@@ -197,17 +197,18 @@ class FinancialStatement extends CashLedger {
   }
 
   hasEscape() {
-		let notification = "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to paid.";
-		if(this.passiveIncome >= this.totalExpense) {
-			if(this.liabilities["Bank Loan"] < this.ledgerBalance){
-				notification = "Congrats!! You are out of Rat race.";
-				this.setNotification(notification);
-				return true;
-			};
-			this.setNotification(notification);
-		};
-		return false;
-	}
+    let notification =
+      "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to paid.";
+    if (this.passiveIncome >= this.totalExpense) {
+      if (this.liabilities["Bank Loan"] < this.ledgerBalance) {
+        notification = "Congrats!! You are out of Rat race.";
+        this.setNotification(notification);
+        return true;
+      }
+      this.setNotification(notification);
+    }
+    return false;
+  }
 }
 
 module.exports = FinancialStatement;

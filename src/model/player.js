@@ -125,7 +125,7 @@ class Player extends FinancialStatement {
     this.deductLedgerBalance(downPayment);
     this.addDebitEvent(downPayment, "bought Real Estate");
     this.addAsset(title, type, downPayment, cost);
-    this.addRealEstateLiability(title, type, mortgage);
+    this.addRealEstateLiability(title, type, mortgage, cost);
     this.addIncomeRealEstate(title, type, cashflow);
     this.setNotification(`You bought ${type} for $${downPayment}`);
     return true;
