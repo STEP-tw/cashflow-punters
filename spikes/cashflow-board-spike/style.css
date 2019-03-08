@@ -1,0 +1,117 @@
+html,
+body,
+main {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  padding: 0.5%;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.vertical-part {
+  height: 15%;
+  width: 100%;
+}
+
+.corner-space {
+  width: 9.8% !important;
+  height: 100% !important;
+}
+
+.horizontal-part {
+  height: 70%;
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.fs-vertical-space {
+  border-color: whitesmoke;
+  border-style: solid;
+
+  border-width: 1px 0 0;
+
+  height: 14.2857%;
+  width: 100%;
+}
+
+.fs-horizontal-space {
+  border-color: whitesmoke;
+  border-style: solid;
+
+  border-width: 0 1px 0 0;
+
+  height: 85%;
+  width: 7.32601%;
+}
+
+.board-part {
+  display: flex;
+  display: flex;
+  margin: 0;
+}
+
+.fs-board {
+  width: 99%;
+  margin: 0;
+
+  overflow: hidden;
+
+  border: 1px solid whitesmoke;
+
+  box-shadow: 0px 0px 55px 8px rgba(0, 0, 0, 0.6);
+  border-radius: 8vh;
+}
+
+.fs-vertical-spaces {
+  width: 7.7%;
+  height: 100%;
+}
+
+.bottom-align {
+  align-items: baseline;
+}
+
+.deal {
+  background: #607d8b;
+}
+
+.deduct {
+  background: #7d97a5;
+}
+
+.charity {
+  background: #57707d;
+}
+
+.fs-game-center {
+  position: absolute;
+  background-color: white;
+
+  top: 13.4%;
+  left: 8%;
+
+  height: 73.3%;
+  width: 83%;
+
+  box-shadow: inset 0px 0px 20px 8px rgba(0, 0, 0, 0.4);
+
+  border-radius: 2vh;
+}
+
+.board-right-corner {
+  border-right: 0px;
+}
+
+.board-bottom-corner {
+  border-top: 1px solid whitesmoke;
+}
