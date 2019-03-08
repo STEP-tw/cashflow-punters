@@ -11,7 +11,6 @@ const {
   cancelGame,
   provideGameLobby
 } = require("./hostAndJoinHandlers");
-const fs = require('fs');
 const { restoreGames } = require('./loadGame');
 
 const loadSavedGames = function () {

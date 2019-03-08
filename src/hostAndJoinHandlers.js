@@ -29,7 +29,7 @@ const hostGame = function (req, res) {
   res.redirect("/waiting.html");
 };
 
-const provideGameLobby = function(req, res) {
+const provideGameLobby = function (req, res) {
   if (req.game == undefined) return res.json({ isGamePresent: false });
   const players = req.game.getPlayerNames();
   const { gameId, playerName } = req.cookies;
@@ -107,7 +107,7 @@ const canJoin = function (req, res) {
   return { isAble: true };
 };
 
-const cancelGame = function(req, res) {
+const cancelGame = function (req, res) {
   const { gameId } = req.cookies;
   delete res.app.games[gameId];
   res.clearCookie("playerName");

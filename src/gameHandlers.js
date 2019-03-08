@@ -2,7 +2,7 @@ const { UNABLE_TO_DO_CHARITY_MSG } = require("./constant");
 
 const startGame = function (req, res) {
   const game = req.game;
-  if(game.hasLoaded) {
+  if (game.hasLoaded) {
     game.resumeGame();
     return res.end();
   }
@@ -107,7 +107,7 @@ const isAbleToDoCharity = function (req, res) {
   res.send(JSON.stringify({ isAble }));
 };
 
-const acceptRealEstateDeal = function(player, game) {
+const acceptRealEstateDeal = function (player, game) {
   const activeCardData = game.activeCard.data;
   const isSuccessful = player.addRealEstate(activeCardData);
   game.activityLog.addActivity(
@@ -116,7 +116,7 @@ const acceptRealEstateDeal = function(player, game) {
   return isSuccessful;
 };
 
-const acceptGoldCoinsDeal = function(player, game) {
+const acceptGoldCoinsDeal = function (player, game) {
   const activeCardData = game.activeCard.data;
   const isSuccessful = player.buyGoldCoins(activeCardData);
   game.activityLog.addActivity(
@@ -125,14 +125,14 @@ const acceptGoldCoinsDeal = function(player, game) {
   return isSuccessful;
 };
 
-const acceptMLMDeal = function(player, game) {
+const acceptMLMDeal = function (player, game) {
   const activeCardData = game.activeCard.data;
   const isSuccessful = player.addMLM(activeCardData);
   game.activityLog.addActivity(`${player.name} has bought MLM card`);
   return isSuccessful;
 };
 
-const acceptSmallDeal = function(req, res) {
+const acceptSmallDeal = function (req, res) {
   const { activeCard } = req.game;
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
@@ -330,7 +330,7 @@ const removePlayer = function (req, res) {
 };
 
 const saveGame = function (req, res) {
-  const savedGames = res.app.savedGames;
+  const { savedGames, fs } = res.app;
   const gameId = req.cookies["gameId"];
   const game = Object.assign({}, JSON.parse(req.game.stableGameJson));
   game.stableGameJson = "";
@@ -339,7 +339,7 @@ const saveGame = function (req, res) {
   res.end();
 };
 
-const renderRequesterData = function(req, res) {
+const renderRequesterData = function (req, res) {
   const { playerName } = req.cookies;
   const game = req.game;
   const requesterData = game.getPlayerByName(playerName);
