@@ -6,12 +6,21 @@ const fs = require("fs");
 const { createGameId } = require("./utils/utils");
 const { renderHomePage, getCurrentGame, logRequest } = require("./handlers.js");
 const {
-  canJoin,
   hostGame,
   joinGame,
   cancelGame,
   provideGameLobby
 } = require("./hostAndJoinHandlers");
+const fs = require('fs');
+const { restoreGames } = require('./loadGame');
+
+const loadSavedGames = function () {
+  fs.readFile('./data/savedGames.json',"utf-8" ,(err, content) => {
+    const games = restoreGames(JSON.parse(content));
+    app.savedGames = games;
+  })
+}
+
 const {
   getGame,
   payDebt,
@@ -51,6 +60,7 @@ const {
 app.games = {};
 app.createGameId = createGameId;
 app.fs = fs;
+loadSavedGames();
 app.use(logRequest);
 app.use(cookieParser());
 app.use(getCurrentGame);
@@ -84,7 +94,6 @@ app.get("/requester", renderRequesterData);
 app.get("/cancelgame", cancelGame);
 
 app.post("/paydebt", payDebt);
-app.post("/canjoin", canJoin);
 app.post("/hostgame", hostGame);
 app.post("/joingame", joinGame);
 app.post("/rolldice", rollDice);
