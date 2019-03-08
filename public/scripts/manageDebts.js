@@ -120,12 +120,23 @@ const showBankForm = function() {
   showOverlay("manage-debt-form");
 };
 
+const getPayableLiabilities = function(playerLiabilities) {
+  const payableLiabilities = {};
+  const liabilitiyTitles = Object.keys(playerLiabilities);
+  liabilitiyTitles.forEach(title => {
+    if (playerLiabilities[title] && title != "realEstates") {
+      payableLiabilities[title] = playerLiabilities[title];
+    }
+  });
+  return Object.keys(payableLiabilities);
+};
+
 const displayLiabilityOptions = function(player) {
   const form = getElementById("manage-debt-form");
   const selectTag = createElement("select", "options");
   selectTag.className = "select-tag";
-  const liabilityTitles = Object.keys(player.liabilities);
-  const options = liabilityTitles.reduce(appendOptions, selectTag);
+  const payableLiabilities = getPayableLiabilities(player.liabilities);
+  const options = payableLiabilities.reduce(appendOptions, selectTag);
   const amountInput = createInput(
     "amount",
     "Enter amount",
