@@ -21,13 +21,13 @@ class Auction {
       bidder.setNotification("You don't have enough money to raise bid.");
       return { ableToBid: false, message: NOT_ENOUGH_MONEY_TO_BID };
     }
-    if (this.currentBid < amount) {
-      this.currentBid = amount;
-      this.bidder = bidder;
-      this.bidder.setNotification(`You have set the bid at ${amount}`);
-      return { ableToBid: true, message: "Bid of current active card" };
+    if (this.currentBid >= amount) {
+      return { ableToBid: false, message: LOW_BIDING_AMOUNT };
     }
-    return { ableToBid: false, message: LOW_BIDING_AMOUNT };
+    this.currentBid = amount;
+    this.bidder = bidder;
+    this.bidder.setNotification(`You have set the bid at ${amount}`);
+    return { ableToBid: true, message: "Bid of current active card" };
   }
 
   passBid(player) {
@@ -40,16 +40,17 @@ class Auction {
   }
 
   sellDeal() {
-    if (this.bidder.name != this.host.name) {
-      this.bidder.setNotification("You have won the auction.");
-      this.bidder.deductLedgerBalance(this.currentBid);
-      this.bidder.addDebitEvent(
-        this.currentBid,
-        " purchased the deal in auction"
-      );
-      this.host.addToLedgerBalance(this.currentBid);
-      this.host.addCreditEvent(this.currentBid, " sold deal");
-    }
+    if (this.bidder.name == this.host.name) return;
+    this.bidder.setNotification("You have won the auction.");
+    this.bidder.deductLedgerBalance(this.currentBid);
+    this.bidder.addDebitEvent(
+      this.currentBid,
+      " purchased the deal in auction"
+    );
+    this.bidder.setNotification(`You purchased the deal in ${this.currentBid}`);
+    this.host.addToLedgerBalance(this.currentBid);
+    this.host.setNotification(`You sold the deal in ${this.currentBid}`);
+    this.host.addCreditEvent(this.currentBid, " sold deal");
   }
 }
 

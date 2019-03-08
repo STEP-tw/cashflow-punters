@@ -1,15 +1,15 @@
-const openFinancialStatement = function() {
+const openFinancialStatement = function () {
   let fs = document.getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
 
-const getBoard = function() {
+const getBoard = function () {
   const container = document.getElementById("container");
   const parent = container.parentElement;
   parent.removeChild(container);
 };
 
-const getCashLedger = function() {
+const getCashLedger = function () {
   const container = getElementById("container");
   container.innerHTML = "";
   const top = createElement("div");
@@ -27,7 +27,7 @@ const getCashLedger = function() {
     });
 };
 
-const updateLedgerBalance = function(ledgerBalance) {
+const updateLedgerBalance = function (ledgerBalance) {
   const ledgerBalanceElement = getElementById("ledger-balance");
   const oldLedgerBalance = ledgerBalanceElement.innerText;
   if (oldLedgerBalance != ledgerBalance) {
@@ -38,7 +38,7 @@ const updateLedgerBalance = function(ledgerBalance) {
   }
 };
 
-const updateStatementBoard = function(player) {
+const updateStatementBoard = function (player) {
   setInnerText("name", player.name);
   setInnerText("Profession", player.profession);
   setInnerText("passiveIn", player.passiveIncome);
@@ -50,7 +50,7 @@ const updateStatementBoard = function(player) {
   return player;
 };
 
-const createFinancialStatement = function() {
+const createFinancialStatement = function () {
   closeOverlay("professions");
   const top = createElement("div");
   const leftSection = createElement("section");
@@ -67,7 +67,7 @@ const createFinancialStatement = function() {
     });
 };
 
-const doCharity = function() {
+const doCharity = function () {
   hideOverlay("askCharity");
   closeOverlay("card-overlay");
   fetch("/acceptCharity")
@@ -78,7 +78,7 @@ const doCharity = function() {
     });
 };
 
-const acceptCharity = function() {
+const acceptCharity = function () {
   fetch("/isabletodocharity")
     .then(res => res.json())
     .then(({ isAble }) => {
@@ -86,13 +86,13 @@ const acceptCharity = function() {
     });
 };
 
-const declineCharity = function() {
+const declineCharity = function () {
   hideOverlay("askCharity");
   closeOverlay("card-overlay");
   fetch("/declineCharity");
 };
 
-const isSameCard = function(card) {
+const isSameCard = function (card) {
   const { title, message } = card;
   const cardTitleDiv = getElementById("card-title");
   const cardMessageDiv = getElementById("card-message");
@@ -101,7 +101,7 @@ const isSameCard = function(card) {
   return cardTitle == title && cardMessage == message;
 };
 
-const showPlainCard = function(title, expenseAmount, type, msg) {
+const showPlainCard = function (title, expenseAmount, type, msg) {
   const cardDiv = getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -116,7 +116,7 @@ const showPlainCard = function(title, expenseAmount, type, msg) {
   cardDiv.appendChild(expenseDiv);
 };
 
-const handleCharity = function() {
+const handleCharity = function () {
   const askCharity = getElementById("askCharity");
   openOverlay("card-overlay");
   askCharity.style.visibility = "visible";
@@ -126,31 +126,31 @@ const handleCharity = function() {
   declineCharityButton.onclick = declineCharity;
 };
 
-const handleDeal = function() {
+const handleDeal = function () {
   openOverlay("card-overlay");
   showOverlay("select-deal");
 };
 
-const selectSmallDeal = function() {
+const selectSmallDeal = function () {
   hideOverlay("select-deal");
   closeOverlay("card-overlay");
   fetch("/selectSmallDeal");
 };
 
-const selectBigDeal = function() {
+const selectBigDeal = function () {
   hideOverlay("select-deal");
   closeOverlay("card-overlay");
   fetch("/selectBigDeal");
 };
 
-const displayDiceValue = function(diceValue, count) {
+const displayDiceValue = function (diceValue, count) {
   const diceDiv = getElementById("dice" + count);
   diceDiv.src = `Dice-${diceValue}.png`;
   diceDiv.style.visibility = "visible";
   diceDiv.style.display = "block";
 };
 
-const showDice = function(diceValues) {
+const showDice = function (diceValues) {
   let count = 1;
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
@@ -158,7 +158,7 @@ const showDice = function(diceValues) {
   });
 };
 
-const showRandomDiceFace = function() {
+const showRandomDiceFace = function () {
   const diceFaces = {
     1: "/Dice-1.png",
     2: "/Dice-2.png",
@@ -181,7 +181,7 @@ const disableDice = () => {
   dice2.onclick = null;
 };
 
-const rollDice = function(numberOfDice) {
+const rollDice = function (numberOfDice) {
   hideOverlay("num_of_dice");
   closeOverlay("num_of_dice");
   const diceBlock = getElementById("dice_block");
@@ -215,12 +215,12 @@ const rollDice = function(numberOfDice) {
   }, 900);
 };
 
-const rollDiceForMLM = function() {
+const rollDiceForMLM = function () {
   const dice = getElementById("dice1");
   dice.onclick = handleMLM;
 };
 
-const handleMLM = function() {
+const handleMLM = function () {
   const diceBlock = getElementById("dice1");
   diceBlock.onclick = null;
   const spacesHandlers = {
@@ -242,14 +242,14 @@ const handleMLM = function() {
     });
 };
 
-const rollOneDice = function() {
+const rollOneDice = function () {
   closeOverlay("num_of_dice");
   hideOverlay("num_of_dice");
   closeOverlay("dice2");
   rollDice(1);
 };
 
-const rollDie = function() {
+const rollDie = function () {
   fetch("/hascharity")
     .then(res => res.json())
     .then(({ hasCharityTurns }) => {
@@ -266,12 +266,12 @@ const rollDie = function() {
     });
 };
 
-const displayOutOfGameMsg = function() {
+const displayOutOfGameMsg = function () {
   const notifyDiv = getElementById("bankruptedMsg");
   notifyDiv.style.visibility = "visible";
 };
 
-const polling = function(game) {
+const polling = function (game) {
   let { players, requester } = game;
   if (requester.notifyEscape) {
     notifyEscape();
@@ -289,7 +289,7 @@ const polling = function(game) {
   }
 };
 
-const showCard = function(card, isMyTurn, player) {
+const showCard = function (card, isMyTurn, player) {
   if (isSameCard(card.data)) return;
   const bigDealactions = [acceptBigDeal, declineBigDeal, createAuction];
   const cardHandlers = {
@@ -311,7 +311,7 @@ const showCard = function(card, isMyTurn, player) {
   cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
-const showNotification = function(notification) {
+const showNotification = function (notification) {
   const odlNotifDiv = document.getElementById("notification-div").children[0];
   const oldNotification = odlNotifDiv && odlNotifDiv.children[0].innerText;
   if (!notification || oldNotification == notification) return;
@@ -330,7 +330,7 @@ const showNotification = function(notification) {
   notificationsDiv.appendChild(timeDiv);
 };
 
-const updateGamePiece = function(player) {
+const updateGamePiece = function (player) {
   let gamePiece = document.getElementById("gamePiece" + player.turn);
   gamePiece.classList.add("visible");
   let space = gamePiece.parentNode;
@@ -339,7 +339,7 @@ const updateGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
-const createActivity = function({ playerName, msg, time }) {
+const createActivity = function ({ playerName, msg, time }) {
   const activity = createElement("div");
   const activityPara = createElement("p");
   activity.classList.add("activity");
@@ -349,7 +349,7 @@ const createActivity = function({ playerName, msg, time }) {
   return activity;
 };
 
-const updateActivityLog = function({ activityLog }) {
+const updateActivityLog = function ({ activityLog }) {
   const activityLogDiv = getElementById("activityLog");
   const localActivitiesCount = activityLogDiv.children.length;
   if (activityLog.length == localActivitiesCount) return;
@@ -360,13 +360,13 @@ const updateActivityLog = function({ activityLog }) {
   });
 };
 
-const getPlayerData = function(playersData) {
+const getPlayerData = function (playersData) {
   const { playerName } = parseCookie();
   const playerData = playersData.filter(({ name }) => name == playerName)[0];
   return playerData;
 };
 
-const handleAuctionCard = function(game) {
+const handleAuctionCard = function (game) {
   const { playerName } = parseCookie();
   const { activeCard, currentAuction } = game;
   const { soldTo } = activeCard;
@@ -377,7 +377,7 @@ const handleAuctionCard = function(game) {
   showPurchasedCard(activeCard);
 };
 
-const getGame = function() {
+const getGame = function () {
   fetch("/getgame")
     .then(data => data.json())
     .then(game => {
@@ -388,11 +388,11 @@ const getGame = function() {
     });
 };
 
-const saveGame = function() {
+const saveGame = function () {
   fetch("/savegame");
 };
 
-const initialize = function() {
+const initialize = function () {
   setInterval(getGame, 1000);
   setTimeout(getProfessions, 1500);
 };

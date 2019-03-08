@@ -17,9 +17,9 @@ const handleBid = function (wantToBid) {
     body: JSON.stringify({ wantToBid, currentBid })
   })
     .then(data => data.json())
-    .then(({ isAbleToBid, message }) => {
-      if (!isAbleToBid) return closeOverlay('auction-div');
+    .then(({ message }) => {
       getElementById("bid-notification").innerText = message;
+      getElementById("bid-value").value = null;
     });
 };
 
@@ -42,9 +42,16 @@ const isBidder = function (bidders) {
   return bidders.some(({ name }) => isSame(name));
 };
 
+const hasAuctionFeeds = function(){
+  const currentBid = getElementById("current-bid");
+  const currentBidder = getElementById("current-bidder");
+  return currentBid.innerText != "" && currentBidder.innerText != "";
+}
+
 const joinAuction = function (game) {
   const { currentAuction } = game;
   const { present } = currentAuction;
+  if (!present && hasAuctionFeeds()) return closeAuction();
   if (!present) return closeOverlay('auction-div');
   const { currentBid, host, bidder, bidders } = currentAuction.data;
   if (isSame(host.name)) {
@@ -60,8 +67,11 @@ const joinAuction = function (game) {
 
 const closeAuction = function () {
   setAuctionFeed("", "");
+  const sellCard = getElementById("submit-base-price");
+  sellCard.innerText = "Sell";
   openOverlay("auction-base-price");
   closeOverlay("auction-form");
+  closeOverlay('auction-div');
 }
 
 const heldAuction = function (action) {

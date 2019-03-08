@@ -285,8 +285,8 @@ const bid = function (req, res) {
 const passBid = function (req, res) {
   const { playerName } = req.cookies;
   const { message, isAbleToPass } = req.game.passBid(playerName);
-  const isAbleToBid = !isAbleToPass;
-  res.json({ message, isAbleToBid, isAbleToPass });
+  const ableToBid = !isAbleToPass;
+  res.json({ message, ableToBid, isAbleToPass });
 };
 
 const handleBid = function (req, res) {

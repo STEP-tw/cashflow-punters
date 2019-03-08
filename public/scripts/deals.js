@@ -17,7 +17,7 @@ const acceptSmallDeal = function(event) {
         parent.style.display = "none";
         return;
       }
-      openOverlay("low-balance");
+      openOverlay("low-balance", "flex");
     });
 };
 
@@ -36,7 +36,7 @@ const acceptBigDeal = function(event) {
         parent.style.display = "none";
         return;
       }
-      openOverlay("low-balance");
+      openOverlay("low-balance", "flex");
     });
 };
 

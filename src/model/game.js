@@ -566,7 +566,9 @@ class Game {
   }
 
   handleBid(playerName, currentBid) {
-    const data = this.currentAuction.data.setCurrentBid(currentBid, playerName);
+    const currentAuction = this.currentAuction.data;
+    const data = currentAuction.setCurrentBid(currentBid, playerName);
+    if (currentAuction.bidders.length == 1 && data.ableToBid) this.closeAuction();
     return data;
   }
 
@@ -580,12 +582,25 @@ class Game {
     return { message: ESCAPE_ERROR, isAbleToPass };
   }
 
+
+  setCloseAuctionActivities() {
+    this.activityLog.addActivity(
+      ` has sold the the deal in ${this.currentAuction.data.currentBid}`,
+      this.currentAuction.data.host.name
+    );
+    this.activityLog.addActivity(
+      ` has bought the the deal in ${this.currentAuction.data.currentBid}`,
+      this.currentAuction.data.bidder.name
+    );
+  }
+
   closeAuction() {
     this.currentAuction.data.sellDeal();
     this.activityLog.addActivity(
       `${this.currentPlayer.name} has closed the auction.`
     );
     const { bidder, host } = this.currentAuction.data;
+    this.setCloseAuctionActivities();
     if (bidder.name == host.name) {
       this.nextPlayer();
       this.currentAuction = { present: false };
