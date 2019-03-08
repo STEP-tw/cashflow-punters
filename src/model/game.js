@@ -27,11 +27,11 @@ class Game {
     this.hasLoaded = false;
   }
 
-  incJoinedPlayerCount(){
+  incJoinedPlayerCount() {
     this.joinedPlayerCount++;
   }
 
-  resumeGame(){
+  resumeGame() {
     this.hasStarted = true;
   }
 
@@ -76,7 +76,7 @@ class Game {
     return this.players.length;
   }
 
-  setHasLoaded(){
+  setHasLoaded() {
     this.hasLoaded = true;
   }
 
