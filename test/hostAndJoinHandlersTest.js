@@ -111,7 +111,7 @@ describe("provideGameLobby", function() {
     expect(res)
       .to.have.property("content")
       .to.equal(
-        '{"players":["player1","player2"],"gameId":"1234","isHost":false}'
+        '{"players":["player1","player2"],"gameId":"1234","isHost":false,"isGamePresent":true}'
       );
   });
 });
