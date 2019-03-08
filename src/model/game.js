@@ -452,7 +452,7 @@ class Game {
     }
     if (isEligibleForMLM) {
       player.setNotification("Roll dice for MLM.");
-      this.activityLog.addActivity("rolling dice for MLM", player.name);
+      this.activityLog.addActivity(" rolling dice for MLM", player.name);
     }
     return { diceValues, spaceType, isEligibleForMLM, isBankrupted };
   }

@@ -304,12 +304,14 @@ describe("acceptSmallDeal", function() {
   beforeEach(() => {
     req.game = {
       activeCard: {
-        data: { relatedTo: "" },
+        data: { relatedTo: "goldCoins" },
         dealDone: false,
         dealDoneCount: 0,
         drawnBy: "player1"
       },
-      getPlayerByName: () => {}
+      getPlayerByName: () => {
+        return { name: "tilak", buyGoldCoins: sinon.stub().returns(true) };
+      }
     };
     req.game.players = { length: 0 };
     req.game.activityLog = { addActivity: sinon.spy() };
@@ -587,4 +589,3 @@ describe("handleBid", function() {
     expect(res.json.calledOnce).to.be.true;
   });
 });
-

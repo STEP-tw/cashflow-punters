@@ -102,23 +102,44 @@ const isAbleToDoCharity = function(req, res) {
   res.send(JSON.stringify({ isAble }));
 };
 
+const acceptRealEstateDeal = function(player, game) {
+  const activeCardData = game.activeCard.data;
+  const isSuccessful = player.addRealEstate(activeCardData);
+  game.activityLog.addActivity(
+    `${player.name} has bought ${activeCardData.type}`
+  );
+  return isSuccessful;
+};
+
+const acceptGoldCoinsDeal = function(player, game) {
+  const activeCardData = game.activeCard.data;
+  const isSuccessful = player.buyGoldCoins(activeCardData);
+  game.activityLog.addActivity(
+    `${player.name} has bought ${activeCardData.numberOfCoins} gold coins`
+  );
+  return isSuccessful;
+};
+
+const acceptMLMDeal = function(player, game) {
+  const activeCardData = game.activeCard.data;
+  const isSuccessful = player.addMLM(activeCardData);
+  game.activityLog.addActivity(`${player.name} has bought MLM card`);
+  return isSuccessful;
+};
+
 const acceptSmallDeal = function(req, res) {
   const { activeCard } = req.game;
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
-  let isSuccessful = true;
-  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful });
-  if (activeCard.data.relatedTo == "realEstate") {
-    isSuccessful = player.addRealEstate(activeCard.data);
-  }
-  if (activeCard.data.relatedTo == "goldCoins") {
-    isSuccessful = player.buyGoldCoins(activeCard.data);
-  }
-  if (activeCard.data.relatedTo == "MLM") {
-    isSuccessful = player.addMLM(activeCard.data);
-  }
+  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful: true });
+  const dealHandlers = {
+    realEstate: acceptRealEstateDeal,
+    goldCoins: acceptGoldCoinsDeal,
+    MLM: acceptMLMDeal
+  };
+  const dealType = activeCard.data.relatedTo;
+  const isSuccessful = dealHandlers[dealType](player, req.game);
   if (!isSuccessful) return res.json({ isSuccessful });
-  req.game.activityLog.addActivity(`${playerName} has accepted the deal`);
   req.game.nextPlayer();
   res.json({ isSuccessful });
 };
@@ -135,10 +156,8 @@ const acceptBigDeal = function(req, res) {
   const { activeCard } = req.game;
   if (playerName != activeCard.drawnBy) return res.send({ isSuccessful: true });
   const player = req.game.getPlayerByName(playerName);
-  const isSuccessful = player.addRealEstate(activeCard.data);
+  const isSuccessful = acceptRealEstateDeal(player, req.game);
   if (!isSuccessful) return res.send({ isSuccessful });
-  let requestedPlayer = req.cookies["playerName"];
-  req.game.activityLog.addActivity(`${requestedPlayer} has accepted the deal`);
   req.game.nextPlayer();
   res.send({ isSuccessful });
 };
