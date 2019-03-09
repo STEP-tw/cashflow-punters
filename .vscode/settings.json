@@ -1,5 +1,11 @@
 {
   "files.exclude" : {
-    "spikes": true
-}
+    ".travis.yml": true,
+    "spikes": true,
+    "package-lock.json": true,
+    ".nyc_output":true,
+    "coverage":true,
+    "node_modules":true,
+    ".github":true
+  }
 }
