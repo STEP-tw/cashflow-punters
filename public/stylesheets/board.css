@@ -32,7 +32,7 @@ button {
   white-space: nowrap;
   background-color: rgb(112, 146, 165);
   color: white;
-  font-size: large;
+  font-size: 18px;
   font-weight: lighter;
   cursor: pointer;
   border-radius: 50px;
@@ -41,8 +41,8 @@ button {
   padding: 10px;
   margin: 20px;
 
-  height: fit-content;
-  width: fit-content;
+  height: 35px;
+  width: 120px;
 
   padding: 1% 2%;
   margin: 1% 8%;
@@ -325,10 +325,11 @@ button:hover {
 }
 
 .button_div {
-  padding: 3%;
+  padding: 2%;
   margin: 0px 7%;
-  height: fit-content;
-  width: fit-content;
+  height: 35px;
+  width: 120px;
+  font-size: 18px;
 }
 
 .cardDisplay {
@@ -835,8 +836,8 @@ button:hover {
 }
 
 .top-popup > button {
-  height: fit-content;
-  width: fit-content;
+  height: 35px;
+  width: 120px;
   align-self: center;
   margin-top: 7%;
   padding: 2% 4%;
