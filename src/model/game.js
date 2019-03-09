@@ -486,7 +486,7 @@ class Game {
     const player = this.currentPlayer;
     this.activityLog.addActivity(
       ` has bought ${numberOfShares} shares ${this.activeCard.data.symbol}`,
-      player
+      player.name
     );
     player.buyShares(this.activeCard.data, numberOfShares);
     this.nextPlayer();
@@ -568,7 +568,8 @@ class Game {
   handleBid(playerName, currentBid) {
     const currentAuction = this.currentAuction.data;
     const data = currentAuction.setCurrentBid(currentBid, playerName);
-    if (currentAuction.bidders.length == 1 && data.ableToBid) this.closeAuction();
+    if (currentAuction.bidders.length == 1 && data.ableToBid)
+      this.closeAuction();
     return data;
   }
 
@@ -581,7 +582,6 @@ class Game {
 
     return { message: ESCAPE_ERROR, isAbleToPass };
   }
-
 
   setCloseAuctionActivities() {
     this.activityLog.addActivity(
