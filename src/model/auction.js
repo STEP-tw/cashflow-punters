@@ -34,7 +34,7 @@ class Auction {
     if (player == this.bidder.name)
       return { isAbleToPass: false, isAuctionClosed: false };
     this.bidders = this.bidders.filter(({ name }) => name != player);
-    if (this.bidders.length == 1)
+    if (this.bidders.length <= 0)
       return { isAbleToPass: true, isAuctionClosed: true };
     return { isAbleToPass: true, isAuctionClosed: false };
   }

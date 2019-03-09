@@ -72,7 +72,7 @@ describe("passBid", function() {
       { name: "shubham", ledgerBalance: 300, setNotification: sinon.spy() }
     ]);
     let bid = auction.passBid("shubham");
-    chai.expect(bid).to.eql({ isAbleToPass: true, isAuctionClosed: true });
+    chai.expect(bid).to.eql({ isAbleToPass: true, isAuctionClosed: false });
   });
 
   it("should not able to pass the bid if player is host", function() {

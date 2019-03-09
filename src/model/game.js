@@ -600,12 +600,12 @@ class Game {
       `${this.currentPlayer.name} has closed the auction.`
     );
     const { bidder, host } = this.currentAuction.data;
-    this.setCloseAuctionActivities();
     if (bidder.name == host.name) {
       this.nextPlayer();
       this.currentAuction = { present: false };
       return;
     }
+    this.setCloseAuctionActivities();
     this.activeCard.soldTo = bidder.name;
     this.currentAuction = { present: false };
   }
