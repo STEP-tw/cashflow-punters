@@ -1,3 +1,12 @@
+const playerColours = {
+  1: "rgb(237, 179, 138)",
+  2: "rgb(152, 215, 116)",
+  3: "rgb(228, 228, 128)",
+  4: "rgb(210, 147, 237)",
+  5: "rgb(130, 198, 233)",
+  6: "rgb(230, 192, 192)"
+};
+
 const displayFinancialStament = function(player) {
   setFinancialStatement(player);
   showOverlay("fs_overlay");
@@ -43,6 +52,7 @@ const createProgressBar = function(player) {
 const createName = function(player) {
   const name = createElement("td");
   name.innerText = player.name;
+  name.style.color = playerColours[player.turn];
   return name;
 };
 
