@@ -564,10 +564,7 @@ describe("handleSpace", function() {
       game.addPlayer(player1);
       game.initializeGame();
       game.removePlayer("player1");
-
-      expect(game.players)
-        .to.be.an("Array")
-        .of.length(0);
+      expect(game.players[0].hasLeftGame).true;
     });
   });
 
@@ -650,7 +647,7 @@ describe("handleSpace", function() {
       expect(game.rollDice(1))
         .to.be.an("Object")
         .to.have.property("diceValues")
-        .to.deep.equals([1,2]);
+        .to.deep.equals([1, 2]);
     });
   });
 });

@@ -52,8 +52,6 @@ describe("hostGame", function () {
         {
           MLMTurns: 0,
           MLMCardsCount: 0,
-          bankrupt: false,
-          bankruptcy: false,
           charityTurns: 0,
           notifyEscape: false,
           notification: "",
@@ -67,6 +65,7 @@ describe("hostGame", function () {
           downSizedForTurns: 0,
           name: "player",
           hasMLM: false,
+          "hasLeftGame": false,
           entries: [],
           hasMLM: false,
           didUpdateSpace: false,
@@ -153,9 +152,8 @@ describe("joinGame", function () {
       .to.deep.equals([
         {
           MLMCardsCount: 0,
-          bankrupt: false,
           MLMTurns: 0,
-          bankruptcy: false,
+          "hasLeftGame": false,
           charityTurns: 0,
           notifyEscape: false,
           MLMProfit: 0,

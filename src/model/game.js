@@ -639,7 +639,6 @@ class Game {
   removePlayer(name) {
     const player = this.getPlayerByName(name);
     player.hasLeftGame = true;
-    // this.players = this.players.filter(player => player.name != name);
     this.activityLog.addActivity(" left the game", name);
   }
 
