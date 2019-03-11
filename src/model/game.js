@@ -120,9 +120,8 @@ class Game {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
-    if (this.isFasttrackPlayer()) {
+    if (this.currentPlayer.hasLeftGame || this.isFasttrackPlayer()) {
       this.nextPlayer();
-      this.activityLog.logTurn(this.currentPlayer.name);
       return;
     }
     if (this.currentPlayer.hasEscape()) {
@@ -638,7 +637,9 @@ class Game {
   }
 
   removePlayer(name) {
-    this.players = this.players.filter(player => player.name != name);
+    const player = this.getPlayerByName(name);
+    player.hasLeftGame = true;
+    // this.players = this.players.filter(player => player.name != name);
     this.activityLog.addActivity(" left the game", name);
   }
 

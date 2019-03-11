@@ -15,8 +15,6 @@ class Player extends FinancialStatement {
     this.didUpdateSpace = false;
     this.notification = "";
     this.downSizedForTurns = 0;
-    this.bankrupt = false;
-    this.bankruptcy = false;
     this.bankrupted = false;
     this.isTurnComplete = true;
     this.notifyEscape = false;
@@ -25,6 +23,7 @@ class Player extends FinancialStatement {
     this.MLMProfit = 0;
     this.MLMCardsCount = 0;
     this.MLMTurns = 0;
+    this.hasLeftGame = false;
   }
 
   setTurn(turn) {
