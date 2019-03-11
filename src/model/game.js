@@ -124,7 +124,9 @@ class Game {
       this.nextPlayer();
       return;
     }
-    this.setDice([6]);
+    if (this.dice.diceValues.length >= 2) {
+      this.dice.diceValues.pop();
+    }
     if (this.currentPlayer.hasEscape()) {
       this.payBankLoan(this.currentPlayer);
       this.notifyEscaping();
