@@ -208,7 +208,6 @@ const rollDice = function (numberOfDice) {
           disableDice();
           return displayOutOfGameMsg();
         }
-        showDice(diceValues);
         if (isEligibleForMLM) return rollDiceForMLM();
         spacesHandlers[spaceType] && spacesHandlers[spaceType]();
       });
@@ -234,7 +233,6 @@ const handleMLM = function () {
     .then(res => res.json())
     .then(({ diceValue, spaceType, isMLMTurnLeft }) => {
       clearInterval(diceAnimationInterval);
-      showDice([diceValue]);
       if (isMLMTurnLeft) {
         return rollDiceForMLM();
       }
@@ -279,6 +277,9 @@ const polling = function (game) {
   if (game.activeCard.data) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
+  const {diceValues,diceCount} = game.dice;
+  console.log(diceValues,diceCount);
+  showDice(diceValues)
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
   showNotification(requester.notification);

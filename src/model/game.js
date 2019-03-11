@@ -25,6 +25,7 @@ class Game {
     this.stableGameJson = "";
     this.joinedPlayerCount = 0;
     this.hasLoaded = false;
+    this.dice = { diceValues: [6] };
   }
 
   incJoinedPlayerCount() {
@@ -469,6 +470,7 @@ class Game {
       player.setNotification("Roll dice for MLM.");
       this.activityLog.addActivity(" rolling dice for MLM", player.name);
     }
+    this.setDice(diceValues);
     return { diceValues, spaceType, isEligibleForMLM, isBankrupted };
   }
 
@@ -550,6 +552,7 @@ class Game {
       return [diceValue];
     }
     this.splitPlayersShares(symbol);
+    this.setDice([diceValue]);
     return [diceValue];
   }
 
@@ -630,12 +633,17 @@ class Game {
       player.setNotification("Roll dice again for MLM.");
       this.activityLog.addActivity(" rolling dice again for MLM", player.name);
     }
+    this.setDice([diceValue]);
     return { spaceType, diceValue, isMLMTurnLeft };
   }
 
   removePlayer(name) {
     this.players = this.players.filter(player => player.name != name);
     this.activityLog.addActivity(" left the game", name);
+  }
+
+  setDice(diceValues) {
+    this.dice.diceValues = diceValues;
   }
 }
 
