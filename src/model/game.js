@@ -638,6 +638,7 @@ class Game {
   }
 
   removePlayer(name) {
+    if (name == this.currentPlayer.name) this.nextPlayer();
     const player = this.getPlayerByName(name);
     player.hasLeftGame = true;
     this.activityLog.addActivity(" left the game", name);
