@@ -177,7 +177,7 @@
           </div>
           <div class="right_part">
             <div class="game-options">
-              <button onclick="leaveGame()">Leave Game</button>
+              <button onclick="openOverlay('leave-game')">Leave Game</button>
               <button  onclick="saveGame();">Save Game</button>
             </div>
             <div class="all-player-details" id="players-information">
@@ -452,6 +452,13 @@
         <div class="top-popup">
           You don't have enough balance
           <button onclick="closeOverlay('low-balance')">OK</button>
+        </div>
+      </div>
+      <div id="leave-game" class="popup-background">
+        <div class="top-popup">
+          Do you really want to leave game ?
+          <button onclick="closeOverlay('leave-game')">Cancel</button>
+          <button onclick="leaveGame()">Yes</button>
         </div>
       </div>
       <div id="share-background" class="popup-overlay">
