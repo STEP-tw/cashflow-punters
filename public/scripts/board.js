@@ -151,6 +151,8 @@ const displayDiceValue = function(diceValue, count) {
 };
 
 const showDice = function(diceValues) {
+  hideOverlay("dice1");
+  hideOverlay("dice2");
   let count = 1;
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
@@ -293,9 +295,9 @@ const polling = function(game) {
   if (game.activeCard.data) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
-  const {diceValues,diceCount} = game.dice;
-  console.log(diceValues,diceCount);
-  showDice(diceValues)
+  const { diceValues, diceCount } = game.dice;
+  console.log(diceValues, diceCount);
+  showDice(diceValues);
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
   showNotification(requester.notification);

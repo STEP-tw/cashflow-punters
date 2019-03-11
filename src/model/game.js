@@ -124,6 +124,7 @@ class Game {
       this.nextPlayer();
       return;
     }
+    this.setDice([6]);
     if (this.currentPlayer.hasEscape()) {
       this.payBankLoan(this.currentPlayer);
       this.notifyEscaping();
