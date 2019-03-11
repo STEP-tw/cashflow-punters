@@ -60,11 +60,21 @@ const cancelGame = function() {
   fetch("/cancelgame");
 };
 
+const openCancelGame = function() {
+  openOverlay("cancel-game");
+};
+
 const insertButtons = function({ isHost }) {
   const buttonsSpace = getElementById("buttons_space");
   let button = createButton("Leave Game", "button", "", "button", leaveGame);
   if (isHost) {
-    button = createButton("Cancel Game", "button", "", "button", cancelGame);
+    button = createButton(
+      "Cancel Game",
+      "button",
+      "",
+      "button",
+      openCancelGame
+    );
   }
   buttonsSpace.appendChild(button);
 };
