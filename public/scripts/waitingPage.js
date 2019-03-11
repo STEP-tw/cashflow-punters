@@ -57,7 +57,9 @@ const leaveGame = function() {
 };
 
 const cancelGame = function() {
-  fetch("/cancelgame");
+  fetch("/cancelgame").then(res => {
+    goToHome();
+  });
 };
 
 const openCancelGame = function() {
@@ -79,9 +81,14 @@ const insertButtons = function({ isHost }) {
   buttonsSpace.appendChild(button);
 };
 
+const goToHome = function() {
+  window.location = "/";
+};
+
 const isGamePresent = function(game) {
   if (!game.isGamePresent) {
-    window.location = "/";
+    openOverlay("notify-cancel-game");
+    return game;
   }
   return game;
 };

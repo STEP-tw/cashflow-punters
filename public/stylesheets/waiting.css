@@ -154,4 +154,22 @@ li {
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
 }
 
+.popup-button{
+  width: 90%;
+	height: 40px;
+	margin-top: 10px;
+
+	color: whitesmoke;
+	background: #607D8B;
+
+	border-radius: 20px;
+	border: none;
+
+	font-size: 18px;
+	font-family: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+	outline: none;
+}
+
 /*-----------cancel game ka popup end------------------------*/

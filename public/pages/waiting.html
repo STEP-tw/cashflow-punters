@@ -27,7 +27,7 @@
       </p>
       <img class="waiting-gif" src="/waiting.gif" alt="waiting" />
       <section class="players-field w3-cotainer">
-        <p class="lobby-title">Players in lobby </p>
+        <p class="lobby-title">Players in lobby</p>
         <section class="waiting-player-field">
           <ul id="playersList"></ul>
         </section>
@@ -37,11 +37,19 @@
       </section>
     </main>
     <div id="cancel-game" class="popup-background">
-        <div class="top-popup">
-          Do you really want to cancel the game ?
-          <button onclick="closeOverlay('cancel-game')">Cancel</button>
-          <button onclick="cancelGame()">Yes</button>
-        </div>
+      <div class="top-popup">
+        Do you really want to cancel the game ?
+        <button class="popup-button" onclick="closeOverlay('cancel-game')">
+          Cancel
+        </button>
+        <button class="popup-button" onclick="cancelGame()">Yes</button>
       </div>
+    </div>
+    <div id="notify-cancel-game" class="popup-background">
+      <div class="top-popup">
+        Sorry! Host has been cancel the game.
+        <button class="popup-button" onclick="goToHome()">Ok</button>
+      </div>
+    </div>
   </body>
 </html>

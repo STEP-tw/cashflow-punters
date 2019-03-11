@@ -22,7 +22,6 @@ class Game {
     this.activityLog = new ActivityLog();
     this.fasttrackPlayers = [];
     this.bankruptedPlayersCount = 0;
-    this.stableGameJson = "";
     this.joinedPlayerCount = 0;
     this.hasLoaded = false;
     this.dice = { diceValues: [6] };
@@ -145,7 +144,6 @@ class Game {
       this.skipTurn();
     }
     this.resetActiveCard();
-    this.stableGameJson = JSON.stringify(this);
   }
 
   setActiveCard(type, data) {
