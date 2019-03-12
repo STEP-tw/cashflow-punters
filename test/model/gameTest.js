@@ -104,9 +104,6 @@ describe("handleSpace", function() {
     game.board = {
       getPayDaySpaces: sinon.stub()
     };
-
-    
-
     game.board.getPayDaySpaces.onFirstCall().returns([6, 14, 22]);
   });
 

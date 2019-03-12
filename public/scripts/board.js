@@ -296,7 +296,6 @@ const polling = function(game) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   const { diceValues, diceCount } = game.dice;
-  console.log(diceValues, diceCount);
   showDice(diceValues);
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
