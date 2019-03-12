@@ -24,7 +24,7 @@ const updateTableRows = function (id, properties, minimumNoOfRows, rowData) {
 		let tableData = [data.type];
     properties.forEach(property => {
 			let value = data[property];
-      tableData.push(value);
+      tableData.push("$ " + value);
     });
     let rowDataHtml = createTableRow(tableData);
 		dataDiv.appendChild(rowDataHtml);
@@ -39,7 +39,7 @@ const updateRealEstateAssets = updateTableRows.bind(null, "RealEstate-downpaymen
 
 const updateRealEstateLiabilities = updateTableRows.bind(null, "RealEstate-mortage",["mortgage"], 4);
 
-const updateRealEstateCashflow = updateTableRows.bind(null, "RealEstate-cashflow", ["cashflow"], 3);
+const updateRealEstateCashflow = updateTableRows.bind(null, "RealEstate-cashflow", ["cashflow"], 4);
 
 const setIncome = function (player) {
   setInnerText("salary", player.income.salary);
@@ -75,7 +75,7 @@ const updateShares = function (player) {
     row.appendChild(number);
 		let price = createElement('td');
 		price.className = "tableData";
-    price.innerText = stocks[stockName]["currentPrice"];
+    price.innerText = "$ " + stocks[stockName]["currentPrice"];
     row.appendChild(price);
     stocksDiv.appendChild(row);
 	});

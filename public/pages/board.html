@@ -255,61 +255,75 @@
                     </tr>
                     <tr>
                       <td>Salary:</td>
-                      <td id="salary"></td>
+                      <td class="tableData">$ <span id="salary"></span></td>
                     </tr>
                     <tr>
                       <td>Real Estate/Business:</td>
                       <td></td>
-                    </tr>
-                    <tbody id="RealEstate-cashflow" style="height: 8em; overflow: scroll;"></tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </table>
+										</tr>
+									</table>
+										<div style="height: 8.3em; overflow: scroll;">
+												<table>
+													<tbody id="RealEstate-cashflow" ></tbody>
+												</table>
+										</div>
                 </div>
                 <div>
                   <h2 class="sub-header">Expenses</h2>
                   <table>
                     <tr>
                       <td>Taxes:</td>
-                      <td id="taxes"></td>
+                      <td class="tableData">$ 
+												<span id="taxes" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
-                      <td>Home Mortage Payment:</td>
-                      <td id="home-mortage-payment"></td>
+											<td>Home Mortage Payment:</td>
+											<td class="tableData">$ 
+												<span id="home-mortage-payment" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
-                      <td>School Loan Payment:</td>
-                      <td id="school-loan-payment"></td>
+											<td>School Loan Payment:</td>
+											<td class="tableData">$ 
+												<span id="school-loan-payment" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
-                      <td>Car Loan Payment:</td>
-                      <td id="car-loan-payment"></td>
+											<td>Car Loan Payment:</td>
+											<td class="tableData">$ 
+												<span id="car-loan-payment"class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
-                      <td>Credit Card Payment:</td>
-                      <td id="credit-card-payment"></td>
+											<td>Credit Card Payment:</td>
+											<td class="tableData">$ 
+												<span id="credit-card-payment" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
-                      <td>Other Expenses:</td>
-                      <td id="other-expenses"></td>
+											<td>Other Expenses:</td>
+											<td class="tableData">$ 
+												<span id="other-expenses" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
                       <td>
-                        Bank Loan Payment: <span id="bank-loan-payment"></span><span class="extra-info">(10% of Bank
-                          Loan Total)</span>
-                      </td>
-                      <td></td>
+                        Bank Loan Payment: <span class="extra-info">   (10% of Bank Loan Total)</span>
+											</td>
+											<td class="tableData">$ 
+												<span id="bank-loan-payment" class="tableData"></span>
+											</td>
                     </tr>
                     <tr>
                       <td>
                         Per Child Expense:
-                        <span class="number" id="child-count"></span> x 200
+                        <span class="number" id="child-count"> _ </span> x 200
                         <span class="extra-info">(# of Children):</span>
-                        <span id="total-child-expense"></span>
-                      </td>
+											</td>
+											<td class="tableData">$ 
+												<span id="total-child-expense" class="tableData"></span>
+											</td>
                     </tr>
                   </table>
                 </div>
@@ -317,33 +331,45 @@
                   <h2 class="sub-header">Assests</h2>
                   <table>
                     <tr>
-                      <td>Savings:</td>
-                      <td id="savings"></td>
+											<td>Savings:</td>
+											<td class="tableData">$ 
+												<span id="savings"></span>
+											</td>
                       <td></td>
                     </tr>
                     <tr>
                       <td>Precious Metals, Etc.:</td>
                       <td id="gold-coins">Gold Coins</td>
-                      <td id="gold-coin-number"></td>
-                    </tr>
-                    <tr>
-                      <td>Stocks/Funds:</td>
-                      <td># of Shares:</td>
-                      <td>Cost/Share:</td>
-                    </tr>
-                    <tbody id="stocks-funds" style="height:4em; overflow:scroll;"></tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Real Estate/Business:</td>
-                      <td>Down Payment:</td>
-                      <td>Cost:</td>
-                    </tr>
-                    <tbody id="RealEstate-downpayment" style="height:8em; overflow:scroll;"></tbody>
-                  </table>
+                      <td id="gold-coin-number" class="tableData"></td>
+										</tr>
+										<tr>
+												<td>Stocks/Funds:</td>
+												<td># of Shares:</td>
+												<td>Cost/Share:</td>
+										</tr>
+									</table>
+									<div style="height: 4.2em; overflow:scroll;">
+										<table>
+												<tbody id="stocks-funds"></tbody>
+										</table>
+									</div>
+									<table style="margin-top: -1%;">
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+											<tr>
+													<td>Real Estate/Business:</td>
+													<td>Down Payment:</td>
+													<td>Cost:</td>
+											</tr>
+									</table>
+                   <div style="height:8em; overflow:scroll;">
+										 <table>
+												<tbody id="RealEstate-downpayment"></tbody>
+										 </table>
+									 </div>
                 </div>
               </div>
 
@@ -363,18 +389,18 @@
                   </h3>
                 </div>
                 <div style="border:3px solid #9EB1BB; padding:3%; color:#303E45;">
-                  <p class="block" id="fs-income">$ Income</p>
+                  <p class="block">$ <span id="fs-income">Income</span></p>
                   <p class="operator">+</p>
-                  <p class="block" id="passive-income">$ passive Income</p>
+                  <p class="block">$ <span id="passive-income">Passive Income</span></p>
                   <p class="extra-info">
                     (Cash Flow from Interest/Dividends and Real Estate/Business)
                   </p>
                   <p class="operator">=</p>
-                  <p class="block" id="total-income">$ total Income</p>
+                  <p class="block">$ <span id="total-income">Total Income</span></p>
                   <p class="operator">-</p>
-                  <p class="block" id="fs-expenses">$ expenses</p>
+                  <p class="block">$ <span id="fs-expenses">Expenses</span></p>
                   <p class="operator">=</p>
-                  <p class="block" id="fs-cashflow">$ cashflow</p>
+                  <p class="block">$ <span id="fs-cashflow">Cashflow</span></p>
                   <p class="extra-info">(Monthly Cash Flow)</p>
                 </div>
                 <div style="height: 200px;">
@@ -382,32 +408,38 @@
                   <table>
                     <tr>
                       <td>Home Mortage:</td>
-                      <td id="home-mortage"></td>
+                      <td class="tableData">$ <span id="home-mortage"></span></td>
                     </tr>
                     <tr>
                       <td>School Loans:</td>
-                      <td id="school-loans"></td>
+                      <td class="tableData">$ <span id="school-loans"></span></td>
                     </tr>
                     <tr>
                       <td>Car Loans:</td>
-                      <td id="car-loans"></td>
+                      <td class="tableData">$ <span id="car-loans"></span></td>
                     </tr>
                     <tr>
                       <td>Credit Card Debt:</td>
-                      <td id="credit-card-debt"></td>
+                      <td class="tableData">$ <span id="credit-card-debt"></span></td>
                     </tr>
                     <tr>
                       <td>Bank Loan</td>
-                      <td id="bank-loan"></td>
+                      <td class="tableData">$ <span id="bank-loan"></span></td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                     </tr>
-                    <td>Real Estate/Business:</td>
-                    <td>Mortage/Liability:</td>
-                    <tbody id="RealEstate-mortage" style="height:8em; overflow:scroll;"></tbody>
-                  </table>
+										<tr>
+											<td>Real Estate/Business:</td>
+											<td>Mortage/Liability:</td>
+										</tr>
+									</table>
+										<div style="height:8em; overflow-y:scroll;">
+											<table>
+												<tbody id="RealEstate-mortage"></tbody>
+											</table>
+										</div>
                 </div>
               </div>
             </div>

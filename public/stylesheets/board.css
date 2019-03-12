@@ -741,26 +741,17 @@ th {
   color: #4d636f;
 }
 
-
-
 .overlay-fs {
-  /* z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 65%;
-	background-color: whitesmoke; */
-	
-	top: 0;
-	left: 0;
-  visibility: hidden;
 	position: absolute;
-	height: 90%;
+	top: 0%;
+	left: 0%;
+
   width: fit-content;
-  /* display: flex; */
-  /* flex-direction: column; */
-  background-color: whitesmoke;
+	height: 100%;
+
+  visibility: hidden;
+	background-color: whitesmoke;
+	
   z-index: 2;
 }
 
