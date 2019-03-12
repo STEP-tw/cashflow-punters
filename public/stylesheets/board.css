@@ -741,26 +741,27 @@ th {
   color: #4d636f;
 }
 
-.close-fs {
-  font-size: 16px;
-  background-color: #4d636f;
-  color: whitesmoke;
-  padding: 0.2% 0.8%;
-  border-radius: 50%;
-  outline: none;
-  float: right;
-  margin: 1%;
-}
+
 
 .overlay-fs {
-  z-index: 2;
+  /* z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 65%;
+	background-color: whitesmoke; */
+	
+	top: 0;
+	left: 0;
   visibility: hidden;
+	position: absolute;
+	height: 90%;
+  width: fit-content;
+  /* display: flex; */
+  /* flex-direction: column; */
   background-color: whitesmoke;
+  z-index: 2;
 }
 
 .tableData {
@@ -860,13 +861,33 @@ thead {
 
 /* ---------------------------   Popups   -------------------------- */
 
+/* close button */
+
 .close {
+	width: 5%;
+	height: 5%;
+
   position: absolute;
-  right: 2%;
-  top: 3%;
-  margin: 0;
-  padding: 1px 5px;
-  border-radius: 50%;
+	top: 1%;
+	right: 3%;
+	
+	margin: 0;
+  padding: 1px 2px;
+	
+	font-size: 30px;
+	font-weight: bolder;
+	color: #3a4b53;
+
+	background-color: inherit;
+}
+
+.close:hover {
+	transform: scale(1.2);
+	transform-origin: center;
+
+	color:rgb(126, 23, 23);
+
+	background-color: inherit;
 }
 
 .popup {
