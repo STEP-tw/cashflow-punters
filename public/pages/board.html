@@ -14,12 +14,16 @@
     <script src="/market.js"></script>
     <script src="/notifyEscape.js"></script>
     <script src="/allPlayersInfo.js"></script>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <link rel="stylesheet" href="/board.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
   </head>
 
-  <body id="body">
+<body id="body">
+<!-- <div class="flip-box">
+  <div id="board"  class="board">
+    <div id="rat-race" class="rat-race"> -->
     <main class="round_border">
       <div hidden id="0">
         <div id="gamePiece1" class="gamePiece player1 "></div>
@@ -179,6 +183,7 @@
             <div class="game-options">
               <button onclick="openOverlay('leave-game')">Leave Game</button>
               <button  onclick="saveGame();">Save Game</button>
+              <button  onclick="renderFastTrack();">FastTrack</button>
             </div>
             <div class="all-player-details" id="players-information">
             </div>
@@ -524,6 +529,7 @@
         </div>
       </div>
     </main>
+    <!-- there will be fast track board.. -->
   </body>
 
 </html>

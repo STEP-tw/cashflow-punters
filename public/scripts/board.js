@@ -283,7 +283,10 @@ const isFasttrackPlayer = function(fasttrackPlayers, player) {
 
 const getRatRicePlayers = function(allPlayer, fasttrackPlayers) {
   return allPlayer.filter(
-    player => isFasttrackPlayer(fasttrackPlayers, player) && !player.bankrupted && !player.hasLeftGame
+    player =>
+      isFasttrackPlayer(fasttrackPlayers, player) &&
+      !player.bankrupted &&
+      !player.hasLeftGame
   );
 };
 
@@ -396,7 +399,6 @@ const handleAuctionCard = function(game) {
   if (soldTo != playerName) return;
   showPurchasedCard(activeCard);
 };
-
 const getGame = function() {
   fetch("/getgame")
     .then(data => data.json())
