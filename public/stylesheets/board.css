@@ -1,56 +1,44 @@
-body {
-  position: relative;
-  font-family: sans-serif;
+/* --------------------------- body, html, main -------------------------------*/
+
+html {
   height: 100%;
-  width: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  box-sizing: border-box;
+  background-color: rgb(242, 248, 252);
+
+  margin: 0;
+  padding: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+
   font-weight: 400;
   font-family: "Roboto", sans-serif;
   color: #3A4B53;
-  background-color: rgb(242, 248, 252);
-}
-
-div {
-  box-sizing: border-box;
-}
-
-button:focus {
-  outline: none;
 }
 
 main {
   height: 98%;
-  width: 99%;
+  width: 98%;  
   margin: 0;
   box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
 }
 
-button {
-  white-space: nowrap;
-  background-color: rgb(112, 146, 165);
-  color: white;
-  font-size: 18px;
-  font-weight: lighter;
-  cursor: pointer;
-  border-radius: 50px;
-  border: none;
-  outline: none;
-  padding: 10px;
-  margin: 20px;
+/*------------------------ board spaces and center part positions ---------------*/
 
-  height: 35px;
-  width: 120px;
-
-  padding: 1% 2%;
-  margin: 1% 8%;
-}
-
-button:hover {
-  color: white;
-  background-color: rgb(49, 68, 78);
+.space_background {
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 }
 
 .horizontal_spaces {
@@ -58,12 +46,15 @@ button:hover {
 }
 
 .horizontal_space {
-  display: flex;
-  position: relative;
-  align-items: flex-end;
-  justify-content: bottom;
   width: 12.5%;
   height: 16.6%;
+
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: bottom;
+
   border-right: 1px #e5dfd3 solid;
 }
 
@@ -76,16 +67,18 @@ button:hover {
 }
 
 .corner_spaces {
-  border-right: 0px;
   width: 14%;
   height: 18.5%;
+
+  border-right: 0px;
 }
 
 .middle_flex {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 64%;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .bottom_flex {
@@ -97,10 +90,25 @@ button:hover {
 }
 
 .vertical_spaces {
-  display: flex;
-  flex-direction: column;
   width: 12.5%;
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical_space {
+  height: 25%;
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: bottom;
+
+  border-bottom: 1px #e5dfd3 solid;
+  text-align: center;
 }
 
 .game_center {
@@ -121,275 +129,51 @@ button:hover {
   height: 68.2%;
 }
 
-.vertical_space {
-  display: flex;
-  position: relative;
-  align-items: flex-end;
-  justify-content: bottom;
-  width: 100%;
-  height: 25%;
-  border-bottom: 1px #e5dfd3 solid;
-  text-align: center;
-}
-
 .round_border {
   overflow: hidden;
   border-radius: 3vh;
 }
 
-.space_background {
-  position: absolute;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
-.deals {
-  background-color: #82c255;
-}
-
-.deals-img {
-  background-image: url("/deals.png");
-  opacity: 0.7;
-}
-
-.baby {
-  background-color: #631c7b;
-}
-
-.baby-img {
-  background-image: url("/baby.png");
-  opacity: 0.7;
-}
-
-.downsize {
-  background-color: #631c7b;
-}
-
-.downsize-img {
-  background-image: url("/downsize.png");
-  opacity: 0.7;
-}
-
-.market {
-  background-color: #5583d6;
-}
-
-.market-img {
-  background-image: url("/market.png");
-  opacity: 0.7;
-}
-
-.charity {
-  background-color: #631c7b;
-}
-
-.charity-img {
-  background-image: url("/charity.png");
-  opacity: 0.7;
-}
-
-.doodad {
-  background-color: rgba(191, 186, 186, 0.7);
-  text-align: center;
-}
-
-.doodad-img {
-  background-image: url("/doodad.png");
-  opacity: 0.7;
-}
-
-.payday {
-  background-color: #e57738;
-}
-
-.payday-img {
-  background-image: url("/payday.png");
-  opacity: 0.7;
-}
+/* ---------------------- board centre positions---------------------- */
 
 .left_part {
+  height: 100%;
+  width: 30%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   padding: 1%;
-  height: 100%;
-  width: 30%;
 }
 
 .middle_part {
+  width: 40%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 40%;
-  height: 100%;
 }
 
 .right_part {
-	padding: 1%;
   width: 30%;
+
+	padding: 1%;
 }
 
 .dice_block {
-  display: flex;
-  position: relative;
-  height: 20%;
   width: 100%;
+  height: 20%;
+
+  position: relative;
+
+  display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.overlay_box {
-  border: black 1px solid;
-  height: 99%;
-  width: 99%;
-  visibility: hidden;
-
-  position: absolute;
-  background-color: white;
-}
-
-.dice {
-  height: 100%;
-  width: 25%;
-
-  cursor: pointer;
-  display: inherit;
-
-  /* background-color: white;
-
-  text-align: center;
-  font-size: 100px;
-  line-height: 0.9;
-
-  border-radius: 8px;
-  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88); */
-}
-.dice-image{
-  height: 80px;
-}
-
-.dice > p {
-  height: 100%;
-  width: 100%;
-  font-size: xx-large;
-}
-
-#dice2 {
-  display: none;
-}
-
-.activity_log {
-  background-color: white;
-  border-radius: 2vh;
-  overflow-y: scroll;
-  height: 30%;
-  border-top-right-radius: 2vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
-	padding: 3%;
-}
-
-.activity {
-  position: relative;
-  display: flex;
-  padding-left: 2%;
-  border-bottom: dotted #DFE5E8 1px;
-  margin: 5% 0 0 2%;
-  width: 95%;
-  height: fit-content;
-}
-
-.activity > p {
-  margin: 4%;
-  margin: 0;
-}
-
-#card {
-  visibility: hidden;
-}
-
-#notification {
-  display: none;
-}
-
-.card-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: black;
-  opacity: 0.5;
-
-  display: none;
-}
-
-.button_div {
-  padding: 2%;
-  margin: 0px 7%;
-  height: 35px;
-  width: 120px;
-  font-size: 18px;
-}
-
-.cardDisplay {
-  display: flex;
-  height: 72%;
-  width: 100%;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-	position: relative;
-}
-
-.doodad-card {
-  background-color: rgba(241, 248, 250, 1);
-}
-
-.market-card {
-  background-color: rgba(241, 248, 250, 1);
-}
-
-.card-title {
-  font-weight: bold;
-}
-
-.plain-card {
-  border-radius: 9px;
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
-
-	color: #3A4B53;
-
-  height: 70%;
-  width: 90%;
-
-  padding: 5%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.smallDeal {
-  background: rgba(250, 252, 248, 0.7);
-}
-
-.smallDeal > button {
-  background: transparent;
-  color: rgb(49, 68, 78);
-  box-shadow: none;
-}
-
-.smallDeal > button:hover {
-  background: transparent;
-  color: rgb(49, 68, 78);
-  box-shadow: none;
-}
-
-.plain-card > div > p {
-  margin: 0%;
-}
+/* --------------------------- board left part ----------------------------- */
 
 .financial_details {
   height: 99%;
@@ -412,6 +196,46 @@ button:hover {
   justify-content: space-around;
 
   width: 100%;
+}
+
+.basic-fs-value {
+	color: #57707D;
+	font-weight: lighter;
+}
+
+basic_fs {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+basic_fs_heading {
+  text-align: center;
+  line-height: 3;
+  margin-right: 15px;
+	font-weight: bold;
+}
+
+.blinking {
+  animation: blinkingText 0.4s 1;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
 }
 
 #fsBtn {
@@ -466,82 +290,279 @@ button:hover {
   display: flex;
   flex-direction: column;
 	background-color: #F5F7F8;
-	/* color: whitesmoke; */
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 750px;
-  height: 100%;
-  display: flex;
-  padding: 0 2%;
-  z-index: 10;
-  visibility: hidden;
-  background: whitesmoke;
+#notification {
+  display: none;
 }
 
-.overlay > header {
-  position: absolute;
-  top: 2%;
-  left: 3%;
-  font-size: larger;
-  color: green;
-}
-
-#cash_ledger {
-  background: whitesmoke;
-  width: 100%;
-  padding-top: 2%;
-}
-
-.close {
-  position: absolute;
-  right: 2%;
-  top: 3%;
-  margin: 0;
-  padding: 1px 5px;
-  border-radius: 50%;
-}
-
-.vertical_flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.half {
-  width: 50%;
-  height: 100%;
-}
-
-.fs_player_details {
-  width: 80%;
-  height: 65%;
-}
-
-.fs_box {
-  width: 80%;
+.time-notification {
   height: 30%;
-  overflow: scroll;
 }
 
-.container {
+.time-notification > p {
+  margin: 0;
+}
+
+.scrollable-notification {
+  overflow: scroll;
+
+  height: 70%;
+}
+
+.notification {
+  height: 25%;
+  width: 100%;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  bottom: 0px;
+  border-top: 1px solid black;
+}
 
-  z-index: 1;
+/* ----------------------------  board middle part  -----------------------------*/
 
+/* dice */
+
+.overlay_box {
+  border: black 1px solid;
+  height: 99%;
+  width: 99%;
+  visibility: hidden;
+
+  position: absolute;
+  background-color: white;
+}
+
+.dice {
+  height: 100%;
+  width: 25%;
+
+  cursor: pointer;
+  display: inherit;
+}
+
+.dice-image{
+  height: 80px;
+}
+
+.dice > p {
   height: 100%;
   width: 100%;
+  font-size: xx-large;
+}
+
+#dice2 {
+  display: none;
+}
+
+/* cards */
+
+#card {
+  visibility: hidden;
+}
+
+.card-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.5;
+
+  display: none;
+}
+
+.cardDisplay {
+  display: flex;
+  height: 72%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+	position: relative;
+}
+
+.doodad-card {
+  background-color: rgba(241, 248, 250, 1);
+}
+
+.market-card {
+  background-color: rgba(241, 248, 250, 1);
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.plain-card {
+  border-radius: 9px;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
+
+	color: #3A4B53;
+
+  height: 70%;
+  width: 90%;
+
+  padding: 5%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(6, 6, 6, 0.75);
-  /* background-color: rgba(255, 255, 255, 0.9); */
+  justify-content: center;
 }
+
+.smallDeal {
+  background: rgba(250, 252, 248, 0.7);
+}
+
+.plain-card > div > p {
+  margin: 0%;
+}
+
+.cardDisplayPopup {
+  position: absolute;
+  visibility: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  box-shadow: 10px 13px 5px 0px rgba(0, 0, 0, 0.47);
+  border-radius: 1vh;
+  padding: 10%;
+  z-index: 2;
+  height: 60%;
+  width: 90%;
+  background-color: white;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#card-title {
+  font-weight: 600;
+  font-size: large;
+}
+
+/* card-options */
+
+.button_div {
+  padding: 2%;
+  margin: 0px 7%;
+  height: 35px;
+  width: 120px;
+  font-size: 18px;
+}
+
+/* ----------------------------  board right part  ------------------------------- */
+
+.game-options {
+	display: flex;
+	align-items:flex-start;
+	justify-content: flex-end;
+  border-radius: 2vh;
+  height: 10%;
+	border-top-right-radius: 2vh;
+}
+
+.game-options > button {
+	margin: 0% 2%;
+	padding: 3% 3%;
+	border-radius: 1.7vh;
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+}
+
+.all-player-details {
+	display: flex;
+	flex-direction: column;
+	height: 53%;
+	background-color: white;
+  border-radius: 2vh;
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	margin-bottom: 5%;
+	padding: 10% 5%;
+}
+
+.progress-bar-div {
+	width:100px;
+	height:10px;
+	border-radius: 50px;
+	border:3px solid #BECBD2;
+}
+
+.current-progress {
+	height: 100%;
+	background-color: #607D8B;
+	border-radius: 50px;
+}
+
+.other-player-Btn {
+	width: 30px;
+	height:30px;
+}
+
+.activity_log {
+  background-color: white;
+  border-radius: 2vh;
+  overflow-y: scroll;
+  height: 30%;
+  border-top-right-radius: 2vh;
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	padding: 3%;
+}
+
+.activity {
+  position: relative;
+  display: flex;
+  padding-left: 2%;
+  border-bottom: dotted #DFE5E8 1px;
+  margin: 5% 0 0 2%;
+  width: 95%;
+  height: fit-content;
+}
+
+.activity > p {
+  margin: 4%;
+  margin: 0;
+}
+
+/* ------------------- board space imges ------------------ */
+
+.deals-img {
+  background-image: url("/deals.png");
+  opacity: 0.7;
+}
+
+.baby-img {
+  background-image: url("/baby.png");
+  opacity: 0.7;
+}
+
+.downsize-img {
+  background-image: url("/downsize.png");
+  opacity: 0.7;
+}
+
+.market-img {
+  background-image: url("/market.png");
+  opacity: 0.7;
+}
+
+.charity-img {
+  background-image: url("/charity.png");
+  opacity: 0.7;
+}
+
+.doodad-img {
+  background-image: url("/doodad.png");
+  opacity: 0.7;
+}
+
+.payday-img {
+  background-image: url("/payday.png");
+  opacity: 0.7;
+}
+
+/* -----------------------------  game piece ----------------------------- */
 
 .player1 {
   height: 10%;
@@ -591,256 +612,41 @@ button:hover {
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 2);
 }
 
-.visible {
-  visibility: visible;
+/* -------------------------  div  ---------------------------------*/
+
+div {
+  box-sizing: border-box;
 }
 
-.popup {
-  background-color: lightblue;
-  height: 90%;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-}
+/* --------------------------- button ------------------------------ */
 
-.statements {
-  height: 90%;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  background-color: whitesmoke;
-  z-index: 1;
-}
+button {
+  white-space: nowrap;
+  background-color: rgb(112, 146, 165);
+  color: white;
+  font-size: 18px;
+  font-weight: lighter;
+  cursor: pointer;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin: 20px;
 
-.details {
-  height: 15%;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
-}
-
-.cardDisplayPopup {
-  position: absolute;
-  visibility: hidden;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  box-shadow: 10px 13px 5px 0px rgba(0, 0, 0, 0.47);
-  border-radius: 1vh;
-  padding: 10%;
-  z-index: 2;
-  height: 60%;
-  width: 90%;
-  background-color: white;
-}
-
-.hover {
-  position: absolute;
-  z-index: 2;
-  background-color: lightgray;
-  visibility: hidden;
-  top: 20%;
-  right: 0%;
-}
-
-.manage-debt-form {
-  height: 270px;
-  width: 400px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding:20px;
-  align-items: center;
-  z-index: 3;
-
-  position: fixed;
-  top: 37%;
-	left: 36%;
-	
-  visibility: hidden;
-	background-color: white;
-	border: 3px solid #BECBD2;
-	border-radius: 10px;
-}
-
-.notify-escape {
-  height: 265px;
-  width: 400px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding:20px;
-  align-items: center;
-  z-index: 3;
-
-  position: fixed;
-  top: 37%;
-	left: 36%;
-	
-  visibility: hidden;
-  background-color: white;
-  border: 3px solid #BECBD2;
-	border-radius: 20px;
-}
-
-.bankruptcy-form {
-  height: 35%;
-  width: 28%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-  position: fixed;
-  top: 37%;
-  left: 36%;
-  padding: 3%;
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-  color: #a22a2a;
-  font-size: 20px;
-  background-color: white;
-  border-radius: 10px;
-}
-
-.market-card-div {
-  height: 250px;
-  width: 300px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
-
-  position: fixed;
-  top: 36%;
-  left: 42%;
-
-  visibility: hidden;
-  background-color: whitesmoke;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
-.debt-input {
-  margin: 10px 0px;
-  width: 200px;
-	height: 35px;
-	font-size: 15px;
-}
-
-.notification {
-  height: 25%;
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
-  border-top: 1px solid black;
-}
-
-.card-bottom {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.form-button {
-  height: 40px;
-  width: 150px;
-
-  margin: 10px 0px;
-}
-
-.debt-input {
-  width: 150px;
-  height: 30px;
-}
-
-.select-tag {
-  width: 200px;
-	height: 35px;
-	font-size: 15px;
-}
-
-.cash-ledger-entries {
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-
-  overflow: scroll;
-}
-
-.entry {
-  margin: 10px 5px;
-
-  border-bottom: 1px solid black;
-  border-radius: 5px;
-}
-
-.buttons-div {
-  display: flex;
-  justify-content: center;
-}
-
-.buttons-div > div {
-  margin-right: 2%;
-}
-
-.scrollable-notification {
-  overflow: scroll;
-
-  height: 70%;
-}
-
-.time-notification {
-  height: 30%;
-}
-
-.time-notification > p {
-  margin: 0;
-}
-
-.popup-background {
-  display: none;
-
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  top: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
-}
-
-.top-popup {
-  z-index: 10;
-
-  display: flex;
-  flex-direction: column;
-
-  position: absolute;
-  top: 32%;
-  left: 37%;
-
-  width: 25%;
-  height: fit-content;
-
-  padding: 5%;
-  background-color: white;
-  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
-}
-
-.top-popup > button {
   height: 35px;
   width: 120px;
-  align-self: center;
-  margin-top: 7%;
-  padding: 2% 4%;
+  
+  padding: 1% 2%;
+  margin: 1% 8%;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  color: white;
+  background-color: rgb(49, 68, 78);
 }
 
 /* ----------------------financial Statement ------------------------------ */
@@ -925,19 +731,6 @@ th {
   color: #9eb1bb;
 }
 
-basic_fs {
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-}
-
-basic_fs_heading {
-  text-align: center;
-  line-height: 3;
-  margin-right: 15px;
-	font-weight: bold;
-}
-
 .title {
   display: flex;
   justify-content: space-between;
@@ -958,6 +751,7 @@ basic_fs_heading {
   float: right;
   margin: 1%;
 }
+
 .overlay-fs {
   z-index: 2;
   position: absolute;
@@ -969,27 +763,11 @@ basic_fs_heading {
   background-color: whitesmoke;
 }
 
-.auction {
-	height: 270px;
-  width: 400px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: baseline;
-  padding: 40px;
-  z-index: 3;
-
-  position: fixed;
-  top: 37%;
-	left: 36%;
-	
-  display: none;
-	background-color: white;
-	border: 3px solid #BECBD2;
-  border-radius: 10px;
-  box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
+.tableData {
+  font-weight: lighter;
 }
+
+/* -----------------------------  Cash ledger ------------------------------- */
 
 .cash-ledger {
   display: flex;
@@ -1037,19 +815,222 @@ thead {
   width: 15%;
 }
 
+.cash-ledger-entries {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+
+  overflow: scroll;
+}
+
 .row-content {
   text-align: center;
   display: flex;
   flex-direction: row;
 }
 
-.tableData {
-  font-weight: lighter;
+#cash_ledger {
+  background: whitesmoke;
+  width: 100%;
+  padding-top: 2%;
 }
 
-#card-title {
-  font-weight: 600;
-  font-size: large;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750px;
+  height: 100%;
+  display: flex;
+  padding: 0 2%;
+  z-index: 10;
+  visibility: hidden;
+  background: whitesmoke;
+}
+
+.overlay > header {
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  font-size: larger;
+  color: green;
+}
+
+/* ---------------------------   Popups   -------------------------- */
+
+.close {
+  position: absolute;
+  right: 2%;
+  top: 3%;
+  margin: 0;
+  padding: 1px 5px;
+  border-radius: 50%;
+}
+
+.popup {
+  background-color: lightblue;
+  height: 90%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.popup-background {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.top-popup {
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 32%;
+  left: 37%;
+
+  width: 25%;
+  height: fit-content;
+
+  padding: 5%;
+  background-color: white;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
+}
+
+.top-popup > button {
+  height: 35px;
+  width: 120px;
+  align-self: center;
+  margin-top: 7%;
+  padding: 2% 4%;
+}
+
+.auction {
+	height: 270px;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: baseline;
+  padding: 40px;
+  z-index: 3;
+
+  position: fixed;
+  top: 37%;
+	left: 36%;
+	
+  display: none;
+	background-color: white;
+	border: 3px solid #BECBD2;
+  border-radius: 10px;
+  box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
+}
+
+.buttons-div {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons-div > div {
+  margin-right: 2%;
+}
+
+.manage-debt-form {
+  height: 270px;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:20px;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 37%;
+	left: 36%;
+	
+  visibility: hidden;
+	background-color: white;
+	border: 3px solid #BECBD2;
+	border-radius: 10px;
+}
+
+.form-button {
+  height: 40px;
+  width: 150px;
+
+  margin: 10px 0px;
+}
+
+.debt-input {
+  margin: 10px 0px;
+  width: 200px;
+	height: 35px;
+	font-size: 15px;
+}
+
+.debt-input {
+  width: 150px;
+  height: 30px;
+}
+
+.select-tag {
+  width: 200px;
+	height: 35px;
+	font-size: 15px;
+}
+
+.notify-escape {
+  height: 265px;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding:20px;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 37%;
+	left: 36%;
+	
+  visibility: hidden;
+  background-color: white;
+  border: 3px solid #BECBD2;
+	border-radius: 20px;
+}
+
+.bankruptcy-form {
+  height: 35%;
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  position: fixed;
+  top: 37%;
+  left: 36%;
+  padding: 3%;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  color: #a22a2a;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .popup-overlay {
@@ -1082,6 +1063,7 @@ thead {
 .bankruptedMsg {
   margin: 5px;
 }
+
 .textField {
   width: 90%;
 
@@ -1097,73 +1079,61 @@ thead {
   background: transparent;
 }
 
-.blinking {
-  animation: blinkingText 0.4s 1;
-}
+.market-card-div {
+  height: 250px;
+  width: 300px;
 
-@keyframes blinkingText {
-  0% {
-    color: #000;
-  }
-  49% {
-    color: transparent;
-  }
-  50% {
-    color: transparent;
-  }
-  99% {
-    color: transparent;
-  }
-  100% {
-    color: #000;
-  }
-}
-.all-player-details {
-	display: flex;
-	flex-direction: column;
-	height: 53%;
-	background-color: white;
-  border-radius: 2vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
-	margin-bottom: 5%;
-	padding: 10% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+  position: fixed;
+  top: 36%;
+  left: 42%;
+
+  visibility: hidden;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 10px;
 }
  
-.game-options {
-	display: flex;
-	align-items:flex-start;
-	justify-content: flex-end;
-  border-radius: 2vh;
-  height: 10%;
-	border-top-right-radius: 2vh;
+/* ------------------------  Others  ------------------------------ */
+
+.container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  z-index: 1;
+
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(6, 6, 6, 0.75);
 }
 
-.game-options > button {
-	margin: 0% 2%;
-	padding: 3% 3%;
-	border-radius: 1.7vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+.statements {
+  height: 90%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  z-index: 1;
 }
 
-.progress-bar-div {
-	width:100px;
-	height:10px;
-	border-radius: 50px;
-	border:3px solid #BECBD2;
+.visible {
+  visibility: visible;
 }
 
-.basic-fs-value {
-	color: #57707D;
-	font-weight: lighter;
-}
-
-.other-player-Btn {
-	width: 30px;
-	height:30px;
-}
-
-.current-progress {
-	height: 100%;
-	background-color: #607D8B;
-	border-radius: 50px;
+.hover {
+  position: absolute;
+  z-index: 2;
+  background-color: lightgray;
+  visibility: hidden;
+  top: 20%;
+  right: 0%;
 }
