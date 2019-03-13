@@ -157,10 +157,15 @@ class Player extends FinancialStatement {
     const price = numberOfShares * currentPrice;
     this.deductLedgerBalance(price);
     this.addDebitEvent(price, ` brought shares of ${symbol}`);
-    this.assets.shares[symbol] = { numberOfShares, currentPrice };
     this.setNotification(
       `You bought ${numberOfShares} shares of ${symbol} for $${price}`
     );
+    if(!this.assets.shares[symbol]){
+      this.assets.shares[symbol] = {};
+      this.assets.shares[symbol].numberOfShares = 0;
+    }
+    this.assets.shares[symbol].numberOfShares += numberOfShares;
+    this.assets.shares[symbol].currentPrice = currentPrice;
   }
 
   sellShares(card, numberOfShares) {
