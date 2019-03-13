@@ -55,7 +55,8 @@ const setExpenses = function (player) {
   setInnerText("credit-card-payment", player.expenses["Credit Card Payment"]);
   setInnerText("other-expenses", player.expenses["Other Expenses"]);
   setInnerText("bank-loan-payment", player.expenses["Bank Loan Payment"]);
-  setInnerText("total-child-expense", player.expenses["Child Expenses"]);
+	setInnerText("total-child-expense", player.expenses["Child Expenses"]);
+	setInnerText("child-count",player.childrenCount);
 };
 
 const updateShares = function (player) {

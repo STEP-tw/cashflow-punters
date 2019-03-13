@@ -5,13 +5,16 @@ const createElementWithClass = function (data, classname) {
   return htmlElement;
 };
 
+const amountColor = { debit: "rgb(144, 43, 43)", credit: "rgb(66, 138, 66)" };
+
 const createLedgerRow = function (rowContent) {
   let row = createElement("tr");
   row.className = "row-content";
-  const { currentTime, event, currentAmount, currentBalance } = rowContent;
+  const { currentTime, event, currentAmount, currentBalance, type } = rowContent;
   let timeDiv = createElementWithClass(currentTime, "time");
   let eventDiv = createElementWithClass(event, "reason");
-  let amountDiv = createElementWithClass(currentAmount, "amount");
+	let amountDiv = createElementWithClass(currentAmount, "amount");
+	amountDiv.style.color = amountColor[type];
   let balance = createElementWithClass(currentBalance, "balance");
   appendChildren(row, [timeDiv, amountDiv, balance, eventDiv]);
   return row;
@@ -19,10 +22,9 @@ const createLedgerRow = function (rowContent) {
 
 const getEntriesHtml = function (entry) {
   const { time, type, amount, currentBalance, event } = entry;
-  const symbols = { debit: "- ", credit: "+ " };
   const currentTime = formatTime(new Date(time));
-  let currentAmount = symbols[type] + amount;
-  return createLedgerRow({ currentTime, event, currentAmount, currentBalance });
+  let currentAmount = amount;
+  return createLedgerRow({ currentTime, event, currentAmount, currentBalance, type });
 };
 
 const setCashLedger = function (player) {

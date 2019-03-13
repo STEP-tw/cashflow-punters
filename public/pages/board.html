@@ -79,38 +79,39 @@
             <div class="financial_details">
               <table class="player_details">
                 <tr>
-                  <td style="border: none;"><span id="name">PlayerName</span></td>
-                </tr>
-                <tr>
-                  <td><span id="Profession" style="font-weight: lighter;">prof</span></td>
-                  <td>
+									<td><span id="name" style="font-size: 18px;">PlayerName</span></td>
+									<td>
                     <div class="progress-bar-div" id="progress-div">
                       <div class="current-progress" id="progress"></div>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading" style="color: #57707D">Income :</td>
+									<td class="basic_fs_heading" style="color: #57707D">Profession</td>
+                  <td><span id="Profession" style="font-weight: lighter;">prof</span></td>
+                </tr>
+                <tr>
+                  <td class="basic_fs_heading" style="color: #57707D">Income </td>
                   <td class="basic-fs-value">$ <span id="income">Income</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading" style="color: #57707D">Passive Income :</td>
+                  <td class="basic_fs_heading" style="color: #57707D">Passive Income </td>
                   <td class="basic-fs-value">$ <span id="passiveIn">passiveIn</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading" style="color: #57707D">Total Income :</td>
+                  <td class="basic_fs_heading" style="color: #57707D">Total Income</td>
                   <td class="basic-fs-value">$ <span id="totalIn">totalIn</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading" style="color: #57707D">Total Expense :</td>
+                  <td class="basic_fs_heading" style="color: #57707D">Total Expense </td>
                   <td class="basic-fs-value">$ <span id="expenses">expenses</span></td>
                 </tr>
                 <tr>
-                  <td class="basic_fs_heading" style="color: #57707D">Monthly Cashflow :</td>
+                  <td class="basic_fs_heading" style="color: #57707D">Monthly Cashflow </td>
                   <td class="basic-fs-value">$ <span id="cashflow">cashflow</span></td>
                 </tr>
                 <tr>
-                  <td>Ledger Balance :</td>
+                  <td>Ledger Balance </td>
                   <td style="font-weight: lighter;">$ <span id="ledger-balance">$0</span></td>
                 </tr>
               </table>
@@ -376,15 +377,15 @@
               <div style="display:flex; flex-direction: column">
                 <div style="margin:1%;">
                   <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; ">
-                    <span class="heading"> Name : </span><span id="fs-name" style="padding-left: 2%;"></span>
+                    <span class="heading"> Name : </span><span id="fs-name" style="padding-left: 2%; font-weight: lighter;"></span>
                   </h3>
                   <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
                     <span class="heading"> Profession : </span><span id="fs-profession"
-                      style="padding-left: 2%;"></span>
+                      style="padding-left: 2%; font-weight: lighter;"></span>
                   </h3>
                   <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
                     <span class="heading">
-                      Dream : <span id="dream"></span>
+                      Dream : <span id="dream" style="font-weight:lighter;"></span>
                     </span>
                   </h3>
                 </div>
@@ -452,15 +453,18 @@
           ×
         </button>
         <div id="cash_ledger">
-          Cash ledger
-          <div style="padding: 2% 0%;">Name: <span id="name-ledger"></span></div>
+					<span class="title">Cash ledger</span>
+					<div style="padding: 2% 4%; font-size: 20px">
+						<span style="font-weight:bold;">Name: </span>
+						<span id="name-ledger"></span>
+					</div>
           <table class="cash-ledger">
             <thead>
               <tr class="row-content">
-                <th class="time">Time</th>
-                <th class="amount">Amount</th>
-                <th class="balance">Balance</th>
-                <th class="reason">Description</th>
+                <th class="time" style="font-weight:bold;">Time</th>
+                <th class="amount" style="font-weight:bold;">Amount</th>
+                <th class="balance" style="font-weight:bold;">Balance</th>
+                <th class="reason" style="font-weight:bold;">Description</th>
               </tr>
             </thead>
             <tbody id="cash-ledger-content"></tbody>
