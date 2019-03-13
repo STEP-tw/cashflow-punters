@@ -11,14 +11,14 @@ const {
   cancelGame,
   provideGameLobby
 } = require("./hostAndJoinHandlers");
-const { restoreGames } = require('./loadGame');
+const { restoreGames } = require("./loadGame");
 
-const loadSavedGames = function () {
-  fs.readFile('./data/savedGames.json',"utf-8" ,(err, content) => {
+const loadSavedGames = function() {
+  fs.readFile("./data/savedGames.json", "utf-8", (err, content) => {
     const games = restoreGames(JSON.parse(content));
     app.savedGames = games;
-  })
-}
+  });
+};
 
 const {
   getGame,

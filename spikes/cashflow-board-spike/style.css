@@ -140,12 +140,12 @@ div {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
+  backface-visibility: visible;
 }
 
-.fasttrack {
+/* .fasttrack {
   transform: rotateY(180deg);
-}
+} */
 
 .rotate {
   position: relative;
