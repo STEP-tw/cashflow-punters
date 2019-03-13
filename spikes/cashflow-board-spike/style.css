@@ -78,7 +78,7 @@ div {
 }
 
 .bottom-align {
-  align-items: baseline;
+  align-items: flex-end;
 }
 
 .deal {
