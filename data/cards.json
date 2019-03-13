@@ -329,14 +329,14 @@
     {
       "title": "Multi-Level Marketing Buy-In",
       "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die: Die = 1-3, No returns this month, but keep trying. Die = 4-6, Your sweat equity paid off! Collect $500.",
-      "cost":500,
-      "relatedTo":"MLM"
+      "cost": 500,
+      "relatedTo": "MLM"
     },
     {
       "title": "Multi-Level Marketing Buy-In",
       "message": "You have a chance to invest in a Multi-Level Marketing opportunity. Company is looking to spread the reach of their newest venture. If you choose to buy-in, pay $500 and KEEP THIS CARD: Every PayDay, roll one die: Die = 1-3, No returns this month, but keep trying. Die = 4-6, Your sweat equity paid off! Collect $500.",
-      "cost":500,
-      "relatedTo":"MLM"
+      "cost": 500,
+      "relatedTo": "MLM"
     },
     {
       "title": "Stock - MYT4U Electronics Co.",
@@ -1425,6 +1425,228 @@
         "Car Loan": 5000,
         "Credit Card": 3000
       }
+    }
+  ],
+  "fasttrack": [
+    {
+      "title": "Health Care",
+      "Message": "Roll one die. If it's 1-3, you're covered-pay half of your cash. If it's 4-6, you're not pay all of your cash.",
+      "type": "luck"
+    },
+    {
+      "title": "Charity",
+      "Message": "Donate 10% of your CASHFLOW Day Income and use 1 or 3 dice for next 3 turns.",
+      "type": "charity"
+    },
+    {
+      "title": "Burger Shop",
+      "cashflow": 9500,
+      "downPayment": 300000,
+      "type": "deal"
+    },
+    {
+      "title": "Heat and AC Service",
+      "cashflow": 10000,
+      "downPayment": 200000,
+      "type": "deal"
+    },
+    {
+      "title": "Quick Food Market",
+      "cashflow": 15000,
+      "downPayment": 120000,
+      "type": "deal"
+    },
+    {
+      "title": "Assisted Living Center",
+      "cashflow": 51000,
+      "downPayment": 400000,
+      "type": "deal"
+    },
+    {
+      "title": "Lawsuit",
+      "Message": "Pay half of your cash to defend yourself",
+      "type": "penalty"
+    },
+    {
+      "title": "Ticket Sale Company",
+      "cashflow": 5000,
+      "downPayment": 150000,
+      "type": "deal"
+    },
+    {
+      "title": "Hobby Supply Store",
+      "cashflow": 3000,
+      "downPayment": 100000,
+      "type": "deal"
+    },
+    {
+      "type": "cashflowDay"
+    },
+    {
+      "title": "Fries Chicken restaurant",
+      "cashflow": 10000,
+      "downPayment": 300000,
+      "type": "deal"
+    },
+    {
+      "title": "Dry Dock Storage",
+      "cashflow": 3000,
+      "downPayment": 100000,
+      "type": "deal"
+    },
+    {
+      "title": "Beauty salon",
+      "cashflow": 10000,
+      "downPayment": 250000,
+      "type": "deal"
+    },
+    {
+      "title": "Tax Audit",
+      "Message": "Pay Accountants and lawyers half of your cash",
+      "type": "penalty"
+    },
+    {
+      "title": "Auto Repair Shop",
+      "cashflow": 6000,
+      "downPayment": 150000,
+      "type": "deal"
+    },
+    {
+      "title": "Extreme Sports Equipment Center",
+      "cashflow": 5000,
+      "downPayment": 150000,
+      "type": "deal"
+    },
+    {
+      "title": "Foreign Oil Deal",
+      "cashflow": 75000,
+      "downPayment": 750000,
+      "type": "deal"
+    },
+    {
+      "type": "cashflowDay"
+    },
+    {
+      "title": "Movie Theater",
+      "cashflow": 6000,
+      "downPayment": 150000
+    },
+    {
+      "title": "Research Center for Diesease",
+      "cashflow": 8000,
+      "downPayment": 300000,
+      "type": "deal"
+    },
+    {
+      "title": "Bad Payment",
+      "Message": "Use Lowest Cashflow Assets.",
+      "type": "penalty"
+    },
+    {
+      "title": "App Development Company",
+      "cashflow": 5000,
+      "downPayment": 150000,
+      "type": "deal"
+    },
+    {
+      "title": "Software Co. IPO",
+      "cashflow": 2500,
+      "downPayment": 25000,
+      "type": "deal"
+    },
+    {
+      "title": "Coffee Shop",
+      "cashflow": 5000,
+      "downPayment": 120000,
+      "type": "deal"
+    },
+    {
+      "title": "400-unit Apartment Building",
+      "cashflow": 8000,
+      "downPayment": 300000,
+      "type": "deal"
+    },
+    {
+      "title": "Island Vaction Rentals",
+      "cashflow": 3000,
+      "downPayment": 100000,
+      "type": "deal"
+    },
+    {
+      "title": "Divorce",
+      "Message": "Lose half of your cash",
+      "type": "penalty"
+    },
+    {
+      "title": "Building pro Golf Course",
+      "cashflow": 6000,
+      "downPayment": 150000,
+      "type": "deal"
+    },
+    {
+      "title": "Pizza Shop",
+      "cashflow": 7000,
+      "downPayment": 225000,
+      "type": "deal"
+    },
+    {
+      "type": "cashflowDay"
+    },
+    {
+      "title": "Collectible Store",
+      "cashflow": 3000,
+      "downPayment": 100000,
+      "type": "deal"
+    },
+    {
+      "title": "Frozen Yogurt Shop",
+      "cashflow": 5000,
+      "downPayment": 120000,
+      "type": "deal"
+    },
+    {
+      "title": "Bio Tech Co. IPO",
+      "cashflow": 5000,
+      "downPayment": 50000,
+      "type": "deal"
+    },
+    {
+      "title": "Unforeseen Repairs",
+      "Message": "Lose your half cash",
+      "type": "penalty"
+    },
+    {
+      "title": "200-Unit Mini Storage",
+      "cashflow": 6000,
+      "downPayment": 200000,
+      "type": "deal"
+    },
+    {
+      "title": "Dry Cleaning",
+      "cashflow": 3000,
+      "downPayment": 100000,
+      "type": "deal"
+    },
+    {
+      "title": "Mobile Home Park",
+      "cashflow": 9000,
+      "downPayment": 400000,
+      "type": "deal"
+    },
+    {
+      "type": "cashflowDay"
+    },
+    {
+      "title": "Family Restaurant",
+      "cashflow": 14000,
+      "downPayment": 300000,
+      "type": "deal"
+    },
+    {
+      "title": "Private Wildlife Preserve",
+      "cashflow": 5000,
+      "downPayment": 120000,
+      "type": "deal"
     }
   ]
 }
