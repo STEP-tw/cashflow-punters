@@ -410,6 +410,12 @@ const getGame = function() {
     });
 };
 
+const flipBoard = function(deg) {
+  const game = getElementById("main-game");
+  game.style.transform = "rotateY(" + deg + "deg)";
+  console.log("sgl");
+};
+
 const saveGame = function() {
   fetch("/savegame");
 };

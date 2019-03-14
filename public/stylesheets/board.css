@@ -12,24 +12,36 @@ body {
   background-color: rgb(242, 248, 252);
 
   margin: 0;
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 1%;
 
   font-weight: 400;
   font-family: "Roboto", sans-serif;
-  color: #3A4B53;
+  color: #3a4b53;
+  perspective: 1000px;
 }
 
-main {
-  height: 98%;
-  width: 98%;  
-  margin: 0;
-  box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
+div {
+  box-sizing: border-box;
 }
 
+.board {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  z-index: 1;
+}
+
+.game {
+  height: 100%;
+  width: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.fast-track {
+  transform: rotateY(180deg);
+}
 /*------------------------ board spaces and center part positions ---------------*/
 
 .space_background {
@@ -159,7 +171,7 @@ main {
 .right_part {
   width: 30%;
 
-	padding: 1%;
+  padding: 1%;
 }
 
 .dice_block {
@@ -199,8 +211,8 @@ main {
 }
 
 .basic-fs-value {
-	color: #57707D;
-	font-weight: lighter;
+  color: #57707d;
+  font-weight: lighter;
 }
 
 basic_fs {
@@ -213,7 +225,7 @@ basic_fs_heading {
   text-align: center;
   line-height: 3;
   margin-right: 15px;
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .blinking {
@@ -283,13 +295,13 @@ basic_fs_heading {
 }
 
 .notifications {
-	border: #DFE5E8 solid 1px;
-	border-radius: 2vh;
+  border: #dfe5e8 solid 1px;
+  border-radius: 2vh;
   height: 20%;
   padding: 0 3%;
   display: flex;
   flex-direction: column;
-	background-color: #F5F7F8;
+  background-color: #f5f7f8;
 }
 
 #notification {
@@ -340,7 +352,7 @@ basic_fs_heading {
   display: inherit;
 }
 
-.dice-image{
+.dice-image {
   height: 80px;
 }
 
@@ -377,7 +389,7 @@ basic_fs_heading {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-	position: relative;
+  position: relative;
 }
 
 .doodad-card {
@@ -396,7 +408,7 @@ basic_fs_heading {
   border-radius: 9px;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
 
-	color: #3A4B53;
+  color: #3a4b53;
 
   height: 70%;
   width: 90%;
@@ -456,48 +468,48 @@ basic_fs_heading {
 /* ----------------------------  board right part  ------------------------------- */
 
 .game-options {
-	display: flex;
-	align-items:flex-start;
-	justify-content: flex-end;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
   border-radius: 2vh;
   height: 10%;
-	border-top-right-radius: 2vh;
+  border-top-right-radius: 2vh;
 }
 
 .game-options > button {
-	margin: 0% 2%;
-	padding: 3% 3%;
-	border-radius: 1.7vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+  margin: 0% 2%;
+  padding: 3% 3%;
+  border-radius: 1.7vh;
+  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
 }
 
 .all-player-details {
-	display: flex;
-	flex-direction: column;
-	height: 53%;
-	background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 53%;
+  background-color: white;
   border-radius: 2vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
-	margin-bottom: 5%;
-	padding: 10% 5%;
+  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+  margin-bottom: 5%;
+  padding: 10% 5%;
 }
 
 .progress-bar-div {
-	width:100px;
-	height:10px;
-	border-radius: 50px;
-	border:3px solid #BECBD2;
+  width: 100px;
+  height: 10px;
+  border-radius: 50px;
+  border: 3px solid #becbd2;
 }
 
 .current-progress {
-	height: 100%;
-	background-color: #607D8B;
-	border-radius: 50px;
+  height: 100%;
+  background-color: #607d8b;
+  border-radius: 50px;
 }
 
 .other-player-Btn {
-	width: 30px;
-	height:30px;
+  width: 30px;
+  height: 30px;
 }
 
 .activity_log {
@@ -506,15 +518,15 @@ basic_fs_heading {
   overflow-y: scroll;
   height: 30%;
   border-top-right-radius: 2vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
-	padding: 3%;
+  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+  padding: 3%;
 }
 
 .activity {
   position: relative;
   display: flex;
   padding-left: 2%;
-  border-bottom: dotted #DFE5E8 1px;
+  border-bottom: dotted #dfe5e8 1px;
   margin: 5% 0 0 2%;
   width: 95%;
   height: fit-content;
@@ -567,7 +579,7 @@ basic_fs_heading {
 .player1 {
   height: 10%;
   width: 10%;
-	background-color:rgb(237, 179, 138) ;
+  background-color: rgb(237, 179, 138);
 }
 
 .player2 {
@@ -635,7 +647,7 @@ button {
 
   height: 35px;
   width: 120px;
-  
+
   padding: 1% 2%;
   margin: 1% 8%;
 }
@@ -700,7 +712,7 @@ table {
 }
 
 td {
-  border-bottom: solid 1px #BECBD2;
+  border-bottom: solid 1px #becbd2;
   text-align: left;
   font-weight: bold;
   /* color: #57707D; */
@@ -742,16 +754,16 @@ th {
 }
 
 .overlay-fs {
-	position: absolute;
-	top: 0%;
-	left: 0%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
 
   width: fit-content;
-	height: 100%;
+  height: 100%;
 
   visibility: hidden;
-	background-color: whitesmoke;
-	
+  background-color: whitesmoke;
+
   z-index: 2;
 }
 
@@ -768,8 +780,8 @@ th {
   flex-direction: column;
   background-color: whitesmoke;
   text-align: left;
-	overflow: scroll;
-	padding-left: 4%;
+  overflow: scroll;
+  padding-left: 4%;
 }
 
 thead {
@@ -784,32 +796,32 @@ thead {
   font-weight: lighter;
   line-height: 3;
   text-align: left;
-	width: 20%;
-	color: #57707D
+  width: 20%;
+  color: #57707d;
 }
 
 .time {
   font-weight: lighter;
   line-height: 3;
   text-align: left;
-	width: 15%;
-	color: #57707D
+  width: 15%;
+  color: #57707d;
 }
 
 .reason {
   font-weight: lighter;
   line-height: 3;
   text-align: left;
-	width: 50%;
-	color: #57707D
+  width: 50%;
+  color: #57707d;
 }
 
 .balance {
   font-weight: lighter;
   line-height: 3;
   text-align: left;
-	width: 15%;
-	color: #57707D
+  width: 15%;
+  color: #57707d;
 }
 
 .cash-ledger-entries {
@@ -825,8 +837,8 @@ thead {
 .row-content {
   text-align: center;
   display: flex;
-	flex-direction: row;
-	font-size: 18px;
+  flex-direction: row;
+  font-size: 18px;
 }
 
 #cash_ledger {
@@ -861,30 +873,30 @@ thead {
 /* close button */
 
 .close {
-	width: 5%;
-	height: 5%;
+  width: 5%;
+  height: 5%;
 
   position: absolute;
-	top: 1%;
-	right: 3%;
-	
-	margin: 0;
-  padding: 1px 2px;
-	
-	font-size: 30px;
-	font-weight: bolder;
-	color: #3a4b53;
+  top: 1%;
+  right: 3%;
 
-	background-color: inherit;
+  margin: 0;
+  padding: 1px 2px;
+
+  font-size: 30px;
+  font-weight: bolder;
+  color: #3a4b53;
+
+  background-color: inherit;
 }
 
 .close:hover {
-	transform: scale(1.2);
-	transform-origin: center;
+  transform: scale(1.2);
+  transform-origin: center;
 
-	color:rgb(126, 23, 23);
+  color: rgb(126, 23, 23);
 
-	background-color: inherit;
+  background-color: inherit;
 }
 
 .popup {
@@ -892,7 +904,7 @@ thead {
   height: 90%;
   width: 50%;
   display: flex;
-	justify-content: center;
+  justify-content: center;
 }
 
 .popup-background {
@@ -934,7 +946,7 @@ thead {
 }
 
 .auction {
-	height: 270px;
+  height: 270px;
   width: 400px;
 
   display: flex;
@@ -946,11 +958,11 @@ thead {
 
   position: fixed;
   top: 37%;
-	left: 36%;
-	
+  left: 36%;
+
   display: none;
-	background-color: white;
-	border: 3px solid #BECBD2;
+  background-color: white;
+  border: 3px solid #becbd2;
   border-radius: 10px;
   box-shadow: 5px 0px 40px -8px rgba(0, 0, 0, 0.5);
 }
@@ -971,18 +983,18 @@ thead {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding:20px;
+  padding: 20px;
   align-items: center;
   z-index: 3;
 
   position: fixed;
   top: 37%;
-	left: 36%;
-	
+  left: 36%;
+
   visibility: hidden;
-	background-color: white;
-	border: 3px solid #BECBD2;
-	border-radius: 10px;
+  background-color: white;
+  border: 3px solid #becbd2;
+  border-radius: 10px;
 }
 
 .form-button {
@@ -995,8 +1007,8 @@ thead {
 .debt-input {
   margin: 10px 0px;
   width: 200px;
-	height: 35px;
-	font-size: 15px;
+  height: 35px;
+  font-size: 15px;
 }
 
 .debt-input {
@@ -1006,8 +1018,8 @@ thead {
 
 .select-tag {
   width: 200px;
-	height: 35px;
-	font-size: 15px;
+  height: 35px;
+  font-size: 15px;
 }
 
 .notify-escape {
@@ -1017,18 +1029,18 @@ thead {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding:20px;
+  padding: 20px;
   align-items: center;
   z-index: 3;
 
   position: fixed;
   top: 37%;
-	left: 36%;
-	
+  left: 36%;
+
   visibility: hidden;
   background-color: white;
-  border: 3px solid #BECBD2;
-	border-radius: 20px;
+  border: 3px solid #becbd2;
+  border-radius: 20px;
 }
 
 .bankruptcy-form {
@@ -1116,7 +1128,7 @@ thead {
   border: 1px solid black;
   border-radius: 10px;
 }
- 
+
 /* ------------------------  Others  ------------------------------ */
 
 .container {
