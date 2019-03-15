@@ -24,6 +24,7 @@ class Player extends FinancialStatement {
     this.MLMCardsCount = 0;
     this.MLMTurns = 0;
     this.hasLeftGame = false;
+    this.isFastrackPlayer = false;
   }
 
   setTurn(turn) {
@@ -63,7 +64,9 @@ class Player extends FinancialStatement {
   }
 
   move(spacesCount) {
-    this.currentSpace = getNextNum(this.currentSpace, 24, spacesCount);
+    let totalSpace = 24;
+    if (this.isFastrackPlayer) totalSpace = 40;
+    this.currentSpace = getNextNum(this.currentSpace, totalSpace, spacesCount);
     this.didUpdateSpace = true;
     return this.currentSpace;
   }
@@ -160,7 +163,7 @@ class Player extends FinancialStatement {
     this.setNotification(
       `You bought ${numberOfShares} shares of ${symbol} for $${price}`
     );
-    if(!this.assets.shares[symbol]){
+    if (!this.assets.shares[symbol]) {
       this.assets.shares[symbol] = {};
       this.assets.shares[symbol].numberOfShares = 0;
     }
