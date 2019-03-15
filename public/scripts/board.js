@@ -298,7 +298,7 @@ const polling = function(game) {
   if (game.activeCard.data) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
-  const { diceValues, diceCount } = game.dice;
+  const { diceValues } = game.dice;
   showDice(diceValues);
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
@@ -306,6 +306,7 @@ const polling = function(game) {
   players.forEach(removeGamePiece);
   const ratRacePlayers = getRatRicePlayers(players, fasttrackPlayers);
   ratRacePlayers.forEach(updateGamePiece);
+  fasttrackPlayers.forEach(updateFasttrackGamePiece);
   if (game.isMyTurn) {
     const diceBlock = getElementById("dice_block");
     diceBlock.onclick = rollDie;
