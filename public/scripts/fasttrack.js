@@ -7,3 +7,10 @@ const updateFasttrackGamePiece = function(player) {
   newSpace.appendChild(gamePiece);
 };
 
+
+const displayFasttrackDiceValue = function(diceValue, count) {
+  const diceDiv = getElementById("ft-dice" + count);
+  diceDiv.src = `Dice-${diceValue}.png`;
+  diceDiv.style.visibility = "visible";
+  diceDiv.style.display = "block";
+};

@@ -153,10 +153,16 @@ const displayDiceValue = function(diceValue, count) {
 const showDice = function(diceValues) {
   hideOverlay("dice1");
   hideOverlay("dice2");
+  hideOverlay("ft-dice1");
+  hideOverlay("ft-dice2");
   let count = 1;
   diceValues.forEach(diceValue => {
     if (diceValue) displayDiceValue(diceValue, count);
     count++;
+  });
+  count = 1;
+  diceValues.forEach(diceValue => {
+    if (diceValue) displayFasttrackDiceValue(diceValue, count);
   });
 };
 
@@ -187,7 +193,10 @@ const rollDice = function(numberOfDice) {
   hideOverlay("num_of_dice");
   closeOverlay("num_of_dice");
   const diceBlock = getElementById("dice_block");
+  const ftDiceBlock = getElementById("ft-dice-block");
+  ftDiceBlock.onclick = null;
   diceBlock.onclick = null;
+  
   const spacesHandlers = {
     charity: handleCharity,
     deal: handleDeal
@@ -276,7 +285,7 @@ const removeGamePiece = function(player) {
 };
 
 const isFasttrackPlayer = function(fasttrackPlayers, player) {
-  return !fasttrackPlayers.some(fasttrackPlayer => {
+  return fasttrackPlayers.some(fasttrackPlayer => {
     return fasttrackPlayer.name == player.name;
   });
 };
@@ -284,7 +293,7 @@ const isFasttrackPlayer = function(fasttrackPlayers, player) {
 const getRatRicePlayers = function(allPlayer, fasttrackPlayers) {
   return allPlayer.filter(
     player =>
-      isFasttrackPlayer(fasttrackPlayers, player) &&
+      !isFasttrackPlayer(fasttrackPlayers, player) &&
       !player.bankrupted &&
       !player.hasLeftGame
   );
@@ -307,8 +316,13 @@ const polling = function(game) {
   const ratRacePlayers = getRatRicePlayers(players, fasttrackPlayers);
   ratRacePlayers.forEach(updateGamePiece);
   fasttrackPlayers.forEach(updateFasttrackGamePiece);
+  const ftDiceBlock = getElementById("ft-dice-block");
+  const diceBlock = getElementById("dice_block");
   if (game.isMyTurn) {
-    const diceBlock = getElementById("dice_block");
+    if(isFasttrackPlayer(fasttrackPlayers, requester)){
+      ftDiceBlock.onclick=rollDie;
+      return;
+    }
     diceBlock.onclick = rollDie;
   }
 };
