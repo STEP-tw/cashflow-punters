@@ -6,7 +6,7 @@ class FinancialStatement extends CashLedger {
   constructor() {
     super();
     this.profession;
-    this.passiveIncome = 3500;
+    this.passiveIncome = 0;
     this.totalExpense;
     this.totalIncome;
     this.cashflow;
