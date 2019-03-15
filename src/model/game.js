@@ -94,7 +94,7 @@ class Game {
   }
 
   isFasttrackPlayer() {
-    return this.fasttrackPlayers.includes(this.currentPlayer);
+    return this.fasttrackPlayers.some(player=>this.currentPlayer.name==player.name);
   }
 
   notifyEscaping() {
@@ -119,14 +119,14 @@ class Game {
     const currTurn = this.currentPlayer.getTurn();
     const nextPlayerTurn = getNextNum(currTurn, this.getPlayersCount());
     this.currentPlayer = this.players[nextPlayerTurn - 1];
-    if (this.currentPlayer.hasLeftGame || this.isFasttrackPlayer()) {
+    if (this.currentPlayer.hasLeftGame) {
       this.nextPlayer();
       return;
     }
     if (this.dice.diceValues.length >= 2) {
       this.dice.diceValues.pop();
     }
-    if (this.currentPlayer.hasEscape()) {
+    if (this.currentPlayer.hasEscape() && !this.isFasttrackPlayer()) {
       this.payBankLoan(this.currentPlayer);
       this.notifyEscaping();
     }
