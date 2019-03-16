@@ -158,11 +158,10 @@ describe("joinGame", function() {
           hasLeftGame: false,
           charityTurns: 0,
           notifyEscape: false,
-          isFastrackPlayer: false,
+          isFasttrackPlayer: false,
           MLMProfit: 0,
           notification: "",
           business: [],
-          isFasttrackPlayer: false,
           MLMProfit: 0,
           name: "player",
           dice: {
