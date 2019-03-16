@@ -24,7 +24,7 @@ class Player extends FinancialStatement {
     this.MLMCardsCount = 0;
     this.MLMTurns = 0;
     this.hasLeftGame = false;
-    this.isFastrackPlayer = false;
+    this.isFasttrackPlayer = false;
   }
 
   setTurn(turn) {
@@ -63,10 +63,8 @@ class Player extends FinancialStatement {
     this.downSizedForTurns -= 1;
   }
 
-  move(spacesCount) {
-    let totalSpace = 24;
-    if (this.isFastrackPlayer) totalSpace = 40;
-    this.currentSpace = getNextNum(this.currentSpace, totalSpace, spacesCount);
+  move(spacesCount, spaces = 24) {
+    this.currentSpace = getNextNum(this.currentSpace, spaces, spacesCount);
     this.didUpdateSpace = true;
     return this.currentSpace;
   }
@@ -107,7 +105,9 @@ class Player extends FinancialStatement {
   rollDiceAndMove(numberOfDice) {
     this.oldSpaceNo = this.currentSpace;
     const diceValues = this.rollDie(numberOfDice);
-    this.move(this.dice.total());
+    let spaces = 24;
+    if (this.isFasttrackPlayer) spaces = 40;
+    this.move(this.dice.total(), spaces);
     this.rolledDice = true;
     this.reduceCharityTurns();
     return diceValues;
@@ -246,6 +246,29 @@ class Player extends FinancialStatement {
   removeAllShares() {
     this.assets.shares = {};
     this.addCreditEvent(0, " sold all shares");
+  }
+
+  getBusinessDeal(card) {
+    if (this.ledgerBalance >= card.downPayment) {
+      this.ledgerBalance -= card.downPayment;
+      this.addCreditEvent(card.downPayment, ` got buisness assets for `);
+      this.setNotification(`You bought ${card.title} for ${card.downPayment}`);
+      this.business.push(card);
+      return true;
+    }
+    return false;
+  }
+
+  addCashFlow() {
+    this.ledgerBalance += this.monthlyCashFlow;
+    this.addCreditEvent(this.monthlyCashFlow, ` added monthly cash flow $ `);
+    return this.monthlyCashFlow;
+  }
+
+  issuePenalty(card) {
+    const amount = this.ledgerBalance / 2;
+    this.ledgerBalance -= amount;
+    this.addDebitEvent(amount, ` Due to ${card.title} you paid `);
   }
 }
 

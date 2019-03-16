@@ -4,6 +4,7 @@ const Player = require("./model/player");
 const cards = require("../data/cards");
 const Board = require("./model/board");
 const {
+  fasttrackSpaces,
   gameSpaces,
   NOT_A_PLAYER_TO_LOAD,
   NOT_A_PLAYER
@@ -15,8 +16,16 @@ const initializeGame = function(host) {
   const market = new Cards(cards.market);
   const doodads = new Cards(cards.doodads);
   const professions = new Cards(cards.professions);
-  const cardsStore = { bigDeals, smallDeals, market, doodads, professions };
-  const board = new Board(gameSpaces);
+  const fasttrack = cards.fasttrack;
+  const cardsStore = {
+    bigDeals,
+    smallDeals,
+    market,
+    doodads,
+    professions,
+    fasttrack
+  };
+  const board = new Board(gameSpaces, fasttrackSpaces);
   return new Game(cardsStore, board, host);
 };
 

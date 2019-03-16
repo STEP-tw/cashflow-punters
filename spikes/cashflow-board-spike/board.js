@@ -1,4 +1,3 @@
-
 const renderFastTrack = function() {
   const board = getElementById("board");
   board.className = null;
@@ -18,4 +17,3 @@ const renderRatRace = function() {
   closeOverlay("fasttrack");
   openOverlay("rat-race");
 };
-

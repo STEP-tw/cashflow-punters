@@ -1,10 +1,10 @@
 const openFinancialStatement = function() {
-  let fs = document.getElementById("financial_statement");
+  let fs = getElementById("financial_statement");
   fs.style.visibility = "visible";
 };
 
 const getBoard = function() {
-  const container = document.getElementById("container");
+  const container = getElementById("container");
   const parent = container.parentElement;
   parent.removeChild(container);
 };
@@ -175,8 +175,8 @@ const showRandomDiceFace = function() {
     5: "/Dice-5.png",
     6: "/Dice-6.png"
   };
-  const dice1 = document.getElementById("dice1");
-  const dice2 = document.getElementById("dice2");
+  const dice1 = getElementById("dice1");
+  const dice2 = getElementById("dice2");
   let randomFaceVal = Math.ceil(Math.random() * 6);
   dice1.src = diceFaces[randomFaceVal];
   dice2.src = diceFaces[randomFaceVal];
@@ -196,7 +196,7 @@ const rollDice = function(numberOfDice) {
   const ftDiceBlock = getElementById("ft-dice-block");
   ftDiceBlock.onclick = null;
   diceBlock.onclick = null;
-  
+
   const spacesHandlers = {
     charity: handleCharity,
     deal: handleDeal
@@ -213,7 +213,7 @@ const rollDice = function(numberOfDice) {
       body: JSON.stringify({ numberOfDice })
     })
       .then(res => res.json())
-      .then(({ diceValues, spaceType, isBankrupted, isEligibleForMLM }) => {
+      .then(({ spaceType, isBankrupted, isEligibleForMLM, isFastTrack }) => {
         clearInterval(diceAnimationInterval);
         if (isBankrupted) {
           disableDice();
@@ -308,7 +308,7 @@ const polling = function(game) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   const { diceValues } = game.dice;
-  showDice(diceValues);
+    showDice(diceValues);
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
   showNotification(requester.notification);
@@ -319,12 +319,109 @@ const polling = function(game) {
   const ftDiceBlock = getElementById("ft-dice-block");
   const diceBlock = getElementById("dice_block");
   if (game.isMyTurn) {
-    if(isFasttrackPlayer(fasttrackPlayers, requester)){
-      ftDiceBlock.onclick=rollDie;
+    if (isFasttrackPlayer(fasttrackPlayers, requester)) {
+      ftDiceBlock.onclick = rollDie;
       return;
     }
     diceBlock.onclick = rollDie;
   }
+};
+
+const acceptFasttrackDeal = function() {
+  fetch("/acceptFtDeal")
+    .then(data => data.json())
+    .then(({ isSuccessful }) => {
+      if (isSuccessful) {
+        hideOverlay("card-button-container");
+      }
+    });
+};
+
+const declineFasttrackDeal = function() {
+  hideOverlay("card-button-container");
+  fetch("/declineSmallDeal");
+};
+
+const getFastTrackCardDiv = function(type) {
+  const cardDiv = getElementById("card-container");
+  cardDiv.style.visibility = "visible";
+  cardDiv.innerHTML = null;
+  cardDiv.classList = [];
+  cardDiv.classList.add("plain-card");
+  cardDiv.classList.add(type);
+  return cardDiv;
+};
+
+const createFasttrackButtons = function(actions) {
+  let buttons = getElementById("card-button-container");
+  if (buttons == undefined) buttons = createElement("div");
+  buttons.classList.add("buttons-div");
+  buttons.style.display = "flex";
+  buttons.id = "card-button-container";
+  const accept = createAcceptButton(actions[0]);
+  const decline = createDeclineButton(actions[1]);
+  appendChildren(buttons, [accept, decline]);
+  return buttons;
+};
+
+const handleFastTrackDeal = function(cardData, isMyTurn) {
+  const card = cardData.data;
+  const fastTrackDealactions = [acceptFasttrackDeal, declineFasttrackDeal];
+  const { title, cashflow, downPayment } = card;
+  const cardDivContainer = getFastTrackCardDiv("fasttrack-card");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
+  const cashflowDiv = createTextDiv(`Cashflow ${cashflow}`);
+  const downPaymentDiv = createTextDiv(`Down Payment : ${downPayment}`);
+  const bottomDiv = createElement("div");
+  bottomDiv.classList.add("card-bottom");
+  appendChildren(bottomDiv, [cashflowDiv, downPaymentDiv]);
+  appendChildren(cardDivContainer, [titleDiv, bottomDiv]);
+  if (isMyTurn)
+    cardDivContainer.appendChild(createFasttrackButtons(fastTrackDealactions));
+};
+
+const handlePenalty = function(card) {
+  fetch("/issuepenalty");
+  const { title, Message } = card;
+  const cardDiv = getFastTrackCardDiv("fasttrack-card");
+  const titleDiv = createHeadingDiv(4, title, "card-title");
+  const messageDiv = createTextDiv(Message);
+  appendChildren(cardDiv, [titleDiv, messageDiv]);
+};
+
+const acceptFtCharity = function() {
+  hideOverlay("card-button-container");
+  fetch("/acceptCharity");
+};
+
+const declineFtCharity = function() {
+  hideOverlay("card-button-container");
+  fetch("/declineCharity");
+};
+
+const handleFtCharity = function(card, isMyTurn) {
+  fetch("/isabletodocharity")
+    .then(data => data.json())
+    .then(isAble => {
+      const charityHandlers = [acceptFtCharity, declineFtCharity];
+      const { title, Message } = card;
+      const cardDiv = getFastTrackCardDiv("fasttrack-card");
+      const titleDiv = createHeadingDiv(4, title, "card-title");
+      const messageDiv = createTextDiv(Message);
+      appendChildren(cardDiv, [titleDiv, messageDiv]);
+      if (isAble && isMyTurn) {
+        cardDiv.appendChild(createFasttrackButtons(charityHandlers));
+      }
+    });
+};
+
+const handleCashFlowDay = function() {
+  fetch("/addcashflow").then(() => {
+    const cardDiv = getFastTrackCardDiv("fasttrack-card");
+    const message = "Monthly cashflow is added into your cash ledger.";
+    const titleDiv = createHeadingDiv(1, message, "card-title");
+    appendChildren(cardDiv, [titleDiv]);
+  });
 };
 
 const showCard = function(card, isMyTurn, player) {
@@ -344,13 +441,17 @@ const showCard = function(card, isMyTurn, player) {
       bigDealactions,
       card.data,
       isMyTurn
-    )
+    ),
+    fasttrackDeal: handleFastTrackDeal.bind(null, card, isMyTurn),
+    penalty: handlePenalty.bind(null, card.data, isMyTurn),
+    charity: handleFtCharity.bind(null, card.data, isMyTurn),
+    cashflowDay: handleCashFlowDay
   };
   cardHandlers[card.type] && cardHandlers[card.type]();
 };
 
 const showNotification = function(notification) {
-  const odlNotifDiv = document.getElementById("notification-div").children[0];
+  const odlNotifDiv = getElementById("notification-div").children[0];
   const oldNotification = odlNotifDiv && odlNotifDiv.children[0].innerText;
   if (!notification || oldNotification == notification) return;
   const notificationDiv = createTextDiv(notification);
@@ -369,10 +470,13 @@ const showNotification = function(notification) {
 };
 
 const updateGamePiece = function(player) {
-  const gamePiece = document.getElementById("gamePiece" + player.turn);
+  const gamePiece = getElementById("gamePiece" + player.turn);
   openOverlay("gamePiece" + player.turn);
   const space = gamePiece.parentNode;
-  const newSpace = document.getElementById(player.currentSpace);
+  let newSpace = getElementById(player.currentSpace);
+  if (player.isFasttrackPlayer) {
+    newSpace = getElementById(`ft-${player.currentSpace}`);
+  }
   space.removeChild(gamePiece);
   newSpace.appendChild(gamePiece);
 };
@@ -389,6 +493,7 @@ const createActivity = function({ playerName, msg, time }) {
 
 const updateActivityLog = function({ activityLog }) {
   const activityLogDiv = getElementById("activityLog");
+  const newLog = getElementById("ftactivityLog");
   const localActivitiesCount = activityLogDiv.children.length;
   if (activityLog.length == localActivitiesCount) return;
   const newActivities = activityLog.slice(localActivitiesCount);
@@ -396,6 +501,7 @@ const updateActivityLog = function({ activityLog }) {
     let activityDiv = createActivity(activity);
     activityLogDiv.insertBefore(activityDiv, activityLogDiv.firstChild);
   });
+  newLog.innerHTML = activityLogDiv.innerHTML;
 };
 
 const getPlayerData = function(playersData) {
@@ -428,7 +534,6 @@ const getGame = function() {
 const flipBoard = function(deg) {
   const game = getElementById("main-game");
   game.style.transform = "rotateY(" + deg + "deg)";
-  console.log("sgl");
 };
 
 const saveGame = function() {

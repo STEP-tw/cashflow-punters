@@ -22,6 +22,7 @@ const loadSavedGames = function() {
 
 const {
   getGame,
+  addCashFlow,
   payDebt,
   rollDice,
   saveGame,
@@ -53,7 +54,9 @@ const {
   getPlayersFinancialStatement,
   rollDiceForMLM,
   removePlayer,
-  renderRequesterData
+  renderRequesterData,
+  acceptFtDeal,
+  issuePenalty
 } = require("./gameHandlers");
 
 app.games = {};
@@ -67,6 +70,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", renderHomePage);
+app.get("/acceptFtDeal", acceptFtDeal);
 app.get("/getgame", getGame);
 app.get("/startgame", startGame);
 app.get("/hascharity", hasCharity);
@@ -91,6 +95,8 @@ app.get("/leavegame", removePlayer);
 app.get("/savegame", saveGame);
 app.get("/requester", renderRequesterData);
 app.get("/cancelgame", cancelGame);
+app.get("/addcashflow", addCashFlow);
+app.get("/issuepenalty", issuePenalty);
 
 app.post("/paydebt", payDebt);
 app.post("/hostgame", hostGame);

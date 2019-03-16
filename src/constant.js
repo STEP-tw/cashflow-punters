@@ -25,6 +25,50 @@ const gameSpaces = [
   "market"
 ];
 
+const fasttrackSpaces = [
+  "",
+  "penalty",
+  "charity",
+  "deal",
+  "deal",
+  "deal",
+  "deal",
+  "penalty",
+  "deal",
+  "deal",
+  "cashflowDay",
+  "deal",
+  "deal",
+  "deal",
+  "panalty",
+  "deal",
+  "deal",
+  "deal",
+  "cashflowDay",
+  "deal",
+  "deal",
+  "penalty",
+  "deal",
+  "deal",
+  "deal",
+  "deal",
+  "deal",
+  "penalty",
+  "deal",
+  "deal",
+  "cashflowDay",
+  "deal",
+  "deal",
+  "deal",
+  "penalty",
+  "deal",
+  "deal",
+  "deal",
+  "cashflowDay",
+  "deal",
+  "deal"
+];
+
 const CHARITY_MSG =
   "You have done charity, So you can optionally use one or two dice for your next 3 turns";
 
@@ -33,10 +77,13 @@ const UNABLE_TO_DO_CHARITY_MSG =
 
 const NOT_ENOUGH_MONEY_TO_BID = "Sorry! you don't have enough money to bid.";
 
-const LOW_BIDING_AMOUNT = "Sorry! you have entered less money than current bid.";
+const LOW_BIDING_AMOUNT =
+  "Sorry! you have entered less money than current bid.";
 const ESCAPE_ERROR = "As a current bidder you can't drop out from the game.";
-const NOT_A_PLAYER_TO_LOAD = "Since you are not a player in this game, you can't load this game."
-const NOT_A_PLAYER = "Since you are not a player in this game, you can't join this game."
+const NOT_A_PLAYER_TO_LOAD =
+  "Since you are not a player in this game, you can't load this game.";
+const NOT_A_PLAYER =
+  "Since you are not a player in this game, you can't join this game.";
 
 module.exports = {
   gameSpaces,
@@ -46,5 +93,6 @@ module.exports = {
   LOW_BIDING_AMOUNT,
   ESCAPE_ERROR,
   NOT_A_PLAYER_TO_LOAD,
-  NOT_A_PLAYER
+  NOT_A_PLAYER,
+  fasttrackSpaces
 };

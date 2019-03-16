@@ -5,6 +5,7 @@ const getIncome = (value, content) => value + content.cashflow;
 class FinancialStatement extends CashLedger {
   constructor() {
     super();
+    this.monthlyCashFlow;
     this.profession;
     this.passiveIncome = 0;
     this.totalExpense;
@@ -16,6 +17,7 @@ class FinancialStatement extends CashLedger {
     this.liabilities;
     this.assets;
     this.perChildExpense;
+    this.business = [];
   }
 
   updateTotalIncome() {

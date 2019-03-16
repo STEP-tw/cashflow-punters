@@ -454,9 +454,40 @@ class Game {
     return hasMLM && gotPayDay;
   }
 
+  handleCrossedCashFlowDay(oldSpaceNo) {
+    const paydaySpaces = this.board.getCashflowSpaces();
+    const crossedPaydays = paydaySpaces.filter(paydaySpace =>
+      isBetween(oldSpaceNo, this.currentPlayer.currentSpace, paydaySpace)
+    );
+    if (crossedPaydays.length > 0) {
+      crossedPaydays.forEach(payday => {
+        const paydayAmount = this.currentPlayer.addCashFlow();
+        this.currentPlayer.setNotification(
+          `You landed on cashflow day .$${paydayAmount} added to your Savings`
+        );
+      });
+    }
+  }
+
+  handleFastTrack(player, numberOfDice, oldSpaceNo) {
+    const diceValues = player.rollDiceAndMove(numberOfDice);
+    this.setDice(diceValues);
+    this.handleCrossedCashFlowDay(oldSpaceNo);
+    const rolledDieMsg = " rolled " + diceValues.reduce(add);
+    this.activityLog.addActivity(rolledDieMsg, player.name);
+    const spaceType = this.board.getFasttrackSpaceType(player.currentSpace);
+    const cardData = this.cardStore.fasttrack[player.currentSpace];
+    const type = cardData.type;
+    this.setActiveCard(type, cardData);
+    return { spaceType, isFastTrack: true };
+  }
+
   rollDice(numberOfDice) {
     const player = this.currentPlayer;
     const oldSpaceNo = player.currentSpace;
+    if (player.isFasttrackPlayer) {
+      return this.handleFastTrack(player, numberOfDice, oldSpaceNo);
+    }
     const diceValues = player.rollDiceAndMove(numberOfDice);
     this.setDice(diceValues);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
@@ -471,7 +502,7 @@ class Game {
       player.setNotification("Roll dice for MLM.");
       this.activityLog.addActivity(" rolling dice for MLM", player.name);
     }
-    return { diceValues, spaceType, isEligibleForMLM, isBankrupted };
+    return { spaceType, isEligibleForMLM, isBankrupted, isFastTrack: false };
   }
 
   hasCharityTurns() {

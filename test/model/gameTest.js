@@ -643,8 +643,8 @@ describe("handleSpace", function() {
 
       expect(game.rollDice(1))
         .to.be.an("Object")
-        .to.have.property("diceValues")
-        .to.deep.equals([1, 2]);
+        .to.have.property("isFastTrack")
+        .to.deep.equals(false);
     });
   });
 });
