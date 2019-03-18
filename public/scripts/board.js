@@ -177,9 +177,13 @@ const showRandomDiceFace = function() {
   };
   const dice1 = getElementById("dice1");
   const dice2 = getElementById("dice2");
+  const fasttrackDice1 = getElementById("ft-dice1");
+  const fasttrackDice2 = getElementById("ft-dice2");
   let randomFaceVal = Math.ceil(Math.random() * 6);
   dice1.src = diceFaces[randomFaceVal];
   dice2.src = diceFaces[randomFaceVal];
+  fasttrackDice1.src = diceFaces[randomFaceVal];
+  fasttrackDice2.src = diceFaces[randomFaceVal];
 };
 
 const disableDice = () => {
