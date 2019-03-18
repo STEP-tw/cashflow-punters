@@ -339,13 +339,9 @@ const polling = function(game) {
 };
 
 const acceptFasttrackDeal = function() {
-  fetch("/acceptFtDeal")
-    .then(data => data.json())
-    .then(({ isSuccessful }) => {
-      if (isSuccessful) {
-        hideOverlay("card-button-container");
-      }
-    });
+  fetch("/acceptFtDeal").then(() => {
+    hideOverlay("card-button-container");
+  });
 };
 
 const declineFasttrackDeal = function() {

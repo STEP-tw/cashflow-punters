@@ -249,20 +249,26 @@ class Player extends FinancialStatement {
   }
 
   getBusinessDeal(card) {
-    if (this.ledgerBalance >= card.downPayment) {
-      this.ledgerBalance -= card.downPayment;
-      this.addCreditEvent(card.downPayment, ` got buisness assets for `);
-      this.setNotification(`You bought ${card.title} for ${card.downPayment}`);
-      this.business.push(card);
-      return true;
+    const { downPayment, title } = card;
+    if (!this.isCapableToPay(downPayment)) {
+      this.setNotification(
+        "You don't have enough balance to invest in this business."
+      );
+      return false;
     }
-    return false;
+    this.deductLedgerBalance(downPayment);
+    this.addCreditEvent(downPayment, `Invested in business '${card.title}'`);
+    this.setNotification(`You bought ${title} for ${downPayment}`);
+    this.businessInvestments.push(card);
+    return true;
   }
 
   addCashFlow() {
-    this.ledgerBalance += this.monthlyCashFlow;
-    this.addCreditEvent(this.monthlyCashFlow, ` added monthly cash flow $ `);
-    return this.monthlyCashFlow;
+    this.addToLedgerBalance(this.monthlyCashFlow);
+    this.addCreditEvent(this.monthlyCashFlow, `Added monthly cashflow`);
+    this.setNotification(
+      `You landed on cashflow. $${this.monthlyCashFlow} added to your Savings`
+    );
   }
 
   issuePenalty(card) {

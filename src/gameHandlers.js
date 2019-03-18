@@ -347,16 +347,25 @@ const renderRequesterData = function(req, res) {
 };
 
 const acceptFtDeal = function(req, res) {
-  const activeCardData = req.game.activeCard.data;
-  const player = req.game.currentPlayer;
+  const game = req.game;
+  const activeCardData = game.activeCard.data;
+  const player = game.currentPlayer;
   const isSuccessful = player.getBusinessDeal(activeCardData);
   if (isSuccessful) {
-    req.game.activityLog.addActivity(
+    game.activityLog.addActivity(
       `${player.name} has accepted ${activeCardData.title}`
     );
-    req.game.nextPlayer();
+    game.nextPlayer();
+    res.end();
+    return;
   }
-  res.json({ isSuccessful });
+  game.activityLog.addActivity(
+    `${player.name} don't have enough balance to invest in ${
+      activeCardData.title
+    }.`
+  );
+  game.nextPlayer();
+  res.end();
 };
 
 const addCashFlow = function(req, res) {

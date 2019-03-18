@@ -54,7 +54,7 @@ describe("hostGame", function() {
           MLMCardsCount: 0,
           charityTurns: 0,
           notifyEscape: false,
-          business: [],
+          businessInvestments: [],
           isFasttrackPlayer: false,
           notification: "",
           MLMProfit: 0,
@@ -161,7 +161,7 @@ describe("joinGame", function() {
           isFasttrackPlayer: false,
           MLMProfit: 0,
           notification: "",
-          business: [],
+          businessInvestments: [],
           MLMProfit: 0,
           name: "player",
           dice: {

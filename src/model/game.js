@@ -457,16 +457,13 @@ class Game {
   }
 
   handleCrossedCashFlowDay(oldSpaceNo) {
-    const paydaySpaces = this.board.getCashflowSpaces();
-    const crossedPaydays = paydaySpaces.filter(paydaySpace =>
-      isBetween(oldSpaceNo, this.currentPlayer.currentSpace, paydaySpace)
+    const cashflowSpaces = this.board.getCashflowSpaces();
+    const crossedCashflows = cashflowSpaces.filter(cashflowSpace =>
+      isBetween(oldSpaceNo, this.currentPlayer.currentSpace, cashflowSpace)
     );
-    if (crossedPaydays.length > 0) {
-      crossedPaydays.forEach(payday => {
-        const paydayAmount = this.currentPlayer.addCashFlow();
-        this.currentPlayer.setNotification(
-          `You landed on cashflow day .$${paydayAmount} added to your Savings`
-        );
+    if (crossedCashflows.length > 0) {
+      crossedCashflows.forEach(cashflow => {
+        this.currentPlayer.addCashFlow();
       });
     }
   }
