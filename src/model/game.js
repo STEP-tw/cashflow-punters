@@ -94,7 +94,9 @@ class Game {
   }
 
   isFasttrackPlayer() {
-    return this.fasttrackPlayers.some(player=>this.currentPlayer.name==player.name);
+    return this.fasttrackPlayers.some(
+      player => this.currentPlayer.name == player.name
+    );
   }
 
   notifyEscaping() {

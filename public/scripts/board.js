@@ -195,7 +195,9 @@ const disableDice = () => {
 
 const rollDice = function(numberOfDice) {
   hideOverlay("num_of_dice");
+  hideOverlay("ft-num_of_dice");
   closeOverlay("num_of_dice");
+  closeOverlay("ft-num_of_dice");
   const diceBlock = getElementById("dice_block");
   const ftDiceBlock = getElementById("ft-dice-block");
   ftDiceBlock.onclick = null;
@@ -257,7 +259,9 @@ const handleMLM = function() {
 
 const rollOneDice = function() {
   closeOverlay("num_of_dice");
+  closeOverlay("ft-num_of_dice");
   hideOverlay("num_of_dice");
+  hideOverlay("ft-num_of_dice");
   closeOverlay("dice2");
   rollDice(1);
 };
@@ -269,11 +273,14 @@ const rollDie = function() {
       if (!hasCharityTurns) return rollOneDice();
       showOverlay("num_of_dice");
       openOverlay("num_of_dice");
+      showOverlay("ft-num_of_dice");
+      openOverlay("ft-num_of_dice");
       const oneDiceButton = getElementById("one_dice_button");
       oneDiceButton.onclick = rollOneDice;
       const twoDiceButton = getElementById("two_dice_button");
       twoDiceButton.onclick = () => {
         showOverlay("dice2");
+        showOverlay("ft-dice2");
         rollDice(2);
       };
     });
@@ -312,7 +319,7 @@ const polling = function(game) {
     showCard(game.activeCard, game.isMyTurn, requester);
   }
   const { diceValues } = game.dice;
-    showDice(diceValues);
+  showDice(diceValues);
   showAllPlayerInfo(players, requester);
   updateStatementBoard(requester);
   showNotification(requester.notification);
@@ -468,9 +475,11 @@ const showNotification = function(notification) {
   const timeDiv = createTextDiv(time);
   timeDiv.classList.add("time-notification");
   const notificationsDiv = getElementById("notification-div");
+  const ftnotificationsDiv = getElementById("ft-notification-div");
   notificationsDiv.innerHTML = "";
   notificationsDiv.appendChild(notificationDiv);
   notificationsDiv.appendChild(timeDiv);
+  ftnotificationsDiv.innerHTML = notificationDiv.innerHTML;
 };
 
 const updateGamePiece = function(player) {
