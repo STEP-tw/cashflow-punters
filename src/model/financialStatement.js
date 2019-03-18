@@ -21,7 +21,7 @@ class FinancialStatement extends CashLedger {
   }
 
   updateTotalIncome() {
-    let assetIncome = this.income.realEstates.reduce(getIncome, 0);
+    const assetIncome = this.income.realEstates.reduce(getIncome, 0);
     this.totalIncome = assetIncome + this.income.salary;
   }
 
@@ -221,7 +221,7 @@ class FinancialStatement extends CashLedger {
 
   hasEscape() {
     let notification =
-      "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to paid.";
+      "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to be paid.";
     if (this.passiveIncome >= this.totalExpense) {
       if (this.liabilities["Bank Loan"] < this.ledgerBalance) {
         notification = "Congrats!! You are out of Rat race.";
