@@ -49,18 +49,15 @@ const restoreMethods = function (data) {
   game.activeCard = gameData.activeCard;
   game.bankruptedPlayersCount = gameData.bankruptedPlayersCount;
   restorePlayers(game, gameData);
-  restoreCurrentPlayer(game, gameData);
+  restoreCurrentPlayer(game, gameData.currentPlayer);
   restoreActivityLog(game, gameData.activityLog);
   return game;
 }
 
-const restoreGames = function (games) {
-  const result = {};
-  Object.keys(games).forEach(key => {
-    result[key] = restoreMethods(games[key]);
-    result[key].setHasLoaded();
-  })
+const restoreGame = function (game) {
+  const result = restoreMethods(game);
+  result.setHasLoaded();
   return result;
 }
 
-module.exports = { restoreGames };
+module.exports = { restoreGame };

@@ -3,6 +3,8 @@ const Cards = require("./model/cards");
 const Player = require("./model/player");
 const cards = require("../data/cards");
 const Board = require("./model/board");
+const { restoreGame } = require("./loadGame");
+
 const {
   fasttrackSpaces,
   gameSpaces,
@@ -140,9 +142,10 @@ const canLoad = function(req, res) {
   const { gameId, playerName } = req.body;
   const savedGames = res.app.savedGames;
   if (!doesGameExist(savedGames, gameId)) return sendGameNotFound(res);
-  if (!isPlayerPresent(savedGames[gameId], playerName))
+  const game = restoreGame(savedGames[gameId]);
+  if (!isPlayerPresent(game, playerName))
     return sendCannotLoadError();
-  res.app.games[gameId] = savedGames[gameId];
+  res.app.games[gameId] = game;
   return { isAble: true, loaded: true };
 };
 

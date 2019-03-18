@@ -77,7 +77,14 @@ const createShareBuyButton = shareCost => {
 
 const nothing = () => {};
 
-const passDeal = () => closeOverlay("buttons-container");
+const passDeal = () => {
+  console.log('hello it is in passdeal');
+  fetch("/passdeal")
+  .then(res => res.json())
+  .then(({isSuccessful}) => {
+    if(isSuccessful) closeOverlay("buttons-container")
+  });
+};
 
 const showNotEnoughBalance = function() {
   const shareMsg = getElementById("share-notification");
@@ -102,10 +109,11 @@ const createCardButtons = function(actions) {
   return buttons;
 };
 
-const createRealEstateDealCard = function(actions, card, isMyTurn) {
+const createRealEstateDealCard = function(actions, card, drawnBy) {
   const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
+  const { playerName } = parseCookie();
   const titleDiv = createHeadingDiv(4, title, "card-title");
   const messageDiv = createTextDiv(message, "card-message");
   const mortgageDiv = createTextDiv(`Mortgage : ${mortgage}`);
@@ -119,11 +127,12 @@ const createRealEstateDealCard = function(actions, card, isMyTurn) {
   appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
   appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
-  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
-const createGoldSmallDeal = function(actions, card, isMyTurn) {
+const createGoldSmallDeal = function(actions, card, drawnBy) {
   const { title, message, numberOfCoins, cost } = card;
+  const { playerName } = parseCookie();
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createHeadingDiv(4, title, "card-title");
@@ -134,7 +143,7 @@ const createGoldSmallDeal = function(actions, card, isMyTurn) {
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [numberDiv, costDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
-  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
 const createCard = function(card) {
@@ -261,7 +270,7 @@ const showSellOption = function(card) {
   cardDisplayDiv.appendChild(buttons);
 };
 
-const handleSharesSmallDeal = function(card, isMyTurn) {
+const handleSharesSmallDeal = function(card, drawnBy, isMyTurn) {
   fetch("/issharepresent")
     .then(data => data.json())
     .then(({ hasShares }) => {
@@ -272,8 +281,9 @@ const handleSharesSmallDeal = function(card, isMyTurn) {
     });
 };
 
-const createMLMCard = function(actions, card, isMyTurn) {
+const createMLMCard = function(actions, card, drawnBy) {
   const { title, message, cost } = card;
+  const { playerName } = parseCookie();
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createHeadingDiv(4, title, "card-title");
@@ -283,7 +293,7 @@ const createMLMCard = function(actions, card, isMyTurn) {
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [costDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
-  if (isMyTurn) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
 const getSmallDealHandler = function(card, isMyTurn) {
@@ -296,6 +306,6 @@ const getSmallDealHandler = function(card, isMyTurn) {
   };
   return (
     dealCardTypes[card.data.relatedTo] &&
-    dealCardTypes[card.data.relatedTo].bind(null, card.data, isMyTurn)
+    dealCardTypes[card.data.relatedTo].bind(null, card.data, card.drawnBy, isMyTurn)
   );
 };

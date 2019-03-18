@@ -11,14 +11,11 @@ const {
   cancelGame,
   provideGameLobby
 } = require("./hostAndJoinHandlers");
-const { restoreGames } = require("./loadGame");
 
-const loadSavedGames = function() {
-  fs.readFile("./data/savedGames.json", "utf-8", (err, content) => {
-    const games = restoreGames(JSON.parse(content));
-    app.savedGames = games;
-  });
-};
+const loadSavedGames = function(){
+  const games = fs.readFileSync("./data/savedGames.json", "utf-8");
+  app.savedGames = JSON.parse(games);
+}
 
 const {
   getGame,
@@ -56,7 +53,8 @@ const {
   removePlayer,
   renderRequesterData,
   acceptFtDeal,
-  issuePenalty
+  issuePenalty,
+  passDeal
 } = require("./gameHandlers");
 
 app.games = {};
@@ -97,6 +95,7 @@ app.get("/requester", renderRequesterData);
 app.get("/cancelgame", cancelGame);
 app.get("/addcashflow", addCashFlow);
 app.get("/issuepenalty", issuePenalty);
+app.get("/passdeal", passDeal);
 
 app.post("/paydebt", payDebt);
 app.post("/hostgame", hostGame);

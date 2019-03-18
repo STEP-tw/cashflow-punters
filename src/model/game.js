@@ -25,6 +25,7 @@ class Game {
     this.joinedPlayerCount = 0;
     this.hasLoaded = false;
     this.dice = { diceValues: [6] };
+    this.stableGame = true;
   }
 
   incJoinedPlayerCount() {
@@ -146,6 +147,7 @@ class Game {
       this.skipTurn();
     }
     this.resetActiveCard();
+    this.stableGame = true;
   }
 
   setActiveCard(type, data) {
@@ -156,12 +158,36 @@ class Game {
   resetActiveCard() {
     this.activeCard.drawnBy = null;
     this.activeCard.soldTo = null;
+    if (this.activeCard.numberOfShareholders) {
+      this.activeCard.numberOfShareholders = null;
+    }
+  }
+
+  passDeal(playerName) {
+    const player = this.getPlayerByName(playerName);
+    const card = this.activeCard.data;
+    if (!player.hasShares(card.symbol)) return false;
+    if (!this.activeCard.numberOfShareholders) this.nextPlayer();
+    return true;
+  }
+
+  declineSmallDeal(requestedPlayer) {
+    if (!this.isCurrentPlayer(requestedPlayer)) return;
+    this.activityLog.addActivity(`${requestedPlayer} has rejected the deal`);
+    if (this.isNoOneElseHasShares()) return this.nextPlayer();
+    const shareHolders = this.activeCard.numberOfShareholders || 1;
+    this.activeCard.numberOfShareholders = shareHolders - 1;
   }
 
   handleSmallDeal() {
     this.activityLog.logSelectedSmallDeal(this.currentPlayer.name);
     const smallDealCard = this.cardStore.smallDeals.drawCard();
     this.setActiveCard("smallDeal", smallDealCard);
+    const { relatedTo, symbol } = smallDealCard;
+    if (relatedTo == "shares") {
+      const shareHolders = this.getPlayersByShares(symbol);
+      this.activeCard.numberOfShareholders = shareHolders.length;
+    }
     this.activeCard.dealDoneCount = 0;
   }
 
@@ -482,6 +508,7 @@ class Game {
   }
 
   rollDice(numberOfDice) {
+    this.stableGame = false;
     const player = this.currentPlayer;
     const oldSpaceNo = player.currentSpace;
     if (player.isFasttrackPlayer) {
@@ -514,14 +541,31 @@ class Game {
     );
   }
 
+  getNoOfShareHolders() {
+    return this.activeCard.numberOfShareholders;
+  }
+
+  doesCurrentPlayerHaveOnly(corporationShare) {
+    const player = this.currentPlayer;
+    const shareHolders = this.getPlayersByShares(corporationShare);
+    return shareHolders.length == 1 && player.hasShares(corporationShare);
+  }
+
+  isNoOneElseHasShares(){
+    const symbol = this.activeCard.data.symbol;
+    return !this.getNoOfShareHolders() || this.doesCurrentPlayerHaveOnly(symbol);
+  }
+
   buyShares(numberOfShares) {
     const player = this.currentPlayer;
+    const card = this.activeCard.data;
+    const { symbol } = card;
     this.activityLog.addActivity(
-      ` has bought ${numberOfShares} shares ${this.activeCard.data.symbol}`,
+      ` has bought ${numberOfShares} shares ${symbol}`,
       player.name
     );
-    player.buyShares(this.activeCard.data, numberOfShares);
-    this.nextPlayer();
+    player.buyShares(card, +numberOfShares);
+    if (this.isNoOneElseHasShares()) this.nextPlayer();
   }
 
   sellShares(playerName, numberOfShares) {
@@ -533,7 +577,8 @@ class Game {
       this.activeCard.data,
       numberOfShares
     );
-    this.nextPlayer();
+    this.activeCard.numberOfShareholders--;
+    if (!this.activeCard.numberOfShareholders) this.nextPlayer();
   }
 
   isPlayerCapableToBuy(numberOfShares) {

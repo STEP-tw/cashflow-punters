@@ -336,21 +336,20 @@ describe("rejectSmallDeal", function() {
     req.game.activityLog = { addActivity: sinon.spy() };
     req.cookies = { playerName: "" };
     req.game.players = { length: 0 };
-    req.game.nextPlayer = sinon.spy();
+    req.game.declineSmallDeal = sinon.spy();
     res.end = sinon.spy();
-    res.send = sinon.spy();
   });
 
-  it("should call nextPlayer if deal is not done ", function() {
+  it("should call declineSmallDeal if deal is not done ", function() {
     rejectSmallDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.true;
+    expect(req.game.declineSmallDeal.calledOnce).to.be.true;
   });
-  it("should call nextPlayer if deal is shares and all players accept or reject", function() {
+  it("should call declineSmallDeal if deal is shares and all players accept or reject", function() {
     req.game.players.length = 6;
     req.game.activeCard.data.relatedTo = "shares";
     req.game.activeCard.dealDoneCount = 5;
     rejectSmallDeal(req, res);
-    expect(req.game.nextPlayer.calledOnce).to.be.true;
+    expect(req.game.declineSmallDeal.calledOnce).to.be.true;
   });
 });
 

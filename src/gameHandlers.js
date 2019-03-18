@@ -151,8 +151,7 @@ const acceptSmallDeal = function(req, res) {
 
 const rejectSmallDeal = function(req, res) {
   let requestedPlayer = req.cookies["playerName"];
-  req.game.activityLog.addActivity(`${requestedPlayer} has rejected the deal`);
-  req.game.nextPlayer();
+  req.game.declineSmallDeal(requestedPlayer);
   res.end();
 };
 
@@ -210,7 +209,13 @@ const sellShares = function(req, res) {
   res.json({ isCapable });
 };
 
-const completeTurn = function(req, res) {
+const passDeal = function (req, res) {
+  const { playerName } = req.cookies;
+  const isSuccessful = req.game.passDeal(playerName);
+  res.json({ isSuccessful });
+}
+
+const completeTurn = function (req, res) {
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
   player.completeTurn();
@@ -332,11 +337,11 @@ const removePlayer = function(req, res) {
 const saveGame = function(req, res) {
   const { savedGames, fs } = res.app;
   const gameId = req.cookies["gameId"];
-  const game = Object.assign({}, JSON.parse(req.game.stableGameJson));
-  game.stableGameJson = "";
-  savedGames[gameId] = game;
-  fs.writeFile("./data/savedGames.json", JSON.stringify(savedGames), () => {});
-  res.end();
+  const game = req.game;
+  if (!game.stableGame) return res.json({ isSuccessful: false });
+  savedGames[gameId] = Object.assign({}, game);
+  fs.writeFile("./data/savedGames.json", JSON.stringify(savedGames), () => { });
+  res.json({ isSuccessful: true });
 };
 
 const renderRequesterData = function(req, res) {
@@ -419,5 +424,6 @@ module.exports = {
   renderRequesterData,
   acceptFtDeal,
   addCashFlow,
-  issuePenalty
+  issuePenalty,
+  passDeal
 };
