@@ -153,7 +153,7 @@ const createCard = function(card) {
 };
 
 const buyShares = function() {
-  const numberOfShares = getElementById("share-count").value;
+  const numberOfShares = +getElementById("share-count").value;
   fetch("/buyshares", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
