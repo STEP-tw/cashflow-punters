@@ -439,7 +439,7 @@ basic_fs_heading {
   border-radius: 1vh;
   padding: 10%;
   z-index: 2;
-  height: 60%;
+  height: 70%;
   width: 90%;
   background-color: white;
 }
@@ -478,9 +478,12 @@ basic_fs_heading {
 
 .game-options > button {
   margin: 0% 2%;
-  padding: 3% 3%;
+  padding: 2% 1%;
   border-radius: 1.7vh;
-  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+	height: 35px;
+	width: 90px;
+	font-size: 15px;
 }
 
 .all-player-details {
@@ -923,23 +926,26 @@ thead {
   z-index: 10;
 
   display: flex;
-  flex-direction: column;
+	flex-direction: column;
+	justify-content: space-around;
 
   position: absolute;
-  top: 32%;
+  top: 40%;
   left: 37%;
 
   width: 25%;
-  height: fit-content;
-
-  padding: 5%;
+	height: 36%;
+	
+	font-size: larger;
+	border-radius: 20px;
+  padding: 4% 4%;
   background-color: white;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
 }
 
 .top-popup > button {
   height: 35px;
-  width: 120px;
+  width: 90px;
   align-self: center;
   margin-top: 7%;
   padding: 2% 4%;
@@ -969,7 +975,8 @@ thead {
 
 .buttons-div {
   display: flex;
-  justify-content: center;
+	justify-content: space-between;
+	justify-content: space-between;
 }
 
 .buttons-div > div {
@@ -1078,15 +1085,16 @@ thead {
 }
 
 .share-popup {
-  height: 80%;
-  width: 60%;
+  height: 85%;
+	width: 90%;
+	
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+	align-items: center;
+	
   z-index: 3;
   position: relative;
   background-color: whitesmoke;
-  border: 1px solid black;
   border-radius: 10px;
 }
 
@@ -1106,7 +1114,8 @@ thead {
   text-align: center;
 
   color: grey;
-  background: transparent;
+	background: transparent;
+	outline: none;
 }
 
 .market-card-div {
