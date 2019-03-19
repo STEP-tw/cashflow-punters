@@ -3,7 +3,7 @@ const Cards = require("./model/cards");
 const Player = require("./model/player");
 const Board = require("./model/board");
 const Dice = require("./model/dice");
-const { gameSpaces } = require("./constant");
+const { gameSpaces, fasttrackSpaces } = require("./constant");
 
 const restoreCards = function (cardStore) {
   const result = {};
@@ -22,13 +22,18 @@ const restorePlayer = function (game, playerData) {
   game.addPlayer(player);
 }
 
+const restoreFastrackPlayers = function(game, playerData){
+  const player = game.getPlayerByName(playerData.name);
+  game.fasttrackPlayers.push(player);
+}
+
 const restorePlayers = function (game, gameData) {
   gameData.players.forEach(restorePlayer.bind(null, game));
-  gameData.fasttrackPlayers.forEach(restorePlayer.bind(null, game));
+  gameData.fasttrackPlayers.forEach(restoreFastrackPlayers.bind(null, game));
 }
 
 const restoreBoard = function () {
-  return new Board(gameSpaces);
+  return new Board(gameSpaces, fasttrackSpaces);
 }
 
 const restoreCurrentPlayer = function (game, player) {

@@ -1503,7 +1503,7 @@
     },
     {
       "title": "Tax Audit",
-      "Message": "Pay Accountants and lawyers half of your cash",
+      "Message": "Pay Accountants and Lawyers half of your cash",
       "type": "penalty"
     },
     {
@@ -1580,7 +1580,7 @@
       "type": "penalty"
     },
     {
-      "title": "Building pro Golf Course",
+      "title": "Building Pro Golf Course",
       "cashflow": 6000,
       "downPayment": 150000,
       "type": "fasttrackDeal"
