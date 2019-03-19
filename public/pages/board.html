@@ -22,244 +22,8 @@
   </head>
 
   <body id="body">
-    <div id="main-game" class="game">
-      <div class="round_border board">
-        <div hidden id="0">
-          <div id="gamePiece1" class="gamePiece player1 "></div>
-          <div id="gamePiece2" class="gamePiece player2 "></div>
-          <div id="gamePiece3" class="gamePiece player3 "></div>
-          <div id="gamePiece4" class="gamePiece player4 "></div>
-          <div id="gamePiece5" class="gamePiece player5 "></div>
-          <div id="gamePiece6" class="gamePiece player6 "></div>
-        </div>
-        <div class="horizontal_spaces">
-          <div class="corner_spaces horizontal_space deals w3-theme" id="1">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_first_space  horizontal_space doodad w3-theme-l1" id="2">
-            <div class="space_background doodad-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="3">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space charity w3-theme-d1" id="4">
-            <div class="space_background charity-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="5">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space payday w3-theme-d2" id="6">
-            <div class="space_background payday-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="7">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space corner_spaces market w3-theme-l2" id="8">
-            <div class="space_background market-img"></div>
-          </div>
-        </div>
-        <div class="middle_flex">
-          <div class="vertical_spaces">
-            <div class="vertical_first_space vertical_space market w3-theme-l2" id="24">
-              <div class="space_background market-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="23">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space payday w3-theme-d2" id="22">
-              <div class="space_background payday-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="21">
-              <div class="space_background deals-img"></div>
-            </div>
-          </div>
-          <div class="game_center round_border">
-            <div class="left_part">
-              <div class="financial_details">
-                <table class="player_details">
-                  <tr>
-                    <td>
-                      <span id="name" style="font-size: 18px;">PlayerName</span>
-                    </td>
-                    <td>
-                      <div class="progress-bar-div" id="progress-div">
-                        <div class="current-progress" id="progress"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Profession
-                    </td>
-                    <td>
-                      <span id="Profession" style="font-weight: lighter;">prof</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="income">Income</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Passive Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="passiveIn">passiveIn</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Total Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="totalIn">totalIn</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Total Expense
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="expenses">expenses</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Monthly Cashflow
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="cashflow">cashflow</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ledger Balance</td>
-                    <td style="font-weight: lighter;">
-                      $ <span id="ledger-balance">$0</span>
-                    </td>
-                  </tr>
-                </table>
 
-                <div class="open-player-details">
-                  <div class="iconButtonDiv">
-                    <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
-                  </div>
-                  <div class="iconButtonDiv">
-                    <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
-                  </div>
-                  <div class="iconButtonDiv">
-                    <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
-                  </div>
-                </div>
-                <div id="notification-div" class="notifications"></div>
-              </div>
-            </div>
-            <div class="middle_part">
-              <div id="dice_block" class="dice_block">
-                <div id="num_of_dice" class="overlay_box">
-                  <p>
-                    How many dice you want to use?
-                  </p>
-                  <button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
-                    One
-                  </button>
-                  <button id="two_dice_button" style="height: unset" onclick="
-    showOverlay('dice2');
-    hideOverlay('num_of_dice')">
-                    Two
-                  </button>
-                </div>
-                <div class="dice">
-                  <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice" />
-                  <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice" />
-                </div>
-              </div>
-              <div id="cardDisplay" class="cardDisplay">
-                <div id="card-overlay" class="card-overlay"></div>
-                <div id="askCharity" class="cardDisplayPopup">
-                  <h2>Do Charity?</h2>
-                  <p>if yes 10% of Total income will be deducted</p>
-                  <div class="buttons-div">
-                    <button id="acceptCharity">Yes</button>
-                    <button id="declineCharity">No</button>
-                  </div>
-                </div>
-                <div id="select-deal" class="cardDisplayPopup">
-                  <h2>Select Deal</h2>
-                  <div class="buttons-div">
-                    <button onclick="selectSmallDeal()">Small Deal</button>
-                    <button onclick="selectBigDeal()">Big Deal</button>
-                  </div>
-                </div>
-                <div id="utilityPopup" class="cardDisplayPopup">
-                  <button class="close" onclick=" hideOverlay('utilityPopup');
-    closeOverlay('card-overlay');">
-                    &times;
-                  </button>
-                  <div class="buttons_div"></div>
-                </div>
-                <div id="card" class="plain-card"></div>
-                <div id="notification" class="notification"></div>
-                <div id="buttons-container" class="buttons-div"></div>
-              </div>
-            </div>
-            <div class="right_part">
-              <div class="game-options">
-                <button onclick="openLeaveGame()">Leave Game</button>
-                <button onclick="saveGame();">Save Game</button>
-                <button onclick="flipBoard(180);">FastTrack</button>
-              </div>
-              <div class="all-player-details" id="players-information"></div>
-              <div class="activity_log" id="activityLog"></div>
-              <div></div>
-            </div>
-          </div>
-          <div class="vertical_spaces">
-            <div class="vertical_first_space vertical_space  deals w3-theme" id="9">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space doodad w3-theme-l1" id="10">
-              <div class="space_background doodad-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="11">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space downsize w3-theme-d1" id="12">
-              <div class="space_background downsize-img"></div>
-            </div>
-          </div>
-        </div>
-        <div class=" horizontal_spaces bottom_flex">
-          <div class="horizontal_space corner_spaces baby w3-theme-d1" id="20">
-            <div class="space_background baby-img"></div>
-          </div>
-          <div class="horizontal_first_space horizontal_space  deals w3-theme" id="19">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space doodad w3-theme-l1" id="18">
-            <div class="space_background doodad-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="17">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space market w3-theme-l2" id="16">
-            <div class="space_background market-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="15">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space payday w3-theme-d2" id="14">
-            <div class="space_background payday-img"></div>
-          </div>
-          <div class="horizontal_space corner_spaces  deals w3-theme" id="13">
-            <div class="space_background deals-img"></div>
-          </div>
-        </div>
-
-        <div class="overlay-fs" id="fs_overlay" style="color:#303E45;">
+      <div class="overlay-fs" id="fs_overlay" style="color:#303E45;">
           <button class="close" style="top:0%;" onclick="hideOverlay('fs_overlay')">
             &times;
           </button>
@@ -509,30 +273,269 @@
             </div>
           </div>
         </div>
-
         <div class="overlay" id="cash-ledger-overlay">
-          <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
-            ×
-          </button>
-          <div id="cash_ledger">
-            <span class="title">Cash ledger</span>
-            <div style="padding: 2% 4%; font-size: 20px">
-              <span style="font-weight:bold;">Name: </span>
-              <span id="name-ledger"></span>
+            <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
+              ×
+            </button>
+            <div id="cash_ledger">
+              <span class="title">Cash ledger</span>
+              <div style="padding: 2% 4%; font-size: 20px">
+                <span style="font-weight:bold;">Name: </span>
+                <span id="name-ledger"></span>
+              </div>
+              <table class="cash-ledger">
+                <thead>
+                  <tr class="row-content">
+                    <th class="time" style="font-weight:bold;">Time</th>
+                    <th class="amount" style="font-weight:bold;">Amount</th>
+                    <th class="balance" style="font-weight:bold;">Balance</th>
+                    <th class="reason" style="font-weight:bold;">Description</th>
+                  </tr>
+                </thead>
+                <tbody id="cash-ledger-content"></tbody>
+              </table>
             </div>
-            <table class="cash-ledger">
-              <thead>
-                <tr class="row-content">
-                  <th class="time" style="font-weight:bold;">Time</th>
-                  <th class="amount" style="font-weight:bold;">Amount</th>
-                  <th class="balance" style="font-weight:bold;">Balance</th>
-                  <th class="reason" style="font-weight:bold;">Description</th>
-                </tr>
-              </thead>
-              <tbody id="cash-ledger-content"></tbody>
-            </table>
+          </div>
+
+    <div id="main-game" class="game">
+      <div class="round_border board">
+        <div hidden id="0">
+          <div id="gamePiece1" class="gamePiece player1 "></div>
+          <div id="gamePiece2" class="gamePiece player2 "></div>
+          <div id="gamePiece3" class="gamePiece player3 "></div>
+          <div id="gamePiece4" class="gamePiece player4 "></div>
+          <div id="gamePiece5" class="gamePiece player5 "></div>
+          <div id="gamePiece6" class="gamePiece player6 "></div>
+        </div>
+        <div class="horizontal_spaces">
+          <div class="corner_spaces horizontal_space deals w3-theme" id="1">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_first_space  horizontal_space doodad w3-theme-l1" id="2">
+            <div class="space_background doodad-img"></div>
+          </div>
+          <div class="horizontal_space  deals w3-theme" id="3">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space charity w3-theme-d1" id="4">
+            <div class="space_background charity-img"></div>
+          </div>
+          <div class="horizontal_space  deals w3-theme" id="5">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space payday w3-theme-d2" id="6">
+            <div class="space_background payday-img"></div>
+          </div>
+          <div class="horizontal_space  deals w3-theme" id="7">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space corner_spaces market w3-theme-l2" id="8">
+            <div class="space_background market-img"></div>
           </div>
         </div>
+        <div class="middle_flex">
+          <div class="vertical_spaces">
+            <div class="vertical_first_space vertical_space market w3-theme-l2" id="24">
+              <div class="space_background market-img"></div>
+            </div>
+            <div class="vertical_space  deals w3-theme" id="23">
+              <div class="space_background deals-img"></div>
+            </div>
+            <div class="vertical_space payday w3-theme-d2" id="22">
+              <div class="space_background payday-img"></div>
+            </div>
+            <div class="vertical_space  deals w3-theme" id="21">
+              <div class="space_background deals-img"></div>
+            </div>
+          </div>
+          <div class="game_center round_border">
+            <div class="left_part">
+              <div class="financial_details">
+                <table class="player_details">
+                  <tr>
+                    <td>
+                      <span id="name" style="font-size: 18px;">PlayerName</span>
+                    </td>
+                    <td>
+                      <div class="progress-bar-div" id="progress-div">
+                        <div class="current-progress" id="progress"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Profession
+                    </td>
+                    <td>
+                      <span id="Profession" style="font-weight: lighter;">prof</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Income
+                    </td>
+                    <td class="basic-fs-value">
+                      $ <span id="income">Income</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Passive Income
+                    </td>
+                    <td class="basic-fs-value">
+                      $ <span id="passiveIn">passiveIn</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Total Income
+                    </td>
+                    <td class="basic-fs-value">
+                      $ <span id="totalIn">totalIn</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Total Expense
+                    </td>
+                    <td class="basic-fs-value">
+                      $ <span id="expenses">expenses</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="basic_fs_heading" style="color: #57707D">
+                      Monthly Cashflow
+                    </td>
+                    <td class="basic-fs-value">
+                      $ <span id="cashflow">cashflow</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Ledger Balance</td>
+                    <td style="font-weight: lighter;">
+                      $ <span id="ledger-balance">$0</span>
+                    </td>
+                  </tr>
+                </table>
+
+                <div class="open-player-details">
+                  <div class="iconButtonDiv">
+                    <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
+                  </div>
+                  <div class="iconButtonDiv">
+                    <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
+                  </div>
+                  <div class="iconButtonDiv">
+                    <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
+                  </div>
+                </div>
+                <div id="notification-div" class="notifications"></div>
+              </div>
+            </div>
+            <div class="middle_part">
+              <div id="dice_block" class="dice_block">
+                <div id="num_of_dice" class="overlay_box">
+                  <p>
+                    How many dice you want to use?
+                  </p>
+                  <button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
+                    One
+                  </button>
+                  <button id="two_dice_button" style="height: unset" onclick="
+    showOverlay('dice2');
+    hideOverlay('num_of_dice')">
+                    Two
+                  </button>
+                </div>
+                <div class="dice">
+                  <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice" />
+                  <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice" />
+                </div>
+              </div>
+              <div id="cardDisplay" class="cardDisplay">
+                <div id="card-overlay" class="card-overlay"></div>
+                <div id="askCharity" class="cardDisplayPopup">
+                  <h2>Do Charity?</h2>
+                  <p>if yes 10% of Total income will be deducted</p>
+                  <div class="buttons-div">
+                    <button id="acceptCharity">Yes</button>
+                    <button id="declineCharity">No</button>
+                  </div>
+                </div>
+                <div id="select-deal" class="cardDisplayPopup">
+                  <h2>Select Deal</h2>
+                  <div class="buttons-div">
+                    <button onclick="selectSmallDeal()">Small Deal</button>
+                    <button onclick="selectBigDeal()">Big Deal</button>
+                  </div>
+                </div>
+                <div id="utilityPopup" class="cardDisplayPopup">
+                  <button class="close" onclick=" hideOverlay('utilityPopup');
+    closeOverlay('card-overlay');">
+                    &times;
+                  </button>
+                  <div class="buttons_div"></div>
+                </div>
+                <div id="card" class="plain-card"></div>
+                <div id="notification" class="notification"></div>
+                <div id="buttons-container" class="buttons-div"></div>
+              </div>
+            </div>
+            <div class="right_part">
+              <div class="game-options">
+                <button onclick="openLeaveGame()">Leave Game</button>
+                <button onclick="saveGame();">Save Game</button>
+                <button onclick="flipBoard(180);">FastTrack</button>
+              </div>
+              <div class="all-player-details" id="players-information"></div>
+              <div class="activity_log" id="activityLog"></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="vertical_spaces">
+            <div class="vertical_first_space vertical_space  deals w3-theme" id="9">
+              <div class="space_background deals-img"></div>
+            </div>
+            <div class="vertical_space doodad w3-theme-l1" id="10">
+              <div class="space_background doodad-img"></div>
+            </div>
+            <div class="vertical_space  deals w3-theme" id="11">
+              <div class="space_background deals-img"></div>
+            </div>
+            <div class="vertical_space downsize w3-theme-d1" id="12">
+              <div class="space_background downsize-img"></div>
+            </div>
+          </div>
+        </div>
+        <div class=" horizontal_spaces bottom_flex">
+          <div class="horizontal_space corner_spaces baby w3-theme-d1" id="20">
+            <div class="space_background baby-img"></div>
+          </div>
+          <div class="horizontal_first_space horizontal_space  deals w3-theme" id="19">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space doodad w3-theme-l1" id="18">
+            <div class="space_background doodad-img"></div>
+          </div>
+          <div class="horizontal_space  deals w3-theme" id="17">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space market w3-theme-l2" id="16">
+            <div class="space_background market-img"></div>
+          </div>
+          <div class="horizontal_space  deals w3-theme" id="15">
+            <div class="space_background deals-img"></div>
+          </div>
+          <div class="horizontal_space payday w3-theme-d2" id="14">
+            <div class="space_background payday-img"></div>
+          </div>
+          <div class="horizontal_space corner_spaces  deals w3-theme" id="13">
+            <div class="space_background deals-img"></div>
+          </div>
+        </div>
+ 
+
+       
         <div id="container" class="container"></div>
 
         <div id="professions" class="professions-container">
