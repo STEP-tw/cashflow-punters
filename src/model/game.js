@@ -691,7 +691,7 @@ class Game {
   addToFasttrack(playerName) {
     const player = this.getPlayerByName(playerName);
     player.notifyEscape = false;
-    player.isFasttrackPlayer = true;
+    player.enterIntoFasttrack();
     this.fasttrackPlayers.push(player);
   }
 

@@ -24,7 +24,6 @@ class Player extends FinancialStatement {
     this.MLMCardsCount = 0;
     this.MLMTurns = 0;
     this.hasLeftGame = false;
-    this.isFasttrackPlayer = false;
   }
 
   setTurn(turn) {
@@ -249,25 +248,24 @@ class Player extends FinancialStatement {
   }
 
   getBusinessDeal(card) {
-    const { downPayment, title } = card;
+    const { downPayment, title, cashflow } = card;
     if (!this.isCapableToPay(downPayment)) {
-      this.setNotification(
-        "You don't have enough balance to invest in this business."
-      );
+      this.setNotification("Don't have enough balance to invest");
       return false;
     }
     this.deductLedgerBalance(downPayment);
-    this.addCreditEvent(downPayment, `Invested in business '${card.title}'`);
-    this.setNotification(`You bought ${title} for ${downPayment}`);
+    this.addCreditEvent(downPayment, `Invested in ${card.title}`);
+    this.setNotification(`You invested ${downPayment} in ${title}`);
+    this.cashflowDayIncome += cashflow;
     this.businessInvestments.push(card);
     return true;
   }
 
   addCashFlow() {
-    this.addToLedgerBalance(this.monthlyCashFlow);
-    this.addCreditEvent(this.monthlyCashFlow, `Added monthly cashflow`);
+    this.addToLedgerBalance(this.cashflowDayIncome);
+    this.addCreditEvent(this.cashflowDayIncome, `Added monthly cashflow`);
     this.setNotification(
-      `You landed on cashflow. $${this.monthlyCashFlow} added to your Savings`
+      `You landed on cashflow. $${this.cashflowDayIncome} added to your Savings`
     );
   }
 
@@ -275,6 +273,12 @@ class Player extends FinancialStatement {
     const amount = this.ledgerBalance / 2;
     this.ledgerBalance -= amount;
     this.addDebitEvent(amount, ` Due to ${card.title} you paid `);
+  }
+
+  enterIntoFasttrack() {
+    this.isFasttrackPlayer = true;
+    this.cashflowDayIncome = this.passiveIncome * 100;
+    this.cashflowGoal = this.cashflowDayIncome + 50000;
   }
 }
 

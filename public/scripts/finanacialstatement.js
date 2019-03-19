@@ -168,6 +168,14 @@ const createInvestmentTable = function({ title, cashflow, downPayment }) {
   return row;
 };
 
+const setFasttrackGoal = function(player) {
+  const { cashflowDayIncome, cashflowGoal, passiveIncome } = player;
+  console.log(player);
+  getElementById("ft-cashflow-income").innerHTML = cashflowDayIncome;
+  getElementById("ft-cashflow-goal").innerHTML = cashflowGoal;
+  getElementById("ft-passive-income").innerHTML = passiveIncome;
+};
+
 const showFastTrackBalanceSheet = function(player) {
   const investments = player.businessInvestments;
   const oldStatement = getElementById("financial_statement");
@@ -178,5 +186,6 @@ const showFastTrackBalanceSheet = function(player) {
   investments.forEach(investment => {
     balanceSheet.appendChild(createInvestmentTable(investment));
   });
+  setFasttrackGoal(player);
   oldStatement.innerHTML = statements.innerHTML;
 };

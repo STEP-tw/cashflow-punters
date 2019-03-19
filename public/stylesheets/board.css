@@ -1176,3 +1176,10 @@ thead {
   top: 20%;
   right: 0%;
 }
+
+.ft-dice-block {
+  display: block;
+  visibility: hidden;
+  height: 26%;
+  width: 50%;
+}

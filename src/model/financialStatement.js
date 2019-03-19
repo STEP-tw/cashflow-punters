@@ -5,7 +5,7 @@ const getIncome = (value, content) => value + content.cashflow;
 class FinancialStatement extends CashLedger {
   constructor() {
     super();
-    this.monthlyCashFlow;
+    this.cashflowDayIncome;
     this.profession;
     this.passiveIncome = 0;
     this.totalExpense;
@@ -18,6 +18,8 @@ class FinancialStatement extends CashLedger {
     this.assets;
     this.perChildExpense;
     this.businessInvestments = [];
+    this.cashflowGoal;
+    this.isFasttrackPlayer = false;
   }
 
   updateTotalIncome() {
@@ -222,7 +224,7 @@ class FinancialStatement extends CashLedger {
   hasEscape() {
     let notification =
       "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to be paid.";
-    if (this.passiveIncome >= this.totalExpense) {
+    if (this.passiveIncome >= this.totalExpense && !this.isFasttrackPlayer) {
       if (this.liabilities["Bank Loan"] < this.ledgerBalance) {
         notification = "Congrats!! You are out of Rat race.";
         this.setNotification(notification);

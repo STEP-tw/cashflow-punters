@@ -1539,8 +1539,8 @@
       "type": "fasttrackDeal"
     },
     {
-      "title": "Bad Payment",
-      "Message": "Use Lowest Cashflow Assets.",
+      "title": "Bad Partner",
+      "Message": "Pay half of your cash.",
       "type": "penalty"
     },
     {
