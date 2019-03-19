@@ -354,7 +354,18 @@ const acceptFasttrackDeal = function() {
 };
 
 const showWin = function(playerName) {
-  alert(`${playerName} has won the game`);
+  const confirmationDiv = getElementById("ft-leave-game");
+  const informationDiv = createElement("div");
+  informationDiv.className = "top-popup";
+  const messageDiv = createElement("p");
+  const message = `${playerName} has won the game`;
+  messageDiv.innerText = message;
+  const okayButton = createElement("button");
+  okayButton.innerText = "OK";
+  okayButton.onclick = hideOverlay.bind(null, "ft-leave-game");
+  appendChildren(informationDiv, [messageDiv, okayButton]);
+  appendChildren(confirmationDiv, [informationDiv]);
+  openOverlay("ft-leave-game");
 };
 
 const declineFasttrackDeal = function() {
@@ -558,18 +569,18 @@ const flipBoard = function(deg) {
 
 const saveGame = function() {
   fetch("/savegame")
-  .then(res => res.json())
-  .then(({isSuccessful, gameId})=>{
-    let message = "Your game is in unstable stage, so you can't save it."
-    if(isSuccessful) {
-      const gameIdDiv = getElementById("saved-game-id");
-      gameIdDiv.innerText = `Game Id: ${gameId}`;
-      message = "You have saved the current state of game."
-    }
-    const notification = getElementById('save-game-notification-msg');
-    notification.innerText = message;
-    openOverlay('save-game');
-  });
+    .then(res => res.json())
+    .then(({ isSuccessful, gameId }) => {
+      let message = "Your game is in unstable stage, so you can't save it.";
+      if (isSuccessful) {
+        const gameIdDiv = getElementById("saved-game-id");
+        gameIdDiv.innerText = `Game Id: ${gameId}`;
+        message = "You have saved the current state of game.";
+      }
+      const notification = getElementById("save-game-notification-msg");
+      notification.innerText = message;
+      openOverlay("save-game");
+    });
 };
 
 const initialize = function() {
