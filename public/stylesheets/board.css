@@ -333,15 +333,16 @@ basic_fs_heading {
 /* ----------------------------  board middle part  -----------------------------*/
 
 /* dice */
-
-.overlay_box {
-  border: black 1px solid;
-  height: 99%;
-  width: 99%;
-  visibility: hidden;
-
-  position: absolute;
-  background-color: white;
+	
+	.overlay_box {
+		height: 99%;
+		width: 99%;
+		visibility: hidden;
+	 
+		position: absolute;
+		background-color: white;
+		padding-left: 30px;
+		border-radius: 20px;
 }
 
 .dice {
@@ -1001,7 +1002,6 @@ thead {
 
   visibility: hidden;
   background-color: white;
-  border: 3px solid #becbd2;
   border-radius: 10px;
 }
 

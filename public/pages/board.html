@@ -565,9 +565,11 @@
         </div>
         <div id="leave-game" class="popup-background">
           <div class="top-popup">
-            Do you really want to leave game ?
-            <button onclick="closeOverlay('leave-game')">Cancel</button>
-            <button onclick="leaveGame()">Yes</button>
+						<p>Do you really want to leave game ?</p>
+						<div style="display: flex; align-content: flex-start; justify-content: center;">
+            <button onclick="closeOverlay('leave-game')">No</button>
+						<button onclick="leaveGame()">Yes</button>
+					</div>
           </div>
         </div>
         <div id="share-background" class="popup-overlay">
