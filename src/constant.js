@@ -26,6 +26,7 @@ const gameSpaces = [
 ];
 
 const fasttrackSpaces = [
+  "",
   "penalty",
   "charity",
   "investment",

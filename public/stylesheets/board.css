@@ -333,16 +333,16 @@ basic_fs_heading {
 /* ----------------------------  board middle part  -----------------------------*/
 
 /* dice */
-	
-	.overlay_box {
-		height: 99%;
-		width: 99%;
-		visibility: hidden;
-	 
-		position: absolute;
-		background-color: white;
-		padding-left: 30px;
-		border-radius: 20px;
+
+.overlay_box {
+  height: 99%;
+  width: 99%;
+  visibility: hidden;
+
+  position: absolute;
+  background-color: white;
+  padding-left: 30px;
+  border-radius: 20px;
 }
 
 .dice {
@@ -1176,4 +1176,15 @@ thead {
   visibility: hidden;
   top: 20%;
   right: 0%;
+}
+
+.ft-dice-count-block {
+  display: none;
+  visibility: hidden;
+  z-index: 5;
+  height: 25%;
+  width: 50%;
+  position: absolute;
+  top: 3%;
+  left: 21%;
 }

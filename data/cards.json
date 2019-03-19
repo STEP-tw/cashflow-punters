@@ -1428,6 +1428,7 @@
     }
   ],
   "fasttrack": [
+    {},
     {
       "title": "Health Care",
       "Message": "Roll one die. If it's 1-3, you're covered-pay half of your cash. If it's 4-6, you're not pay all of your cash.",
