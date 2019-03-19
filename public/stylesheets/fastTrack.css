@@ -277,26 +277,6 @@
   justify-content: flex-end;
 }
 
-.fasttrack-card {
-  position: absolute;
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
-  top: 25%;
-  left: 43%;
-  width: 28%;
-  padding: 5%;
-  justify-content: center;
-}
-
-/* .ft-activity-log {
-  position: absolute;
-  border: 1px solid grey;
-  top: 31%;
-  right: 12%;
-  overflow: scroll;
-  width: 17%;
-  height: 51%;
-} */
-
 .ft-notification-div {
   position: absolute;
   height: 20%;

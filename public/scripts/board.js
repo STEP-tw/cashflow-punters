@@ -359,9 +359,7 @@ const getFastTrackCardDiv = function(type) {
   const cardDiv = getElementById("card-container");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
-  cardDiv.classList = [];
-  cardDiv.classList.add("plain-card");
-  cardDiv.classList.add(type);
+  cardDiv.className = "ft-card";
   return cardDiv;
 };
 
@@ -551,18 +549,18 @@ const flipBoard = function(deg) {
   game.style.transform = "rotateY(" + deg + "deg)";
 };
 
-const saveGame = function () {
+const saveGame = function() {
   fetch("/savegame")
-  .then(res => res.json())
-  .then(({isSuccessful})=>{
-    let message = "You have saved the current state of game."
-    if(!isSuccessful) {
-      message = "Your game is in unstable stage, so you can't save it."
-    }
-    const notification = getElementById('save-game-notification');
-    notification.innerText = message;
-    openOverlay('save-game');
-  });
+    .then(res => res.json())
+    .then(({ isSuccessful }) => {
+      let message = "You have saved the current state of game.";
+      if (!isSuccessful) {
+        message = "Your game is in unstable stage, so you can't save it.";
+      }
+      const notification = getElementById("save-game-notification");
+      notification.innerText = message;
+      openOverlay("save-game");
+    });
 };
 
 const initialize = function() {

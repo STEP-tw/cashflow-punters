@@ -1183,3 +1183,17 @@ thead {
   height: 26%;
   width: 50%;
 }
+
+.ft-card {
+  visibility: visible;
+    position: absolute;
+    height: 56%;
+    border: 1px solid black;
+    width: 41%;
+    top: 31%;
+    left: 28%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
