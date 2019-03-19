@@ -259,9 +259,10 @@ class Player extends FinancialStatement {
       return false;
     }
     this.deductLedgerBalance(downPayment);
-    this.addCreditEvent(downPayment, `Invested in ${card.title}`);
+    this.addCreditEvent(downPayment, `Invested in ${title}`);
     this.setNotification(`You invested ${downPayment} in ${title}`);
     this.cashflowDayIncome += cashflow;
+    card.cashflowDayIncome = this.cashflowDayIncome;
     this.businessInvestments.push(card);
     return true;
   }
@@ -279,7 +280,7 @@ class Player extends FinancialStatement {
   }
 
   issuePenalty(card) {
-    const amount = this.ledgerBalance / 2;
+    const amount = Math.floor(this.ledgerBalance / 2);
     this.ledgerBalance -= amount;
     this.addDebitEvent(amount, ` Due to ${card.title} you paid `);
   }

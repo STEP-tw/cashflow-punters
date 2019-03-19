@@ -418,14 +418,14 @@
                   </tr>
                 </table>
 
-                <div class="open-player-details">
+                <div class="open-player-details" id="board-icons">
                   <div class="iconButtonDiv">
                     <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
                   </div>
                   <div class="iconButtonDiv">
                     <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
                   </div>
-                  <div class="iconButtonDiv">
+                  <div class="iconButtonDiv" id="bank">
                     <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
                   </div>
                 </div>
@@ -792,6 +792,11 @@
           <div class="fs-game-center">
 						<div class="fs-left-part">
 							<div class="ft-player-info">
+                <div><span id="ft-player-name"></span></div>
+                <div>Cashflow Day Income:<span id="ft-player-cashflow"></span></div>
+                <div>Cashflow Goal :<span id="ft-player-cashflow-goal"></span></div>
+                <div>Ledger Balance :<span id="ft-leger-balance"></span></div>
+                <div class="open-player-details" id="ft-board-icons"></div>
 							</div>
 							<div id="ft-notification-div" class="ft-notification-div"></div>
 						</div>
@@ -876,7 +881,7 @@
              <div> &#9747; 100 &#x3d; </div>
            </section>
            <section class="ft-parts">
-              <div class="down-border">&#36;<span id="ft-cashflow-income">100000</span></div>
+              <div class="down-border">&#36;<span id="initial-ft-income" >100000</span></div>
               <div>Your starting cashflow day income</div>
             </section>
           </section>
@@ -897,7 +902,7 @@
               Buisness
             </th>
             <th class="ft-field2">Monthly cashflow</th>
-            <th class="ft-field3" align="left"> <div>cashflow Day Income</div> <div>&#36; <span> 100000</span></div></th>
+            <th class="ft-field3" align="left"> <div>cashflow Day Income</div> <div>&#36; <span id="ft-cashflow-income"> 100000</span></div></th>
           </thead>
           <tbody id="ft-balance-sheet">
           </tbody>

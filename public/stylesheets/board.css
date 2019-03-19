@@ -1181,6 +1181,7 @@ thead {
 .ft-dice-count-block {
   display: none;
   visibility: hidden;
+  background-color: whitesmoke;
   z-index: 5;
   height: 25%;
   width: 50%;

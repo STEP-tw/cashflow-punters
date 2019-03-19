@@ -148,17 +148,29 @@ const showFinancialStatement = function() {
     .then(res => res.json())
     .then(player => {
       setFinancialStatement(player);
+      setFtBoardStatement(player);
       showOverlay("fs_overlay");
     });
 };
 
-const createInvestmentTable = function({ title, cashflow, downPayment }) {
+const setFtBoardStatement = function(player) {
+  const { cashflowDayIncome, name, ledgerBalance, cashflowGoal } = player;
+  getElementById("bank").style.visibility = "hidden";
+  const icons = getElementById("board-icons").innerHTML;
+  getElementById("ft-board-icons").innerHTML = icons;
+  getElementById("ft-leger-balance").innerHTML = ledgerBalance;
+  getElementById("ft-player-name").innerHTML = name;
+  getElementById("ft-player-cashflow").innerHTML = cashflowDayIncome;
+  getElementById("ft-player-cashflow-goal").innerHTML = cashflowGoal;
+};
+
+const createInvestmentTable = function({ title, cashflow, cashflowDayIncome }) {
   const row = createElement("tr");
   const investmentTitle = createInvestmentCell(title);
   investmentTitle.className = "ft-field1";
   const investmentCashflow = createInvestmentCell(cashflow);
   investmentCashflow.className = "ft-field2";
-  const investmentDownPayment = createInvestmentCell(downPayment);
+  const investmentDownPayment = createInvestmentCell(cashflowDayIncome);
   investmentDownPayment.className = "ft-field3";
   appendChildren(row, [
     investmentTitle,
@@ -169,9 +181,9 @@ const createInvestmentTable = function({ title, cashflow, downPayment }) {
 };
 
 const setFasttrackGoal = function(player) {
-  const { cashflowDayIncome, cashflowGoal, passiveIncome } = player;
-  console.log(player);
-  getElementById("ft-cashflow-income").innerHTML = cashflowDayIncome;
+  const { cashflowGoal, passiveIncome } = player;
+  getElementById("initial-ft-income").innerHTML = passiveIncome * 100;
+  getElementById("ft-cashflow-income").innerHTML = passiveIncome * 100;
   getElementById("ft-cashflow-goal").innerHTML = cashflowGoal;
   getElementById("ft-passive-income").innerHTML = passiveIncome;
 };

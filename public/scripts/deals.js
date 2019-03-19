@@ -1,4 +1,4 @@
-const getCardDiv = function (type) {
+const getCardDiv = function(type) {
   const cardDiv = getElementById("card");
   cardDiv.style.visibility = "visible";
   cardDiv.innerHTML = null;
@@ -8,7 +8,7 @@ const getCardDiv = function (type) {
   return cardDiv;
 };
 
-const acceptSmallDeal = function (event) {
+const acceptSmallDeal = function(event) {
   let parent = event.target.parentElement;
   fetch("/acceptSmallDeal")
     .then(data => data.json())
@@ -21,13 +21,13 @@ const acceptSmallDeal = function (event) {
     });
 };
 
-const declineSmallDeal = function () {
+const declineSmallDeal = function() {
   let parent = event.target.parentElement;
   parent.style.display = "none";
   fetch("/declineSmallDeal");
 };
 
-const acceptBigDeal = function (event) {
+const acceptBigDeal = function(event) {
   fetch("/acceptBigDeal")
     .then(data => data.json())
     .then(({ isSuccessful }) => {
@@ -40,7 +40,7 @@ const acceptBigDeal = function (event) {
     });
 };
 
-const declineBigDeal = function () {
+const declineBigDeal = function() {
   let parent = event.target.parentElement;
   parent.style.display = "none";
   fetch("/declineBigDeal");
@@ -55,7 +55,7 @@ const createDeclineButton = actions =>
 const createCardSellButton = action =>
   createButton("Sell Card", "button_div", "sell-card", "button", action);
 
-const createShareSellButton = function (shareCost) {
+const createShareSellButton = function(shareCost) {
   return createButton(
     "Sell",
     "button_div",
@@ -75,27 +75,27 @@ const createShareBuyButton = shareCost => {
   );
 };
 
-const nothing = () => { };
+const nothing = () => {};
 
 const passDeal = () => {
   fetch("/passdeal")
     .then(res => res.json())
     .then(({ isSuccessful }) => {
-      if (isSuccessful) closeOverlay("buttons-container")
+      if (isSuccessful) closeOverlay("buttons-container");
     });
 };
 
-const showNotEnoughBalance = function () {
+const showNotEnoughBalance = function() {
   const shareMsg = getElementById("share-notification");
   shareMsg.innerText = "You don't have enough balance.";
 };
 
-const showInvalidShareCount = function () {
+const showInvalidShareCount = function() {
   const shareMsg = getElementById("share-notification");
   shareMsg.innerText = "You don't have enough shares.";
 };
 
-const createCardButtons = function (actions) {
+const createCardButtons = function(actions) {
   let buttons = getElementById("card-button-container");
   if (buttons == undefined) buttons = createElement("div");
   buttons.classList.add("buttons-div");
@@ -108,7 +108,7 @@ const createCardButtons = function (actions) {
   return buttons;
 };
 
-const createRealEstateDealCard = function (actions, card, drawnBy) {
+const createRealEstateDealCard = function(actions, card, drawnBy) {
   const { title, message, cost, mortgage, downPayment, cashflow } = card;
   const cardDisplayDiv = getElementById("cardDisplay");
   const cardDiv = getCardDiv("smallDeal");
@@ -126,10 +126,11 @@ const createRealEstateDealCard = function (actions, card, drawnBy) {
   appendChildren(bottomDiv1, [costDiv, cashflowDiv]);
   appendChildren(bottomDiv2, [mortgageDiv, downPaymentDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv1, bottomDiv2]);
-  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName)
+    cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
-const createGoldSmallDeal = function (actions, card, drawnBy) {
+const createGoldSmallDeal = function(actions, card, drawnBy) {
   const { title, message, numberOfCoins, cost } = card;
   const { playerName } = parseCookie();
   const cardDisplayDiv = getElementById("cardDisplay");
@@ -142,10 +143,11 @@ const createGoldSmallDeal = function (actions, card, drawnBy) {
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [numberDiv, costDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
-  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName)
+    cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
-const createCard = function (card) {
+const createCard = function(card) {
   const { title, message, symbol, historicTradingRange, currentPrice } = card;
   const cardDiv = getCardDiv("smallDeal");
   const titleDiv = createHeadingDiv(4, title, "card-title");
@@ -160,7 +162,7 @@ const createCard = function (card) {
   return cardDiv;
 };
 
-const buyShares = function () {
+const buyShares = function() {
   const numberOfShares = +getElementById("share-count").value;
   fetch("/buyshares", {
     method: "POST",
@@ -176,7 +178,7 @@ const buyShares = function () {
     });
 };
 
-const sellShares = function () {
+const sellShares = function() {
   const numberOfShares = getElementById("share-count").value;
   fetch("/sellshares", {
     method: "POST",
@@ -192,7 +194,7 @@ const sellShares = function () {
     });
 };
 
-const shareForm = function (func, id, value, shareCost) {
+const shareForm = function(func, id, value, shareCost) {
   showOverlay("share-background");
   const form = getElementById("share-card");
   form.style.display = "flex";
@@ -219,13 +221,13 @@ const shareForm = function (func, id, value, shareCost) {
   appendChildren(form, [closeButton, input, priceDiv, submit, msgDiv]);
 };
 
-const updatePrice = function (shareCost) {
+const updatePrice = function(shareCost) {
   const priceVal = getElementById("shares-price");
   const priceInput = getElementById("share-count");
   priceVal.innerText = +priceInput.value * +shareCost;
 };
 
-const showOptions = function (isAbleToSell, shareCost) {
+const showOptions = function(isAbleToSell, shareCost) {
   const buttonDiv = getElementById("buttons-container");
   const buy = createShareBuyButton(shareCost);
   appendChildren(buttonDiv, [buy]);
@@ -235,7 +237,7 @@ const showOptions = function (isAbleToSell, shareCost) {
   }
 };
 
-const showBuyAndSellOptions = function (card) {
+const showBuyAndSellOptions = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   createCard(card);
   const buttons = getElementById("buttons-container");
@@ -247,7 +249,7 @@ const showBuyAndSellOptions = function (card) {
   appendChildren(buttons, [buy, sell, decline]);
 };
 
-const showBuyOption = function (card) {
+const showBuyOption = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   createCard(card);
   const buttons = getElementById("buttons-container");
@@ -258,7 +260,7 @@ const showBuyOption = function (card) {
   appendChildren(buttons, [buy, decline]);
 };
 
-const showSellOption = function (card) {
+const showSellOption = function(card) {
   const cardDisplayDiv = getElementById("cardDisplay");
   createCard(card);
   const buttons = getElementById("buttons-container");
@@ -269,7 +271,7 @@ const showSellOption = function (card) {
   cardDisplayDiv.appendChild(buttons);
 };
 
-const handleSharesSmallDeal = function (card, drawnBy, isMyTurn) {
+const handleSharesSmallDeal = function(card, drawnBy, isMyTurn) {
   fetch("/issharepresent")
     .then(data => data.json())
     .then(({ hasShares }) => {
@@ -281,7 +283,7 @@ const handleSharesSmallDeal = function (card, drawnBy, isMyTurn) {
     });
 };
 
-const createMLMCard = function (actions, card, drawnBy) {
+const createMLMCard = function(actions, card, drawnBy) {
   const { title, message, cost } = card;
   const { playerName } = parseCookie();
   const cardDisplayDiv = getElementById("cardDisplay");
@@ -293,10 +295,11 @@ const createMLMCard = function (actions, card, drawnBy) {
   bottomDiv.classList.add("card-bottom");
   appendChildren(bottomDiv, [costDiv]);
   appendChildren(cardDiv, [titleDiv, messageDiv, bottomDiv]);
-  if (drawnBy == playerName) cardDisplayDiv.appendChild(createCardButtons(actions));
+  if (drawnBy == playerName)
+    cardDisplayDiv.appendChild(createCardButtons(actions));
 };
 
-const getSmallDealHandler = function (card, isMyTurn) {
+const getSmallDealHandler = function(card, isMyTurn) {
   const smallDealactions = [acceptSmallDeal, declineSmallDeal, createAuction];
   const dealCardTypes = {
     shares: handleSharesSmallDeal,
@@ -306,6 +309,11 @@ const getSmallDealHandler = function (card, isMyTurn) {
   };
   return (
     dealCardTypes[card.data.relatedTo] &&
-    dealCardTypes[card.data.relatedTo].bind(null, card.data, card.drawnBy, isMyTurn)
+    dealCardTypes[card.data.relatedTo].bind(
+      null,
+      card.data,
+      card.drawnBy,
+      isMyTurn
+    )
   );
 };
