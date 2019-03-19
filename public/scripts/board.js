@@ -399,7 +399,7 @@ const handleFastTrackDeal = function(cardData, isMyTurn) {
   const { title, cashflow, downPayment } = card;
   const cardDivContainer = getFastTrackCardDiv("fasttrack-card");
   const titleDiv = createHeadingDiv(4, title, "card-title");
-  const cashflowDiv = createTextDiv(`Cashflow ${cashflow}`);
+  const cashflowDiv = createTextDiv(`Cashflow : ${cashflow}`);
   const downPaymentDiv = createTextDiv(`Down Payment : ${downPayment}`);
   const bottomDiv = createElement("div");
   bottomDiv.classList.add("card-bottom");
