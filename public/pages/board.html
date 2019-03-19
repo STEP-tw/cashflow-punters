@@ -208,7 +208,7 @@
             </div>
             <div class="right_part">
               <div class="game-options">
-                <button onclick="openOverlay('leave-game')">Leave Game</button>
+                <button onclick="openLeaveGame()">Leave Game</button>
                 <button onclick="saveGame();">Save Game</button>
                 <button onclick="flipBoard(180);">FastTrack</button>
               </div>
@@ -790,6 +790,13 @@
 						</div>
 
             <div class="fs-middle-part">
+                <div id="ft-leave-game" class="popup-background">
+                    <div class="top-popup">
+                      Do you really want to leave game ?
+                      <button onclick="closeOverlay('leave-game')">Cancel</button>
+                      <button onclick="leaveGame()">Yes</button>
+                    </div>
+                  </div>
 								<div id="ft-num_of_dice" class="overlay_box">
 										<p>How many dice you want to use?</p>
 										<button
@@ -826,7 +833,7 @@
 						
 						<div class="fs-right-part">
 							<div class="ft-game-options">
-								<button onclick="openOverlay('leave-game')">Leave Game</button>
+								<button onclick="openLeaveGame()">Leave Game</button>
 								<button onclick="saveGame();">Save Game</button>
 								<button onclick="flipBoard(0);">Rat Race</button>
 							</div>
