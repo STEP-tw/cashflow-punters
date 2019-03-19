@@ -12,8 +12,15 @@ const {
   provideGameLobby
 } = require("./hostAndJoinHandlers");
 
+const readSavedGames = ()=>{
+  if(!fs.existsSync('./data/savedGames.json')){
+    fs.writeFileSync('./data/savedGames.json', JSON.stringify({}));
+  }
+  return fs.readFileSync("./data/savedGames.json", "utf-8");
+}
+
 const loadSavedGames = function(){
-  const games = fs.readFileSync("./data/savedGames.json", "utf-8");
+  const games = readSavedGames();
   app.savedGames = JSON.parse(games);
 }
 
