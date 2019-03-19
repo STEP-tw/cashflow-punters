@@ -498,11 +498,17 @@ const showNotification = function(notification) {
   const timeDiv = createTextDiv(time);
   timeDiv.classList.add("time-notification");
   const notificationsDiv = getElementById("notification-div");
-  const ftnotificationsDiv = getElementById("ft-notification-div");
+  updateFtNotification(notificationDiv, timeDiv);
   notificationsDiv.innerHTML = "";
   notificationsDiv.appendChild(notificationDiv);
   notificationsDiv.appendChild(timeDiv);
-  ftnotificationsDiv.innerHTML = notificationDiv.innerHTML;
+};
+
+const updateFtNotification = function(notificationDiv, timeDiv) {
+  const ftnotificationsDiv = getElementById("ft-notification-div");
+  ftnotificationsDiv.innerHTML = "";
+  ftnotificationsDiv.appendChild(notificationDiv.cloneNode(true));
+  ftnotificationsDiv.appendChild(timeDiv.cloneNode(true));
 };
 
 const updateGamePiece = function(player) {
