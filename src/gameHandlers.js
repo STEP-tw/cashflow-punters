@@ -342,7 +342,7 @@ const saveGame = function (req, res) {
   const gameData = JSON.stringify(game);
   savedGames[gameId] = JSON.parse(gameData);
   fs.writeFile("./data/savedGames.json", JSON.stringify(savedGames), () => { });
-  res.json({ isSuccessful: true });
+  res.json({ isSuccessful: true, gameId });
 };
 
 const renderRequesterData = function (req, res) {

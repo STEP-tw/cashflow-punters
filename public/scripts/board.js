@@ -551,16 +551,18 @@ const flipBoard = function(deg) {
 
 const saveGame = function() {
   fetch("/savegame")
-    .then(res => res.json())
-    .then(({ isSuccessful }) => {
-      let message = "You have saved the current state of game.";
-      if (!isSuccessful) {
-        message = "Your game is in unstable stage, so you can't save it.";
-      }
-      const notification = getElementById("save-game-notification");
-      notification.innerText = message;
-      openOverlay("save-game");
-    });
+  .then(res => res.json())
+  .then(({isSuccessful, gameId})=>{
+    let message = "Your game is in unstable stage, so you can't save it."
+    if(isSuccessful) {
+      const gameIdDiv = getElementById("saved-game-id");
+      gameIdDiv.innerText = `Game Id: ${gameId}`;
+      message = "You have saved the current state of game."
+    }
+    const notification = getElementById('save-game-notification-msg');
+    notification.innerText = message;
+    openOverlay('save-game');
+  });
 };
 
 const initialize = function() {
