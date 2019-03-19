@@ -274,6 +274,10 @@ class Player extends FinancialStatement {
     );
   }
 
+  hasWon() {
+    return this.cashflowDayIncome >= this.cashflowGoal;
+  }
+
   issuePenalty(card) {
     const amount = this.ledgerBalance / 2;
     this.ledgerBalance -= amount;

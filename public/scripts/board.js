@@ -345,9 +345,16 @@ const polling = function(game) {
 };
 
 const acceptFasttrackDeal = function() {
-  fetch("/acceptFtDeal").then(() => {
-    hideOverlay("card-button-container");
-  });
+  fetch("/acceptFtDeal")
+    .then(res => res.json())
+    .then(({ hasWon, playerName }) => {
+      hideOverlay("card-button-container");
+      if (hasWon) showWin(playerName);
+    });
+};
+
+const showWin = function(playerName) {
+  alert(`${playerName} has won the game`);
 };
 
 const declineFasttrackDeal = function() {
