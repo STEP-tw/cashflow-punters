@@ -569,19 +569,19 @@ const flipBoard = function (deg) {
   game.style.transform = "rotateY(" + deg + "deg)";
 };
 
-const saveGame = function () {
+const saveGame = function (gameType) {
   fetch("/savegame")
     .then(res => res.json())
     .then(({ isSuccessful, gameId }) => {
       let message = "Your game is in unstable stage, so you can't save it.";
       if (isSuccessful) {
-        const gameIdDiv = getElementById("saved-game-id");
+        const gameIdDiv = getElementById(gameType + "saved-game-id");
         gameIdDiv.innerText = `Game Id: ${gameId}`;
         message = "You have saved the current state of game.";
       }
-      const notification = getElementById("save-game-notification-msg");
+      const notification = getElementById(gameType + "save-game-notification-msg");
       notification.innerText = message;
-      openOverlay("save-game");
+      openOverlay(gameType+"save-game");
     });
 };
 

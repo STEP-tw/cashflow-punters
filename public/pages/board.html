@@ -484,7 +484,7 @@
             <div class="right_part">
               <div class="game-options">
                 <button onclick="openLeaveGame()">Leave Game</button>
-                <button onclick="saveGame();">Save Game</button>
+                <button onclick="saveGame('rat-race-');">Save Game</button>
                 <button onclick="flipBoard(180);">FastTrack</button>
               </div>
               <div class="all-player-details" id="players-information"></div>
@@ -558,12 +558,12 @@
             <button onclick="closeOverlay('low-balance')">OK</button>
           </div>
         </div>
-        <div id="save-game" class="popup-background">
+        <div id="rat-race-save-game" class="popup-background">
           <div class="top-popup">
-            <div id="save-game-notification"><span id="saved-game-id"></span>
-              <div id="save-game-notification-msg"></div>
+            <div id="rat-race-save-game-notification"><span id="rat-race-saved-game-id"></span>
+              <div id="rat-race-save-game-notification-msg"></div>
             </div>
-            <button onclick="closeOverlay('save-game')">OK</button>
+            <button onclick="closeOverlay('rat-race-save-game')">OK</button>
           </div>
         </div>
         <div id="leave-game" class="popup-background">
@@ -797,6 +797,14 @@
 						</div>
 
             <div class="fs-middle-part">
+                <div id="ft-save-game" class="popup-background">
+                    <div class="top-popup">
+                      <div id="ft-save-game-notification"><span id="ft-saved-game-id"></span>
+                        <div id="ft-save-game-notification-msg"></div>
+                      </div>
+                      <button onclick="closeOverlay('ft-save-game')">OK</button>
+                    </div>
+                  </div>
                 <div id="ft-leave-game" class="popup-background">
                     <div class="ft-popup">
 											<p>
@@ -845,7 +853,7 @@
 						<div class="fs-right-part">
 							<div class="ft-game-options">
 								<button onclick="openLeaveGame()">Leave Game</button>
-								<button onclick="saveGame();">Save Game</button>
+								<button onclick="saveGame('ft-');">Save Game</button>
 								<button onclick="flipBoard(0);">Rat Race</button>
 							</div>
 							<div class="ft-all-player-details" id="players-information"></div>
