@@ -50,6 +50,12 @@ const updateStatementBoard = function(player) {
   return player;
 };
 
+const createInvestmentCell = function(value) {
+  const cell = createElement("td");
+  cell.innerText = value;
+  return cell;
+};
+
 const createFinancialStatement = function() {
   closeOverlay("professions");
   const top = createElement("div");
