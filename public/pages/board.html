@@ -18,14 +18,10 @@
     <link rel="stylesheet" href="/board.css" />
     <link rel="stylesheet" href="/financialStatement.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-<<<<<<< HEAD
     <link
       rel="stylesheet"
       href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"
     />
-=======
-		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
->>>>>>> Changed the css
   </head>
 
   <body id="body">
@@ -780,7 +776,7 @@
                 class="fs-horizontal-space fs-space-30 fs-corner-space fs-board-right-corner fs-deal"
                 id="ft-30"
               >
-                Cashflow day
+                Cashflow Day
               </div>
             </div>
 
@@ -833,7 +829,7 @@
               </div>
             </div>
 
-            <div class="fs-board-part fs-vertical-part bottom-align">
+            <div class="fs-board-part fs-vertical-part fs-bottom-align">
               <div
                 class="fs-horizontal-space fs-space-10 fs-board-bottom-corner fs-corner-space fs-deal"
                 id="ft-10"
@@ -882,52 +878,56 @@
             </div>
           </div>
           <div class="fs-game-center">
-            <button onclick="flipBoard(0);">Rat Race</button>
-            <div id="ft-notification-div" class="ft-notification-div"></div>
-            <div id="ft-num_of_dice" class="overlay_box">
-              <p>
-                How many dice you want to use?
-              </p>
-              <button
-                id="ft-one_dice_button"
-                style="height: unset"
-                onclick="hideOverlay('ft-num_of_dice');rollDice(1);"
-              >
-                One
-              </button>
+						<div class="fs-left-part">
+							<div id="ft-notification-div" class="ft-notification-div"></div>
+						</div>
 
-              <button
-                id="ft-two_dice_button"
-                style="height: unset"
-                onclick="
-      showOverlay('ft-dice2');
-      hideOverlay('ft-num_of_dice')
-      rollDice(2)"
-              >
-                Two
-              </button>
-            </div>
-            <div id="ft-dice-block" class="dice">
-              <img
-                id="ft-dice1"
-                class="dice-image"
-                src="/Dice-6.png"
-                alt="dice"
-                onclick="rollDie()"
-              />
-              <img
-                id="ft-dice2"
-                class="dice-image"
-                src="/Dice-6.png"
-                alt="dice"
-                onclick="rollDie()"
-              />
-            </div>
-            <div class="middle_part">
+            <div class="fs-middle-part">
+								<div id="ft-num_of_dice" class="overlay_box">
+										<p>How many dice you want to use?</p>
+										<button
+											id="ft-one_dice_button"
+											style="height: unset"
+											onclick="hideOverlay('ft-num_of_dice');rollDice(1);">
+											One
+										</button>
+										<button
+											id="ft-two_dice_button"
+											style="height: unset"
+											onclick="showOverlay('ft-dice2');
+															 hideOverlay('ft-num_of_dice')
+															 rollDice(2)">
+											Two
+										</button>
+									</div>
+									<div id="ft-dice-block" class="ft-dice">
+										<img
+											id="ft-dice1"
+											class="dice-image"
+											src="/Dice-6.png"
+											alt="dice"
+											onclick="rollDie()"/>
+										<img
+											id="ft-dice2"
+											class="dice-image"
+											src="/Dice-6.png"
+											alt="dice"
+											onclick="rollDie()"/>
+									</div>
               <div id="card-container" class="ft-deal-card"></div>
-            </div>
-          </div>
-          <div id="ftactivityLog" class="ft-activity-log"></div>
+						</div>
+						
+						<div class="fs-right-part">
+							<div class="ft-game-options">
+								<button onclick="openOverlay('leave-game')">Leave Game</button>
+								<button onclick="saveGame();">Save Game</button>
+								<button onclick="flipBoard(0);">Rat Race</button>
+							</div>
+							<div class="ft-all-player-details" id="players-information"></div>
+							<div id="ftactivityLog" class="ft-activity-log"></div>
+							<div></div>
+						</div>
+					</div>
         </main>
       </div>
     </div>
