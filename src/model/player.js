@@ -102,13 +102,18 @@ class Player extends FinancialStatement {
   }
 
   rollDiceAndMove(numberOfDice) {
+    this.rolledDice = true;
+    this.reduceCharityTurns();
     this.oldSpaceNo = this.currentSpace;
     const diceValues = this.rollDie(numberOfDice);
     let spaces = 24;
     if (this.isFasttrackPlayer) spaces = 40;
+    if (this.currentSpace == null) {
+      const fasttrackIntialSpaces = [1, 7, 14, 21, 27, 34];
+      this.currentSpace = fasttrackIntialSpaces[this.dice.total() - 1];
+      return diceValues;
+    }
     this.move(this.dice.total(), spaces);
-    this.rolledDice = true;
-    this.reduceCharityTurns();
     return diceValues;
   }
 

@@ -551,9 +551,11 @@ class Game {
     return shareHolders.length == 1 && player.hasShares(corporationShare);
   }
 
-  isNoOneElseHasShares(){
+  isNoOneElseHasShares() {
     const symbol = this.activeCard.data.symbol;
-    return !this.getNoOfShareHolders() || this.doesCurrentPlayerHaveOnly(symbol);
+    return (
+      !this.getNoOfShareHolders() || this.doesCurrentPlayerHaveOnly(symbol)
+    );
   }
 
   buyShares(numberOfShares) {
@@ -691,6 +693,7 @@ class Game {
   addToFasttrack(playerName) {
     const player = this.getPlayerByName(playerName);
     player.notifyEscape = false;
+    player.currentSpace = null;
     player.enterIntoFasttrack();
     this.fasttrackPlayers.push(player);
   }

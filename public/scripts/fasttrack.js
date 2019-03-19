@@ -1,4 +1,5 @@
 const updateFasttrackGamePiece = function(player) {
+  if (player.currentSpace == null) return;
   const gamePiece = document.getElementById("gamePiece" + player.turn);
   openOverlay("gamePiece" + player.turn);
   const space = gamePiece.parentNode;
@@ -6,7 +7,6 @@ const updateFasttrackGamePiece = function(player) {
   space.removeChild(gamePiece);
   newSpace.appendChild(gamePiece);
 };
-
 
 const displayFasttrackDiceValue = function(diceValue, count) {
   const diceDiv = getElementById("ft-dice" + count);
