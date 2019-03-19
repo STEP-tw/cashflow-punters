@@ -8,6 +8,7 @@ const playerColours = {
 };
 
 const displayFinancialStament = function(player) {
+  hideOverlay("cash-ledger-overlay");
   setFinancialStatement(player);
   showOverlay("fs_overlay");
 };
@@ -23,6 +24,7 @@ const createFinancialStatmentOption = function(player) {
 };
 
 const displayCashLedger = function(player) {
+  hideOverlay("fs_overlay");
   setCashLedger(player);
   showOverlay("cash-ledger-overlay");
 };

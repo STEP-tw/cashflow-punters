@@ -480,10 +480,10 @@ basic_fs_heading {
   margin: 0% 2%;
   padding: 2% 1%;
   border-radius: 1.7vh;
-	box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
-	height: 35px;
-	width: 90px;
-	font-size: 15px;
+  box-shadow: 0px 0px 40px -8px rgba(0, 0, 0, 0.88);
+  height: 35px;
+  width: 90px;
+  font-size: 15px;
 }
 
 .all-player-details {
@@ -511,6 +511,7 @@ basic_fs_heading {
 }
 
 .other-player-Btn {
+  cursor: pointer;
   width: 30px;
   height: 30px;
 }
@@ -926,18 +927,18 @@ thead {
   z-index: 10;
 
   display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-around;
 
   position: absolute;
   top: 40%;
   left: 37%;
 
   width: 25%;
-	height: 36%;
-	
-	font-size: larger;
-	border-radius: 20px;
+  height: 36%;
+
+  font-size: larger;
+  border-radius: 20px;
   padding: 4% 4%;
   background-color: white;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.75);
@@ -975,8 +976,8 @@ thead {
 
 .buttons-div {
   display: flex;
-	justify-content: space-between;
-	justify-content: space-between;
+  justify-content: space-between;
+  justify-content: space-between;
 }
 
 .buttons-div > div {
@@ -1086,12 +1087,12 @@ thead {
 
 .share-popup {
   height: 85%;
-	width: 90%;
-	
+  width: 90%;
+
   flex-direction: column;
   justify-content: center;
-	align-items: center;
-	
+  align-items: center;
+
   z-index: 3;
   position: relative;
   background-color: whitesmoke;
@@ -1114,8 +1115,8 @@ thead {
   text-align: center;
 
   color: grey;
-	background: transparent;
-	outline: none;
+  background: transparent;
+  outline: none;
 }
 
 .market-card-div {
@@ -1186,14 +1187,14 @@ thead {
 
 .ft-card {
   visibility: visible;
-    position: absolute;
-    height: 56%;
-    border: 1px solid black;
-    width: 41%;
-    top: 31%;
-    left: 28%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+  position: absolute;
+  height: 56%;
+  border: 1px solid black;
+  width: 41%;
+  top: 31%;
+  left: 28%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
