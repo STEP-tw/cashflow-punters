@@ -138,7 +138,8 @@ const acceptSmallDeal = function (req, res) {
   const { activeCard } = req.game;
   const { playerName } = req.cookies;
   const player = req.game.getPlayerByName(playerName);
-  if (playerName != activeCard.drawnBy) return res.json({ isSuccessful: true });
+  if (playerName != activeCard.drawnBy && playerName != activeCard.soldTo)
+    return res.json({ isSuccessful: true });
   const dealHandlers = {
     realEstate: acceptRealEstateDeal,
     goldCoins: acceptGoldCoinsDeal,
@@ -160,7 +161,8 @@ const rejectSmallDeal = function (req, res) {
 const acceptBigDeal = function (req, res) {
   const { playerName } = req.cookies;
   const { activeCard } = req.game;
-  if (playerName != activeCard.drawnBy) return res.send({ isSuccessful: true });
+  if (playerName != activeCard.drawnBy && playerName != activeCard.soldTo)
+    return res.json({ isSuccessful: true });
   const player = req.game.getPlayerByName(playerName);
   const isSuccessful = acceptRealEstateDeal(player, req.game);
   if (!isSuccessful) return res.send({ isSuccessful });
