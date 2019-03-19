@@ -453,7 +453,7 @@ const showCard = function(card, isMyTurn, player) {
       null,
       bigDealactions,
       card.data,
-      isMyTurn
+      card.drawnBy
     ),
     fasttrackDeal: handleFastTrackDeal.bind(null, card, isMyTurn),
     penalty: handlePenalty.bind(null, card.data, isMyTurn),

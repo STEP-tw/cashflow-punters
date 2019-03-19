@@ -27,10 +27,10 @@ const {
   saveGame
 } = require("../src/gameHandlers");
 
-describe("getgame", function() {
+describe("getgame", function () {
   const res = {};
   const req = {};
-  beforeEach(function() {
+  beforeEach(function () {
     req.game = {
       currentPlayer: {
         name: "tilak",
@@ -45,7 +45,7 @@ describe("getgame", function() {
     req.cookies = {
       playerName: "tilak"
     };
-    res.send = function(response) {
+    res.send = function (response) {
       res.content = response;
     };
     const player = { name: "player" };
@@ -53,20 +53,20 @@ describe("getgame", function() {
     req.game.currentPlayer.isDownSized.onFirstCall().returns(false);
     req.game.getPlayerByName.onFirstCall().returns(player);
   });
-  it("should return game with isMyTurn true when currentPlayer is request player", function() {
+  it("should return game with isMyTurn true when currentPlayer is request player", function () {
     getGame(req, res);
 
     expect(req.game.isMyTurn).to.be.true;
   });
-  it("should return game with isMyTurn false when currentPlayer is request player", function() {
+  it("should return game with isMyTurn false when currentPlayer is request player", function () {
     req.cookies["playerName"] = "swapnil";
     getGame(req, res);
     expect(req.game.isMyTurn).to.be.false;
   });
 });
 
-describe("startGame", function() {
-  it("should redirect to board.html", function() {
+describe("startGame", function () {
+  it("should redirect to board.html", function () {
     let req = {
       game: {
         hasStarted: false,
@@ -79,7 +79,7 @@ describe("startGame", function() {
       }
     };
     let res = {
-      end: () => {}
+      end: () => { }
     };
     startGame(req, res);
 
@@ -89,8 +89,8 @@ describe("startGame", function() {
   });
 });
 
-describe("getPlayersFinancialStatement", function() {
-  it("should give financial statement of current player", function() {
+describe("getPlayersFinancialStatement", function () {
+  it("should give financial statement of current player", function () {
     let req = {
       cookies: { playerName: "anu" },
       game: { players: [{ name: "anu" }], getPlayerByName: sinon.stub() }
@@ -108,28 +108,28 @@ describe("getPlayersFinancialStatement", function() {
   });
 });
 
-describe("acceptCharity", function() {
+describe("acceptCharity", function () {
   let req, res;
   beforeEach(() => {
     req = {
       game: {
         currentPlayer: { charityTurns: 0, getLedgerBalance: sinon.spy() },
         nextPlayer: sinon.spy(),
-        acceptCharity: function() {
+        acceptCharity: function () {
           this.currentPlayer.charityTurns = 3;
         }
       }
     };
     res = { send: sinon.spy() };
   });
-  it("should add charity turns to currentPlayer", function() {
+  it("should add charity turns to currentPlayer", function () {
     acceptCharity(req, res);
     expect(req.game.currentPlayer.charityTurns).equal(3);
   });
 });
 
-describe("declineCharity", function() {
-  it("should add charity turns to currentPlayer", function() {});
+describe("declineCharity", function () {
+  it("should add charity turns to currentPlayer", function () { });
   const req = {
     game: {
       declineCharity: sinon.spy(),
@@ -141,7 +141,7 @@ describe("declineCharity", function() {
   expect(req.game.declineCharity.calledOnce).to.be.true;
 });
 
-describe("selectSmallDeal", function() {
+describe("selectSmallDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -151,12 +151,12 @@ describe("selectSmallDeal", function() {
     };
     res.end = sinon.spy();
   });
-  it("should call handleSmallDeal when current player wants to take small deal", function() {
+  it("should call handleSmallDeal when current player wants to take small deal", function () {
     selectSmallDeal(req, res);
     expect(req.game.handleSmallDeal.calledOnce).to.be.true;
   });
 });
-describe("selectBigDeal", function() {
+describe("selectBigDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -166,41 +166,41 @@ describe("selectBigDeal", function() {
     };
     res.end = sinon.spy();
   });
-  it("should call handleBigDeal when player selected big deal", function() {
+  it("should call handleBigDeal when player selected big deal", function () {
     selectBigDeal(req, res);
     expect(req.game.handleBigDeal.calledOnce).to.be.true;
   });
 });
 
-describe("isAbleToDoCharity", function() {
+describe("isAbleToDoCharity", function () {
   const req = {};
   const res = {};
   beforeEach(() => {
     req.game = {
       currentPlayer: {
         totalIncome: 5000,
-        setNotification: function(msg) {
+        setNotification: function (msg) {
           this.notification = msg;
         },
-        isAbleToDoCharity: function() {
+        isAbleToDoCharity: function () {
           return this.ledgerBalance >= this.totalIncome * 0.1;
         }
       }
     };
     res.content = "";
-    res.send = function(data) {
+    res.send = function (data) {
       this.content = data;
     };
   });
 
-  it("should response with object with keys isAble as true and msg as charitymessage", function() {
+  it("should response with object with keys isAble as true and msg as charitymessage", function () {
     req.game.currentPlayer.ledgerBalance = 5000;
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
       isAble: true
     });
   });
-  it("should response with object with keys isAble as false and msg as unabletodocharity", function() {
+  it("should response with object with keys isAble as false and msg as unabletodocharity", function () {
     req.game.currentPlayer.ledgerBalance = 300;
     isAbleToDoCharity(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
@@ -209,8 +209,8 @@ describe("isAbleToDoCharity", function() {
   });
 });
 
-describe("grantLoan", function() {
-  it("should update the cash ledger, financial statement and respond with player", function() {
+describe("grantLoan", function () {
+  it("should update the cash ledger, financial statement and respond with player", function () {
     const req = {};
     req.cookies = { playerName: "player" };
     req.body = { amount: 5000 };
@@ -230,7 +230,7 @@ describe("grantLoan", function() {
   });
 });
 
-describe("provideLiabilities", function() {
+describe("provideLiabilities", function () {
   const req = {};
   const res = {};
   req.cookies = { playerName: "player1" };
@@ -240,16 +240,16 @@ describe("provideLiabilities", function() {
       { name: "player2", turn: 2, profession: {} },
       { name: "player3", turn: 3, profession: {} }
     ],
-    getPlayerByName: function(playerName) {
+    getPlayerByName: function (playerName) {
       return this.players.filter(player => player.name == playerName)[0];
     }
   };
   res.content = "";
-  res.send = function(data) {
+  res.send = function (data) {
     this.content = data;
   };
 
-  it("should response with a current player object ", function() {
+  it("should response with a current player object ", function () {
     provideLiabilities(req, res);
     expect(JSON.parse(res.content)).to.be.deep.equal({
       name: "player1",
@@ -259,8 +259,8 @@ describe("provideLiabilities", function() {
   });
 });
 
-describe("payDebt", function() {
-  it("should deduct the amount from ledgerBalance and return the player", function() {
+describe("payDebt", function () {
+  it("should deduct the amount from ledgerBalance and return the player", function () {
     const req = {};
     const res = {};
     req.cookies = { playerName: "player1" };
@@ -276,7 +276,7 @@ describe("payDebt", function() {
       payDebt: sinon.spy()
     };
     res.content = "";
-    res.send = function(data) {
+    res.send = function (data) {
       this.content = data;
     };
     const player = {
@@ -298,7 +298,7 @@ describe("payDebt", function() {
   });
 });
 
-describe("acceptSmallDeal", function() {
+describe("acceptSmallDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -320,13 +320,13 @@ describe("acceptSmallDeal", function() {
     res.end = sinon.spy();
     res.json = sinon.spy();
   });
-  it("should call nextPlayer if deal is not done ", function() {
+  it("should call nextPlayer if deal is not done ", function () {
     acceptSmallDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
 });
 
-describe("rejectSmallDeal", function() {
+describe("rejectSmallDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -340,11 +340,11 @@ describe("rejectSmallDeal", function() {
     res.end = sinon.spy();
   });
 
-  it("should call declineSmallDeal if deal is not done ", function() {
+  it("should call declineSmallDeal if deal is not done ", function () {
     rejectSmallDeal(req, res);
     expect(req.game.declineSmallDeal.calledOnce).to.be.true;
   });
-  it("should call declineSmallDeal if deal is shares and all players accept or reject", function() {
+  it("should call declineSmallDeal if deal is shares and all players accept or reject", function () {
     req.game.players.length = 6;
     req.game.activeCard.data.relatedTo = "shares";
     req.game.activeCard.dealDoneCount = 5;
@@ -353,7 +353,7 @@ describe("rejectSmallDeal", function() {
   });
 });
 
-describe("acceptBigDeal", function() {
+describe("acceptBigDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -368,7 +368,7 @@ describe("acceptBigDeal", function() {
     res.end = sinon.spy();
     res.send = sinon.spy();
   });
-  it("should return nothing if deal is already done ", function() {
+  it("should return nothing if deal is already done ", function () {
     req.game.activeCard.dealDone = true;
     const output = acceptBigDeal(req, res);
     expect(output).to.be.undefined;
@@ -376,7 +376,7 @@ describe("acceptBigDeal", function() {
   });
 });
 
-describe("rejectBigDeal", function() {
+describe("rejectBigDeal", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -389,13 +389,13 @@ describe("rejectBigDeal", function() {
     req.game.nextPlayer = sinon.spy();
     res.end = sinon.spy();
   });
-  it("should call nextPlayer if deal is not done ", function() {
+  it("should call nextPlayer if deal is not done ", function () {
     rejectBigDeal(req, res);
     expect(req.game.nextPlayer.calledOnce).to.be.true;
   });
 });
 
-describe("isSharePresent", function() {
+describe("isSharePresent", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -405,7 +405,7 @@ describe("isSharePresent", function() {
       }
     };
     req.game.activityLog = { addActivity: sinon.spy() };
-    req.game.hasShares = function() {
+    req.game.hasShares = function () {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
     req.cookies = { playerName: "player1" };
@@ -415,7 +415,7 @@ describe("isSharePresent", function() {
         assets: {
           shares: { MYT4U: { numberOfShares: 5 } }
         },
-        hasShares: function(symbol) {
+        hasShares: function (symbol) {
           return Object.keys(this.assets.shares).includes(symbol);
         }
       }
@@ -423,12 +423,12 @@ describe("isSharePresent", function() {
     req.game.nextPlayer = sinon.spy();
     res.json = sinon.spy();
   });
-  it("should respond with true if player has required shares", function() {
+  it("should respond with true if player has required shares", function () {
     isSharePresent(req, res);
     sinon.assert.calledOnce(res.json);
     expect(res.json.firstCall.args[0]).to.be.deep.equals({ hasShares: true });
   });
-  it("should respond with false if player doesn't have required shares", function() {
+  it("should respond with false if player doesn't have required shares", function () {
     req.game.activeCard.data.symbol = "ON2U";
     isSharePresent(req, res);
     sinon.assert.calledOnce(res.json);
@@ -436,7 +436,7 @@ describe("isSharePresent", function() {
   });
 });
 
-describe("buyShares", function() {
+describe("buyShares", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -448,7 +448,7 @@ describe("buyShares", function() {
       }
     };
     req.game.activityLog = { addActivity: sinon.spy() };
-    req.game.hasShares = function() {
+    req.game.hasShares = function () {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
     req.cookies = { playerName: "player1" };
@@ -458,7 +458,7 @@ describe("buyShares", function() {
         assets: {
           shares: { MYT4U: { numberOfShares: 5 } }
         },
-        hasShares: function(symbol) {
+        hasShares: function (symbol) {
           return Object.keys(this.assets.shares).includes(symbol);
         }
       }
@@ -467,14 +467,14 @@ describe("buyShares", function() {
     req.game.buyShares = sinon.spy();
     res.json = sinon.spy();
   });
-  it("should return statement", function() {
+  it("should return statement", function () {
     buyShares(req, res);
     expect(res.json.calledOnce).to.be.true;
     expect(req.game.buyShares.calledOnce).to.be.true;
   });
 });
 
-describe("sellShares", function() {
+describe("sellShares", function () {
   const req = {},
     res = {};
   beforeEach(() => {
@@ -486,7 +486,7 @@ describe("sellShares", function() {
       }
     };
     req.game.activityLog = { addActivity: sinon.spy() };
-    req.game.hasShares = function() {
+    req.game.hasShares = function () {
       return this.players[0].hasShares(this.activeCard.data.symbol);
     };
     req.cookies = { playerName: "player1" };
@@ -496,7 +496,7 @@ describe("sellShares", function() {
         assets: {
           shares: { MYT4U: { numberOfShares: 5 } }
         },
-        hasShares: function(symbol) {
+        hasShares: function (symbol) {
           return Object.keys(this.assets.shares).includes(symbol);
         }
       }
@@ -505,15 +505,15 @@ describe("sellShares", function() {
     req.game.sellShares = sinon.spy();
     res.json = sinon.spy();
   });
-  it("should call res.json once", function() {
+  it("should call res.json once", function () {
     sellShares(req, res);
     expect(res.json.calledOnce).to.be.true;
     expect(req.game.sellShares.calledOnce).to.be.true;
   });
 });
 
-describe("removePlayer", function() {
-  it("should return statement", function() {
+describe("removePlayer", function () {
+  it("should return statement", function () {
     const req = {
       cookies: { playerName: "anu" },
       game: { removePlayer: sinon.spy() }
@@ -524,8 +524,8 @@ describe("removePlayer", function() {
   });
 });
 
-describe("rollDiceForMLM", function() {
-  it("should return statement", function() {
+describe("rollDiceForMLM", function () {
+  it("should return statement", function () {
     const req = {
       cookies: { playerName: "anu" },
       game: { rollDiceForMLM: sinon.spy() }
@@ -536,8 +536,8 @@ describe("rollDiceForMLM", function() {
   });
 });
 
-describe("handleAuction", function() {
-  it("should return statement", function() {
+describe("handleAuction", function () {
+  it("should return statement", function () {
     const req = {
       body: { action: true },
       cookies: { playerName: "anu" },
@@ -553,8 +553,8 @@ describe("handleAuction", function() {
   });
 });
 
-describe("addToFastTrack", function() {
-  it("should return statement", function() {
+describe("addToFastTrack", function () {
+  it("should return statement", function () {
     const req = {
       cookies: { playerName: "anu" },
       game: { addToFasttrack: sinon.spy() }
@@ -565,8 +565,8 @@ describe("addToFastTrack", function() {
   });
 });
 
-describe("handleBid", function() {
-  it("should return statement", function() {
+describe("handleBid", function () {
+  it("should return statement", function () {
     const req = {
       body: { wantToBid: true },
       cookies: { playerName: "anu" },
@@ -577,7 +577,7 @@ describe("handleBid", function() {
     expect(res.json.calledOnce).to.be.true;
   });
 
-  it("should return statement", function() {
+  it("should return statement", function () {
     const req = {
       body: { wantToBid: true },
       cookies: { playerName: "anu" },

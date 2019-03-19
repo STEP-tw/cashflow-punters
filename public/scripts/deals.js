@@ -78,7 +78,6 @@ const createShareBuyButton = shareCost => {
 const nothing = () => {};
 
 const passDeal = () => {
-  console.log('hello it is in passdeal');
   fetch("/passdeal")
   .then(res => res.json())
   .then(({isSuccessful}) => {
