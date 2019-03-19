@@ -270,11 +270,10 @@ const showSellOption = function (card) {
 };
 
 const handleSharesSmallDeal = function (card, drawnBy, isMyTurn) {
-  const { playerName } = parseCookie();
   fetch("/issharepresent")
     .then(data => data.json())
     .then(({ hasShares }) => {
-      if (drawnBy != playerName) return createCard(card);
+      if (drawnBy == null) return createCard(card);
       if (hasShares && isMyTurn) return showBuyAndSellOptions(card);
       if (hasShares) return showSellOption(card);
       if (isMyTurn) return showBuyOption(card);

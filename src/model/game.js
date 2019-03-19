@@ -167,6 +167,7 @@ class Game {
     const player = this.getPlayerByName(playerName);
     const card = this.activeCard.data;
     if (!player.hasShares(card.symbol)) return false;
+    this.activeCard.numberOfShareholders--;
     if (!this.activeCard.numberOfShareholders) this.nextPlayer();
     return true;
   }
