@@ -147,7 +147,8 @@ const showFinancialStatement = function() {
   fetch("/requester")
     .then(res => res.json())
     .then(player => {
-      setFinancialStatement(player);
+			setFinancialStatement(player);
+			console.log(player,"hii");
       setFtBoardStatement(player);
       showOverlay("fs_overlay");
     });
@@ -157,7 +158,6 @@ const setFtBoardStatement = function(player) {
   const { cashflowDayIncome, name, ledgerBalance, cashflowGoal } = player;
   getElementById("bank").style.visibility = "hidden";
   const icons = getElementById("board-icons").innerHTML;
-  getElementById("ft-board-icons").innerHTML = icons;
   getElementById("ft-leger-balance").innerHTML = ledgerBalance;
   getElementById("ft-player-name").innerHTML = name;
   getElementById("ft-player-cashflow").innerHTML = cashflowDayIncome;

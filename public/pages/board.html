@@ -791,12 +791,37 @@
           </div>
           <div class="fs-game-center">
 						<div class="fs-left-part">
+							<div style="position: absolute; top: 27%; left: 7%;">CashFlow Goal:   $ <span id="ft-player-cashflow-goal"></span></div>
 							<div class="ft-player-info">
-                <div><span id="ft-player-name"></span></div>
-                <div>Cashflow Day Income:<span id="ft-player-cashflow"></span></div>
-                <div>Cashflow Goal :<span id="ft-player-cashflow-goal"></span></div>
-                <div>Ledger Balance :<span id="ft-leger-balance"></span></div>
-                <div class="open-player-details" id="ft-board-icons"></div>
+									<div style="display:flex; flex-direction: column;">
+											<div style="margin-bottom: 20%; margin-left: 8%;">
+													<span id="ft-player-name" style="font-size: 22px; font-weight: bold;">Player Name</span>
+											</div>
+											<div style="display:flex; align-content:space-between; justify-content:center; flex-direction: row; height:40%;">
+													<div class="iconButtonDiv">
+															<button id="fsBtn" onclick="showFinancialStatement()" style="height: 55%;margin-left: 0%;"></button>
+													</div>
+													<div>
+															<div class="basic_fs_heading" style="color: #57707D">
+																	Cashflow Day Income
+															</div>
+															<div class="basic-fs-value">
+																	$ <span id="ft-player-cashflow">cashflow</span>
+															</div>
+													</div>
+											</div>
+											<div style="display:flex; align-content:space-between; justify-content:center; height: 30%; margin-left: -15%;">
+													<div class="iconButtonDiv">
+															<button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
+													</div>
+													<div>
+															<div>Ledger Balance</div>
+															<div style="font-weight: lighter;">
+																	$ <span id="ft-leger-balance">0</span>
+															</div>
+													</div>
+											</div>
+									</div>
 							</div>
 							<div id="ft-notification-div" class="ft-notification-div"></div>
 						</div>
