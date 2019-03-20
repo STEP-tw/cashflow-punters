@@ -1,6 +1,6 @@
 const { getNextNum } = require("../utils/utils.js");
 const FinancialStatement = require("./financialStatement");
-const { CHARITY_MSG } = require("../constant");
+const { CHARITY_MSG, fasttrackSpaces } = require("../constant");
 const Dice = require("./dice");
 
 class Player extends FinancialStatement {

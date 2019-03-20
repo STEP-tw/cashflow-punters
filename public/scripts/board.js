@@ -102,10 +102,11 @@ const isSameCard = function(card) {
   const { title, message } = card;
   const cardTitleDiv = getElementById("card-title");
   const cardMessageDiv = getElementById("card-message");
+  const ftCardTitle = getElementById("ft-card-title");
   const cardTitle = cardTitleDiv && cardTitleDiv.innerText;
   const cardMessage = cardMessageDiv && cardMessageDiv.innerText;
   if (!cardMessage) return cardTitle == title;
-  return cardTitle == title && cardMessage == message;
+  return (cardTitle == title && cardMessage == message) || ftCardTitle == title;
 };
 
 const showPlainCard = function(title, expenseAmount, type, msg) {
@@ -402,6 +403,7 @@ const handleFastTrackDeal = function(cardData, isMyTurn) {
   const { title, cashflow, downPayment } = card;
   const cardDivContainer = getFastTrackCardDiv("fasttrack-card");
   const titleDiv = createHeadingDiv(4, title, "card-title");
+  titleDiv.id = "ft-card-title";
   const cashflowDiv = createTextDiv(`Cashflow : ${cashflow}`);
   const downPaymentDiv = createTextDiv(`Down Payment : ${downPayment}`);
   const bottomDiv = createElement("div");
@@ -417,6 +419,7 @@ const handlePenalty = function(card) {
   const { title, Message } = card;
   const cardDiv = getFastTrackCardDiv("fasttrack-card");
   const titleDiv = createHeadingDiv(4, title, "card-title");
+  titleDiv.id = "ft-card-title";
   const messageDiv = createTextDiv(Message);
   appendChildren(cardDiv, [titleDiv, messageDiv]);
 };
@@ -440,6 +443,7 @@ const handleFtCharity = function(card, isMyTurn, drawnBy) {
       const { playerName } = parseCookie();
       const cardDiv = getFastTrackCardDiv("fasttrack-card");
       const titleDiv = createHeadingDiv(4, title, "card-title");
+      titleDiv.id = "ft-card-title";
       const messageDiv = createTextDiv(Message);
       appendChildren(cardDiv, [titleDiv, messageDiv]);
       if (isAble && drawnBy == playerName) {
@@ -453,6 +457,7 @@ const handleCashFlowDay = function() {
     const cardDiv = getFastTrackCardDiv("fasttrack-card");
     const message = "Monthly cashflow is added into your cash ledger.";
     const titleDiv = createHeadingDiv(1, message, "card-title");
+    titleDiv.id = "ft-card-title";
     appendChildren(cardDiv, [titleDiv]);
   });
 };

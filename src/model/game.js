@@ -30,7 +30,7 @@ class Game {
   }
 
   setPlayersCount(playersCount) {
-    this.playersCount = playersCount
+    this.playersCount = playersCount;
   }
 
   incJoinedPlayerCount(playerName) {
@@ -39,14 +39,13 @@ class Game {
     this.joinedPlayerCount++;
   }
 
-
-  getJoinedPlayerNames(){
-    const names = []
-    this.players.forEach((player) => {
-      if(player.hasJoined){
-        names.push(player.name)
+  getJoinedPlayerNames() {
+    const names = [];
+    this.players.forEach(player => {
+      if (player.hasJoined) {
+        names.push(player.name);
       }
-    })
+    });
     return names;
   }
 
@@ -518,6 +517,16 @@ class Game {
 
   handleFastTrack(player, numberOfDice, oldSpaceNo) {
     const diceValues = player.rollDiceAndMove(numberOfDice);
+    player.setNotification(
+      `You landed on the ${
+        this.cardStore.fasttrack[player.currentSpace].title
+      } as you rolled ${diceValues[0]}`
+    );
+    this.activityLog.addActivity(
+      `${player.name} landed on the ${
+        this.cardStore.fasttrack[player.currentSpace].title
+      }`
+    );
     this.setDice(diceValues);
     this.handleCrossedCashFlowDay(oldSpaceNo);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
