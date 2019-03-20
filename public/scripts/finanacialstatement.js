@@ -156,8 +156,6 @@ const showFinancialStatement = function() {
 
 const setFtBoardStatement = function(player) {
   const { cashflowDayIncome, name, ledgerBalance, cashflowGoal } = player;
-  getElementById("bank").style.visibility = "hidden";
-  const icons = getElementById("board-icons").innerHTML;
   getElementById("ft-leger-balance").innerHTML = ledgerBalance;
   getElementById("ft-player-name").innerHTML = name;
   getElementById("ft-player-cashflow").innerHTML = cashflowDayIncome;
