@@ -90,8 +90,11 @@ const updateProgressBar = function(player, progressBar) {
 
 const showAllPlayerInfo = function(players, requester) {
   const playersInfoDiv = getElementById("players-information");
+  const playersInfoFtDiv = getElementById("ft-players-information");
   const playersList = players.filter(player => player.name != requester.name);
-  playersInfoDiv.innerHTML = null;
+	playersInfoDiv.innerHTML = null;
+	playersInfoFtDiv.innerHTML = null;
   playersInfoDiv.appendChild(createInfoTable(playersList));
+  playersInfoFtDiv.appendChild(createInfoTable(playersList));
   updateRequesterProgress(requester);
 };
