@@ -615,7 +615,7 @@ class Game {
       numberOfShares
     );
     this.activeCard.numberOfShareholders--;
-    if (!this.activeCard.numberOfShareholders) this.nextPlayer();
+    if (this.isNoOneElseHasShares()) this.nextPlayer();
   }
 
   isPlayerCapableToBuy(numberOfShares) {
