@@ -69,6 +69,7 @@ describe("hostGame", function() {
           hasMLM: false,
           hasLeftGame: false,
           entries: [],
+          hasJoined:true,
           hasMLM: false,
           didUpdateSpace: false,
           currentSpace: 0,
@@ -97,7 +98,7 @@ describe("provideGameLobby", function() {
     const req = {};
     const res = {};
     req.game = {
-      getPlayerNames: () => {
+      getJoinedPlayerNames: () => {
         return ["player1", "player2"];
       },
       host: "player1"

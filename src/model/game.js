@@ -26,10 +26,28 @@ class Game {
     this.hasLoaded = false;
     this.dice = { diceValues: [6] };
     this.stableGame = true;
+    this.playersCount = 0;
   }
 
-  incJoinedPlayerCount() {
+  setPlayersCount(playersCount) {
+    this.playersCount = playersCount
+  }
+
+  incJoinedPlayerCount(playerName) {
+    const player = this.getPlayerByName(playerName);
+    player.hasJoined = true;
     this.joinedPlayerCount++;
+  }
+
+
+  getJoinedPlayerNames(){
+    const names = []
+    this.players.forEach((player) => {
+      if(player.hasJoined){
+        names.push(player.name)
+      }
+    })
+    return names;
   }
 
   resumeGame() {
@@ -40,6 +58,9 @@ class Game {
     player.turn = this.players.length + 1;
     player.setNotification("Welcome to CashFlow");
     this.players.push(player);
+    if (this.players.length == this.playersCount && !this.hasLoaded) {
+      this.startGame();
+    }
   }
 
   getPlayerNames() {

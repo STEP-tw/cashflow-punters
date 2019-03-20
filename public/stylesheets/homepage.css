@@ -123,3 +123,10 @@ input {
 .textField:hover {
 	border-bottom: 1px solid #607D8B;
 }
+
+.players-count{
+	margin: 10px 0px;
+  width: 200px;
+  height: 35px;
+  font-size: 15px;
+}

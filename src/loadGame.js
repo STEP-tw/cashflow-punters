@@ -19,6 +19,7 @@ const restorePlayer = function(game, playerData) {
   const player = new Player(playerData.name);
   Object.assign(player, playerData);
   player.dice = new Dice();
+  player.hasJoined = false;
   game.addPlayer(player);
 };
 
@@ -51,6 +52,8 @@ const restoreMethods = function(data) {
   const board = restoreBoard();
   const host = gameData.host;
   const game = new Game(cardStore, board, host);
+  game.setHasLoaded();
+  game.joinedPlayerCount = 0;
   game.activeCard = gameData.activeCard;
   game.bankruptedPlayersCount = gameData.bankruptedPlayersCount;
   restorePlayers(game, gameData);
@@ -61,7 +64,7 @@ const restoreMethods = function(data) {
 
 const restoreGame = function(game) {
   const result = restoreMethods(game);
-  result.setHasLoaded();
+  result.playersCount = result.players.length;
   return result;
 };
 

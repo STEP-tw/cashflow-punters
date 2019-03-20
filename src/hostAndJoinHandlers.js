@@ -31,14 +31,20 @@ const initializeGame = function(host) {
   return new Game(cardsStore, board, host);
 };
 
+const resumeGameIFEveryoneJoins = (game)=>{
+  if(game.joinedPlayerCount >= game.playersCount && game.hasLoaded)
+  game.resumeGame();
+}
+
 const hostGame = function(req, res) {
-  const { playerName } = req.body;
+  const { playerName, playersCount } = req.body;
   const game = initializeGame(playerName);
   const player = new Player(playerName);
   const gameId = res.app.createGameId();
   game.addPlayer(player);
+  game.setPlayersCount(+playersCount);
   res.app.games[gameId] = game;
-  game.incJoinedPlayerCount();
+  game.incJoinedPlayerCount(playerName);
   res.cookie("gameId", gameId);
   res.cookie("playerName", playerName);
   res.redirect("/waiting.html");
@@ -46,7 +52,7 @@ const hostGame = function(req, res) {
 
 const provideGameLobby = function(req, res) {
   if (req.game == undefined) return res.json({ isGamePresent: false });
-  const players = req.game.getPlayerNames();
+  const players = req.game.getJoinedPlayerNames();
   const { gameId, playerName } = req.cookies;
   const isHost = req.game.host == playerName;
   const hasStarted = req.game.hasStarted;
@@ -66,7 +72,8 @@ const joinGame = function(req, res) {
     const player = new Player(playerName);
     game.addPlayer(player);
   }
-  game.incJoinedPlayerCount();
+  game.incJoinedPlayerCount(playerName);
+  resumeGameIFEveryoneJoins(game);
   res.cookie("gameId", gameId);
   res.cookie("playerName", playerName);
   res.json({ isAble: true, url: "/waiting.html" });

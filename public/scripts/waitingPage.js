@@ -40,16 +40,6 @@ const startNewGame = function() {
   fetch("/startGame");
 };
 
-const checkPlayersCount = function({ players, isHost }) {
-  const buttonSpace = getElementById("start_button_space");
-  buttonSpace.innerHTML = "";
-  if (players.length >= 1 && isHost) {
-    const startButton = createButton("Start Game", "button", "", "button");
-    startButton.onclick = startNewGame;
-    appendChildren(buttonSpace, [startButton]);
-  }
-};
-
 const leaveGame = function() {
   fetch("/leavegame").then(res => {
     window.location = "/";
@@ -106,6 +96,5 @@ window.onload = () => {
       .then(isGamePresent)
       .then(displayLobby)
       .then(goToGame)
-      .then(checkPlayersCount);
   }, 1000);
 };

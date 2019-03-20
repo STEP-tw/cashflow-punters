@@ -24,6 +24,7 @@ class Player extends FinancialStatement {
     this.MLMCardsCount = 0;
     this.MLMTurns = 0;
     this.hasLeftGame = false;
+    this.hasJoined;
   }
 
   setTurn(turn) {

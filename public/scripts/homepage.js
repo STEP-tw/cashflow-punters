@@ -1,17 +1,13 @@
 const displayHostTemplate = function() {
   const optionsField = getElementById("gameOptionsField");
   const hostingForm = createForm("/hostgame", "POST", "host-join-form");
-  const nameInput = createInput(
-    "playerName",
-    "Enter Name",
-    "text",
-    "none",
-    "textField"
-  );
+  const nameInput = createInput("playerName", "Enter Name", "text", "none", "textField");
+  const input = createInput("playersCount", "Enter number of players", "number", "", "textField");
   nameInput.required = true;
+  input.required = true;
   const hostButton = createButton("HOST", "button");
   appendChildren(optionsField, [hostingForm]);
-  appendChildren(hostingForm, [nameInput, hostButton]);
+  appendChildren(hostingForm, [nameInput, input, hostButton]);
 };
 
 const displayError = function(error) {
