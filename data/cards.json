@@ -627,212 +627,254 @@
     {
       "title": "BIRTHDAY PARTY FOR YOUR CHILD",
       "expenseAmount": 500,
-      "isChildExpense": true
+      "isChildExpense": true,
+      "message": "Pay 500 (if you have baby$)"
     },
     {
       "title": "HELP PAY FOR CHILD'S WEDDING",
       "expenseAmount": 2000,
-      "isChildExpense": true
+      "isChildExpense": true,
+      "message": "Pay 2000 (if you have baby$)"
     },
     {
       "title": "BUILD A HOME GYM",
       "expenseAmount": 3000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $3000"
     },
     {
       "title": "NEW TENNIS RACKET",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "FAMILY VACATION",
       "expenseAmount": 2500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $2500"
     },
     {
       "title": "CAPPUCCINO MACHINE",
       "expenseAmount": 300,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $300"
     },
     {
       "title": "PRIVATE TUTORING FOR YOUR CHILD",
       "expenseAmount": 500,
-      "isChildExpense": true
+      "isChildExpense": true,
+      "message": "Pay 500 (if you have baby$)"
     },
     {
       "title": "COSTUME JEWELRY",
       "expenseAmount": 400,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $400"
     },
     {
       "title": "FOOD PROCESSOR",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "NEW COMPUTER",
       "expenseAmount": 1800,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1800"
     },
     {
       "title": "GO TO CASINO",
       "expenseAmount": 800,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $800"
     },
     {
       "title": "BIG SCREEN TV",
       "expenseAmount": 2500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $2500"
     },
     {
       "title": "SEASON TICKETS",
       "expenseAmount": 1500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1500"
     },
     {
       "title": "DATE NIGHT: DINNER, CONCERT & DESSERT",
       "expenseAmount": 500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $500"
     },
     {
       "title": "NEW BOWLING BALL",
       "expenseAmount": 100,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $100"
     },
     {
       "title": "NEW SUNGLASSES",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "FISHING BOAT",
       "expenseAmount": 5000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $5000"
     },
     {
       "title": "GOLF CLUB MEMBERSHIP",
       "expenseAmount": 2000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $2000"
     },
     {
       "title": "NEW TAILORED SUIT",
       "expenseAmount": 1000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1000"
     },
     {
       "title": "REPAINT YOUR HOUSE",
       "expenseAmount": 600,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $600"
     },
     {
       "title": "BUY LOCAL ARTIST'S PAINTING",
       "expenseAmount": 800,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $800"
     },
     {
       "title": "NEXT-GEN GAME CONSOLE",
       "expenseAmount": 600,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $600"
     },
     {
       "title": "NEW EASY CHAIR",
       "expenseAmount": 500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $500"
     },
     {
       "title": "REPLACE CAR AIR CONDITIONER",
       "expenseAmount": 700,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $700"
     },
     {
       "title": "HIGH SCHOOL REUNION",
       "expenseAmount": 500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $500"
     },
     {
       "title": "TAKE A TRIP TO WINE COUNTRY",
       "expenseAmount": 1000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1000"
     },
     {
       "title": "CHILD NEEDS BRACES",
       "expenseAmount": 4000,
-      "isChildExpense": true
+      "isChildExpense": true,
+      "message": "Pay 4000 (if you have baby$)"
     },
     {
       "title": "NEW GYM CLOTHES",
       "expenseAmount": 300,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $300"
     },
     {
       "title": "JET SKI",
       "expenseAmount": 3000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $3000"
     },
     {
       "title": "NEW CLOTHES",
       "expenseAmount": 1000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1000"
     },
     {
       "title": "NEW CAR STEREO",
       "expenseAmount": 700,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $700"
     },
     {
       "title": "NEW WATCH",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "FIRST CAR FOR CHILD",
       "expenseAmount": 5000,
-      "isChildExpense": true
+      "isChildExpense": true,
+      "message": "Pay 5000 (if you have baby$)"
     },
     {
       "title": "VISIT THE DENTIST",
       "expenseAmount": 700,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $700"
     },
     {
       "title": "NEW SOUND SYSTEM",
       "expenseAmount": 1500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $1500"
     },
     {
       "title": "PAY FOR LUNCH WITH FRIENDS",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "CONCERT TICKETS",
       "expenseAmount": 200,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $200"
     },
     {
       "title": "GET NEWEST PHONE",
       "expenseAmount": 300,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $300"
     },
     {
       "title": "NEW TIRES",
       "expenseAmount": 600,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $600"
     },
     {
       "title": "NEW RIMS FOR YOUR CAR",
       "expenseAmount": 2000,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $2000"
     },
     {
       "title": "NEW GOLF CLUBS",
       "expenseAmount": 800,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $800"
     },
     {
       "title": "REMODEL KITCHEN",
       "expenseAmount": 7500,
-      "isChildExpense": false
+      "isChildExpense": false,
+      "message": "Pay $7500"
     }
   ],
   "market": [
@@ -1531,7 +1573,7 @@
       "title": "Movie Theater",
       "cashflow": 6000,
       "downPayment": 150000,
-      "type":"fasttrackDeal"
+      "type": "fasttrackDeal"
     },
     {
       "title": "Research Center for Diesease",
@@ -1651,5 +1693,4 @@
       "type": "fasttrackDeal"
     }
   ]
-  
 }

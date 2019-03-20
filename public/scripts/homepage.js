@@ -1,25 +1,31 @@
-const displayHostTemplate = function () {
+const displayHostTemplate = function() {
   const optionsField = getElementById("gameOptionsField");
   const hostingForm = createForm("/hostgame", "POST", "host-join-form");
-  const nameInput = createInput("playerName", "Enter Name", "text", "none", "textField");
+  const nameInput = createInput(
+    "playerName",
+    "Enter Name",
+    "text",
+    "none",
+    "textField"
+  );
   nameInput.required = true;
   const hostButton = createButton("HOST", "button");
   appendChildren(optionsField, [hostingForm]);
   appendChildren(hostingForm, [nameInput, hostButton]);
 };
 
-const displayError = function (error) {
+const displayError = function(error) {
   const messageDiv = getElementById("messageDiv");
   messageDiv.innerText = error;
 };
 
-const isInvalidCredentials = function () {
+const isInvalidCredentials = function() {
   const gameId = getElementById("game_id").value;
   const playerName = getElementById("name").value;
   return !gameId || !playerName;
 };
 
-const joinOrLoad = function (action) {
+const joinOrLoad = function(action) {
   const gameId = getElementById("game_id").value;
   const playerName = getElementById("name").value;
   if (isInvalidCredentials()) {
@@ -38,21 +44,28 @@ const joinOrLoad = function (action) {
     });
 };
 
-const displayJoinTemplate = function (actionName, handler) {
+const displayJoinTemplate = function(actionName, handler) {
   const optionsField = document.getElementById("gameOptionsField");
-  const joinForm = createElement('div');
+  const joinForm = createElement("div");
   joinForm.className = "host-join-form";
-  const gameIdInput = createInput("gameId", "Enter GameID", "text", "game_id", "textField");
-  const nameInput = createInput("playerName", "Enter Name", "text", "name", "textField");
+  const gameIdInput = createInput(
+    "gameId",
+    "Enter GameID",
+    "text",
+    "game_id",
+    "textField"
+  );
+  const nameInput = createInput(
+    "playerName",
+    "Enter Name",
+    "text",
+    "name",
+    "textField"
+  );
   const joinButton = createButton(actionName, "button", "", "", handler);
   const messageDiv = createElement("div");
   messageDiv.id = "messageDiv";
-  appendChildren(joinForm, [
-    nameInput,
-    gameIdInput,
-    joinButton,
-    messageDiv
-  ]);
+  appendChildren(joinForm, [nameInput, gameIdInput, joinButton, messageDiv]);
   appendChildren(optionsField, [joinForm]);
 };
 

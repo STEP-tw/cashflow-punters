@@ -416,7 +416,7 @@ describe("Player", function() {
       player.setNotification = sinon.spy();
 
       player.addMLM(MLMCard);
-      
+
       expect(player.hasMLM).to.equal(true);
       expect(player.MLMCardsCount).to.equal(1);
       expect(player.ledgerBalance).to.equal(1100);

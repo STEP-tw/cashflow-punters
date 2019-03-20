@@ -104,6 +104,7 @@ const isSameCard = function(card) {
   const cardMessageDiv = getElementById("card-message");
   const cardTitle = cardTitleDiv && cardTitleDiv.innerText;
   const cardMessage = cardMessageDiv && cardMessageDiv.innerText;
+  if (!cardMessage) return cardTitle == title;
   return cardTitle == title && cardMessage == message;
 };
 
@@ -116,7 +117,7 @@ const showPlainCard = function(title, expenseAmount, type, msg) {
   cardDiv.classList.add(type);
   const titleDiv = createTextDiv(title, "card-title");
   titleDiv.classList.add("card-title");
-  const expenseDiv = createTextDiv("Pay $ " + expenseAmount, "card-message");
+  const expenseDiv = createTextDiv(msg, "card-message");
   expenseDiv.classList.add("card-expense");
   cardDiv.appendChild(titleDiv);
   cardDiv.appendChild(expenseDiv);
@@ -464,7 +465,8 @@ const showCard = function(card, isMyTurn, player) {
       null,
       card.data.title,
       card.data.expenseAmount,
-      "doodad-card"
+      "doodad-card",
+      card.data.message
     ),
     market: showMarketCard.bind(null, card, player),
     smallDeal: getSmallDealHandler(card, isMyTurn),

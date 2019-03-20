@@ -143,8 +143,7 @@ const canLoad = function(req, res) {
   const savedGames = res.app.savedGames;
   if (!doesGameExist(savedGames, gameId)) return sendGameNotFound(res);
   const game = restoreGame(savedGames[gameId]);
-  if (!isPlayerPresent(game, playerName))
-    return sendCannotLoadError();
+  if (!isPlayerPresent(game, playerName)) return sendCannotLoadError();
   res.app.games[gameId] = game;
   return { isAble: true, loaded: true };
 };
