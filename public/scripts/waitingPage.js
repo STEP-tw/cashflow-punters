@@ -20,8 +20,24 @@ const displayLobby = function(gameDetails) {
   return gameDetails;
 };
 
-const goToGame = function(gameDetails) {
-  if (gameDetails.hasStarted) window.location.href = "/board.html";
+const goToGame = function(checkStartGame, gameDetails) {
+  if (gameDetails.hasStarted) {
+    let waitingSecs = 5;
+    const waitingGif = document.getElementsByClassName("waiting-gif")[0];
+    const starting = document.createElement("div");
+    starting.innerText = "Starting Game in " + waitingSecs + " seconds";
+    starting.className = "starting-msg";
+    const main = document.getElementById("waiting-main");
+    main.replaceChild(starting, waitingGif);
+    clearInterval(checkStartGame);
+    setInterval(() => {
+      waitingSecs--;
+      starting.innerText = "Starting Game in " + waitingSecs + " seconds";
+      if (waitingSecs <= 0) {
+        window.location.href = "/board.html";
+      }
+    }, 1000);
+  }
   return gameDetails;
 };
 
@@ -87,14 +103,14 @@ window.onload = () => {
   fetch("/gamelobby")
     .then(res => res.json())
     .then(displayLobby)
-    .then(goToGame)
+    .then(goToGame.bind(null, undefined))
     .then(insertButtons);
 
-  setInterval(() => {
+  const checkStartGame = setInterval(() => {
     fetch("/gamelobby")
       .then(res => res.json())
       .then(isGamePresent)
       .then(displayLobby)
-      .then(goToGame)
+      .then(goToGame.bind(null, checkStartGame));
   }, 1000);
 };

@@ -21,7 +21,7 @@
       <strong>CASHFLOW</strong>
       <p class="sub-header">Get out of the Rat Race !</p>
     </header>
-    <main>
+    <main id="waiting-main">
       <p style="font-weight: bold; font-size: 23px;">
         Game ID : <span id="gameId" style="font-weight:bolder">1234</span>
       </p>
@@ -38,23 +38,31 @@
     </main>
     <div id="cancel-game" class="popup-background">
       <div class="top-popup">
-			<p>
-				Do you really want to cancel the game ?
-			</p>
-			<div style="display:flex; align-content: space-around; justify-content: center;">
-        <button class="popup-button" onclick="closeOverlay('cancel-game')">
-          No
-        </button>
-				<button class="popup-button" onclick="cancelGame()">Yes</button>
-			</div>
+        <p>
+          Do you really want to cancel the game ?
+        </p>
+        <div
+          style="display:flex; align-content: space-around; justify-content: center;"
+        >
+          <button class="popup-button" onclick="closeOverlay('cancel-game')">
+            No
+          </button>
+          <button class="popup-button" onclick="cancelGame()">Yes</button>
+        </div>
       </div>
     </div>
     <div id="notify-cancel-game" class="popup-background">
       <div class="top-popup">
-				<p>
-					Sorry! Host has been cancel the game.
-				</p>
-					<button class="popup-button" style="margin-left:30%;" onclick="goToHome()">Ok</button>
+        <p>
+          Sorry! Host has been cancel the game.
+        </p>
+        <button
+          class="popup-button"
+          style="margin-left:30%;"
+          onclick="goToHome()"
+        >
+          Ok
+        </button>
       </div>
     </div>
   </body>
