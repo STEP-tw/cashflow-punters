@@ -415,7 +415,6 @@ const handleFastTrackDeal = function(cardData, isMyTurn) {
 };
 
 const handlePenalty = function(card) {
-  fetch("/issuepenalty");
   const { title, Message } = card;
   const cardDiv = getFastTrackCardDiv("fasttrack-card");
   const titleDiv = createHeadingDiv(4, title, "card-title");

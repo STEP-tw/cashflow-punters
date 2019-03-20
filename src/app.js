@@ -12,17 +12,17 @@ const {
   provideGameLobby
 } = require("./hostAndJoinHandlers");
 
-const readSavedGames = ()=>{
-  if(!fs.existsSync('./data/savedGames.json')){
-    fs.writeFileSync('./data/savedGames.json', JSON.stringify({}));
+const readSavedGames = () => {
+  if (!fs.existsSync("./data/savedGames.json")) {
+    fs.writeFileSync("./data/savedGames.json", JSON.stringify({}));
   }
   return fs.readFileSync("./data/savedGames.json", "utf-8");
-}
+};
 
-const loadSavedGames = function(){
+const loadSavedGames = function() {
   const games = readSavedGames();
   app.savedGames = JSON.parse(games);
-}
+};
 
 const {
   getGame,
@@ -60,7 +60,6 @@ const {
   removePlayer,
   renderRequesterData,
   acceptFtDeal,
-  issuePenalty,
   passDeal
 } = require("./gameHandlers");
 
@@ -101,7 +100,6 @@ app.get("/savegame", saveGame);
 app.get("/requester", renderRequesterData);
 app.get("/cancelgame", cancelGame);
 app.get("/addcashflow", addCashFlow);
-app.get("/issuepenalty", issuePenalty);
 app.get("/passdeal", passDeal);
 
 app.post("/paydebt", payDebt);

@@ -535,6 +535,10 @@ class Game {
     const cardData = this.cardStore.fasttrack[player.currentSpace];
     const type = cardData.type;
     this.setActiveCard(type, cardData);
+    if (type == "penalty") {
+      player.issuePenalty(this.activeCard.data);
+      this.nextPlayer();
+    }
     return { spaceType, isFastTrack: true };
   }
 

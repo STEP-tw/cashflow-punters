@@ -385,13 +385,6 @@ const addCashFlow = function(req, res) {
   res.end();
 };
 
-const issuePenalty = function(req, res) {
-  const player = req.game.currentPlayer;
-  player.issuePenalty(req.game.activeCard.data);
-  req.game.nextPlayer();
-  res.end();
-};
-
 module.exports = {
   getGame,
   startGame,
@@ -428,6 +421,5 @@ module.exports = {
   renderRequesterData,
   acceptFtDeal,
   addCashFlow,
-  issuePenalty,
   passDeal
 };
