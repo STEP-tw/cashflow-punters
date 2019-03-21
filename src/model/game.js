@@ -149,7 +149,7 @@ class Game {
     if (this.dice.diceValues.length >= 2) {
       this.dice.diceValues.pop();
     }
-    if (this.currentPlayer.hasEscape() && !this.isFasttrackPlayer()) {
+    if (this.currentPlayer.hasEscaped() && !this.isFasttrackPlayer()) {
       this.payBankLoan(this.currentPlayer);
       this.notifyEscaping();
     }
@@ -338,17 +338,15 @@ class Game {
       const loanAmount = calculateLoanToTake(ledgerBalance);
       this.grantLoan(currentPlayer.name, loanAmount);
       notificationMsg = `Oops! You have landed on Downsize space. You dont had enough amount
-        to pay the penalty so loan of $${loanAmount} added to your ledger balance and deducted the penalty`;
+        to pay the penalty so loan of $${loanAmount} added to your ledger balance and paid the penalty`;
     }
-    currentPlayer.notification = notificationMsg;
+    currentPlayer.setNotification(notificationMsg);
     this.nextPlayer();
   }
 
   bankrupt(player, msg) {
-    this.activityLog.addActivity(
-      " is out of the game because of bankruptcy",
-      player.name
-    );
+    const bankruptcyMessage = ` is out of the game because of bankruptcy`;
+    this.activityLog.addActivity(bankruptcyMessage, player.name);
     player.bankrupted = true;
     this.bankruptedPlayersCount++;
   }
@@ -363,9 +361,7 @@ class Game {
     }
 
     const paydayAmount = this.currentPlayer.addPayday();
-    this.currentPlayer.setNotification(
-      `You got Payday.${paydayAmount} added to your Savings`
-    );
+    this.currentPlayer.setNotification(`You got ${paydayAmount} on Payday`);
     this.nextPlayer();
     return false;
   }
@@ -479,9 +475,9 @@ class Game {
     player.removeExpense(expense, expenseAmount);
     player.updateFinancialStatement();
     player.addDebitEvent(liabilityPrice, `paid loan for ${liability}`);
-    const activityMessage = ` paid debt $${liabilityPrice} for liability - ${liability}`;
+    const activityMessage = `You paid debt $${liabilityPrice} for liability - ${liability}`;
     this.activityLog.logDebtPaid(liabilityPrice, liability, playerName);
-    player.setNotification("you" + activityMessage);
+    player.setNotification(activityMessage);
   }
 
   acceptCharity() {
@@ -517,20 +513,13 @@ class Game {
 
   handleFastTrack(player, numberOfDice, oldSpaceNo) {
     const diceValues = player.rollDiceAndMove(numberOfDice);
-    player.setNotification(
-      `You landed on the ${
-        this.cardStore.fasttrack[player.currentSpace].title
-      } as you rolled ${diceValues[0]}`
-    );
-    this.activityLog.addActivity(
-      `${player.name} landed on the ${
-        this.cardStore.fasttrack[player.currentSpace].title
-      }`
-    );
     this.setDice(diceValues);
-    this.handleCrossedCashFlowDay(oldSpaceNo);
+    const spaceTitle = this.cardStore.fasttrack[player.currentSpace].title;
+    player.setNotification(`You landed on ${spaceTitle}`);
     const rolledDieMsg = " rolled " + diceValues.reduce(add);
     this.activityLog.addActivity(rolledDieMsg, player.name);
+    this.activityLog.addActivity(` landed on ${spaceTitle}`, player.name);
+    this.handleCrossedCashFlowDay(oldSpaceNo);
     const spaceType = this.board.getFasttrackSpaceType(player.currentSpace);
     const cardData = this.cardStore.fasttrack[player.currentSpace];
     const type = cardData.type;
@@ -571,9 +560,8 @@ class Game {
   }
 
   hasShares(playerName) {
-    return this.getPlayerByName(playerName).hasShares(
-      this.activeCard.data.symbol
-    );
+    const symbol = this.activeCard.data.symbol;
+    return this.getPlayerByName(playerName).hasShares(symbol);
   }
 
   getNoOfShareHolders() {

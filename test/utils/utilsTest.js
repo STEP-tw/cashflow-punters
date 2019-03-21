@@ -1,7 +1,6 @@
 const {
   getNextNum,
   add,
-  isSame,
   calculateLoanToTake,
   hasIntersection,
   isEqual
@@ -12,15 +11,6 @@ const { expect } = require("chai");
 describe("getNextNum", function() {
   it("should return next number and cycled after list length", function() {});
   expect(getNextNum(1, 10, 4)).is.equal(5);
-});
-
-describe("isSame", function() {
-  it("should return true if passing args are same", function() {
-    expect(isSame("a", "a")).to.be.true;
-  });
-  it("should return false if passing args are different", function() {
-    expect(isSame("a", "b")).to.be.false;
-  });
 });
 
 describe("hasIntersection", function() {

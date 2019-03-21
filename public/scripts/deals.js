@@ -97,10 +97,9 @@ const showInvalidShareCount = function() {
 
 const createCardButtons = function(actions) {
   let buttons = getElementById("card-button-container");
-  if (buttons == undefined) buttons = createElement("div");
+  if (!buttons) buttons = createElement("div", "card-button-container");
   buttons.classList.add("buttons-div");
   buttons.style.display = "flex";
-  buttons.id = "card-button-container";
   const accept = createAcceptButton(actions[0]);
   const decline = createDeclineButton(actions[1]);
   const sell = createCardSellButton(actions[2]);
@@ -211,7 +210,7 @@ const shareForm = function(func, id, value, shareCost) {
   const message = "Enter no of shares you want to " + id;
   const msgDiv = createDiv(message, "share-notification", "debt-form-msg");
   const priceDiv = createElement("div");
-  const priceVal = document.createElement("span");
+  const priceVal = createElement("span");
   input.onkeyup = updatePrice.bind(null, shareCost);
   priceDiv.innerText = "Price:";
   priceVal.id = "shares-price";

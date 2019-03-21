@@ -62,10 +62,9 @@ const parseCookie = function() {
 };
 
 const createButton = function(value, classname, id, type, func) {
-  const button = createElement("button");
+  const button = createElement("button", id);
   button.innerHTML = value;
   button.className = classname;
-  button.id = id;
   button.type = type;
   button.onclick = func;
   return button;
@@ -80,8 +79,7 @@ const appendChildren = function(parentElement, childrenElements) {
 };
 
 const createDiv = function(text, id, className) {
-  const div = createElement("div");
-  div.id = id;
+  const div = createElement("div", id);
   div.className = className;
   div.innerHTML = text;
   return div;
@@ -130,19 +128,24 @@ const showOverlay = function(id) {
 };
 
 const createTextDiv = function(text, id) {
-  const textDiv = document.createElement("div");
-  const textPara = document.createElement("p");
-  textPara.innerText = text;
-  textPara.id = id;
+  const textDiv = createElement("div");
+  const textPara = createParagraph(text, "", id);
   textDiv.appendChild(textPara);
   return textDiv;
 };
 
+const createParagraph = function(text, classname, id) {
+  const paragraph = createElement("p");
+  paragraph.id = id;
+  paragraph.innerText = text;
+  paragraph.className = classname;
+  return paragraph;
+};
+
 const createHeadingDiv = function(headingNum, text, id) {
-  const textDiv = document.createElement("div");
-  const heading = document.createElement("h" + headingNum);
+  const textDiv = createElement("div");
+  const heading = createElement("h" + headingNum, id);
   heading.innerText = text;
-  heading.id = id;
   textDiv.appendChild(heading);
   return textDiv;
 };

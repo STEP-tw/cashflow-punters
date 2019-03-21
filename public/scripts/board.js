@@ -360,9 +360,8 @@ const showWin = function(playerName) {
   const confirmationDiv = getElementById("ft-leave-game");
   const informationDiv = createElement("div");
   informationDiv.className = "top-popup";
-  const messageDiv = createElement("p");
   const message = `${playerName} has won the game`;
-  messageDiv.innerText = message;
+  const messageDiv = createParagraph(message);
   const okayButton = createElement("button");
   okayButton.innerText = "OK";
   okayButton.onclick = hideOverlay.bind(null, "ft-leave-game");
@@ -386,10 +385,10 @@ const getFastTrackCardDiv = function(type) {
 
 const createFasttrackButtons = function(actions) {
   let buttons = getElementById("card-button-container");
-  if (buttons == undefined) buttons = createElement("div");
+  if (buttons == undefined)
+    buttons = createElement("div", "card-button-container");
   buttons.classList.add("buttons-div");
   buttons.style.display = "flex";
-  buttons.id = "card-button-container";
   const accept = createAcceptButton(actions[0]);
   const decline = createDeclineButton(actions[1]);
   appendChildren(buttons, [accept, decline]);
@@ -529,10 +528,10 @@ const updateGamePiece = function(player) {
 
 const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
-  const activityPara = createElement("p");
+  const time = formatTime(new Date(time));
+  const activityMessage = `${time}   ${playerName}${msg}`;
+  const activityPara = createParagraph(activityMessage);
   activity.classList.add("activity");
-  activityPara.innerText =
-    formatTime(new Date(time)) + "   " + playerName + msg;
   activity.appendChild(activityPara);
   return activity;
 };
@@ -544,7 +543,7 @@ const updateActivityLog = function({ activityLog }) {
   if (activityLog.length == localActivitiesCount) return;
   const newActivities = activityLog.slice(localActivitiesCount);
   newActivities.forEach(activity => {
-    let activityDiv = createActivity(activity);
+    const activityDiv = createActivity(activity);
     activityLogDiv.insertBefore(activityDiv, activityLogDiv.firstChild);
   });
   newLog.innerHTML = activityLogDiv.innerHTML;

@@ -46,17 +46,17 @@ class FinancialStatement extends CashLedger {
     this.perChildExpense = profession.perChildExpense;
     this.income = profession.income;
     this.income.realEstates = [];
-    this.expenses = profession.expenses;
     this.assets = profession.assets;
-    this.assets.realEstates = [];
-    this.assets.goldCoins = 0;
     this.assets.shares = {};
+    this.assets.goldCoins = 0;
+    this.assets.realEstates = [];
+    this.expenses = profession.expenses;
     this.liabilities = profession.liabilities;
     this.liabilities.realEstates = [];
     this.liabilities["Bank Loan"] = 0;
     this.updateFinancialStatement();
-    this.ledgerBalance = this.cashflow + profession.assets.savings;
     const initialAmount = this.cashflow + profession.assets.savings;
+    this.ledgerBalance = initialAmount;
     this.addCreditEvent(initialAmount, "Initial Cash");
   }
 
@@ -69,7 +69,7 @@ class FinancialStatement extends CashLedger {
   }
 
   addPayday() {
-    this.ledgerBalance += this.cashflow;
+    this.addToLedgerBalance(this.cashflow);
     this.addCreditEvent(this.cashflow, "got payday");
     return this.cashflow;
   }
@@ -135,12 +135,11 @@ class FinancialStatement extends CashLedger {
 
   sellEstate(estate, marketCard) {
     const profit = this.calculateProfit(estate, marketCard);
-    this.addToLedgerBalance(profit);
-    this.removeRealEstateLiability(estate);
     this.removeAsset(estate);
-    this.removeIncomeRealEstate(estate);
-
     this.addCreditEvent(profit, " sold Real Estate");
+    this.addToLedgerBalance(profit);
+    this.removeIncomeRealEstate(estate);
+    this.removeRealEstateLiability(estate);
     return estate.mortgage + profit;
   }
 
@@ -151,10 +150,6 @@ class FinancialStatement extends CashLedger {
 
   removeExpense(expense, amount) {
     this.expenses[expense] -= amount;
-  }
-
-  hasShares(symbol) {
-    return Object.keys(this.assets.shares).includes(symbol);
   }
 
   calculateProfit(estate, marketCard) {
@@ -168,18 +163,10 @@ class FinancialStatement extends CashLedger {
     return this.liabilities.realEstates.map(estate => estate.type);
   }
 
-  hasRealEstate(realEstatesType) {
-    return hasIntersection(this.getRealEstatesType(), realEstatesType);
-  }
-
-  hasGoldCoins() {
-    return this.assets.goldCoins > 0;
-  }
-
   sellGoldCoins(numberOfCoins, cost) {
     const totalAmout = numberOfCoins * cost;
     this.assets.goldCoins -= numberOfCoins;
-    this.ledgerBalance += totalAmout;
+    this.addToLedgerBalance(totalAmout);
     this.addCreditEvent(totalAmout, ` Sold ${numberOfCoins} gold coins.`);
     this.setNotification(
       `You sold ${numberOfCoins} gold coins at rate of ${cost}.$${totalAmout} added to your Ledger Balance`
@@ -203,10 +190,6 @@ class FinancialStatement extends CashLedger {
     return refundableAmount;
   }
 
-  hasShares(symbol) {
-    return this.assets.shares.hasOwnProperty(symbol);
-  }
-
   removeHalfShares(symbol) {
     const shares = this.assets.shares[symbol];
     const numberOfShares = shares.numberOfShares;
@@ -221,7 +204,19 @@ class FinancialStatement extends CashLedger {
     shares.numberOfShares = numberOfShares * 2;
   }
 
-  hasEscape() {
+  hasRealEstate(realEstatesType) {
+    return hasIntersection(this.getRealEstatesType(), realEstatesType);
+  }
+
+  hasGoldCoins() {
+    return this.assets.goldCoins > 0;
+  }
+
+  hasShares(symbol) {
+    return this.assets.shares.hasOwnProperty(symbol);
+  }
+
+  hasEscaped() {
     let notification =
       "Your Passive income has became greater than expenses, to escape from Rat race bank loan needs to be paid.";
     if (this.passiveIncome >= this.totalExpense && !this.isFasttrackPlayer) {

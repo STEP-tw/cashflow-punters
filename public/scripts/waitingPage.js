@@ -24,10 +24,10 @@ const goToGame = function(checkStartGame, gameDetails) {
   if (gameDetails.hasStarted) {
     let waitingSecs = 5;
     const waitingGif = document.getElementsByClassName("waiting-gif")[0];
-    const starting = document.createElement("div");
+    const starting = createElement("div");
     starting.innerText = "Starting Game in " + waitingSecs + " seconds";
     starting.className = "starting-msg";
-    const main = document.getElementById("waiting-main");
+    const main = getElementById("waiting-main");
     main.replaceChild(starting, waitingGif);
     clearInterval(checkStartGame);
     setInterval(() => {

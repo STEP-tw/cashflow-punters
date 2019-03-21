@@ -18,10 +18,6 @@ const add = function(firstNum, secondNum) {
   return firstNum + secondNum;
 };
 
-const isSame = function(firstArg, secondArg) {
-  return firstArg == secondArg;
-};
-
 const calculateLoanToTake = function(ledgerBalance) {
   return Math.ceil(Math.abs(ledgerBalance) / 1000) * 1000;
 };
@@ -40,7 +36,6 @@ module.exports = {
   getNextNum,
   isBetween,
   add,
-  isSame,
   calculateLoanToTake,
   hasIntersection,
   isEqual
