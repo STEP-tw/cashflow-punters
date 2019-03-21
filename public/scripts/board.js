@@ -528,8 +528,8 @@ const updateGamePiece = function(player) {
 
 const createActivity = function({ playerName, msg, time }) {
   const activity = createElement("div");
-  const time = formatTime(new Date(time));
-  const activityMessage = `${time}   ${playerName}${msg}`;
+  const timeStamp = formatTime(new Date(time));
+  const activityMessage = `${timeStamp}   ${playerName}${msg}`;
   const activityPara = createParagraph(activityMessage);
   activity.classList.add("activity");
   activity.appendChild(activityPara);
