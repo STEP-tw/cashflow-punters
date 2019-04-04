@@ -18,10 +18,6 @@ class CashLedger {
     entry.type = "debit";
     this.entries.unshift(entry);
   }
-
-  getCashLedger() {
-    return this.entries;
-  }
 }
 
 module.exports = CashLedger;

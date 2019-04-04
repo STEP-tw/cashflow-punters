@@ -264,9 +264,9 @@ basic_fs_heading {
 }
 
 .iconBtn:hover {
-	transform: scale(1.2);
-	transform-origin: center;
-	background-color: white;
+  transform: scale(1.2);
+  transform-origin: center;
+  background-color: white;
 }
 
 .iconButtonDiv {
@@ -275,12 +275,12 @@ basic_fs_heading {
 }
 
 .iconButtonDiv > button {
-	border: whitesmoke;
+  border: whitesmoke;
   box-shadow: none;
   background-color: white;
   background-size: contain;
   background-repeat: no-repeat;
-	border-radius: 10%;
+  border-radius: 10%;
 }
 
 #bankBtn {
