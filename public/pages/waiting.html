@@ -1,69 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Waiting to start game</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto"
-      rel="stylesheet"
-    />
-    <script src="/waitingPage.js"></script>
-    <script src="/utils.js"></script>
-  </head>
 
-  <body>
-    <header>
-      <strong>CASHFLOW</strong>
-      <p class="sub-header">Get out of the Rat Race !</p>
-    </header>
-    <main id="waiting-main">
-      <p style="font-weight: bold; font-size: 23px;">
-        Game ID : <span id="gameId" style="font-weight:bolder">1234</span>
-      </p>
-      <img class="waiting-gif" src="/waiting.gif" alt="waiting" />
-      <section class="players-field w3-cotainer">
-        <p class="lobby-title">Players in lobby</p>
-        <section class="waiting-player-field">
-          <ul id="playersList"></ul>
-        </section>
-        <section class="buttons" id="buttons_space">
-          <a id="start_button_space"></a>
-        </section>
-      </section>
-    </main>
-    <div id="cancel-game" class="popup-background">
-      <div class="top-popup">
-        <p>
-          Do you really want to cancel the game ?
-        </p>
-        <div
-          style="display:flex; align-content: space-around; justify-content: center;"
-        >
-          <button class="popup-button" onclick="closeOverlay('cancel-game')">
-            No
-          </button>
-          <button class="popup-button" onclick="cancelGame()">Yes</button>
-        </div>
-      </div>
-    </div>
-    <div id="notify-cancel-game" class="popup-background">
-      <div class="top-popup">
-        <p>
-          Sorry! Host has cancelled the game.
-        </p>
-        <button
-          class="popup-button"
-          style="margin-left:30%;"
-          onclick="goToHome()"
-        >
-          Ok
-        </button>
-      </div>
-    </div>
-  </body>
+<head>
+	<title>Waiting to start game</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="/waiting.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
+	<link href="https://fonts.googleapis.com/css?family=Coiny|Lobster|Roboto" rel="stylesheet" />
+	<script src="/waitingPage.js"></script>
+	<script src="/utils.js"></script>
+</head>
+
+<body>
+	<header>
+		<strong>CASHFLOW</strong>
+		<p class="sub-header">Get out of the Rat Race !</p>
+	</header>
+	<main id="waiting-main">
+		<p style="font-weight: bold; font-size: 23px;">
+			Game ID : <span id="gameId" style="font-weight:bolder">1234</span>
+		</p>
+		<img class="waiting-gif" src="/waiting.gif" alt="waiting" />
+		<section class="players-field w3-cotainer">
+			<p class="lobby-title">Players in lobby</p>
+			<section class="waiting-player-field">
+				<ul id="playersList"></ul>
+			</section>
+			<section class="buttons" id="buttons_space">
+				<a id="start_button_space"></a>
+			</section>
+		</section>
+	</main>
+	<div id="cancel-game" class="popup-background">
+		<div class="top-popup">
+			<p>
+				Do you really want to cancel the game ?
+			</p>
+			<div style="display:flex; align-content: space-around; justify-content: center;">
+				<button class="popup-button" onclick="closeOverlay('cancel-game')">
+					No
+				</button>
+				<button class="popup-button" onclick="cancelGame()">Yes</button>
+			</div>
+		</div>
+	</div>
+	<div id="notify-cancel-game" class="popup-background">
+		<div class="top-popup">
+			<p>
+				Sorry! Host has cancelled the game.
+			</p>
+			<button class="popup-button" style="margin-left:30%;" onclick="goToHome()">
+				Ok
+			</button>
+		</div>
+	</div>
+</body>
+
 </html>
