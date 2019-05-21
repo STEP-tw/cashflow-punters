@@ -40,6 +40,7 @@ const updateLedgerBalance = function(ledgerBalance) {
 
 const updateStatementBoard = function(player) {
   setInnerText("name", player.name);
+  getElementById("name").style.color = playerColours[player.turn];
   setInnerText("Profession", player.profession);
   setInnerText("passiveIn", player.passiveIncome);
   setInnerText("totalIn", player.totalIncome);

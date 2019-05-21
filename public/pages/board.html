@@ -1,6 +1,6 @@
 <html>
 
-  <head>
+<head>
     <script src="/waitingPage.js"></script>
     <script src="/finanacialstatement.js"></script>
     <script src="/cashledger.js"></script>
@@ -8,930 +8,934 @@
     <script src="/auction.js"></script>
     <script src="/board.js"></script>
     <script src="/deals.js"></script>
-    <link rel="stylesheet" href="/professions.css" />
-    <link rel="stylesheet" href="/fastTrack.css" />
+    <link rel="stylesheet" href="/professions.css"/>
+    <link rel="stylesheet" href="/fastTrack.css"/>
     <script src="/utils.js"></script>
     <script src="/manageDebts.js"></script>
     <script src="/market.js"></script>
     <script src="/fasttrack.js"></script>
     <script src="/notifyEscape.js"></script>
     <script src="/allPlayersInfo.js"></script>
-    <link rel="stylesheet" href="/board.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" />
-  </head>
+    <link rel="stylesheet" href="/board.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"/>
+</head>
 
-  <body id="body">
+<body id="body">
 
-      <div class="overlay-fs" id="fs_overlay" style="color:#303E45;">
-          <button class="close" style="top:0%;" onclick="hideOverlay('fs_overlay')">
-            &times;
-          </button>
-          <div id="financial_statement" style="display:flex; flex-direction:column; background-color: whitesmoke;">
-            <div class="title">
-              <div style="color: #4D636F; padding-top: 1%">
+<div class="overlay-fs" id="fs_overlay" style="color:#303E45;">
+    <button class="close" style="top:0%;" onclick="hideOverlay('fs_overlay')">
+        &times;
+    </button>
+    <div id="financial_statement" style="display:flex; flex-direction:column; background-color: whitesmoke;">
+        <div class="title">
+            <div style="color: #4D636F; padding-top: 1%">
                 INCOME STATEMENT
-              </div>
             </div>
-            <div style="overflow:scroll; height:100%;">
-              <div style="display:flex; flex-direction: row; justify-content: space-around;
+        </div>
+        <div style="overflow:scroll; height:100%;">
+            <div style="display:flex; flex-direction: row; justify-content: space-around;
     width: 900px; height: 100%; background-color: whitesmoke;">
                 <div style="display:flex; flex-direction: column">
-                  <div>
-                    <h2 class="sub-header">Income</h2>
-                    <table>
-                      <tr>
-                        <th style="width:300px;">Description</th>
-                        <th style="width:100px;">Cash Flow</th>
-                      </tr>
-                      <tr>
-                        <td>Salary:</td>
-                        <td class="tableData">$ <span id="salary"></span></td>
-                      </tr>
-                      <tr>
-                        <td>Real Estate/Business:</td>
-                        <td></td>
-                      </tr>
-                    </table>
+                    <div>
+                        <h2 class="sub-header">Income</h2>
+                        <table>
+                            <tr>
+                                <th style="width:300px;">Description</th>
+                                <th style="width:100px;">Cash Flow</th>
+                            </tr>
+                            <tr>
+                                <td>Salary:</td>
+                                <td class="tableData">$ <span id="salary"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Real Estate/Business:</td>
+                                <td></td>
+                            </tr>
+                        </table>
 
-                    <div style="height: 8.3em; overflow: scroll;">
-                      <table>
-                        <tbody id="RealEstate-cashflow"></tbody>
-                      </table>
+                        <div style="height: 8.3em; overflow: scroll;">
+                            <table>
+                                <tbody id="RealEstate-cashflow"></tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
-                  <div>
-                    <h2 class="sub-header">Expenses</h2>
-                    <table>
-                      <tr>
-                        <td>Taxes:</td>
-                        <td class="tableData">
-                          $
-                          <span id="taxes" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Home Mortage Payment:</td>
-                        <td class="tableData">
-                          $
-                          <span id="home-mortage-payment" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>School Loan Payment:</td>
-                        <td class="tableData">
-                          $
-                          <span id="school-loan-payment" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Car Loan Payment:</td>
-                        <td class="tableData">
-                          $
-                          <span id="car-loan-payment" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Credit Card Payment:</td>
-                        <td class="tableData">
-                          $
-                          <span id="credit-card-payment" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Other Expenses:</td>
-                        <td class="tableData">
-                          $
-                          <span id="other-expenses" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Bank Loan Payment:
-                          <span class="extra-info">
+                    <div>
+                        <h2 class="sub-header">Expenses</h2>
+                        <table>
+                            <tr>
+                                <td>Taxes:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="taxes" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Home Mortage Payment:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="home-mortage-payment" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>School Loan Payment:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="school-loan-payment" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Car Loan Payment:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="car-loan-payment" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Credit Card Payment:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="credit-card-payment" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Other Expenses:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="other-expenses" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bank Loan Payment:
+                                    <span class="extra-info">
                             (10% of Bank Loan Total)</span>
-                        </td>
-                        <td class="tableData">
-                          $
-                          <span id="bank-loan-payment" class="tableData"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Per Child Expense:
-                          <span class="number" id="child-count"> _ </span> x 200
-                          <span class="extra-info">(# of Children):</span>
-                        </td>
-                        <td class="tableData">
-                          $
-                          <span id="total-child-expense" class="tableData"></span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div>
-                    <h2 class="sub-header">Assests</h2>
-                    <table>
-                      <tr>
-                        <td>Savings:</td>
-                        <td class="tableData">
-                          $
-                          <span id="savings"></span>
-                        </td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>Precious Metals, Etc.:</td>
-                        <td id="gold-coins">Gold Coins</td>
-                        <td id="gold-coin-number" class="tableData"></td>
-                      </tr>
-                      <tr>
-                        <td>Stocks/Funds:</td>
-                        <td># of Shares:</td>
-                        <td>Cost/Share:</td>
-                      </tr>
-                    </table>
-
-                    <div style="height: 4.2em; overflow:scroll;">
-                      <table>
-                        <tbody id="stocks-funds"></tbody>
-                      </table>
+                                </td>
+                                <td class="tableData">
+                                    $
+                                    <span id="bank-loan-payment" class="tableData"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Per Child Expense:
+                                    <span class="number" id="child-count"> _ </span> x 200
+                                    <span class="extra-info">(# of Children):</span>
+                                </td>
+                                <td class="tableData">
+                                    $
+                                    <span id="total-child-expense" class="tableData"></span>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <table style="margin-top: -1%;">
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>Real Estate/Business:</td>
-                        <td>Down Payment:</td>
-                        <td>Cost:</td>
-                      </tr>
-                    </table>
+                    <div>
+                        <h2 class="sub-header">Assests</h2>
+                        <table>
+                            <tr>
+                                <td>Savings:</td>
+                                <td class="tableData">
+                                    $
+                                    <span id="savings"></span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Precious Metals, Etc.:</td>
+                                <td id="gold-coins">Gold Coins</td>
+                                <td id="gold-coin-number" class="tableData"></td>
+                            </tr>
+                            <tr>
+                                <td>Stocks/Funds:</td>
+                                <td># of Shares:</td>
+                                <td>Cost/Share:</td>
+                            </tr>
+                        </table>
 
-                    <div style="height:8em; overflow:scroll;">
-                      <table>
-                        <tbody id="RealEstate-downpayment"></tbody>
-                      </table>
+                        <div style="height: 4.2em; overflow:scroll;">
+                            <table>
+                                <tbody id="stocks-funds"></tbody>
+                            </table>
+                        </div>
+                        <table style="margin-top: -1%;">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Real Estate/Business:</td>
+                                <td>Down Payment:</td>
+                                <td>Cost:</td>
+                            </tr>
+                        </table>
+
+                        <div style="height:8em; overflow:scroll;">
+                            <table>
+                                <tbody id="RealEstate-downpayment"></tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
                 </div>
 
                 <div style="display:flex; flex-direction: column">
-                  <div style="margin:1%;">
-                    <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; ">
-                      <span class="heading"> Name : </span><span id="fs-name"
-                        style="padding-left: 2%; font-weight: lighter;"></span>
-                    </h3>
-                    <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
-                      <span class="heading"> Profession : </span><span id="fs-profession"
-                        style="padding-left: 2%; font-weight: lighter;"></span>
-                    </h3>
-                    <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
+                    <div style="margin:1%;">
+                        <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%; ">
+                            <span class="heading"> Name : </span><span id="fs-name"
+                                                                       style="padding-left: 2%; font-weight: lighter;"></span>
+                        </h3>
+                        <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
+                            <span class="heading"> Profession : </span><span id="fs-profession"
+                                                                             style="padding-left: 2%; font-weight: lighter;"></span>
+                        </h3>
+                        <h3 style="border-bottom:1px solid grey; border-bottom-left-radius:20%;">
                       <span class="heading">
                         Dream :
                         <span id="dream" style="font-weight:lighter;"></span>
                       </span>
-                    </h3>
-                  </div>
-                  <div style="border:3px solid #9EB1BB; padding:3%; color:#303E45;">
-                    <p class="block">$ <span id="fs-income">Income</span></p>
-                    <p class="operator">+</p>
-                    <p class="block">
-                      $ <span id="passive-income">Passive Income</span>
-                    </p>
-                    <p class="extra-info">
-                      (Cash Flow from Interest/Dividends and Real
-                      Estate/Business)
-                    </p>
-                    <p class="operator">=</p>
-                    <p class="block">
-                      $ <span id="total-income">Total Income</span>
-                    </p>
-                    <p class="operator">-</p>
-                    <p class="block">
-                      $ <span id="fs-expenses">Expenses</span>
-                    </p>
-                    <p class="operator">=</p>
-                    <p class="block">
-                      $ <span id="fs-cashflow">Cashflow</span>
-                    </p>
-                    <p class="extra-info">(Monthly Cash Flow)</p>
-                  </div>
-                  <div style="height: 200px;">
-                    <h2 class="sub-header">Liabilities</h2>
-                    <table>
-                      <tr>
-                        <td>Home Mortage:</td>
-                        <td class="tableData">
-                          $ <span id="home-mortage"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>School Loans:</td>
-                        <td class="tableData">
-                          $ <span id="school-loans"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Car Loans:</td>
-                        <td class="tableData">
-                          $ <span id="car-loans"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Credit Card Debt:</td>
-                        <td class="tableData">
-                          $ <span id="credit-card-debt"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Bank Loan</td>
-                        <td class="tableData">
-                          $ <span id="bank-loan"></span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>Real Estate/Business:</td>
-                        <td>Mortage/Liability:</td>
-                      </tr>
-                    </table>
-
-                    <div style="height:8em; overflow-y:scroll;">
-                      <table>
-                        <tbody id="RealEstate-mortage"></tbody>
-                      </table>
+                        </h3>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay" id="cash-ledger-overlay">
-            <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
-              ×
-            </button>
-            <div id="cash_ledger">
-              <span class="title">Cash ledger</span>
-              <div style="padding: 2% 4%; font-size: 20px">
-                <span style="font-weight:bold;">Name: </span>
-                <span id="name-ledger"></span>
-              </div>
-              <table class="cash-ledger">
-                <thead>
-                  <tr class="row-content">
-                    <th class="time" style="font-weight:bold;">Time</th>
-                    <th class="amount" style="font-weight:bold;">Amount</th>
-                    <th class="balance" style="font-weight:bold;">Balance</th>
-                    <th class="reason" style="font-weight:bold;">Description</th>
-                  </tr>
-                </thead>
-                <tbody id="cash-ledger-content"></tbody>
-              </table>
-            </div>
-          </div>
+                    <div style="border:3px solid #9EB1BB; padding:3%; color:#303E45;">
+                        <p class="block">$ <span id="fs-income">Income</span></p>
+                        <p class="operator">+</p>
+                        <p class="block">
+                            $ <span id="passive-income">Passive Income</span>
+                        </p>
+                        <p class="extra-info">
+                            (Cash Flow from Interest/Dividends and Real
+                            Estate/Business)
+                        </p>
+                        <p class="operator">=</p>
+                        <p class="block">
+                            $ <span id="total-income">Total Income</span>
+                        </p>
+                        <p class="operator">-</p>
+                        <p class="block">
+                            $ <span id="fs-expenses">Expenses</span>
+                        </p>
+                        <p class="operator">=</p>
+                        <p class="block">
+                            $ <span id="fs-cashflow">Cashflow</span>
+                        </p>
+                        <p class="extra-info">(Monthly Cash Flow)</p>
+                    </div>
+                    <div style="height: 200px;">
+                        <h2 class="sub-header">Liabilities</h2>
+                        <table>
+                            <tr>
+                                <td>Home Mortage:</td>
+                                <td class="tableData">
+                                    $ <span id="home-mortage"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>School Loans:</td>
+                                <td class="tableData">
+                                    $ <span id="school-loans"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Car Loans:</td>
+                                <td class="tableData">
+                                    $ <span id="car-loans"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Credit Card Debt:</td>
+                                <td class="tableData">
+                                    $ <span id="credit-card-debt"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bank Loan</td>
+                                <td class="tableData">
+                                    $ <span id="bank-loan"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Real Estate/Business:</td>
+                                <td>Mortage/Liability:</td>
+                            </tr>
+                        </table>
 
-    <div id="main-game" class="game">
-      <div class="round_border board">
+                        <div style="height:8em; overflow-y:scroll;">
+                            <table>
+                                <tbody id="RealEstate-mortage"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlay" id="cash-ledger-overlay">
+    <button class="close" onclick="hideOverlay('cash-ledger-overlay')">
+        ×
+    </button>
+    <div id="cash_ledger">
+        <span class="title">Cash ledger</span>
+        <div style="padding: 2% 4%; font-size: 20px">
+            <span style="font-weight:bold;">Name: </span>
+            <span id="name-ledger"></span>
+        </div>
+        <table class="cash-ledger">
+            <thead>
+            <tr class="row-content">
+                <th class="time" style="font-weight:bold;">Time</th>
+                <th class="amount" style="font-weight:bold;">Amount</th>
+                <th class="balance" style="font-weight:bold;">Balance</th>
+                <th class="reason" style="font-weight:bold;">Description</th>
+            </tr>
+            </thead>
+            <tbody id="cash-ledger-content"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="main-game" class="game">
+    <div class="round_border board">
         <div hidden id="0">
-          <div id="gamePiece1" class="gamePiece player1 "></div>
-          <div id="gamePiece2" class="gamePiece player2 "></div>
-          <div id="gamePiece3" class="gamePiece player3 "></div>
-          <div id="gamePiece4" class="gamePiece player4 "></div>
-          <div id="gamePiece5" class="gamePiece player5 "></div>
-          <div id="gamePiece6" class="gamePiece player6 "></div>
+            <div id="gamePiece1" class="gamePiece player1 "></div>
+            <div id="gamePiece2" class="gamePiece player2 "></div>
+            <div id="gamePiece3" class="gamePiece player3 "></div>
+            <div id="gamePiece4" class="gamePiece player4 "></div>
+            <div id="gamePiece5" class="gamePiece player5 "></div>
+            <div id="gamePiece6" class="gamePiece player6 "></div>
         </div>
         <div class="horizontal_spaces">
-          <div class="corner_spaces horizontal_space deals w3-theme" id="1">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_first_space  horizontal_space doodad w3-theme-l1" id="2">
-            <div class="space_background doodad-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="3">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space charity w3-theme-d1" id="4">
-            <div class="space_background charity-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="5">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space payday w3-theme-d2" id="6">
-            <div class="space_background payday-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="7">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space corner_spaces market w3-theme-l2" id="8">
-            <div class="space_background market-img"></div>
-          </div>
+            <div class="corner_spaces horizontal_space deals w3-theme" id="1">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_first_space  horizontal_space doodad w3-theme-l1" id="2">
+                <div class="space_background doodad-img"></div>
+            </div>
+            <div class="horizontal_space  deals w3-theme" id="3">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space charity w3-theme-d1" id="4">
+                <div class="space_background charity-img"></div>
+            </div>
+            <div class="horizontal_space  deals w3-theme" id="5">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space payday w3-theme-d2" id="6">
+                <div class="space_background payday-img"></div>
+            </div>
+            <div class="horizontal_space  deals w3-theme" id="7">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space corner_spaces market w3-theme-l2" id="8">
+                <div class="space_background market-img"></div>
+            </div>
         </div>
         <div class="middle_flex">
-          <div class="vertical_spaces">
-            <div class="vertical_first_space vertical_space market w3-theme-l2" id="24">
-              <div class="space_background market-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="23">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space payday w3-theme-d2" id="22">
-              <div class="space_background payday-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="21">
-              <div class="space_background deals-img"></div>
-            </div>
-          </div>
-          <div class="game_center round_border">
-            <div class="left_part">
-              <div class="financial_details">
-                <table class="player_details">
-                  <tr>
-                    <td>
-                      <span id="name" style="font-size: 18px;">PlayerName</span>
-                    </td>
-                    <td>
-                      <div class="progress-bar-div" id="progress-div">
-                        <div class="current-progress" id="progress"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Profession
-                    </td>
-                    <td>
-                      <span id="Profession" style="font-weight: lighter;">prof</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="income">Income</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Passive Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="passiveIn">passiveIn</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Total Income
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="totalIn">totalIn</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Total Expense
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="expenses">expenses</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="basic_fs_heading" style="color: #57707D">
-                      Monthly Cashflow
-                    </td>
-                    <td class="basic-fs-value">
-                      $ <span id="cashflow">cashflow</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ledger Balance</td>
-                    <td style="font-weight: lighter;">
-                      $ <span id="ledger-balance">$0</span>
-                    </td>
-                  </tr>
-                </table>
-
-                <div class="open-player-details" id="board-icons">
-                  <div class="iconButtonDiv">
-                    <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
-                  </div>
-                  <div class="iconButtonDiv">
-                    <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
-                  </div>
-                  <div class="iconButtonDiv" id="bank">
-                    <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
-                  </div>
+            <div class="vertical_spaces">
+                <div class="vertical_first_space vertical_space market w3-theme-l2" id="24">
+                    <div class="space_background market-img"></div>
                 </div>
-                <div id="notification-div" class="notifications"></div>
-              </div>
+                <div class="vertical_space  deals w3-theme" id="23">
+                    <div class="space_background deals-img"></div>
+                </div>
+                <div class="vertical_space payday w3-theme-d2" id="22">
+                    <div class="space_background payday-img"></div>
+                </div>
+                <div class="vertical_space  deals w3-theme" id="21">
+                    <div class="space_background deals-img"></div>
+                </div>
             </div>
-            <div class="middle_part">
-              <div id="dice_block" class="dice_block">
-                <div id="num_of_dice" class="overlay_box">
-                  <p>
-                    How many dice you want to use?
-                  </p>
-                  <button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
-                    One
-                  </button>
-                  <button id="two_dice_button" style="height: unset" onclick="
+            <div class="game_center round_border">
+                <div class="left_part">
+                    <div class="financial_details">
+                        <table class="player_details">
+                            <tr>
+                                <td>
+                                    <span id="name" style="font-size: 18px;">PlayerName</span>
+                                </td>
+                                <td>
+                                    <div class="progress-bar-div" id="progress-div">
+                                        <div class="current-progress" id="progress"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Profession
+                                </td>
+                                <td>
+                                    <span id="Profession" style="font-weight: lighter;">prof</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Income
+                                </td>
+                                <td class="basic-fs-value">
+                                    $ <span id="income">Income</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Passive Income
+                                </td>
+                                <td class="basic-fs-value">
+                                    $ <span id="passiveIn">passiveIn</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Total Income
+                                </td>
+                                <td class="basic-fs-value">
+                                    $ <span id="totalIn">totalIn</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Total Expense
+                                </td>
+                                <td class="basic-fs-value">
+                                    $ <span id="expenses">expenses</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="basic_fs_heading" style="color: #57707D">
+                                    Monthly Cashflow
+                                </td>
+                                <td class="basic-fs-value">
+                                    $ <span id="cashflow">cashflow</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ledger Balance</td>
+                                <td style="font-weight: lighter;">
+                                    $ <span id="ledger-balance">$0</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="open-player-details" id="board-icons">
+                            <div class="iconButtonDiv">
+                                <button id="fsBtn" class="iconBtn" onclick="showFinancialStatement()"></button>
+                            </div>
+                            <div class="iconButtonDiv">
+                                <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
+                            </div>
+                            <div class="iconButtonDiv" id="bank">
+                                <button id="bankBtn" class="iconBtn" onclick="showBankForm()"></button>
+                            </div>
+                        </div>
+                        <div id="notification-div" class="notifications"></div>
+                    </div>
+                </div>
+                <div class="middle_part">
+                    <div id="dice_block" class="dice_block">
+                        <div id="num_of_dice" class="overlay_box">
+                            <p>
+                                How many dice you want to use?
+                            </p>
+                            <button id="one_dice_button" style="height: unset" onclick="hideOverlay('num_of_dice')">
+                                One
+                            </button>
+                            <button id="two_dice_button" style="height: unset" onclick="
     showOverlay('dice2');
     hideOverlay('num_of_dice')">
-                    Two
-                  </button>
-                </div>
-                <div class="dice">
-                  <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice" />
-                  <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice" />
-                </div>
-              </div>
-              <div id="cardDisplay" class="cardDisplay">
-                <div id="card-overlay" class="card-overlay"></div>
-                <div id="askCharity" class="cardDisplayPopup">
-                  <h2>Do Charity?</h2>
-                  <p>if yes 10% of Total income will be deducted</p>
-                  <div class="buttons-div">
-                    <button id="acceptCharity">Yes</button>
-                    <button id="declineCharity">No</button>
-                  </div>
-                </div>
-                <div id="select-deal" class="cardDisplayPopup">
-                  <h2>Select Deal</h2>
-                  <div class="buttons-div">
-                    <button onclick="selectSmallDeal()">Small Deal</button>
-                    <button onclick="selectBigDeal()">Big Deal</button>
-                  </div>
-                </div>
-                <div id="utilityPopup" class="cardDisplayPopup">
-                  <button class="close" onclick=" hideOverlay('utilityPopup');
+                                Two
+                            </button>
+                        </div>
+                        <div class="dice">
+                            <img id="dice1" class="dice-image" src="/Dice-6.png" alt="dice"/>
+                            <img id="dice2" class="dice-image" src="/Dice-6.png" alt="dice"/>
+                        </div>
+                    </div>
+                    <div id="cardDisplay" class="cardDisplay">
+                        <div id="card-overlay" class="card-overlay"></div>
+                        <div id="askCharity" class="cardDisplayPopup">
+                            <h2>Do Charity?</h2>
+                            <p>if yes 10% of Total income will be deducted</p>
+                            <div class="buttons-div">
+                                <button id="acceptCharity">Yes</button>
+                                <button id="declineCharity">No</button>
+                            </div>
+                        </div>
+                        <div id="select-deal" class="cardDisplayPopup">
+                            <h2>Select Deal</h2>
+                            <div class="buttons-div">
+                                <button onclick="selectSmallDeal()">Small Deal</button>
+                                <button onclick="selectBigDeal()">Big Deal</button>
+                            </div>
+                        </div>
+                        <div id="utilityPopup" class="cardDisplayPopup">
+                            <button class="close" onclick=" hideOverlay('utilityPopup');
     closeOverlay('card-overlay');">
-                    &times;
-                  </button>
-                  <div class="buttons_div"></div>
+                                &times;
+                            </button>
+                            <div class="buttons_div"></div>
+                        </div>
+                        <div id="card" class="plain-card"></div>
+                        <div id="notification" class="notification"></div>
+                        <div id="buttons-container" class="buttons-div"></div>
+                    </div>
                 </div>
-                <div id="card" class="plain-card"></div>
-                <div id="notification" class="notification"></div>
-                <div id="buttons-container" class="buttons-div"></div>
-              </div>
+                <div class="right_part">
+                    <div class="game-options">
+                        <button onclick="openLeaveGame()">Leave Game</button>
+                        <button onclick="saveGame('rat-race-');">Save Game</button>
+                        <button onclick="flipBoard(180);">FastTrack</button>
+                    </div>
+                    <div class="all-player-details" id="players-information"></div>
+                    <div class="activity_log" id="activityLog"></div>
+                    <div></div>
+                </div>
             </div>
-            <div class="right_part">
-              <div class="game-options">
-                <button onclick="openLeaveGame()">Leave Game</button>
-                <button onclick="saveGame('rat-race-');">Save Game</button>
-                <button onclick="flipBoard(180);">FastTrack</button>
-              </div>
-              <div class="all-player-details" id="players-information"></div>
-              <div class="activity_log" id="activityLog"></div>
-              <div></div>
+            <div class="vertical_spaces">
+                <div class="vertical_first_space vertical_space  deals w3-theme" id="9">
+                    <div class="space_background deals-img"></div>
+                </div>
+                <div class="vertical_space doodad w3-theme-l1" id="10">
+                    <div class="space_background doodad-img"></div>
+                </div>
+                <div class="vertical_space  deals w3-theme" id="11">
+                    <div class="space_background deals-img"></div>
+                </div>
+                <div class="vertical_space downsize w3-theme-d1" id="12">
+                    <div class="space_background downsize-img"></div>
+                </div>
             </div>
-          </div>
-          <div class="vertical_spaces">
-            <div class="vertical_first_space vertical_space  deals w3-theme" id="9">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space doodad w3-theme-l1" id="10">
-              <div class="space_background doodad-img"></div>
-            </div>
-            <div class="vertical_space  deals w3-theme" id="11">
-              <div class="space_background deals-img"></div>
-            </div>
-            <div class="vertical_space downsize w3-theme-d1" id="12">
-              <div class="space_background downsize-img"></div>
-            </div>
-          </div>
         </div>
         <div class=" horizontal_spaces bottom_flex">
-          <div class="horizontal_space corner_spaces baby w3-theme-d1" id="20">
-            <div class="space_background baby-img"></div>
-          </div>
-          <div class="horizontal_first_space horizontal_space  deals w3-theme" id="19">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space doodad w3-theme-l1" id="18">
-            <div class="space_background doodad-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="17">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space market w3-theme-l2" id="16">
-            <div class="space_background market-img"></div>
-          </div>
-          <div class="horizontal_space  deals w3-theme" id="15">
-            <div class="space_background deals-img"></div>
-          </div>
-          <div class="horizontal_space payday w3-theme-d2" id="14">
-            <div class="space_background payday-img"></div>
-          </div>
-          <div class="horizontal_space corner_spaces  deals w3-theme" id="13">
-            <div class="space_background deals-img"></div>
-          </div>
+            <div class="horizontal_space corner_spaces baby w3-theme-d1" id="20">
+                <div class="space_background baby-img"></div>
+            </div>
+            <div class="horizontal_first_space horizontal_space  deals w3-theme" id="19">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space doodad w3-theme-l1" id="18">
+                <div class="space_background doodad-img"></div>
+            </div>
+            <div class="horizontal_space  deals w3-theme" id="17">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space market w3-theme-l2" id="16">
+                <div class="space_background market-img"></div>
+            </div>
+            <div class="horizontal_space  deals w3-theme" id="15">
+                <div class="space_background deals-img"></div>
+            </div>
+            <div class="horizontal_space payday w3-theme-d2" id="14">
+                <div class="space_background payday-img"></div>
+            </div>
+            <div class="horizontal_space corner_spaces  deals w3-theme" id="13">
+                <div class="space_background deals-img"></div>
+            </div>
         </div>
- 
 
-       
+
         <div id="container" class="container"></div>
 
         <div id="professions" class="professions-container">
-          <div class="popup-bg">
-            <div class="professions-heading"></div>
-            <div id="players-info" class="players-info"></div>
-            <button class="continue-button" onclick="createFinancialStatement()">
-              continue
-            </button>
-          </div>
+            <div class="popup-bg">
+                <div class="professions-heading"></div>
+                <div id="players-info" class="players-info"></div>
+                <button class="continue-button" onclick="createFinancialStatement()">
+                    continue
+                </button>
+            </div>
         </div>
 
         <div id="manage-debt-form" class="manage-debt-form">
-          <div id="manage-debt-form-msg-Box"></div>
+            <div id="manage-debt-form-msg-Box"></div>
         </div>
         <div id="market-card-div" class="market-card-div"></div>
         <div id="low-balance" class="popup-background">
-          <div class="top-popup">
-            You don't have enough balance
-            <button onclick="closeOverlay('low-balance')">OK</button>
-          </div>
+            <div class="top-popup">
+                You don't have enough balance
+                <button onclick="closeOverlay('low-balance')">OK</button>
+            </div>
         </div>
         <div id="rat-race-save-game" class="popup-background">
-          <div class="top-popup">
-            <div id="rat-race-save-game-notification"><span id="rat-race-saved-game-id"></span>
-              <div id="rat-race-save-game-notification-msg"></div>
+            <div class="top-popup">
+                <div id="rat-race-save-game-notification"><span id="rat-race-saved-game-id"></span>
+                    <div id="rat-race-save-game-notification-msg"></div>
+                </div>
+                <button onclick="closeOverlay('rat-race-save-game')">OK</button>
             </div>
-            <button onclick="closeOverlay('rat-race-save-game')">OK</button>
-          </div>
         </div>
         <div id="leave-game" class="popup-background">
-          <div class="top-popup">
-						<p>Do you really want to leave game ?</p>
-						<div style="display: flex; align-content: flex-start; justify-content: center;">
-            <button onclick="closeOverlay('leave-game')">No</button>
-						<button onclick="leaveGame()">Yes</button>
-					</div>
-          </div>
+            <div class="top-popup">
+                <p>Do you really want to leave game ?</p>
+                <div style="display: flex; align-content: flex-start; justify-content: center;">
+                    <button onclick="closeOverlay('leave-game')">No</button>
+                    <button onclick="leaveGame()">Yes</button>
+                </div>
+            </div>
         </div>
         <div id="share-background" class="popup-overlay">
-          <div id="share-card" class="share-popup"></div>
+            <div id="share-card" class="share-popup"></div>
         </div>
 
         <div id="notify-escape" class="notify-escape">
-          <div style="font-size:30px; text-align: center; font-weight: bold; color:#607D8B; padding: 3%">
-            Congrats!!
-          </div>
-          <div style="text-align: center; font-size: 20px; padding:7%;">
-            You have escaped from Rat race. Now you can enter in FastTrack
-          </div>
-          <button onclick="addToFastTrack()" style="height: 30px; width: 60px; margin-left: 40%;">
-            Ok
-          </button>
+            <div style="font-size:30px; text-align: center; font-weight: bold; color:#607D8B; padding: 3%">
+                Congrats!!
+            </div>
+            <div style="text-align: center; font-size: 20px; padding:7%;">
+                You have escaped from Rat race. Now you can enter in FastTrack
+            </div>
+            <button onclick="addToFastTrack()" style="height: 30px; width: 60px; margin-left: 40%;">
+                Ok
+            </button>
         </div>
 
         <div id="bankruptedMsg" class="bankruptcy-form">
-          <button class="close" onclick="closeOverlay('bankruptedMsg')">
-            &times;
-          </button>
-          <div class="bankruptedMsg">
-            You are bankrupted. So that you can't continue game!! For more
-            details see financial details.
-          </div>
+            <button class="close" onclick="closeOverlay('bankruptedMsg')">
+                &times;
+            </button>
+            <div class="bankruptedMsg">
+                You are bankrupted. So that you can't continue game!! For more
+                details see financial details.
+            </div>
         </div>
         <div id="auction-div" class="auction">
-          <div id="bidder" class="bidding-message">Current Bid</div>
-          <div id="bid-price" class="bidding-price">100</div>
-          <input type="text" placeholder="Enter Bidding Price" id="bid-value" />
-          <button id="bid" onclick="bid()">bid</button>
-          <button id="pass-bid" onclick="pass()">pass</button>
-          <div id="bid-notification" class="bidding-notification">
-            Bidding for current card
-          </div>
+            <div id="bidder" class="bidding-message">Current Bid</div>
+            <div id="bid-price" class="bidding-price">100</div>
+            <input type="text" placeholder="Enter Bidding Price" id="bid-value"/>
+            <button id="bid" onclick="bid()">bid</button>
+            <button id="pass-bid" onclick="pass()">pass</button>
+            <div id="bid-notification" class="bidding-notification">
+                Bidding for current card
+            </div>
         </div>
         <div id="auction-form" class="auction">
-          <div>
-            <label style="font-weight:bold;">Current-Bid: </label><span id="current-bid"></span>
-          </div>
-          <div>
-            <label style="font-weight:bold;">Current-Bidder: </label><span id="current-bidder"></span>
-          </div>
-          <input type="number" id="auction-base-price" placeholder="Enter base price"
-            style="width:200px; height:35px; font-size:15px;" />
-          <button id="submit-base-price">Sell</button>
+            <div>
+                <label style="font-weight:bold;">Current-Bid: </label><span id="current-bid"></span>
+            </div>
+            <div>
+                <label style="font-weight:bold;">Current-Bidder: </label><span id="current-bidder"></span>
+            </div>
+            <input type="number" id="auction-base-price" placeholder="Enter base price"
+                   style="width:200px; height:35px; font-size:15px;"/>
+            <button id="submit-base-price">Sell</button>
         </div>
         <div class="overlay" id="cash_ledger">
-          <div>
-            <button class="close" onclick="hideOverlay('cash_ledger')">
-              ×
-            </button>
-            <header>
-              Cash ledger
-            </header>
-            <div class="statements">
-              <table class="cash-ledger">
-                <thead>
-                  <tr class="row-content">
-                    <th class="time">Time</th>
-                    <th class="amount">Amount</th>
-                    <th class="balance">Balance</th>
-                    <th class="reason">Description</th>
-                  </tr>
-                </thead>
-                <tbody id="cash-ledger-content"></tbody>
-              </table>
+            <div>
+                <button class="close" onclick="hideOverlay('cash_ledger')">
+                    ×
+                </button>
+                <header>
+                    Cash ledger
+                </header>
+                <div class="statements">
+                    <table class="cash-ledger">
+                        <thead>
+                        <tr class="row-content">
+                            <th class="time">Time</th>
+                            <th class="amount">Amount</th>
+                            <th class="balance">Balance</th>
+                            <th class="reason">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody id="cash-ledger-content"></tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="fast-track board">
+    </div>
+    <div class="fast-track board">
         <main>
-          <div class="fs-board">
-            <div class="fs-board-part fs-vertical-part">
-              <div class="fs-horizontal-space fs-space-18 fs-corner-space fs-deal" id="ft-18">
-                Cashflow Day
-              </div>
-              <div class="fs-horizontal-space fs-space-19 fs-deal" id="ft-19">
-                Movie Theater
-              </div>
-              <div class="fs-horizontal-space fs-space-20 fs-deal" id="ft-20">
-                Research Center For Diesease
-              </div>
-              <div class="fs-horizontal-space fs-space-21 fs-deduct" id="ft-21">
-                Bad partner
-              </div>
-              <div class="fs-horizontal-space fs-space-22 fs-deal" id="ft-22">
-                App Development Company
-              </div>
-              <div class="fs-horizontal-space fs-space-23 fs-deal" id="ft-23">
-                Software co. IPO
-              </div>
-              <div class="fs-horizontal-space fs-space-24 fs-deal" id="ft-24">
-                Coffee Shop
-              </div>
-              <div class="fs-horizontal-space fs-space-25 fs-deal" id="ft-25">
-                400-unit Apartment Building
-              </div>
-              <div class="fs-horizontal-space fs-space-26 fs-deal" id="ft-26">
-                Island Vacation Rentals
-              </div>
-              <div class="fs-horizontal-space fs-space-27 fs-deduct" id="ft-27">
-                Divorce
-              </div>
-              <div class="fs-horizontal-space fs-space-28 fs-deal" id="ft-28">
-                Build Pro Golf Course
-              </div>
-              <div class="fs-horizontal-space fs-space-29 fs-deal" id="ft-29">
-                Pizza Shop
-              </div>
-              <div
-                class="fs-horizontal-space fs-space-30 fs-corner-space fs-board-right-corner fs-deal"
-                id="ft-30"
-              >
-                Cashflow Day
-              </div>
-            </div>
-
-            <div class="fs-board-part fs-horizontal-part">
-              <div class="fs-vertical-spaces">
-                <div class="fs-vertical-space fs-space-17 fs-deal" id="ft-17">
-                  Foreign Oil fs-Deal
-                </div>
-                <div class="fs-vertical-space fs-space-16 fs-deal" id="ft-16">
-                  Extreme Sports Equipment Rental
-                </div>
-                <div class="fs-vertical-space fs-space-15 fs-deal" id="ft-15">
-                  Auto Repair Shop
-                </div>
-                <div class="fs-vertical-space fs-space-14 fs-deduct" id="ft-14">
-                  Tax Audit
-                </div>
-                <div class="fs-vertical-space fs-space-13 fs-deal" id="ft-13">
-                  Beauty Salon
-                </div>
-                <div class="fs-vertical-space fs-space-12 fs-deal" id="ft-12">
-                  Dry Dock Storage
-                </div>
-                <div class="fs-vertical-space fs-space-11 fs-deal" id="ft-11">
-                  Fried Chicken Restaurant
-                </div>
-              </div>
-              <div class="fs-vertical-spaces">
-                <div class="fs-vertical-space fs-space-31 fs-deal" id="ft-31">
-                  Collectiables Store
-                </div>
-                <div class="fs-vertical-space fs-space-32 fs-deal" id="ft-32">
-                  Frozen Yogurt Shop
-                </div>
-                <div class="fs-vertical-space fs-space-33 fs-deal" id="ft-33">
-                  Bio-Tech Co. IPO
-                </div>
-                <div class="fs-vertical-space fs-space-34 fs-deduct" id="ft-34">
-                  Unforenseen Repair
-                </div>
-                <div class="fs-vertical-space fs-space-35 fs-deal" id="ft-35">
-                  200-Unit Mini Storage
-                </div>
-                <div class="fs-vertical-space fs-space-36 fs-deal" id="ft-36">
-                  Dry Cleaning Business
-                </div>
-                <div class="fs-vertical-space fs-space-37 fs-deal" id="ft-37">
-                  Mobile Home Park
-                </div>
-              </div>
-            </div>
-
-            <div class="fs-board-part fs-vertical-part fs-bottom-align">
-              <div
-                class="fs-horizontal-space fs-space-10 fs-board-bottom-corner fs-corner-space fs-deal"
-                id="ft-10"
-              >
-                Cashflow Day
-              </div>
-              <div class="fs-horizontal-space fs-space-9 fs-deal" id="ft-9">
-                Hobby Supply Store
-              </div>
-              <div class="fs-horizontal-space fs-space-8 fs-deal" id="ft-8">
-                Ticket Sale Company
-              </div>
-              <div class="fs-horizontal-space fs-space-7 fs-deduct" id="ft-7">
-                Lawsuit
-              </div>
-              <div class="fs-horizontal-space fs-space-6 fs-charity" id="ft-6">
-                Assisted Living Center
-              </div>
-              <div class="fs-horizontal-space fs-space-5 fs-deal" id="ft-5">
-                Quick Food Market
-              </div>
-              <div class="fs-horizontal-space fs-space-4 fs-deal" id="ft-4">
-                Health And AC Service
-              </div>
-              <div class="fs-horizontal-space fs-space-3 fs-deal" id="ft-3">
-                Burger Shop
-              </div>
-              <div class="fs-horizontal-space fs-space-2 fs-deal" id="ft-2">
-                Charity
-              </div>
-              <div class="fs-horizontal-space fs-space-1 fs-deduct" id="ft-1">
-                Health Care
-              </div>
-              <div class="fs-horizontal-space fs-space-40 fs-deal" id="ft-40">
-                Private Wildife Preserve
-              </div>
-              <div class="fs-horizontal-space fs-space-39 fs-deal" id="ft-39">
-                Family Restaurant
-              </div>
-              <div
-                class="fs-horizontal-space fs-space-38 fs-board-bottom-corner fs-board-right-corner fs-corner-space  fs-deal"
-                id="ft-38">
-                Cashflow Day
-              </div>
-            </div>
-          </div>
-          <div class="fs-game-center">
-						<div class="fs-left-part">
-							<div style="position: absolute; top: 27%; left: 7%;">CashFlow Goal:   $ <span id="ft-player-cashflow-goal"></span></div>
-							<div class="ft-player-info">
-									<div style="display:flex; flex-direction: column;">
-											<div style="margin-bottom: 20%; margin-left: 8%;">
-													<span id="ft-player-name" style="font-size: 22px; font-weight: bold;">Player Name</span>
-											</div>
-											<div style="display:flex; align-content:space-between; justify-content:center; flex-direction: row; height:40%;">
-													<div class="iconButtonDiv">
-															<button id="fsBtn" onclick="showFinancialStatement()" class="iconBtn" style="height: 55%;margin-left: 0%;"></button>
-													</div>
-													<div>
-															<div class="basic_fs_heading" style="color: #57707D">
-																	Cashflow Day Income
-															</div>
-															<div class="basic-fs-value">
-																	$ <span id="ft-player-cashflow">cashflow</span>
-															</div>
-													</div>
-											</div>
-											<div style="display:flex; align-content:space-between; justify-content:center; height: 30%; margin-left: -15%;">
-													<div class="iconButtonDiv">
-															<button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
-													</div>
-													<div>
-															<div>Ledger Balance</div>
-															<div style="font-weight: lighter;">
-																	$ <span id="ft-leger-balance">0</span>
-															</div>
-													</div>
-											</div>
-									</div>
-							</div>
-							<div id="ft-notification-div" class="ft-notification-div"></div>
-						</div>
-
-            <div class="fs-middle-part">
-                <div id="ft-save-game" class="popup-background">
-                    <div class="top-popup">
-                      <div id="ft-save-game-notification"><span id="ft-saved-game-id"></span>
-                        <div id="ft-save-game-notification-msg"></div>
-                      </div>
-                      <button onclick="closeOverlay('ft-save-game')">OK</button>
+            <div class="fs-board">
+                <div class="fs-board-part fs-vertical-part">
+                    <div class="fs-horizontal-space fs-space-18 fs-corner-space fs-deal" id="ft-18">
+                        Cashflow Day
                     </div>
-                  </div>
-                <div id="ft-leave-game" class="popup-background">
-                    <div class="ft-popup">
-											<p>
-												Do you really want to leave game ?
-											</p>
-											<div style="display:flex; align-content:flex-start; justify-content:center;">
-												<button onclick="closeOverlay('ft-leave-game')">No</button>
-												<button onclick="leaveGame()">Yes</button>
-											</div>
+                    <div class="fs-horizontal-space fs-space-19 fs-deal" id="ft-19">
+                        Movie Theater
                     </div>
-                  </div>
-								<div id="ft-num_of_dice" class="ft-dice-count-block">
-										<p>How many dice you want to use?</p>
-										<button
-											id="ft-one_dice_button"
-											style="height: unset"
-											onclick="hideOverlay('ft-num_of_dice');rollDice(1);">
-											One
-										</button>
-										<button
-											id="ft-two_dice_button"
-											style="height: unset"
-											onclick="showOverlay('ft-dice2');
+                    <div class="fs-horizontal-space fs-space-20 fs-deal" id="ft-20">
+                        Research Center For Diesease
+                    </div>
+                    <div class="fs-horizontal-space fs-space-21 fs-deduct" id="ft-21">
+                        Bad partner
+                    </div>
+                    <div class="fs-horizontal-space fs-space-22 fs-deal" id="ft-22">
+                        App Development Company
+                    </div>
+                    <div class="fs-horizontal-space fs-space-23 fs-deal" id="ft-23">
+                        Software co. IPO
+                    </div>
+                    <div class="fs-horizontal-space fs-space-24 fs-deal" id="ft-24">
+                        Coffee Shop
+                    </div>
+                    <div class="fs-horizontal-space fs-space-25 fs-deal" id="ft-25">
+                        400-unit Apartment Building
+                    </div>
+                    <div class="fs-horizontal-space fs-space-26 fs-deal" id="ft-26">
+                        Island Vacation Rentals
+                    </div>
+                    <div class="fs-horizontal-space fs-space-27 fs-deduct" id="ft-27">
+                        Divorce
+                    </div>
+                    <div class="fs-horizontal-space fs-space-28 fs-deal" id="ft-28">
+                        Build Pro Golf Course
+                    </div>
+                    <div class="fs-horizontal-space fs-space-29 fs-deal" id="ft-29">
+                        Pizza Shop
+                    </div>
+                    <div
+                            class="fs-horizontal-space fs-space-30 fs-corner-space fs-board-right-corner fs-deal"
+                            id="ft-30"
+                    >
+                        Cashflow Day
+                    </div>
+                </div>
+
+                <div class="fs-board-part fs-horizontal-part">
+                    <div class="fs-vertical-spaces">
+                        <div class="fs-vertical-space fs-space-17 fs-deal" id="ft-17">
+                            Foreign Oil fs-Deal
+                        </div>
+                        <div class="fs-vertical-space fs-space-16 fs-deal" id="ft-16">
+                            Extreme Sports Equipment Rental
+                        </div>
+                        <div class="fs-vertical-space fs-space-15 fs-deal" id="ft-15">
+                            Auto Repair Shop
+                        </div>
+                        <div class="fs-vertical-space fs-space-14 fs-deduct" id="ft-14">
+                            Tax Audit
+                        </div>
+                        <div class="fs-vertical-space fs-space-13 fs-deal" id="ft-13">
+                            Beauty Salon
+                        </div>
+                        <div class="fs-vertical-space fs-space-12 fs-deal" id="ft-12">
+                            Dry Dock Storage
+                        </div>
+                        <div class="fs-vertical-space fs-space-11 fs-deal" id="ft-11">
+                            Fried Chicken Restaurant
+                        </div>
+                    </div>
+                    <div class="fs-vertical-spaces">
+                        <div class="fs-vertical-space fs-space-31 fs-deal" id="ft-31">
+                            Collectiables Store
+                        </div>
+                        <div class="fs-vertical-space fs-space-32 fs-deal" id="ft-32">
+                            Frozen Yogurt Shop
+                        </div>
+                        <div class="fs-vertical-space fs-space-33 fs-deal" id="ft-33">
+                            Bio-Tech Co. IPO
+                        </div>
+                        <div class="fs-vertical-space fs-space-34 fs-deduct" id="ft-34">
+                            Unforenseen Repair
+                        </div>
+                        <div class="fs-vertical-space fs-space-35 fs-deal" id="ft-35">
+                            200-Unit Mini Storage
+                        </div>
+                        <div class="fs-vertical-space fs-space-36 fs-deal" id="ft-36">
+                            Dry Cleaning Business
+                        </div>
+                        <div class="fs-vertical-space fs-space-37 fs-deal" id="ft-37">
+                            Mobile Home Park
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fs-board-part fs-vertical-part fs-bottom-align">
+                    <div
+                            class="fs-horizontal-space fs-space-10 fs-board-bottom-corner fs-corner-space fs-deal"
+                            id="ft-10"
+                    >
+                        Cashflow Day
+                    </div>
+                    <div class="fs-horizontal-space fs-space-9 fs-deal" id="ft-9">
+                        Hobby Supply Store
+                    </div>
+                    <div class="fs-horizontal-space fs-space-8 fs-deal" id="ft-8">
+                        Ticket Sale Company
+                    </div>
+                    <div class="fs-horizontal-space fs-space-7 fs-deduct" id="ft-7">
+                        Lawsuit
+                    </div>
+                    <div class="fs-horizontal-space fs-space-6 fs-charity" id="ft-6">
+                        Assisted Living Center
+                    </div>
+                    <div class="fs-horizontal-space fs-space-5 fs-deal" id="ft-5">
+                        Quick Food Market
+                    </div>
+                    <div class="fs-horizontal-space fs-space-4 fs-deal" id="ft-4">
+                        Health And AC Service
+                    </div>
+                    <div class="fs-horizontal-space fs-space-3 fs-deal" id="ft-3">
+                        Burger Shop
+                    </div>
+                    <div class="fs-horizontal-space fs-space-2 fs-deal" id="ft-2">
+                        Charity
+                    </div>
+                    <div class="fs-horizontal-space fs-space-1 fs-deduct" id="ft-1">
+                        Health Care
+                    </div>
+                    <div class="fs-horizontal-space fs-space-40 fs-deal" id="ft-40">
+                        Private Wildife Preserve
+                    </div>
+                    <div class="fs-horizontal-space fs-space-39 fs-deal" id="ft-39">
+                        Family Restaurant
+                    </div>
+                    <div
+                            class="fs-horizontal-space fs-space-38 fs-board-bottom-corner fs-board-right-corner fs-corner-space  fs-deal"
+                            id="ft-38">
+                        Cashflow Day
+                    </div>
+                </div>
+            </div>
+            <div class="fs-game-center">
+                <div class="fs-left-part">
+                    <div style="position: absolute; top: 27%; left: 7%;">CashFlow Goal: $ <span
+                            id="ft-player-cashflow-goal"></span></div>
+                    <div class="ft-player-info">
+                        <div style="display:flex; flex-direction: column;">
+                            <div style="margin-bottom: 20%; margin-left: 8%;">
+                                <span id="ft-player-name" style="font-size: 22px; font-weight: bold;">Player Name</span>
+                            </div>
+                            <div style="display:flex; align-content:space-between; justify-content:center; flex-direction: row; height:40%;">
+                                <div class="iconButtonDiv">
+                                    <button id="fsBtn" onclick="showFinancialStatement()" class="iconBtn"
+                                            style="height: 55%;margin-left: 0%;"></button>
+                                </div>
+                                <div>
+                                    <div class="basic_fs_heading" style="color: #57707D">
+                                        Cashflow Day Income
+                                    </div>
+                                    <div class="basic-fs-value">
+                                        $ <span id="ft-player-cashflow">cashflow</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:flex; align-content:space-between; justify-content:center; height: 30%; margin-left: -15%;">
+                                <div class="iconButtonDiv">
+                                    <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
+                                </div>
+                                <div>
+                                    <div>Ledger Balance</div>
+                                    <div style="font-weight: lighter;">
+                                        $ <span id="ft-leger-balance">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ft-notification-div" class="ft-notification-div"></div>
+                </div>
+
+                <div class="fs-middle-part">
+                    <div id="ft-save-game" class="popup-background">
+                        <div class="top-popup">
+                            <div id="ft-save-game-notification"><span id="ft-saved-game-id"></span>
+                                <div id="ft-save-game-notification-msg"></div>
+                            </div>
+                            <button onclick="closeOverlay('ft-save-game')">OK</button>
+                        </div>
+                    </div>
+                    <div id="ft-leave-game" class="popup-background">
+                        <div class="ft-popup">
+                            <p>
+                                Do you really want to leave game ?
+                            </p>
+                            <div style="display:flex; align-content:flex-start; justify-content:center;">
+                                <button onclick="closeOverlay('ft-leave-game')">No</button>
+                                <button onclick="leaveGame()">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ft-num_of_dice" class="ft-dice-count-block">
+                        <p>How many dice you want to use?</p>
+                        <button
+                                id="ft-one_dice_button"
+                                style="height: unset"
+                                onclick="hideOverlay('ft-num_of_dice');rollDice(1);">
+                            One
+                        </button>
+                        <button
+                                id="ft-two_dice_button"
+                                style="height: unset"
+                                onclick="showOverlay('ft-dice2');
 															 hideOverlay('ft-num_of_dice')
 															 rollDice(2)">
-											Two
-										</button>
-									</div>
-									<div id="ft-dice-block" class="ft-dice">
-										<img
-											id="ft-dice1"
-											class="dice-image"
-											src="/Dice-6.png"
-											alt="dice"
-											onclick="rollDie()"/>
-										<img
-											id="ft-dice2"
-											class="dice-image"
-											src="/Dice-6.png"
-											alt="dice"
-											onclick="rollDie()"/>
-									</div>
-              <div id="card-container" class="ft-deal-card"></div>
-						</div>
-						
-						<div class="fs-right-part">
-							<div class="ft-game-options">
-								<button onclick="openLeaveFtGame()">Leave Game</button>
-								<button onclick="saveGame('ft-');">Save Game</button>
-								<button onclick="flipBoard(0);">Rat Race</button>
-							</div>
-							<div class="ft-all-player-details" id="ft-players-information"></div>
-							<div id="ftactivityLog" class="ft-activity-log"></div>
-							<div></div>
-						</div>
-					</div>
+                            Two
+                        </button>
+                    </div>
+                    <div id="ft-dice-block" class="ft-dice">
+                        <img
+                                id="ft-dice1"
+                                class="dice-image"
+                                src="/Dice-6.png"
+                                alt="dice"
+                                onclick="rollDie()"/>
+                        <img
+                                id="ft-dice2"
+                                class="dice-image"
+                                src="/Dice-6.png"
+                                alt="dice"
+                                onclick="rollDie()"/>
+                    </div>
+                    <div id="card-container" class="ft-deal-card"></div>
+                </div>
+
+                <div class="fs-right-part">
+                    <div class="ft-game-options">
+                        <button onclick="openLeaveFtGame()">Leave Game</button>
+                        <button onclick="saveGame('ft-');">Save Game</button>
+                        <button onclick="flipBoard(0);">Rat Race</button>
+                    </div>
+                    <div class="ft-all-player-details" id="ft-players-information"></div>
+                    <div id="ftactivityLog" class="ft-activity-log"></div>
+                    <div></div>
+                </div>
+            </div>
         </main>
-      </div>
     </div>
-   <section class="ft-balance-sheet" id="balance-sheet" style="visibility: hidden">
-        <section>
-          <div class="ft-header">FAST TRACK</div>
-          <section class="ft-calculations">
+</div>
+<section class="ft-balance-sheet" id="balance-sheet" style="visibility: hidden">
+    <section>
+        <div class="ft-header">FAST TRACK</div>
+        <section class="ft-calculations">
             <section class="ft-parts">
-             <div class="ft-down-border">&#36;<span id="ft-passive-income" >100000</span></div>
-             <div>Your passive income</div>
-           </section>
-           <section class="ft-parts">
-             <div> &#9747; 100 &#x3d; </div>
-           </section>
-           <section class="ft-parts">
-              <div class="down-border">&#36;<span id="initial-ft-income" >100000</span></div>
-              <div>Your starting cashflow day income</div>
+                <div class="ft-down-border">&#36;<span id="ft-passive-income">100000</span></div>
+                <div>Your passive income</div>
             </section>
-          </section>
+            <section class="ft-parts">
+                <div> &#9747; 100 &#x3d;</div>
+            </section>
+            <section class="ft-parts">
+                <div class="down-border">&#36;<span id="initial-ft-income">100000</span></div>
+                <div>Your starting cashflow day income</div>
+            </section>
         </section>
-        <section class="ft-goal">
-          <section class="ft-box">
+    </section>
+    <section class="ft-goal">
+        <section class="ft-box">
             <div>Cashflow Day Goal</div>
             <div>&#36; <span id="ft-cashflow-goal">10050000</span></div>
-          </section>
-          </section>
-        <section>
-          Track your cashflow by adding the monthly cashflow from the buisness you acquire in the
-           fast track to your starting cashflow day income.
         </section>
-        <table class="ft-table">
-          <thead class="ft-thead">
-            <th class="ft-field1">
-              Buisness
-            </th>
-            <th class="ft-field2">Monthly cashflow</th>
-            <th class="ft-field3" align="left"> <div>cashflow Day Income</div> <div>&#36; <span id="ft-cashflow-income"> 100000</span></div></th>
-          </thead>
-          <tbody id="ft-balance-sheet">
-          </tbody>
-        </table>
-      </section>
-  </body>
+    </section>
+    <section>
+        Track your cashflow by adding the monthly cashflow from the buisness you acquire in the
+        fast track to your starting cashflow day income.
+    </section>
+    <table class="ft-table">
+        <thead class="ft-thead">
+        <th class="ft-field1">
+            Buisness
+        </th>
+        <th class="ft-field2">Monthly cashflow</th>
+        <th class="ft-field3" align="left">
+            <div>cashflow Day Income</div>
+            <div>&#36; <span id="ft-cashflow-income"> 100000</span></div>
+        </th>
+        </thead>
+        <tbody id="ft-balance-sheet">
+        </tbody>
+    </table>
+</section>
+</body>
 </html>
