@@ -148,7 +148,6 @@ const showFinancialStatement = function() {
     .then(res => res.json())
     .then(player => {
 			setFinancialStatement(player);
-			console.log(player,"hii");
       setFtBoardStatement(player);
       showOverlay("fs_overlay");
     });
