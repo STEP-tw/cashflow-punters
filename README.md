@@ -9,3 +9,5 @@ This game is online version of classic board game -- cashflow
 * To play this game online ==> https://cashflow-punters.herokuapp.com
 
 * To download docker image ==> https://drive.google.com/open?id=1YY5WyiWr277yfQrrmKPmmoZl81f4s_1o
+
+* For pulling the docker image ===> Use command ```docker pull swapnillothe15/cashflow:latest```
