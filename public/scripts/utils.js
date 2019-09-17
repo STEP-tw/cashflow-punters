@@ -142,6 +142,20 @@ const createParagraph = function(text, classname, id) {
   return paragraph;
 };
 
+const createDetail = function(labelText,valueText,id){
+  const detail = createElement("div");
+  const label = createElement("p");
+  const value = createElement("p");
+  label.className = "label";
+  value.className = "label-value";
+  label.innerText = labelText;
+  value.innerText = valueText;
+  detail.id = id;
+  detail.appendChild(label);
+  detail.appendChild(value);
+  return detail;
+}
+
 const createHeadingDiv = function(headingNum, text, id) {
   const textDiv = createElement("div");
   const heading = createElement("h" + headingNum, id);
