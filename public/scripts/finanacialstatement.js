@@ -123,6 +123,7 @@ const setLiabilities = function(player) {
 };
 
 const setBasicFinancialDetails = function(player) {
+  setFtBoardStatement(player)
   setInnerText("fs-name", player.name);
   setInnerText("fs-profession", player.profession);
   setInnerText("fs-income", player.income.salary);
@@ -155,10 +156,10 @@ const showFinancialStatement = function() {
 
 const setFtBoardStatement = function(player) {
   const { cashflowDayIncome, name, ledgerBalance, cashflowGoal } = player;
-  getElementById("ft-leger-balance").innerHTML = ledgerBalance;
+  getElementById("ft-leger-balance").innerHTML = ledgerBalance || 'N/A' ;
   getElementById("ft-player-name").innerHTML = name;
-  getElementById("ft-player-cashflow").innerHTML = cashflowDayIncome;
-  getElementById("ft-player-cashflow-goal").innerHTML = cashflowGoal;
+  getElementById("ft-player-cashflow").innerHTML = cashflowDayIncome || 'N/A';
+  getElementById("ft-player-cashflow-goal").innerHTML = cashflowGoal || 'N/A';
 };
 
 const createInvestmentTable = function({ title, cashflow, cashflowDayIncome }) {

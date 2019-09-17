@@ -27,7 +27,8 @@
     <button class="close" style="top:0%;" onclick="hideOverlay('fs_overlay')">
         &times;
     </button>
-    <div id="financial_statement" style="display:flex; flex-direction:column; background-color: whitesmoke;height:100%;">
+    <div id="financial_statement"
+         style="display:flex; flex-direction:column; background-color: whitesmoke;height:100%;">
         <div class="title">
             <div style="color: #4D636F; padding-top: 1%">
                 INCOME STATEMENT
@@ -790,37 +791,33 @@
             </div>
             <div class="fs-game-center">
                 <div class="fs-left-part">
-                    <div style="position: absolute; top: 27%; left: 7%;">CashFlow Goal: $ <span
-                            id="ft-player-cashflow-goal"></span></div>
                     <div class="ft-player-info">
-                        <div style="display:flex; flex-direction: column;">
-                            <div style="margin-bottom: 20%; margin-left: 8%;">
-                                <span id="ft-player-name" style="font-size: 22px; font-weight: bold;">Player Name</span>
+                        <div style="height: 75%; flex-direction: column;">
+                            <div style="margin-bottom: 2em;">
+                                    <span id="ft-player-name"
+                                          style=" font-size: 2em; font-weight: bold;">Player Name</span>
                             </div>
-                            <div style="display:flex; align-content:space-between; justify-content:center; flex-direction: row; height:40%;">
-                                <div class="iconButtonDiv">
-                                    <button id="fsBtn" onclick="showFinancialStatement()" class="iconBtn"
-                                            style="height: 55%;margin-left: 0%;"></button>
-                                </div>
-                                <div>
+                            <div style="display:flex; flex-direction: row; height:40%;">
+                                <div style="display:flex; flex-direction: column; height: 100%;justify-content: space-around;">
+                                    <div style="">CashFlow Goal:  <span
+                                            id="ft-player-cashflow-goal"></span></div>
                                     <div class="basic_fs_heading" style="color: #57707D">
-                                        Cashflow Day Income
+                                        Cashflow Day Income  <span id="ft-player-cashflow">cashflow</span>
                                     </div>
-                                    <div class="basic-fs-value">
-                                        $ <span id="ft-player-cashflow">cashflow</span>
+                                    <div>
+                                        <div>Ledger Balance : <span id="ft-leger-balance">0</span></div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div style="display:flex; align-content:space-between; justify-content:center; height: 30%; margin-left: -15%;">
-                                <div class="iconButtonDiv">
-                                    <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
-                                </div>
-                                <div>
-                                    <div>Ledger Balance</div>
-                                    <div style="font-weight: lighter;">
-                                        $ <span id="ft-leger-balance">0</span>
-                                    </div>
-                                </div>
+                        </div>
+                        <div style="display:flex; align-content:space-between; justify-content:center; height: 25%; ">
+                            <div class="iconButtonDiv">
+                                <button id="ledgerBtn" class="iconBtn" onclick="showCashLedger()"></button>
+                            </div>
+                            <div class="iconButtonDiv">
+                                <button id="fsBtn" onclick="showFinancialStatement()" class="iconBtn"
+                                        "></button>
                             </div>
                         </div>
                     </div>
